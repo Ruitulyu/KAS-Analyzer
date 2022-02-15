@@ -1,0 +1,262 @@
+#!/bin/bash
+
+# continue on error
+set -e
+
+#$#########
+#The MIT License (MIT)
+#
+# Copyright (c) 2021 Chuan He Lab@The Univeristy of Chicago: https://he-group.uchicago.edu/
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+#$#########
+
+###
+### KAS-pipe2 is a collection of command line tools for KAS-seq or strand specific KAS-seq(spKAS-seq) data analysis.
+### Version:   v2.0
+### About:     KAS-pipe2 is mainly developed by Ruitu Lyu, current postdoc fellow in Prof. Chuan He's group at the University of Chicago.
+### Docs:      https://github.com/Ruitulyu/KAS-pipe2/blob/master/README.md
+### Code:      https://github.com/Ruitulyu/KAS-pipe2
+### Mail:      https://groups.google.com/forum/#!forum/KAS-pipe2-discuss
+###
+### Usage:
+### KAS-pipe2 <subcommand> [options]
+###
+### The KAS-pipe2 sub-commands include:
+###
+### [ Configure ]
+###    download        Downlaod the index of reference genome for aligners (bowtie, bowtie2, bwa, star).
+###    build           Build the index of reference genome for aligners (bowtie, bowtie2, bwa, star).
+###    install         Install and check the 'KAS-pipe2' conda environment; check the installation of tools.
+###    uninstall       Uninstall the 'KAS-pipe2' conda environment.
+###    activate        Activate the 'KAS-pipe2' conda environment.
+###    deactivate      Deactivate the 'KAS-pipe2' conda environment.
+###
+### [ Fastqc ]
+###    fastqc          Generate basic quality control metrics for KAS-seq data.
+###    readsnum        Calcuate the reads number of raw fastq files.
+###    statistics      Calculate the mapping statistics for KAS-seq data.
+###    FRiP            Calculate the fraction of reads in peaks.
+###    fragmentsize    Measure the fragment size of paired-end KAS-seq data.
+###    correlation     Calculate the correlation coefficient and pvalue, generate correlation plot for replicates of KAS-seq data.
+###    saturation      Perform saturation analysis for KAS-seq data.
+###    complexity      Calculate the complexity metric for (sp)KAS-seq data, including the PCR Bottlenecking Coefficient and Non-Redundant Fraction (NRF).
+###    genomicdist     Visualize the genomic distribution for KAS-seq peaks (table and plot).
+###    fingerprint     Plot fingerprint for KAS-seq data.
+###
+### [ Map ]
+###    trim            Trim adapter and low quality sequence, perform quality control for raw KAS-seq data.
+###    KAS-seq         Map KAS-seq data to the reference genome, deduplicate mapped reads, and generate several files with maped reads (bam, bed and bedGraph).
+###    spKAS-seq       Map strand specific KAS-seq (spKAS-seq) data. Note: we strongly recommend paired-end sequencing for spKAS-seq data to accurately measure the fragments size.
+###    peakscalling    Call broad or sharp peaks for KAS-seq data.
+###    normalize       Normalize KAS-seq data with bedGraph density files.
+###    bedGraphToBigWig Transfer normalized bedGraph file to bigWig file.
+###    targetgenes     Define target or associated genes (promoter, genebody, terminator or gene) of KAS-seq peaks, R-loops or enhancers loci."
+###    UCSC            Generate bedGraph files ready for submitting to UCSC genome browser.
+###
+### [ Plot ]
+###    profile         Generate metagene profile for KAS-seq data (normalized bigWig files are needed).
+###    heatmap         Generate heatmap for KAS-seq data (normalized bigWig files are needed).
+###   
+### [ Differential analysis ]
+###    KASexpre        Calculate normalized KAS-seq expression levels on promoter, genebody, genes or custom regions. 
+###    diff            Perform differential KAS-seq analysis on promoter, genebody, gene, bin or custom regions.        
+###    TC              Perform 'case-only' or 'case-control' differential time course(TC) analysis for (sp)KAS-seq data.
+###    PCA             Perform and plot PCA analysis for (sp)KAS-seq data.
+###
+### [ R-loops ]
+###    R-loop          Identify R-loops regions with spKAS-seq data.
+###   
+### [ Enhancers identification ]
+###    ss_enhancer     Identify the single stranded (ss) enhancers.
+###    motif           Identify enriched TF binding motifs on ss_enhancers.
+###   
+### [ Termination length ]
+###    termilength     Calculate the transcription termination length of protein coding genes.
+###  
+### [ KAS-seq index ]    
+###    index           Calculate the pausing or termination index.
+###
+### [ General help ]
+###    --help          Print this help menu.
+###    --version       Print the version of KAS-pipe2 you are using.
+###    --contact       Feature requests, bugs, mailing lists, etc.
+###
+
+# Help message for KAS-pipe2
+
+help() {
+    sed -rn 's/^### ?//;T;p' "$0"
+}
+
+version() {
+    echo "KAS-pipe2 v2.0"
+}
+
+contact() {
+    echo "
+- For further help, or to report a bug, please 
+  email the bedtools mailing list: 
+     KAS-pip2-discuss@googlegroups.com
+
+- The development repository can be found at: 
+     https://github.com/Ruitulyu/KAS-pipe2
+
+- Stable releases of bedtools can be found at: 
+     https://github.com/Ruitulyu/KAS-pipe2"
+}
+
+if [[ $# == 0 ]] || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+   help
+   exit 1
+fi
+
+if [[ "$1" == "--version" ]]; then
+   version
+   exit 1
+fi
+
+if [[ "$1" == "--contact" ]]; then
+   contact
+   exit 1
+fi
+
+# get the path of shell scripts.
+SH_SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
+
+# Run the sub-commands submitted into KAS-pipe2.
+# run 'Configure' shell scripts.
+if [[ "$1" == "download" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/configure_download.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "build" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/configure_build.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "install" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/configure_install.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "uninstall" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/configure_uninstall.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "activate" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/configure_activate.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "deactivate" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/configure_deactivate.sh $( echo $* | cut -d " " -f 2- )
+
+# run 'Fastqc' shell scripts.
+elif [[ "$1" == "fastqc" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/fastqc_fastqc.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "readsnum" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/calculate_rawreads.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "statistics" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/fastqc_statistics.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "FRiP" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/fastqc_FRiP.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "fragmentsize" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/fastqc_fragmentsize.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "correlation" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/fastqc_correlation_bigWig.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "saturation" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/fastqc_saturation.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "complexity" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/fastqc_complexity.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "genomicdist" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/fastqc_genomicdist.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "fingerprint" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/fastqc_fingerprint.sh $( echo $* | cut -d " " -f 2- )
+ 
+# run 'Map' shell scripts.
+elif [[ "$1" == "trim" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/map_trim.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "KAS-seq" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/map_KAS-seq.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "spKAS-seq" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/map_spKAS-seq.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "peakscalling" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/map_peakscalling.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "normalize" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/map_normalize.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "bedGraphToBigWig" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/map_bedGraphToBigWig.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "targetgenes" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/define_target_genes.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "UCSC" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/map_UCSC.sh $( echo $* | cut -d " " -f 2- )
+
+# run 'Plot' shell scripts.
+elif [[ "$1" == "profile" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/plot_profile.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "heatmap" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/plot_heatmap.sh $( echo $* | cut -d " " -f 2- )
+
+# run 'Differential analysis' shell scripts.
+elif [[ "$1" == "KASexpre" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/calculate_KAS_expression.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "diff" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/diff_regions_bigWig.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "TC" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/KAS-seq_timecourse.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "PCA" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/plot_PCA.sh $( echo $* | cut -d " " -f 2- )
+
+# run 'R-loops' shell scripts.
+elif [[ "$1" == "R-loop" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/define_R-loops.sh $( echo $* | cut -d " " -f 2- )
+
+# run 'KAS index' shell scripts.
+elif [[ "$1" == "index" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/calculate_index.sh $( echo $* | cut -d " " -f 2- )
+
+# run 'Enhancers identification' shell scripts.
+elif [[ "$1" == "ss_enhancer" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/define_ss_enhancers.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "motif" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/motifs_on_enhancers.sh $( echo $* | cut -d " " -f 2- )
+
+# run 'Termination length' shell scripts.
+elif [[ "$1" == "termilength" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/calculate_termination_length.sh $( echo $* | cut -d " " -f 2- )
+
+# Unsupported sub-commands.
+else
+   echo "Error: unsupported sub-commands $1"
+   exit 1
+fi
