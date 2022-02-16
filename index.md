@@ -1,4 +1,4 @@
-# KAS-pipe2: a user-friendly toolkit for exploring KAS-seq data
+## KAS-pipe2: a user-friendly toolkit for exploring KAS-seq data
 
 ## Ruitu Lyu, Chemistry department, the university of Chicago, 2022-02-15
 
