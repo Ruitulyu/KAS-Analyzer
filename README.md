@@ -1,10 +1,10 @@
 # KAS-pipe2
-## A user-friendly toolkit for exploring (sp)KAS-seq data ###
+## A user-friendly toolkit for exploring (sp)KAS-seq data ##
 
 ----------------------------------------
-KAS-pipe2 is a collection of command line tools specifically developped for exploring KAS-seq or strand-specific (sp)KAS-seq data, including the basic tools for quality control, raw reads mapping, and heatmaps and summary plots. KAS-pipe2 also includes some novel features and completely new frame design compared to KAS-pipe. e.g. time-courese(TC) KAS-seq differential analysis, R-loop identification (only for spKAS-seq), ss-enhancer, index calculation, termination index and so on. 
+KAS-pipe2 is a collection of command line tools specifically developped for exploring KAS-seq or strand-specific (sp)KAS-seq data, including the basic tools for quality control, reference genome index, raw reads mapping, and heatmaps and summary plots. KAS-pipe2 also includes many novel features and completely new frame design compared to KAS-pipe. e.g. time-courese(TC) KAS-seq differential analysis, R-loop identification (only for spKAS-seq), ss-enhancers, motif,  index calculation, termination length and so on. 
 
-KAS-seq is a kethoxal-assisted single-stranded DNA sequencing (KAS-seq) approach, based on the fast and specific reaction between N3-kethoxal and guanines in ssDNA. KAS-seq allows rapid (within 5 min), sensitive and genome-wide capture and mapping of ssDNA produced by transcriptionally active RNA polymerases or other processes in situ using as few as 1,000 cells. KAS-seq can also enable definition of a group of enhancers that are single-stranded. Overall, KAS-seq facilitates fast and accurate analysis of transcription dynamics and enhancer activities in both low-input and high-throughput manners. Strand-specific KAS-seq (spKAS-seq) was further developped to identify R-loops with strand specificity using as few as 50,000 cells by mapping the exposed single-stranded DNA (ssDNA) caused by RNA-DNA duplex R-loop formation.
+KAS-seq is a kethoxal-assisted single-stranded DNA sequencing (KAS-seq) approach, based on the fast and specific reaction between N3-kethoxal and guanines in ssDNA. KAS-seq allows rapid (within 5 min), sensitive and genome-wide capture and mapping of ssDNA produced by transcriptionally active RNA polymerases or other processes in situ using as few as 1,000 cells. KAS-seq can also enable definition of a group of enhancers that are single-stranded. Overall, KAS-seq facilitates fast and accurate analysis of transcription dynamics and enhancer activities in both low-input and high-throughput manner. Strand-specific KAS-seq (spKAS-seq) was further developped to identify in vivo genome-wide R-loops with strand specificity using as few as 50,000 cells by mapping the exposed single-stranded DNA (ssDNA) caused by RNA-DNA duplex R-loop formation.
 
 ### KAS-seq:
 <img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/regular_KAS-seq_procedure.png">
@@ -29,17 +29,17 @@ Our [documentation](https://ruitulyu.github.io/KAS-pipe2/) contains more details
 
 >Please see also the [FAQ](https://github.com/Ruitulyu/KAS-pipe2/wiki), which we update regularly. 
 
->If you have any questions about the KAS-pipe2, please post your questions [to github discussions](https://github.com/Ruitulyu/KAS-pipe2/discussions).
+>If you have any questions about the KAS-pipe2, please post your questions to [github discussions](https://github.com/Ruitulyu/KAS-pipe2/discussions).
 
->For more specific **troubleshooting, feedback, and tool suggestions**, please post [to github issue](https://github.com/Ruitulyu/KAS-pipe2/issues) or send emails to the authors: lvruitu@gmail.com.
+>For more specific **troubleshooting, feedback, and tool suggestions**, please post to [github issue](https://github.com/Ruitulyu/KAS-pipe2/issues) or send emails to the authors: lvruitu@gmail.com.
 
 -----------------------------------------
 
 ### Installation
 
-**Install by cloning this repository:**
+**Install by cloning KAS-pipe2 git repository on github:**
 
-You can install KAS-pipe2 on command line (linux/mac) by cloning this git repository on github :
+You can install KAS-pipe2 on command line (linux/mac) by cloning git repository on github:
 
 	$ git clone https://github.com/Ruitulyu/KAS-pipe2.git
 	$ cd KAS-pipe2
@@ -59,5 +59,3 @@ You can install KAS-pipe2 on command line (linux/mac) by cloning this git reposi
 This tool suite is developed by the [Dr. Ruitu Lyu](https://scholar.google.com/citations?user=7nt2ezgAAAAJ&hl=en) at [Prof. Chuan He's lab](https://he-group.uchicago.edu/) of [the University of Chicago](https://www.uchicago.edu/).
 
 [Documentation](https://ruitulyu.github.io/KAS-pipe2/) | [FAQ](https://github.com/Ruitulyu/KAS-pipe2/wiki)
-
-
