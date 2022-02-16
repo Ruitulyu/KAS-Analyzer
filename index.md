@@ -1,8 +1,6 @@
 ### KAS-pipe2: a user-friendly toolkit for exploring KAS-seq data
 
-## <center>Ruitu Lyu</center>
-<center> Chemistry department, the university of Chicago</center>
-<center>2022-02-15<center> 
+## Ruitu Lyu, Chemistry department, the university of Chicago, 2022-02-15
 
 You can use the [editor on GitHub](https://github.com/Ruitulyu/KAS-pipe2/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
