@@ -89,8 +89,9 @@ number_of_tracknames=$( awk 'END {print NR}' $trackname )
 # Test if the number of track names is consistent with the number of KAS-seq samples.
 if [[ ${number_of_tracknames} != ${number_of_samples} ]]
    then
-   echo " "
+   echo ""
    echo "Error: the number of track names isn't consistent with the number of KAS-seq or spKAS-seq samples."
+   echo ""
    exit
 fi
 
@@ -126,14 +127,14 @@ sample_selected=$( sed -n ''$j'p' $KASseq )
 trackname_selected=$( sed -n ''$j'p' $trackname)
 KASseq_basename=$(basename ${sample_selected} .bg)
 color_selected=$( sed -n ''$j'p' $trackcolor)
-echo "$sample_selected ..."
-echo "track type=bedGraph name=\"${trackname_selected}.$(date +%Y-%m-%d)\" description=\"${trackname_selected}.$(date +%Y-%m-%d)\" visibility=full color=${color_selected} "> .${trackname_selected}.track
-head -49999999 $sample_selected > .${KASseq_basename}.filter.bg
-cat .${trackname_selected}.track .${KASseq_basename}.filter.bg > ${KASseq_basename}.UCSC.bg
+echo "Processing $sample_selected ..."
+echo ""
+echo "track type=bedGraph name=\"${trackname_selected}.$(date +%Y-%m-%d)\" description=\"${trackname_selected}.$(date +%Y-%m-%d)\" visibility=full color=${color_selected}" > .${trackname_selected}.track
+cat .${trackname_selected}.track $sample_selected | head -n 50000000 > ${KASseq_basename}.UCSC.bg
 gzip ${KASseq_basename}.UCSC.bg
-rm -f .${KASseq_basename}.filter.bg
 rm -f .${trackname_selected}.track
 echo "done."
+echo ""
 done
 
 rm -f .track_colors.txt

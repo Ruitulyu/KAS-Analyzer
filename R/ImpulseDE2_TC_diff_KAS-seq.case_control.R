@@ -16,8 +16,8 @@ if (length(args) == 0) {
 
 ## -----------------------------------------------------------------------------
 # use shell input
-KAS.matrix <- round(as.matrix(read.table(args[1], header = T)))
-coldata <- read.table(args[2], header = T)
+KASseq <- as.matrix(read.table(args[1], header = T))
+annotation <- as.data.frame(read.table(args[2], header = T))
 
 ## -----------------------------------------------------------------------------
 # install and load ImpulseDE2 package
@@ -27,4 +27,46 @@ coldata <- read.table(args[2], header = T)
 # BiocManager::install("ImpulseDE2")
 library(ImpulseDE2)
 
+# BiocManager::install("ComplexHeatmap")
+library(ComplexHeatmap)
+
 ## -----------------------------------------------------------------------------
+# perform case-control time course(TC) KAS-seq differential analysis using ImpulseDE2 package without batch effect normalization.
+
+objectImpulseDE2 <- runImpulseDE2(
+     matCountData    = KASseq,
+     dfAnnotation    = annotation,
+     boolCaseCtrl    = TRUE,
+     boolIdentifyTransients = TRUE,
+     vecConfounders  = NULL,
+     scaNProc        = 1 )
+
+## -----------------------------------------------------------------------------
+#output the results of time course differential KAS-seq analysis
+write.csv(objectImpulseDE2$dfImpulseDE2Results, "KAS-seq_case_control_TC_ImpulseDE2_output.csv")
+
+## ----------------------------------------------------------------------------
+# Visualization of global TC KAS-seq patterns via a heatmap
+
+# Visualize global TC KAS-seq patterns and save it as png plot.
+png(file="KAS-seq_case_control_TC_ImpulseDE2_heatmap.png", bg="transparent")
+plotHeatmap(
+  objectImpulseDE2       = objectImpulseDE2,
+  strCondition           = c("case","control"),
+  boolIdentifyTransients = TRUE,
+  scaQThres              = 0.01)
+dev.off()
+
+# Visualize global TC KAS-seq patterns and save it as svg plot.
+png(file="KAS-seq_case_control_TC_ImpulseDE2_heatmap.svg", bg="transparent")
+plotHeatmap(
+  objectImpulseDE2       = objectImpulseDE2,
+  strCondition           = c("case","control"),
+  boolIdentifyTransients = TRUE,
+  scaQThres              = 0.01)
+dev.off()
+
+# https://bioconductor.riken.jp/packages/3.9/bioc/vignettes/ImpulseDE2/inst/doc/ImpulseDE2_Tutorial.html#transiently-regulated-genes
+
+## ----sessionInfo--------------------------------------------------------------
+sessionInfo()

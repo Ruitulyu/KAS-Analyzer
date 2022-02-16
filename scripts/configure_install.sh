@@ -31,7 +31,7 @@ printHelpAndExit() {
 }
 
 # if no parameters was provided, 'KAS-pipe2 install' will print the help.
-if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
+if [[ $# == 0 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
 
@@ -54,17 +54,20 @@ fi
 
 # function to check the installed and uninstalled tools.
 checkinstall() {
-all_tools="bedtools bwa bowtie2 macs2 macs14 deeptools homer fastqc cutadapt trim-galore bedGraphToBigWig samtools picard R"
+all_tools="bedtools bwa bowtie2 macs2 macs14 deeptools homer fastqc cutadapt trim_galore bedGraphToBigWig samtools picard R"
+cat /dev/null > .installed_tools.txt
+cat /dev/null > .uninstalled_tools.txt
 for ((i=1; i<=14; i++))	
 do
 echo 	
 tool_selected=$( echo $all_tools | awk -v x=$i '{print $x}' )	
-if ! type $tool_selected >/dev/null 2>&1 ;then
+if ! type $tool_selected > /dev/null 2>&1 ;then	
    echo "$tool_selected" >> .uninstalled_tools.txt
 else 
    echo "$tool_selected" >> .installed_tools.txt
 fi
 done
+
 echo "Installed_tools:"
 cat .installed_tools.txt
 echo ""
@@ -77,9 +80,16 @@ rm -f .uninstalled_tools.txt
 
 # function to install tools.
 installtools() {
-echo "Install $tools with 'conda install'"        
-conda install -c bioconda $tools
-echo "done."
+if ! type $tools >/dev/null 2>&1 ;then
+   echo ""
+   echo "$tools was not installed, install $tools with 'conda'"
+   echo ""
+   conda install -c bioconda $tools
+   echo "done."
+   echo ""
+else
+   echo "$tools have been installed."
+fi   
 }	
 
 installKAS-pipe2() {
@@ -186,3 +196,7 @@ do
     esac
 shift
 done
+
+if [[ $# == 1 ]] ;then
+    printHelpAndExit
+fi
