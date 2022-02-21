@@ -63,6 +63,31 @@ while getopts 'ho:t:s:i:l:k:' opt; do
     esac
 done
 
+# check bedtools, samtools and deeptools were installed in your system.
+if ! type bedtools > /dev/null 2>&1 ;then
+   echo "bedtools was not installed or not export to the \$PATH'"
+   echo ""
+   echo "Install bedtools with 'conda install -c bioconda bedtools' or refer the official website of 'bedtools'."
+   echo ""
+   exit 1
+fi
+
+if ! type samtools > /dev/null 2>&1 ;then
+   echo "samtools was not installed or not export to the \$PATH'"
+   echo ""
+   echo "Install samtools with 'conda install -c bioconda samtools' or refer the official website of 'samtools'."
+   echo ""
+   exit 1
+fi
+
+if ! type deeptools > /dev/null 2>&1 ;then
+   echo "deeptools was not installed or not export to the \$PATH'"
+   echo ""
+   echo "Install deeptools with 'conda install -c bioconda deeptools' or refer the official website of 'deeptools'."
+   echo ""
+   exit 1
+fi
+
 # Required options.
 if test -z $prefix ;then
    echo ""

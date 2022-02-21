@@ -8,7 +8,7 @@ set -e
 usageHelp="Usage: KAS-pipe2 readsnum [ -h/--help ] [ -o prefix ] [ -f format ] "
 exampleHelp="Example: nohup KAS-pipe2 readsnum -p KAS-seq_reads_num -f fastq.gz &"
 prefixHelp="-o [prefix]: please specify the prefix (basename) of 'KAS-pipe2 readsnum' output files. REQUIRED."
-formatHelp="-f [format]: please specify the format of raw reads data. e.g. fastq, fastq.gz, fa or fa.gz. REQUIRED."
+formatHelp="-f [format]: please specify the format of raw reads data. e.g. fastq, fq, fastq.gz, fasta, fa or fa.gz. REQUIRED."
 helpHelp="-h/--help: print this help and exit.
 Note: The 'KAS-pipe2 readsnum' shell script is applied to calculate the reads number of raw sequencing files."
 
@@ -51,13 +51,13 @@ fi
 
 if test -z $format ;then
    echo ""	
-   echo "Please specify the format of raw reads data. e.g. fastq, fastq.gz, fa or fa.gz. -f [format]"
+   echo "Please specify the format of raw reads data. e.g. fastq, fq, fastq.gz, fasta, fa or fa.gz. -f [format]"
    echo ""
    exit 1
 fi
 
 # Test the supported format of raw data files.
-if [[ $format != "fastq" ]] && [[ $format != "fastq.gz" ]] && [[ $format != "fa" ]] && [[ $format != "fa.gz" ]]  ;then
+if [[ $format != "fastq" ]] && [[ $format != "fq" ]] && [[ $format != "fastq.gz" ]] && [[ $format != "fasta" ]] && [[ $format != "fa" ]] && [[ $format != "fa.gz" ]]  ;then
    echo ""	
    echo "Error: unsupported formats of raw data files: $format."
    echo ""
@@ -89,6 +89,19 @@ elif [[ $format == "fastq" ]]; then
    echo ""
    done
 
+elif [[ $format == "fq" ]]; then
+   echo -e "samples\treads_num" > ${prefix}_reads_num.txt
+   for file in ./*.fq;
+   do
+   echo "Calculating the reads number of $file ..."
+   rawdata_prefix=$(basename $file .fq)
+   reads_num=$(wc -l $file | awk '{print $1/4}')
+   echo -e "$rawdata_prefix\t$reads_num" >> ${prefix}_reads_num.txt
+   echo "done."
+   echo ""
+   done
+
+
 elif [ "${rawdata_format}" == "fa.gz" ]; then
    echo -e "samples\treads_num" > ${prefix}_reads_num.txt
    for file in ./*.fa.gz;
@@ -107,6 +120,16 @@ elif [ "${rawdata_format}" == "fa" ]; then
    do
    echo "Calculating the reads number of $file ..."
    rawdata_prefix=$(basename $file .fa)
+   reads_num=$(wc -l $file | awk '{print $1/2}')
+   echo -e "$rawdata_prefix\t$reads_num" >> ${prefix}_reads_num.txt
+   done
+
+elif [ "${rawdata_format}" == "fasta" ]; then
+   echo -e "samples\treads_num" > ${prefix}_reads_num.txt
+   for file in ./*.fasta;
+   do
+   echo "Calculating the reads number of $file ..."
+   rawdata_prefix=$(basename $file .fasta)
    reads_num=$(wc -l $file | awk '{print $1/2}')
    echo -e "$rawdata_prefix\t$reads_num" >> ${prefix}_reads_num.txt
    done

@@ -85,7 +85,16 @@ if test -z $prefix ;then
 fi
 
 # Build bowtie2 index with bowtie2-build.
-if [[ "$aligner" == "bowtie2" ]]; then 
+if [[ "$aligner" == "bowtie2" ]]; then
+
+   if ! type bowtie2 > /dev/null 2>&1 ;then
+      echo "bowtie2 was not installed or not export to the \$PATH'"
+      echo ""
+      echo "Install bowtie2 with 'conda install -c bioconda bowtie2' or 'KAS-pipe2 install -t bowtie2'."
+      echo ""
+      exit 1
+   fi            	
+   
    mkdir -p $indexdir
    fasta_name=$(basename ${fasta} .fa).fa
    mv -n $fasta $indexdir
@@ -94,6 +103,15 @@ if [[ "$aligner" == "bowtie2" ]]; then
 
 # Build bwa index with bwa index.
 elif [[ "$aligner" == "bwa" ]]; then
+
+   if ! type bwa > /dev/null 2>&1 ;then
+   echo "bwa was not installed or not export to the \$PATH'"
+   echo ""
+   echo "Install bwa with 'conda install -c bioconda bwa' or 'KAS-pipe2 install -t bwa'."
+   echo ""
+   exit 1
+   fi
+
    mkdir -p $indexdir
    fasta_name=$(basename ${fasta} .fa).fa
    mv -n $fasta $indexdir

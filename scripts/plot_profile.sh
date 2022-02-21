@@ -93,6 +93,15 @@ while getopts 'ht:s:o:e:r:p:f:l:c:k:' opt; do
     esac
 done
 
+# test if deeptools was installed.
+if ! type deeptools > /dev/null 2>&1 ;then
+   echo "deeptools was not installed or not export to the \$PATH'"
+   echo ""
+   echo "Install deeptools with 'conda install -c bioconda deeptools' or refer the official website of 'deeptools'."
+   echo ""
+   exit 1
+fi
+
 # Required options.
 if test -z $prefix ;then
    echo ""

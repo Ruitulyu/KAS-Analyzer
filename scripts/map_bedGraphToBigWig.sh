@@ -47,6 +47,23 @@ while getopts 'hk:s:' opt; do
     esac
 done
 
+# check bedtools and bedGraphToBigWig were installed in your system.
+if ! type bedtools > /dev/null 2>&1 ;then
+   echo "bedtools was not installed or not export to the \$PATH'"
+   echo ""
+   echo "Install bedtools with 'conda install -c bioconda bedtools' or refer the official website of 'bedtools'."
+   echo ""
+   exit 1
+fi
+
+if ! type bedGraphToBigWig > /dev/null 2>&1 ;then
+   echo "bedGraphToBigWig was not installed or not export to the \$PATH'"
+   echo ""
+   echo "Install bedGraphToBigWig with 'conda install -c bioconda ucsc-bedgraphtobigwig' or refer the official website of UCSC command lines."
+   echo ""
+   exit 1
+fi
+
 # Required options.
 if test -z $KASseq ;then
    echo ""
@@ -78,8 +95,7 @@ sample_selected=$(sed -n ''$i'p' $KASseq)
 KASseq_basename=$(basename ${sample_selected} .bg)
 echo "Transfering ${KASseq_basename}.bg into ${KASseq_basename}.bigWig ..."
 echo ""
-sed -i '/^chrM/d' $sample_selected 
-bedSort $sample_selected ${KASseq_basename}.sort.bg
+sed '/^chrM/d' $sample_selected | sortBed -i - > ${KASseq_basename}.sort.bg
 bedGraphToBigWig ${KASseq_basename}.sort.bg ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes ${KASseq_basename}.bigWig
 rm -f ${KASseq_basename}.sort.bg
 echo "done."

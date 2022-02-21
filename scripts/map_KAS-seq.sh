@@ -5,17 +5,18 @@
 set -e
 
 ## Read arguments                                                     
-usageHelp="Usage: KAS-pipe2 KAS-seq [ -h ] [ -a aligner ] [ -t threads ] [ -i index path ] [ -e extend length ] [ -o prefix ] [ -s assembly id ] [ -1 read1 ] [ -2 read2 ]"
+usageHelp="Usage: KAS-pipe2 KAS-seq [ -h ] [ -a aligner ] [ -t threads ] [ -i index path ] [ -u ] [ -e extend length ] [ -o prefix ] [ -s assembly id ] [ -1 read1 ] [ -2 read2 ]"
 exampleHelp="Example:
        Single-end:
        nohup KAS-pipe2 KAS-seq -a bowtie2 -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -e 150 -o KAS-seq -s hg19 -1 KAS-seq.trim.fastq.gz &
        Paired-end:
        nohup KAS-pipe2 KAS-seq -a bowtie2 -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o KAS-seq -s hg19 -1 KAS-seq.trim.R1.fastq.gz -2 KAS-seq.trim.R2.fastq.gz &
        Note: Bowtie2 Index example: /absolute path/Bowtie2Index/hg19; bwa Index example: /absolute path/BWAIndex/hg19.fa"
-alignerHelp="-a [aligner]: please specify the aligner (bowtie2 or bwa) you want to use to map KAS-seq data. Default: bowtie2."
-threadsHelp="-t [threads]: please input the number of threads used for KAS-seq data mapping. Default: 1."
+alignerHelp="-a [aligner]: please specify the aligner (bowtie2 or bwa) you want to use to map KAS-seq data. DEFAULT: bowtie2."
+threadsHelp="-t [threads]: please input the number of threads used for KAS-seq data mapping. DEFAULT: 1."
 indexpathHelp="-i [index path]: please input the absolute path of reference genome index for aligner. REQUIRED."
-extendlengthHelp="-e [extendlengthHelp]: please input the extend length for single-end KAS-seq data. Default: 150."
+uniqueHelp="-u: please specify to filter the unique mapped reads. DEFAULT: off."
+extendlengthHelp="-e [extendlengthHelp]: please input the extend length for single-end KAS-seq data. DEFAULT: 150."
 prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 KAS-seq' output files. REQUIRED."
 assemblyidHelp="-s [assembly id]: please specify the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. REQUIRED."
 read1Help="-1 [read1]: please input trimmed single-end KAS-seq fastq file or read 1 of paired-end KAS-seq raw fastq files; Compressed .fastq.gz is accepted. REQUIRED."
@@ -34,6 +35,8 @@ printHelpAndExit() {
     echo -e "$threadsHelp"
     echo -e ""
     echo -e "$indexpathHelp"
+    echo -e ""
+    echo -e "$uniqueHelp"
     echo -e ""
     echo -e "$extendlengthHelp"
     echo -e ""
@@ -55,12 +58,13 @@ if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
 
-while getopts 'ha:t:i:e:o:s:1:2:' opt; do
+while getopts 'ha:t:i:ue:o:s:1:2:' opt; do
     case $opt in
         h) printHelpAndExit 0;;
         a) aligner=$OPTARG ;;
         t) threads=$OPTARG ;;
         i) indexpath=$OPTARG ;;
+	u) unique="on"
 	e) extendlength=$OPTARG ;;
         o) prefix=$OPTARG ;;
         s) assemblyid=$OPTARG ;;
@@ -106,6 +110,10 @@ if test -z $threads ;then
    threads=1
 fi
 
+if test -z $unique ;then
+   unique="off"
+fi   
+
 if test -z $aligner ;then
    aligner="bowtie2"
 elif [[ $aligner != "bowtie2" ]] && [[ $aligner != "bwa" ]] ;then
@@ -114,7 +122,6 @@ elif [[ $aligner != "bowtie2" ]] && [[ $aligner != "bwa" ]] ;then
    echo ""
    exit 1
 fi
-
 
 if test -z $extendlength ;then
    extendlength=150
@@ -222,19 +229,26 @@ if [[ $paired_or_single_end == "single" ]]; then
       echo "'samtools rmdup' done."
       echo ""
       
+      if [[ $unique == "on" ]] ;then
+         echo "Filter the unique mapped reads ..."
+	 echo ""
+         samtools view -q 10 -b ${prefix}_rmdup.bam | bamToBed -i - | awk '$3-'${extendlength}'>0 {if ($6~"+") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$2,$2+'${extendlength}',$4,$5,$6); else if ($6~"-") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$3-'${extendlength}',$3,$4,$5,$6)}' | intersectBed -a - -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v | intersectBed -a - -b ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes.bed -wa -f 1 > ${prefix}.ext${extendlength}.unique.bed
+         genomeCoverageBed -bg -i ${prefix}.ext${extendlength}.unique.bed -g ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes > ${prefix}.ext${extendlength}.unique.bg
+	 echo "done."
+	 echo ""
+      fi
+
       # transfer bam into bed.
       echo "Transfer ${prefix}_rmdup.bam into ${prefix}.bed with bamToBed."
       echo ""
-      bamToBed -i ${prefix}_rmdup.bam > ${prefix}.bed
-      intersectBed -a ${prefix}.bed -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v > ${prefix}.filter.bed 
-      mv ${prefix}.filter.bed ${prefix}.bed
+      bamToBed -i ${prefix}_rmdup.bam | intersectBed -a - -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v > ${prefix}.bed
       echo "'bamToBed' done."
       echo ""
       
       # extend the deduplicated mapped reads to extendlength.  
       echo "Extend the deduplicated reads in ${prefix}.bed to ${extendlength}."
       echo ""
-      awk '$3-'${extendlength}'>0 {if ($6~"+") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$2,$2+'${extendlength}',$4,$5,$6); else if ($6~"-") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$3-'${extendlength}',$3,$4,$5,$6)}' ${prefix}.bed > ${prefix}.ext${extendlength}.bed
+      awk '$3-'${extendlength}'>0 {if ($6~"+") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$2,$2+'${extendlength}',$4,$5,$6); else if ($6~"-") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$3-'${extendlength}',$3,$4,$5,$6)}' ${prefix}.bed | intersectBed -a - -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v | intersectBed -a - -b ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes.bed -wa -f 1 > ${prefix}.ext${extendlength}.bed
       echo "'extend' done."
       echo ""
 
@@ -263,13 +277,13 @@ if [[ $paired_or_single_end == "single" ]]; then
       # move bedGraph files into BedGraph files.
       mkdir -p BedGraph_files
       cd BedGraph_files
-      mv ../${prefix}/${prefix}.ext${extendlength}.bg ./
+      mv ../${prefix}/${prefix}.ext${extendlength}.*bg ./
       cd ..
 
       # move extended bed files into Bed_files.
       mkdir -p Bed_files
       cd Bed_files
-      mv ../${prefix}/${prefix}.ext${extendlength}.bed ./
+      mv ../${prefix}/${prefix}.ext${extendlength}.*bed ./
       cd ..
 
       # move mapping summary files into Mapping_summary.
@@ -332,20 +346,27 @@ if [[ $paired_or_single_end == "single" ]]; then
       rm -f .${prefix}_SE_KAS-seq_deduplication_ratios.txt
       echo "'samtools rmdup' done."
       echo ""
- 
+      
+      if [[ $unique == "on" ]] ;then
+         echo "Filter the unique mapped reads ..."
+         echo ""
+         samtools view -q 10 -b ${prefix}_rmdup.bam | bamToBed -i - | awk '$3-'${extendlength}'>0 {if ($6~"+") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$2,$2+'${extendlength}',$4,$5,$6); else if ($6~"-") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$3-'${extendlength}',$3,$4,$5,$6)}' | intersectBed -a - -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v | intersectBed -a - -b ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes.bed -wa -f 1 > ${prefix}.ext${extendlength}.unique.bed
+         genomeCoverageBed -bg -i ${prefix}.ext${extendlength}.unique.bed -g ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes > ${prefix}.ext${extendlength}.unique.bg
+         echo "done."
+         echo ""
+      fi
+
       # transfer bam into bed.
       echo "Transfer ${prefix}_rmdup.bam into ${prefix}.bed with bamToBed."
       echo ""
-      bamToBed -i ${prefix}_rmdup.bam > ${prefix}.bed
-      intersectBed -a ${prefix}.bed -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v > ${prefix}.filter.bed
-      mv ${prefix}.filter.bed ${prefix}.bed
+      bamToBed -i ${prefix}_rmdup.bam | intersectBed -a - -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v > ${prefix}.bed
       echo "'bamToBed' done."
       echo ""
 
       # extend the deduplicated mapped reads to extendlength.
       echo "Extend the deduplicated reads in ${prefix}.bed to ${extendlength}."
       echo ""
-      awk '$3-'${extendlength}'>0 {if ($6~"+") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$2,$2+'${extendlength}',$4,$5,$6); else if ($6~"-") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$3-'${extendlength}',$3,$4,$5,$6)}' ${prefix}.bed > ${prefix}.ext${extendlength}.bed
+      awk '$3-'${extendlength}'>0 {if ($6~"+") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$2,$2+'${extendlength}',$4,$5,$6); else if ($6~"-") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$3-'${extendlength}',$3,$4,$5,$6)}' ${prefix}.bed | intersectBed -a - -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v | intersectBed -a - -b ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes.bed -wa -f 1 > ${prefix}.ext${extendlength}.bed
       echo "'extend' done."
       echo ""
 
@@ -374,13 +395,13 @@ if [[ $paired_or_single_end == "single" ]]; then
       # move bedGraph files into BedGraph files.
       mkdir -p BedGraph_files
       cd BedGraph_files
-      mv ../${prefix}/${prefix}.ext${extendlength}.bg ./
+      mv ../${prefix}/${prefix}.ext${extendlength}.*bg ./
       cd ..
 
       # move extended bed files into Bed_files.
       mkdir -p Bed_files
       cd Bed_files
-      mv ../${prefix}/${prefix}.ext${extendlength}.bed ./
+      mv ../${prefix}/${prefix}.ext${extendlength}.*bed ./
       cd ..
       
       # move mapping summary files into Mapping_summary.
@@ -446,10 +467,21 @@ elif [[ $paired_or_single_end == "paired" ]] ;then
       echo "'picard MarkDuplicates' done."
       echo ""
 
+      if [[ $unique == "on" ]] ;then
+         echo "Filter the unique mapped reads ..."
+         echo ""
+         samtools view -q 10 ${prefix}_rmdup.bam | ${SH_SCRIPT_DIR}/../src/SAMtoBED -i - -o ${prefix}.unique.bed -x -v >> /dev/null 2>&1
+	 intersectBed -a ${prefix}.unique.bed -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v > ${prefix}.unique.rmbl.bed
+	 mv ${prefix}.unique.rmbl.bed ${prefix}.unique.bed
+         genomeCoverageBed -bg -i ${prefix}.unique.bed -g ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes > ${prefix}.unique.bg
+         echo "done."
+         echo ""
+      fi
+
       # estimate the exact size of KAS-seq fragments with mapped read1 and read2.
       echo "Combine 'properly paired' alignments into a single BED interval. ${prefix}_rmdup.bam into ${prefix}.bed."
       echo ""
-      samtools view -h ${prefix}_rmdup.bam | ${SH_SCRIPT_DIR}/../src/SAMtoBED  -i - -o  ${prefix}.bed -x -v >> .${prefix}_PE_KAS-seq_fragment_length.txt 2>&1 
+      samtools view -h ${prefix}_rmdup.bam | ${SH_SCRIPT_DIR}/../src/SAMtoBED -i - -o ${prefix}.bed -x -v >> .${prefix}_PE_KAS-seq_fragment_length.txt 2>&1 
       paired_alignments_num=$( grep "Paired alignments (fragments):" .${prefix}_PE_KAS-seq_fragment_length.txt | awk '{printf("%d\n",$4/2)}' )
       unpaired_alignments_num=$( grep "Unpaired alignments:" .${prefix}_PE_KAS-seq_fragment_length.txt | awk '{printf("%d\n",$3/2)}' )
       alignments_num=$(( paired_alignments_num + unpaired_alignments_num ))
@@ -473,23 +505,29 @@ elif [[ $paired_or_single_end == "paired" ]] ;then
       echo "Remove blacklist reads ..."
       echo ""
       bedSort ${prefix}.bed ${prefix}.sort.bed
-      sed -i '/^chrM/d' ${prefix}.sort.bed
-      intersectBed -a ${prefix}.sort.bed -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v > ${prefix}.bed
+      grep ^chrM -v ${prefix}.sort.bed | intersectBed -a - -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v > ${prefix}.bed
       echo "done."
       echo ""
 
-      echo "Attach strand information into combined alignments."
+      echo "Attach strand information into combined alignments ..."
       echo ""
       samtools view -hbf 64 ${prefix}_rmdup.bam > ${prefix}_rmdup.R1.bam
-      bamToBed -i ${prefix}_rmdup.R1.bam > ${prefix}_rmdup.R1.bed
-      sed -i '/^chrM/d' ${prefix}_rmdup.R1.bed
+      bamToBed -i ${prefix}_rmdup.R1.bam | grep ^chrM -v > ${prefix}_rmdup.R1.bed
       sed -i "s/\/1//g" ${prefix}_rmdup.R1.bed
 
       intersectBed -a ${prefix}.bed -b ${prefix}_rmdup.R1.bed -wa -wb -F 1 | awk '$4==$8 {printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$2,$3,$8,$9,$10)}' > ${prefix}.6bed
       mv ${prefix}.6bed ${prefix}.bed
-
       echo "done."
       echo ""
+
+      if [[ $unique == "on" ]] ;then
+	 echo "Attach strand information into combined alignments for uniquely mapped reads ..."
+         echo "done."
+	 intersectBed -a ${prefix}.unique.bed -b ${prefix}_rmdup.R1.bed -wa -wb -F 1 | awk '$4==$8 {printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$2,$3,$8,$9,$10)}' > ${prefix}.unique.6bed
+         mv ${prefix}.unique.6bed ${prefix}.unique.bed
+         echo "done."
+         echo ""
+      fi	 
 
       echo "Transfer ${prefix}.bed into ${prefix}.bg with genomeCoverageBed."
       echo ""
@@ -518,13 +556,13 @@ elif [[ $paired_or_single_end == "paired" ]] ;then
       # move bedGraph files into BedGraph files.
       mkdir -p BedGraph_files
       cd BedGraph_files
-      mv ../${prefix}/${prefix}.bg ./
+      mv ../${prefix}/${prefix}.*bg ./
       cd ..
 
       # move extended bed files into Bed_files.
       mkdir -p Bed_files
       cd Bed_files
-      mv ../${prefix}/${prefix}.bed ./
+      mv ../${prefix}/${prefix}.*bed ./
       cd ..
 
       # move mapping summary files into Mapping_summary.
@@ -585,10 +623,21 @@ elif [[ $paired_or_single_end == "paired" ]] ;then
       echo "'picard MarkDuplicates' done."
       echo ""
 
+      if [[ $unique == "on" ]] ;then
+         echo "Filter the unique mapped reads ..."
+         echo ""
+         samtools view -q 10 ${prefix}_rmdup.bam | ${SH_SCRIPT_DIR}/../src/SAMtoBED -i - -o ${prefix}.unique.bed -x -v >> /dev/null 2>&1
+         intersectBed -a ${prefix}.unique.bed -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v > ${prefix}.unique.rmbl.bed
+         mv ${prefix}.unique.rmbl.bed ${prefix}.unique.bed
+         genomeCoverageBed -bg -i ${prefix}.unique.bed -g ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes > ${prefix}.unique.bg
+         echo "done."
+         echo ""
+      fi
+
       # estimate the exact size of fragments from map read1 and read2.
       echo "Combine 'properly paired' alignments into a single BED interval. ${prefix}_rmdup.bam into ${prefix}.bed."
       echo ""
-      samtools view -h  ${prefix}_rmdup.bam | ${SH_SCRIPT_DIR}/../src/SAMtoBED  -i - -o ${prefix}.bed -x -v >> .${prefix}_PE_KAS-seq_fragment_length.txt 2>&1
+      samtools view -h ${prefix}_rmdup.bam | ${SH_SCRIPT_DIR}/../src/SAMtoBED -i - -o ${prefix}.bed -x -v >> .${prefix}_PE_KAS-seq_fragment_length.txt 2>&1
       paired_alignments_num=$( grep "Paired alignments (fragments):" .${prefix}_PE_KAS-seq_fragment_length.txt | awk '{printf("%d\n",$4/2)}' )
       unpaired_alignments_num=$( grep "Unpaired alignments:" .${prefix}_PE_KAS-seq_fragment_length.txt | awk '{printf("%d\n",$3/2)}' )
       alignments_num=$(( paired_alignments_num + unpaired_alignments_num ))
@@ -612,21 +661,28 @@ elif [[ $paired_or_single_end == "paired" ]] ;then
       echo "Remove blacklist reads ..."
       echo ""
       bedSort ${prefix}.bed ${prefix}.sort.bed
-      sed -i '/^chrM/d' ${prefix}.sort.bed
-      intersectBed -a ${prefix}.sort.bed -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v > ${prefix}.bed
+      grep ^chrM -v ${prefix}.sort.bed | intersectBed -a - -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v > ${prefix}.bed
       echo "done."
       echo ""
 
       echo "Attach strand information into combined alignments."
       echo ""
       samtools view -hbf 64 ${prefix}_rmdup.bam > ${prefix}_rmdup.R1.bam
-      bamToBed -i ${prefix}_rmdup.R1.bam > ${prefix}_rmdup.R1.bed
-      sed -i '/^chrM/d' ${prefix}_rmdup.R1.bed
+      bamToBed -i ${prefix}_rmdup.R1.bam | grep ^chrM -v > ${prefix}_rmdup.R1.bed
       sed -i "s/\/1//g" ${prefix}_rmdup.R1.bed
       intersectBed -a ${prefix}.bed -b ${prefix}_rmdup.R1.bed -wa -wb -F 1 | awk '$4==$8 {printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$2,$3,$8,$9,$10)}' > ${prefix}.6bed
       mv ${prefix}.6bed ${prefix}.bed
       echo "done."
       echo ""
+
+      if [[ $unique == "on" ]] ;then
+         echo "Attach strand information into combined alignments for uniquely mapped reads ..."
+         echo "done."
+         intersectBed -a ${prefix}.unique.bed -b ${prefix}_rmdup.R1.bed -wa -wb -F 1 | awk '$4==$8 {printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$2,$3,$8,$9,$10)}' > ${prefix}.unique.6bed
+         mv ${prefix}.unique.6bed ${prefix}.unique.bed
+         echo "done."
+         echo ""
+      fi
 
       echo "Transfer ${prefix}.bed into ${prefix}.bg with genomeCoverageBed."
       echo ""
@@ -655,13 +711,13 @@ elif [[ $paired_or_single_end == "paired" ]] ;then
       # move bedGraph files into BedGraph files.
       mkdir -p BedGraph_files
       cd BedGraph_files
-      mv ../${prefix}/${prefix}.bg ./
+      mv ../${prefix}/${prefix}.*bg ./
       cd ..
 
       # move extended bed files into Bed_files.
       mkdir -p Bed_files
       cd Bed_files
-      mv ../${prefix}/${prefix}.bed ./
+      mv ../${prefix}/${prefix}.*bed ./
       cd ..
 
       # move mapping summary files into Mapping_summary.

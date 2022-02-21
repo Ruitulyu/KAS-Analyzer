@@ -117,7 +117,7 @@ if [[ $features == "promoter" ]] || [[ $features == "genebody" ]] || [[ $feature
    echo ""
 
 elif [[ $features == "enhancer" ]]
-   echo "Edite the gene annotation based on the $length bp distance to TSS."
+   echo "Define the gene annotation based on the $length bp distance to TSS."
    echo ""
    awk -v x=${length} '{if(($2+$3)/2-x>=0){printf("%s\t%d\t%d\t%d\t%d\t%s\t%d\t%s\t\n",$1,($2+$3)/2-x,($2+$3)/2+x,$2,$3,$4,$5,$6)} else{printf("%s\t%d\t%d\t%d\t%d\t%s\t%d\t%s\t\n",$1,"0",($2+$3)/2+x,$2,$3,$4,$5,$6)} }' ${SH_SCRIPT_DIR}/../annotation/${assemblyid}/${assemblyid}_Refseq.promoter.bed > ${assemblyid}_Refseq.promoter.${length}.bed
    echo "done."

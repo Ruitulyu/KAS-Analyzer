@@ -14,7 +14,7 @@ WT.rep1
 WT.rep2
 WT.rep3
 WT.rep4              ---labels.txt"
-KASseqHelp="-k [KAS-seq.txt]: please input the text file containing the bam files without removing redundant reads, which are used to calcuate the complexity metric including PCR Bottlenecking Coefficients (PBC) and Non-Redundant Fraction (NRF). The order and number of KAS-seq data should be the consistent with the labels file. REQUIRED.
+KASseqHelp="-k [KAS-seq.txt]: please input the text file containing the bam files without removing redundant reads, which are used to calculate the complexity metric including PCR Bottlenecking Coefficients (PBC) and Non-Redundant Fraction (NRF). The order and number of KAS-seq data should be the consistent with the labels file. REQUIRED.
 Example:
 KAS-seq.rep1.bam
 KAS-seq.rep2.bam

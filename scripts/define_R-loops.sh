@@ -81,6 +81,31 @@ while getopts 'ht:o:s:p:b:f:l:n:k:' opt; do
     esac
 done
 
+# check bedtools, samtools and deeptools were installed in your system.
+if ! type bedtools > /dev/null 2>&1 ;then
+   echo "bedtools was not installed or not export to the \$PATH'"
+   echo ""
+   echo "Install bedtools with 'conda install -c bioconda bedtools' or refer the official website of 'bedtools'."
+   echo ""
+   exit 1
+fi
+
+if ! type macs2 > /dev/null 2>&1 ;then
+   echo "macs2 was not installed or not export to the \$PATH'"
+   echo ""
+   echo "Install macs2 with 'conda install -c bioconda macs2' or refer the official website of 'macs2'."
+   echo ""
+   exit 1
+fi
+
+if ! type deeptools > /dev/null 2>&1 ;then
+   echo "deeptools was not installed or not export to the \$PATH'"
+   echo ""
+   echo "Install deeptools with 'conda install -c bioconda deeptools' or refer the official website of 'deeptools'."
+   echo ""
+   exit 1
+fi
+
 # Required options.
 if test -z $assemblyid ;then
    echo ""      

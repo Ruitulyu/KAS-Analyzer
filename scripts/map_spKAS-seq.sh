@@ -5,7 +5,7 @@
 set -e
 
 ## Read arguments                                                     
-usageHelp="Usage: KAS-pipe2 spKAS-seq [ -h ] [ -t threads ] [ -i index path ] [ -r ] [ -f fold change ] [ -b bin size ] [ -e extend length ] [ -o prefix ] [ -s assembly id ] [ -1 read1 ] [ -2 read2 ]
+usageHelp="Usage: KAS-pipe2 spKAS-seq [ -h ] [ -t threads ] [ -i index path ] [ -u ] [ -r ] [ -f fold change ] [ -b bin size ] [ -e extend length ] [ -o prefix ] [ -s assembly id ] [ -1 read1 ] [ -2 read2 ]
 
 Note: we strongly recommend paired-end sequencing for strand specific KAS-seq (spKAS-seq) data to accurately measure the fragments size."
 exampleHelp="Example:
@@ -14,12 +14,13 @@ exampleHelp="Example:
        Paired-end:
        nohup KAS-pipe2 spKAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o spKAS-seq -r -s hg19 -1 spKAS-seq.trim.R1.fastq.gz -2 spKAS-seq.trim.R2.fastq.gz &
        Note: Bowtie2 Index example: /absolute path/Bowtie2Index/hg19."
-threadsHelp="-t [threads]: please specify the number of threads used for spKAS-seq data mapping. Default: 1."
+threadsHelp="-t [threads]: please specify the number of threads used for spKAS-seq data mapping. DEFAULT: 1."
 indexpathHelp="-i [index path]: please input the absolute path of reference genome index for aligner. REQUIRED."
-rloopsHelp="-r: please specify if identify R-loops regions with spKAS-seq data. Default: off."
-foldchangeHelp="-f [fold change cutoff]: please specify the fold change cutoff of spKAS-seq reads difference between plus and minus strands used for R-loops identification. Default: 2."
-binsizeHelp="-b [bin size]: please specify the size of bins used to identify R-loops. Default: 500."
-extendlengthHelp="-e [extendlengthHelp]: please input the extend length for single-end spKAS-seq data. Default: 150."
+uniqueHelp="-u: please specify to filter the unique mapped reads. DEFAULT: off."
+rloopsHelp="-r: please specify if identify R-loops regions with spKAS-seq data. DEFAULT: off."
+foldchangeHelp="-f [fold change cutoff]: please specify the fold change cutoff of spKAS-seq reads difference between plus and minus strands used for R-loops identification. DEFAULT: 2."
+binsizeHelp="-b [bin size]: please specify the size of bins used to identify R-loops. DEFAULT: 500."
+extendlengthHelp="-e [extendlengthHelp]: please input the extend length for single-end spKAS-seq data. DEFAULT: 150."
 prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 spKAS-seq' output files. REQUIRED."
 assemblyidHelp="-s [assembly id]: please input the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. REQUIRED."
 read1Help="-1 [read1]: please input trimmed single-end spKAS-seq fastq file or read1 of paired-end spKAS-seq fastq files; compressed .fastq.gz is accepted. REQUIRED."
@@ -37,6 +38,8 @@ printHelpAndExit() {
     echo -e "$threadsHelp"
     echo -e ""
     echo -e "$indexpathHelp"
+    echo -e ""
+    echo -e "$uniqueHelp"
     echo -e ""
     echo -e "$rloopsHelp"
     echo -e ""
@@ -63,12 +66,13 @@ if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
 fi
 
 # get the value of options.
-while getopts 'hrt:i:f:b:e:o:s:1:2:' opt; do
+while getopts 'hrt:i:uf:b:e:o:s:1:2:' opt; do
     case $opt in
         h) printHelpAndExit 0;;
         r) rloops="true" ;;
         t) threads=$OPTARG ;;
         i) indexpath=$OPTARG ;;
+	u) unique="on" ;;
 	f) foldchange=$OPTARG ;;
 	b) binsize=$OPTARG ;;
         e) extendlength=$OPTARG ;;
@@ -116,6 +120,10 @@ if test -z $threads ;then
    threads=1
 fi
 
+if test -z $unique ;then
+   unique="off"
+fi
+
 if test -z $rloops ;then
    rloops="false"
 fi
@@ -161,9 +169,17 @@ if ! type samtools >/dev/null 2>&1; then
 fi
 
 if ! type bedtools >/dev/null 2>&1; then
-   echo " bedtools was not installed or not export to the \$PATH'"
+   echo "bedtools was not installed or not export to the \$PATH'"
    echo ""
    echo "Install bedtools with 'conda install -c bioconda bedtools' or refer the official website of 'bedtools'."
+   echo ""
+   exit 1
+fi
+
+if ! type macs2 >/dev/null 2>&1; then
+   echo "macs2 was not installed or not export to the \$PATH'"
+   echo ""
+   echo "Install macs2 with 'conda install -c bioconda macs2' or refer the official website of 'macs2'."
    echo ""
    exit 1
 fi
@@ -234,6 +250,15 @@ if [[ $paired_or_single_end == "single" ]] ;then
    rm -f .${prefix}_SE_spKAS-seq_deduplication_ratios.txt
    echo "'samtools rmdup' done."
    echo ""
+   
+   if [[ $unique == "on" ]] ;then
+      echo "Filter the unique mapped reads ..."
+      echo ""
+      samtools view -q 10 -b ${prefix}_rmdup.bam | bamToBed -i - | awk '$3-'${extendlength}'>0 {if ($6~"+") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$2,$2+'${extendlength}',$4,$5,$6); else if ($6~"-") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$3-'${extendlength}',$3,$4,$5,$6)}' | intersectBed -a - -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v | intersectBed -a - -b ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes.bed -wa -f 1 > ${prefix}.ext${extendlength}.unique.bed
+      genomeCoverageBed -bg -i ${prefix}.ext${extendlength}.unique.bed -g ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes > ${prefix}.ext${extendlength}.unique.bg
+      echo "done."
+      echo ""
+   fi 
 
    # transfer bam into bed.
    echo "Transfer ${prefix}_rmdup.bam into ${prefix}.bed with bamToBed."
@@ -418,13 +443,13 @@ if [[ $paired_or_single_end == "single" ]] ;then
    # move bedGraph files into BedGraph files.
    mkdir -p BedGraph_files
    cd BedGraph_files
-   mv ../${prefix}/${prefix}.ext${extendlength}.bg ./
+   mv ../${prefix}/${prefix}.ext${extendlength}.*bg ./
    cd ..
 
    # move extended bed files into Bed_files.
    mkdir -p Bed_files
    cd Bed_files
-   mv ../${prefix}/${prefix}.ext${extendlength}.bed ./
+   mv ../${prefix}/${prefix}.ext${extendlength}.*bed ./
    cd ..
 
    # move mapping summary files into Mapping_summary.
@@ -484,6 +509,17 @@ elif [[ $paired_or_single_end == "paired" ]]; then
    echo "'picard MarkDuplicates' done."
    echo ""
 
+   if [[ $unique == "on" ]] ;then
+      echo "Filter the unique mapped reads ..."
+      echo ""
+      samtools view -q 10 ${prefix}_rmdup.bam | ${SH_SCRIPT_DIR}/../src/SAMtoBED -i - -o ${prefix}.unique.bed -x -v >> /dev/null 2>&1
+      intersectBed -a ${prefix}.unique.bed -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v > ${prefix}.unique.rmbl.bed
+      mv ${prefix}.unique.rmbl.bed ${prefix}.unique.bed
+      genomeCoverageBed -bg -i ${prefix}.unique.bed -g ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes > ${prefix}.unique.bg
+      echo "done."
+      echo ""
+   fi
+
    # estimate the exact size of KAS-seq fragments with mapped read1 and read2.
    echo "Combine 'properly paired' alignments into a single BED interval. ${prefix}_rmdup.bam into ${prefix}.bed."
    echo ""
@@ -526,6 +562,14 @@ elif [[ $paired_or_single_end == "paired" ]]; then
    echo "done."
    echo ""
 
+   if [[ $unique == "on" ]] ;then
+      echo "Attach strand information into combined alignments for uniquely mapped reads ..."
+      echo "done."
+      intersectBed -a ${prefix}.unique.bed -b ${prefix}_rmdup.R1.bed -wa -wb -F 1 | awk '$4==$8 {printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$2,$3,$8,$9,$10)}' > ${prefix}.unique.6bed
+      mv ${prefix}.unique.6bed ${prefix}.unique.bed
+      echo "done."
+      echo ""
+   fi  
 
    genomeCoverageBed -bg -i ${prefix}.bed -g ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes > ${prefix}.bg
    echo "'genomeCoverageBed' done."
@@ -685,13 +729,13 @@ elif [[ $paired_or_single_end == "paired" ]]; then
    # move bedGraph files into BedGraph files.
    mkdir -p BedGraph_files
    cd BedGraph_files
-   mv ../${prefix}/${prefix}.bg ./
+   mv ../${prefix}/${prefix}.*bg ./
    cd ..
 
    # move extended bed files into Bed_files.
    mkdir -p Bed_files
    cd Bed_files
-   mv ../${prefix}/${prefix}.bed ./
+   mv ../${prefix}/${prefix}.*bed ./
    cd ..
 
    # move mapping summary files into Mapping_summary.

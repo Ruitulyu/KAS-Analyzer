@@ -97,6 +97,14 @@ if ! type findMotifs.pl > /dev/null 2>&1 ;then
    exit 1
 fi
 
+if ! type bedtools > /dev/null 2>&1 ;then
+   echo "bedtools was not installed or not export to the \$PATH'"
+   echo ""
+   echo "Install bedtools with 'conda install -c bioconda bedtools' or 'KAS-pipe2 install -t bedtools'."
+   echo ""
+   exit 1
+fi
+
 # the path of KAS-pipe2 KAS-seq shell script.
 SH_SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 

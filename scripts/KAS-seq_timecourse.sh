@@ -140,6 +140,33 @@ while getopts 'ht:o:g:r:s:bp:d:a:l:k:' opt; do
     esac
 done
 
+# check if samtools, deeptools and bedtools were installed in your system.
+
+if ! type samtools > /dev/null 2>&1 ;then
+   echo "samtools was not installed or not export to the \$PATH'"
+   echo ""
+   echo "Install samtools with 'conda install -c bioconda samtools' or refer the official website of 'samtools'."
+   echo ""
+   exit 1
+fi
+
+if ! type bedtools > /dev/null 2>&1 ;then
+   echo "bedtools was not installed or not export to the \$PATH'"
+   echo ""
+   echo "Install bedtools with 'conda install -c bioconda bedtools' or refer the official website of 'bedtools'."
+   echo ""
+   exit 1
+fi
+
+if ! type deeptools > /dev/null 2>&1 ;then
+   echo "deeptools was not installed or not export to the \$PATH'"
+   echo ""
+   echo "Install deeptools with 'conda install -c bioconda deeptools' or refer the official website of 'deeptools'."
+   echo ""
+   exit 1
+fi
+
+
 # Required options.
 if test -z $assemblyid ;then
    echo ""
@@ -521,16 +548,21 @@ if [[ $difftypes == "case_only" ]] ;then
    if [[ $batch == "off" ]] ;then       
       echo "Perform 'case_only' differential time course KAS-seq analysis without batch effect normalization ..."
       echo ""
-      echo ${prefix}_on_${assemblyid}_${regions}.txt
-      echo $annotation
-      exit
       Rscript --vanilla ${SH_SCRIPT_DIR}/../R/ImpulseDE2_TC_diff_KAS-seq.case_only.R ${prefix}_on_${assemblyid}_${regions}.txt $annotation
+      sed "s/\"//g" KAS-seq_case_only_TC_ImpulseDE2_output.csv | sed "s/\,/\t/g" > ${prefix}_case_only_TC_ImpulseDE2_output.txt
+      mv KAS-seq_case_only_TC_ImpulseDE2_heatmap.svg ${prefix}_case_only_TC_ImpulseDE2_heatmap.svg
+      mv KAS-seq_case_only_TC_ImpulseDE2_heatmap.png ${prefix}_case_only_TC_ImpulseDE2_heatmap.png
+      rm -f KAS-seq_case_only_TC_ImpulseDE2_output.csv
       echo "done."
       echo ""
    elif [[ $batch == "on" ]] ;then
       echo "Perform 'case_only' differential time course KAS-seq analysis with batch effect normalization ..."	   
       echo ""
       Rscript --vanilla ${SH_SCRIPT_DIR}/../R/ImpulseDE2_TC_diff_KAS-seq.case_only.batch-effect.R ${prefix}_on_${assemblyid}_${regions}.txt $annotation
+      sed "s/\"//g" KAS-seq_case_only_TC_ImpulseDE2_nor-batch_output.csv | sed "s/\,/\t/g" > ${prefix}_case_only_TC_ImpulseDE2_nor-batch_output.txt
+      mv KAS-seq_case_only_TC_ImpulseDE2_nor-batch_heatmap.png ${prefix}_case_only_TC_ImpulseDE2_nor-batch_heatmap.png
+      mv KAS-seq_case_only_TC_ImpulseDE2_nor-batch_heatmap.svg ${prefix}_case_only_TC_ImpulseDE2_nor-batch_heatmap.svg
+      rm -f KAS-seq_case_only_TC_ImpulseDE2_nor-batch_output.csv
       echo "done."
       echo ""
    fi   
@@ -540,12 +572,20 @@ elif [[ $difftypes == "case_control" ]]	;then
       echo "Perform 'case_control' differential time course KAS-seq analysis without batch effect normalization ... "
       echo ""
       Rscript --vanilla ${SH_SCRIPT_DIR}/../R/ImpulseDE2_TC_diff_KAS-seq.case_control.R ${prefix}_on_${assemblyid}_${regions}.txt $annotation
+      sed "s/\"//g" KAS-seq_case_control_TC_ImpulseDE2_output.csv | sed "s/\,/\t/g" > ${prefix}_case_control_TC_ImpulseDE2_output.txt
+      mv KAS-seq_case_control_TC_ImpulseDE2_heatmap.png ${prefix}_case_control_TC_ImpulseDE2_heatmap.png
+      mv KAS-seq_case_control_TC_ImpulseDE2_heatmap.svg ${prefix}_case_control_TC_ImpulseDE2_heatmap.svg
+      rm -f KAS-seq_case_control_TC_ImpulseDE2_output.csv
       echo "done."
       echo ""
    elif [[ $batch == "on" ]] ;then
       echo "Perform 'case_control' differential time course KAS-seq analysis with batch effect normalization ..."
       echo ""
       Rscript --vanilla ${SH_SCRIPT_DIR}/../R/ImpulseDE2_TC_diff_KAS-seq.case_control.batch-effect.R ${prefix}_on_${assemblyid}_${regions}.txt $annotation
+      sed "s/\"//g" KAS-seq_case_control_TC_ImpulseDE2_nor-batch_output.csv | sed "s/\,/\t/g" > ${prefix}_case_control_TC_ImpulseDE2_nor-batch_output.txt
+      mv KAS-seq_case_control_TC_ImpulseDE2_nor-batch_heatmap.png ${prefix}_case_control_TC_ImpulseDE2_nor-batch_heatmap.png
+      mv KAS-seq_case_control_TC_ImpulseDE2_nor-batch_heatmap.svg ${prefix}_case_control_TC_ImpulseDE2_nor-batch_heatmap.svg
+      rm -f KAS-seq_case_control_TC_ImpulseDE2_nor-batch_output.csv
       echo "done."
       echo ""
    fi	

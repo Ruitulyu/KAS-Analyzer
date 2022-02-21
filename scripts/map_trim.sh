@@ -65,6 +65,23 @@ while getopts 'hfa:t:q:l:1:2:' opt; do
     esac
 done
 
+if ! type fastqc > /dev/null 2>&1 ;then
+   echo "fastqc was not installed or not export to the \$PATH'"
+   echo ""
+   echo "Install fastqc with 'conda install -c bioconda fastqc'."
+   echo ""
+   exit 1
+fi
+
+
+if ! type trim_galore > /dev/null 2>&1 ;then
+   echo "trim_galore was not installed or not export to the \$PATH'"
+   echo ""
+   echo "Install trim_galore with 'conda install -c bioconda trim-galore'."
+   echo ""
+   exit 1
+fi
+
 # Required options.
 if test -z $read1 ;then
    echo ""

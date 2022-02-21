@@ -64,6 +64,15 @@ while getopts 'hm:t:c:b:o:p:g:' opt; do
     esac
 done
 
+# check if macs2 was installed.
+if ! type macs2 > /dev/null 2>&1 ;then
+   echo "macs2 was not installed or not export to the \$PATH'"
+   echo ""
+   echo "Install macs2 with 'conda install -c bioconda macs2' or refer the official website of 'macs2'."
+   echo ""
+   exit 1
+fi
+
 # Required options.
 if test -z $KASseq ;then
    echo ""
@@ -143,7 +152,8 @@ if test -z $cutoff ;then
 fi
 
 # call KAS-seq peaks without control using macs2
-if test -z $control && [[ $peakscaller == "macs2" ]] && [[ $mode == "broad" ]] ;then
+if test -z $control && [[ $peakscaller == "macs2" ]] && [[ $mode == "broad" ]] ;then	
+
    echo $KASseq > .KASseq.txt
    sed -i "s/\,/ /g" .KASseq.txt
    KASseq_list=$(cat .KASseq.txt)

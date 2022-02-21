@@ -33,6 +33,14 @@ printHelpAndExit() {
     exit -1
 }
 
+if ! type macs2 > /dev/null 2>&1 ;then
+   echo "macs2 was not installed or not export to the \$PATH'"
+   echo ""
+   echo "Install macs2 with 'conda install -c bioconda macs2' or refer the official website of 'macs2'."
+   echo ""
+   exit 1
+fi
+
 # if no parameters was provided, 'KAS-pipe2 saturation' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
