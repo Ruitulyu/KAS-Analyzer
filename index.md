@@ -80,7 +80,7 @@ KAS-pipe2 sub-command [options]
    UCSC            Generate bedGraph files ready for submitting to UCSC genome browser.
 ```
 
-#### Plot
+#### Summary plots
 ```
    profile         Generate metagene profile for KAS-seq data (normalized bigWig files are needed).
    heatmap         Generate heatmap for KAS-seq data (normalized bigWig files are needed).
