@@ -1,6 +1,9 @@
 ## KAS-pipe2: a user-friendly toolkit for exploring KAS-seq data
 ### Ruitu Lyu, Chemistry department, the University of Chicago, 2022-02-15
 
+<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-pipe2.jpg">
+
+
 You can use the [editor on GitHub](https://github.com/Ruitulyu/KAS-pipe2/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
