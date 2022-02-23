@@ -1,5 +1,6 @@
 # KAS-pipe2
 ## A user-friendly toolkit for exploring (sp)KAS-seq data ##
+<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-pipe2.jpg"  height="180" align="right" />
 
 ----------------------------------------
 KAS-pipe2 is a collection of command line tools specifically developped for exploring KAS-seq or strand-specific (sp)KAS-seq data, including the basic processing tools for quality control, reference genome index, raw reads mapping, and heatmaps and summary plots. KAS-pipe2 also includes many novel features and completely new frame design compared to KAS-pipe. e.g. time-courese(TC) KAS-seq differential analysis, R-loop identification (only for spKAS-seq), ss-enhancers, motif,  index calculation, termination length and so on. 
