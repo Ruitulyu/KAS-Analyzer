@@ -45,7 +45,7 @@ KAS-pipe2 sub-command [options]
 
 ### The KAS-pipe2 sub-commands include:
 ----------------------------------------
-- [Configure](#Configure)
+#### Configure
 ```	
    download        Downlaod the index of reference genome for aligners (bowtie, bowtie2, bwa, star).
    build           Build the index of reference genome for aligners (bowtie, bowtie2, bwa, star).
@@ -54,7 +54,7 @@ KAS-pipe2 sub-command [options]
    activate        Activate the 'KAS-pipe2' conda environment.
    deactivate      Deactivate the 'KAS-pipe2' conda environment.
 ```	
-- #### [Fastqc](#Fastqc)
+#### Fastqc
 ```
    fastqc          Generate basic quality control metrics for KAS-seq data.
    readsnum        Calcuate the reads number of raw fastq files.
@@ -67,7 +67,7 @@ KAS-pipe2 sub-command [options]
    genomicdist     Visualize the genomic distribution for KAS-seq peaks (table and plot).
    fingerprint     Plot fingerprint for KAS-seq data.
 ```
-- #### [Mapping](#Mapping)
+#### Mapping
 ```
    trim            Trim adapter and low quality sequence, perform quality control for raw KAS-seq data.
    KAS-seq         Align KAS-seq data to the reference genome, deduplicate mapped reads, and generate several files with maped reads (bam, bed and bedGraph).
@@ -79,7 +79,7 @@ KAS-pipe2 sub-command [options]
    UCSC            Generate bedGraph files ready for submitting to UCSC genome browser.
 ```
 
-- #### [Plot](#Plot)
+#### Plot
 ```
    profile         Generate metagene profile for KAS-seq data (normalized bigWig files are needed).
    heatmap         Generate heatmap for KAS-seq data (normalized bigWig files are needed).
