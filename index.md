@@ -69,11 +69,11 @@ KAS-pipe2 sub-command [options]
    genomicdist     Visualize the genomic distribution for KAS-seq peaks (table and plot).
    fingerprint     Plot fingerprint for KAS-seq data.
 ```
-##### Map
+##### Mapping
 ```
    trim            Trim adapter and low quality sequence, perform quality control for raw KAS-seq data.
-   KAS-seq         Map KAS-seq data to the reference genome, deduplicate mapped reads, and generate several files with maped reads (bam, bed and bedGraph).
-   spKAS-seq       Map strand specific KAS-seq (spKAS-seq) data. Note: we strongly recommend paired-end sequencing for spKAS-seq data to accurately measure the fragments size.
+   KAS-seq         Align KAS-seq data to the reference genome, deduplicate mapped reads, and generate several files with maped reads (bam, bed and bedGraph).
+   spKAS-seq       Align strand specific KAS-seq (spKAS-seq) data. Note: we strongly recommend paired-end sequencing for spKAS-seq data to accurately measure the fragment size.
    peakscalling    Call broad or sharp peaks for KAS-seq data.
    normalize       Normalize KAS-seq data with bedGraph density files.
    bedGraphToBigWig Transfer normalized bedGraph file to bigWig file.
@@ -87,7 +87,7 @@ KAS-pipe2 sub-command [options]
    heatmap         Generate heatmap for KAS-seq data (normalized bigWig files are needed).
 ```
 
-##### Differential analysis
+##### Differential KAS-seq analysis
 ```
    KASexpre        Calculate normalized KAS-seq expression levels on promoter, genebody, genes or custom regions. 
    diff            Perform differential KAS-seq analysis on promoter, genebody, gene, bin or custom regions.        
@@ -99,7 +99,7 @@ KAS-pipe2 sub-command [options]
    R-loop          Identify R-loops regions with spKAS-seq data.
 ```   
   
-##### single-stranded nhancers identification
+##### Single-stranded enhancers identification
 ```
    ss_enhancer     Identify the single stranded (ss) enhancers.
    motif           Identify enriched TF binding motifs on ss_enhancers.
