@@ -121,6 +121,31 @@ KAS-pipe2 sub-command [options]
    --contact       Feature requests, bugs, mailing lists, etc.
 ```   
 
+### Tutorial
+
+#### Configure sub commands:
+
+##### <details><summary>Download</summary>
+<p>
+##### Usage and option summary:
+
+###### Usage: KAS-pipe2 download [ -l ] [ -h ] [ -a aligner ] [ -g assembly id ] [ -d directory to save index of aligner ]
+```   
+Example: KAS-pipe2 download -a bowtie2 -g hg19 -d /Software/reference_genome/ 
+
+-l list all of the available aligner index for reference genomes.
+
+-a [aligner]: aligner name you want to use, e.g. bowtie, bowtie2 or bwa. REQUIRED.
+
+-g [assembly id]: reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9,mm10,mm39; Fruitfly: dm3, dm6; Rat: rn6, rn7; C.elegans: ce10, ce11; Zebra fish: danRer10, danRer11. REQUIRED.
+
+-d [directory to save index of aligner]: directory to save downloaded reference genome index. REQUIRED.
+
+-h\-help: print this help and exit.
+```   
+</p>
+</details>
+
 You can use the [editor on GitHub](https://github.com/Ruitulyu/KAS-pipe2/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
