@@ -123,7 +123,7 @@ KAS-pipe2 sub-command [options]
 
 ## Tutorial
 
-### Configure:
+### Configure
 
 #### download
 #### usage: KAS-pipe2 download [ -l ] [ -h ] [ -a aligner ] [ -g assembly id ] [ -d directory to save index of aligner ]
