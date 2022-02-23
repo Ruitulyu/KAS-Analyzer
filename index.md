@@ -125,9 +125,9 @@ KAS-pipe2 sub-command [options]
 
 #### Configure sub commands:
 
-##### <details><summary>Download</summary>
+<details><summary>Download</summary>
 <p>
-##### Usage and option summary:
+###### Usage and option summary:
 
 ###### Usage: KAS-pipe2 download [ -l ] [ -h ] [ -a aligner ] [ -g assembly id ] [ -d directory to save index of aligner ]
 ```   
