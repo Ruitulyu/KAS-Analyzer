@@ -45,7 +45,7 @@ KAS-pipe2 sub-command [options]
 
 ### The KAS-pipe2 sub-commands include:
 
-#### Configure
+#### [Configure](#Configure)
 ```	
    download        Downlaod the index of reference genome for aligners (bowtie, bowtie2, bwa, star).
    build           Build the index of reference genome for aligners (bowtie, bowtie2, bwa, star).
@@ -123,7 +123,7 @@ KAS-pipe2 sub-command [options]
 
 ## Tutorial
 
-### Configure sub-commands:
+### Configure:
 
 #### download
 #### usage: KAS-pipe2 download [ -l ] [ -h ] [ -a aligner ] [ -g assembly id ] [ -d directory to save index of aligner ]
