@@ -31,6 +31,96 @@ You can install KAS-pipe2 on command line (linux/mac) by cloning git repository 
 	# Activate conda 'KAS-pipe2' environment.
 	$ KAS-pipe2 activate
 	
+### Overview
+
+KAS-pipe2 is a collection of command line tools for KAS-seq or strand specific KAS-seq(spKAS-seq) data analysis.
+```
+Version:   v2.0
+About:     KAS-pipe2 is mainly developed by Ruitu Lyu, postdoc fellow in Prof. Chuan He's group at the University of Chicago.
+Docs:      https://ruitulyu.github.io/KAS-pipe2/
+Code:      https://github.com/Ruitulyu/KAS-pipe2
+Mail:      https://github.com/Ruitulyu/KAS-pipe2/discussions
+```
+#### Usage:
+KAS-pipe2 sub-command [options]
+
+#### The KAS-pipe2 sub-commands include:
+
+##### Configure
+```	
+   download        Downlaod the index of reference genome for aligners (bowtie, bowtie2, bwa, star).
+   build           Build the index of reference genome for aligners (bowtie, bowtie2, bwa, star).
+   install         Install and check the 'KAS-pipe2' conda environment; check the installation of tools.
+   uninstall       Uninstall the 'KAS-pipe2' conda environment.
+   activate        Activate the 'KAS-pipe2' conda environment.
+   deactivate      Deactivate the 'KAS-pipe2' conda environment.
+```
+	
+##### Fastqc
+```
+   fastqc          Generate basic quality control metrics for KAS-seq data.
+   readsnum        Calcuate the reads number of raw fastq files.
+   statistics      Calculate the mapping statistics for KAS-seq data.
+   FRiP            Calculate the fraction of reads in peaks.
+   fragmentsize    Measure the fragment size of paired-end KAS-seq data.
+   correlation     Calculate the correlation coefficient and pvalue, generate correlation plot for replicates of KAS-seq data.
+   saturation      Perform saturation analysis for KAS-seq data.
+   complexity      Calculate the complexity metric for (sp)KAS-seq data, including the PCR Bottlenecking Coefficient and Non-Redundant Fraction (NRF).
+   genomicdist     Visualize the genomic distribution for KAS-seq peaks (table and plot).
+   fingerprint     Plot fingerprint for KAS-seq data.
+```
+##### Map
+```
+   trim            Trim adapter and low quality sequence, perform quality control for raw KAS-seq data.
+   KAS-seq         Map KAS-seq data to the reference genome, deduplicate mapped reads, and generate several files with maped reads (bam, bed and bedGraph).
+   spKAS-seq       Map strand specific KAS-seq (spKAS-seq) data. Note: we strongly recommend paired-end sequencing for spKAS-seq data to accurately measure the fragments size.
+   peakscalling    Call broad or sharp peaks for KAS-seq data.
+   normalize       Normalize KAS-seq data with bedGraph density files.
+   bedGraphToBigWig Transfer normalized bedGraph file to bigWig file.
+   targetgenes     Define target or associated genes (promoter, genebody, terminator or gene) of KAS-seq peaks, R-loops or enhancers loci."
+   UCSC            Generate bedGraph files ready for submitting to UCSC genome browser.
+```
+
+##### Plot
+```
+   profile         Generate metagene profile for KAS-seq data (normalized bigWig files are needed).
+   heatmap         Generate heatmap for KAS-seq data (normalized bigWig files are needed).
+```
+
+##### Differential analysis
+```
+   KASexpre        Calculate normalized KAS-seq expression levels on promoter, genebody, genes or custom regions. 
+   diff            Perform differential KAS-seq analysis on promoter, genebody, gene, bin or custom regions.        
+   TC              Perform 'case-only' or 'case-control' differential time course(TC) analysis for (sp)KAS-seq data.
+   PCA             Perform and plot PCA analysis for (sp)KAS-seq data.
+```
+##### R-loops
+```
+   R-loop          Identify R-loops regions with spKAS-seq data.
+```   
+  
+##### single-stranded nhancers identification
+```
+   ss_enhancer     Identify the single stranded (ss) enhancers.
+   motif           Identify enriched TF binding motifs on ss_enhancers.
+```   
+  
+##### Termination length
+```
+   termilength     Calculate the transcription termination length of protein coding genes.
+```   
+ 
+##### KAS-seq index
+```
+   index           Calculate the pausing or termination index.
+```   
+
+##### General help
+```
+   --help          Print this help menu.
+   --version       Print the version of KAS-pipe2 you are using.
+   --contact       Feature requests, bugs, mailing lists, etc.
+```   
 
 You can use the [editor on GitHub](https://github.com/Ruitulyu/KAS-pipe2/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
