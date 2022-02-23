@@ -123,9 +123,9 @@ KAS-pipe2 sub-command [options]
 
 ### Tutorial
 
-#### Configure sub commands:
+#### Configure sub-commands:
 
-##### Download
+##### download
 ###### Usage: KAS-pipe2 download [ -l ] [ -h ] [ -a aligner ] [ -g assembly id ] [ -d directory to save index of aligner ]
 ```  
 Example: KAS-pipe2 download -a bowtie2 -g hg19 -d /Software/reference_genome/ 
@@ -141,6 +141,52 @@ Example: KAS-pipe2 download -a bowtie2 -g hg19 -d /Software/reference_genome/
 -h\-help: print this help and exit.
 ```   
 
+##### build
+###### Usage: KAS-pipe2 build [ -h ] [ -a aligner ] [ -g genome fasta ] [ -p index prefix ] [ -t threads ] [ -d index dir ]
+```  
+Example: KAS-pipe2 build -a bowtie2 -g ./genome.fa -p hg19 -t 10 -d /Software/hg19_Bowtie2Index/ 
+
+-a [aligner]: please specify aligner name you want to use, e.g. bowtie, bowtie2 or bwa. REQUIRED.
+
+-g [genome fasta]: please input the path of reference genome fasta file. REQUIRED.
+
+-t [threads]: please specify the number of threads. Default: 1.
+
+-p [index prefix]: please input the prefix (basename) of the aligners' (bowtie, bowtie2 or bwa) reference genome index. Default: basename of fasta file .
+
+-d [index dir]: directory to save newly built reference genome index. REQUIRED.
+
+-h\-help: print this help and exit.
+```  
+
+##### install
+###### Usage: KAS-pipe2 install [ -h\--help ] [ -conda ] [ -check ] [ -t tools ] [ -KAS-pipe2 ]
+``` 
+Example: KAS-pipe2 install or KAS-pipe2 install -check
+
+-conda: check the installation or install anaconda in your computer.
+
+-check: list the installed and uninstalled tools.
+
+-t [tools]: check the installation of specific tool, if not, will install automaticially.
+
+-h\-help: print this help and exit.
+Note: this subcommand is used to install conda environment and specific tool that needed in KAS-pipe2.
+``` 
+
+##### uninstall
+###### Usage: KAS-pipe2 uninstall 
+This subcommand is used to uninstall KAS-pipe2 conda environment.
+
+##### activate
+###### Usage: KAS-pipe2 activate
+This subcommand is used to activate KAS-pipe2 conda environment.
+
+##### inactivate
+###### Usage: KAS-pipe2 deactivate
+This subcommand is used to deactivate KAS-pipe2 conda environment.
+
+#### Fastqc sub-commands:
 
 
 ### Markdown
