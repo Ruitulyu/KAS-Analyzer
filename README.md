@@ -40,7 +40,7 @@ Our [documentation](https://ruitulyu.github.io/KAS-pipe2/) contains more details
 
 **Install by cloning KAS-pipe2 git repository on github:**
 
-You can install KAS-pipe2 on command line (linux/mac) by cloning git repository on github:
+You can install KAS-pipe2 using command line (linux/mac) by cloning git repository on github:
 
 	$ git clone https://github.com/Ruitulyu/KAS-pipe2.git
 	$ cd KAS-pipe2
