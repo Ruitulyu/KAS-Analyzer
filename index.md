@@ -145,10 +145,6 @@ Example: KAS-pipe2 download -a bowtie2 -g hg19 -d /Software/reference_genome/
 </p>
 </details>
 
-You can use the [editor on GitHub](https://github.com/Ruitulyu/KAS-pipe2/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
 
 ### Markdown
 
