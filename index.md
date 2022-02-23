@@ -1,8 +1,36 @@
 ## KAS-pipe2: a user-friendly toolkit for exploring KAS-seq data
+
 ### Author: Ruitu Lyu, Chemistry department, the University of Chicago
+
+----------------------------------------
 
 <img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-pipe2.jpg"  />
 
+### Introduction
+
+KAS-pipe2 is a collection of command line tools specifically developped for exploring KAS-seq or strand-specific (sp)KAS-seq data, including the basic processing tools for quality control, reference genome index, raw reads mapping, and heatmaps and summary plots. KAS-pipe2 also includes many novel features and completely new frame design compared to KAS-pipe. e.g. time-courese(TC) KAS-seq differential analysis, R-loop identification (only for spKAS-seq), ss-enhancers, motif, index calculation, termination length and so on.
+
+KAS-pipe2 is still on active development and the source code is hosted on [GitHub](https://github.com/Ruitulyu/KAS-pipe2).
+
+### Installation
+
+**Install by cloning KAS-pipe2 git repository on github:**
+
+You can install KAS-pipe2 on command line (linux/mac) by cloning git repository on github:
+
+	$ git clone https://github.com/Ruitulyu/KAS-pipe2.git
+	$ cd KAS-pipe2
+	$ bash ./setup.sh
+	
+	# If anaconda or miniconda was not installed on your system.
+	$ KAS-pipe2 install -conda
+	
+	# Install conda 'KAS-pipe2' environment. 
+	$ KAS-pipe2 install -KAS-pipe2
+	
+	# Activate conda 'KAS-pipe2' environment.
+	$ KAS-pipe2 activate
+	
 
 You can use the [editor on GitHub](https://github.com/Ruitulyu/KAS-pipe2/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
