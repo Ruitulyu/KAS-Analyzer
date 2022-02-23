@@ -12,7 +12,7 @@ KAS-seq is a kethoxal-assisted single-stranded DNA sequencing (KAS-seq) approach
 
 
 ### Strand-specific (sp)KAS-seq:
-<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/spKAS-seq_procedure.jpg" width="550" height="350">
+<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/spKAS-seq.jpg" width="550" height="350">
 
 ----------------------------------------
 
