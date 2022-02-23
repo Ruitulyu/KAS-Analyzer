@@ -1,17 +1,17 @@
-## KAS-pipe2: a user-friendly toolkit for exploring KAS-seq data
+# KAS-pipe2: a user-friendly toolkit for exploring KAS-seq data
 
-### Author: Ruitu Lyu, Chemistry department, the University of Chicago 
+## Author: Ruitu Lyu, Chemistry department, the University of Chicago 
 ---------------------------------------------------------------------------
 <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5f2zpl0mkwd&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
 ![Image](https://raw.githubusercontent.com/Ruitulyu/KAS-pipe2/main/image/KAS-pipe2.jpg)
 
-### Introduction
+## Introduction
 
 KAS-pipe2 is a collection of command line tools specifically developped for exploring KAS-seq or strand-specific (sp)KAS-seq data, including the basic processing tools for quality control, reference genome index, raw reads mapping, and heatmaps and summary plots. KAS-pipe2 also includes many novel features and completely new frame design compared to KAS-pipe. e.g. time-courese(TC) KAS-seq differential analysis, R-loop identification (only for spKAS-seq), ss-enhancers, motif, index calculation, termination length and so on.
 
 KAS-pipe2 is still on active development and the source code is hosted on [GitHub](https://github.com/Ruitulyu/KAS-pipe2).
 
-### Installation
+## Installation
 
 **Install by cloning KAS-pipe2 git repository on github:**
 
@@ -30,7 +30,7 @@ You can install KAS-pipe2 on command line (linux/mac) by cloning git repository 
 	# Activate conda 'KAS-pipe2' environment.
 	$ KAS-pipe2 activate
 	
-### Overview
+## Overview
 
 KAS-pipe2 is a collection of command line tools for KAS-seq or strand specific KAS-seq(spKAS-seq) data analysis.
 ```
@@ -40,12 +40,12 @@ Docs:      https://ruitulyu.github.io/KAS-pipe2/
 Code:      https://github.com/Ruitulyu/KAS-pipe2
 Mail:      https://github.com/Ruitulyu/KAS-pipe2/discussions
 ```
-#### Usage:
+### Usage:
 KAS-pipe2 sub-command [options]
 
-#### The KAS-pipe2 sub-commands include:
+### The KAS-pipe2 sub-commands include:
 
-##### Configure
+#### Configure
 ```	
    download        Downlaod the index of reference genome for aligners (bowtie, bowtie2, bwa, star).
    build           Build the index of reference genome for aligners (bowtie, bowtie2, bwa, star).
@@ -55,7 +55,7 @@ KAS-pipe2 sub-command [options]
    deactivate      Deactivate the 'KAS-pipe2' conda environment.
 ```
 	
-##### Fastqc
+#### Fastqc
 ```
    fastqc          Generate basic quality control metrics for KAS-seq data.
    readsnum        Calcuate the reads number of raw fastq files.
@@ -68,7 +68,7 @@ KAS-pipe2 sub-command [options]
    genomicdist     Visualize the genomic distribution for KAS-seq peaks (table and plot).
    fingerprint     Plot fingerprint for KAS-seq data.
 ```
-##### Mapping
+#### Mapping
 ```
    trim            Trim adapter and low quality sequence, perform quality control for raw KAS-seq data.
    KAS-seq         Align KAS-seq data to the reference genome, deduplicate mapped reads, and generate several files with maped reads (bam, bed and bedGraph).
@@ -80,53 +80,53 @@ KAS-pipe2 sub-command [options]
    UCSC            Generate bedGraph files ready for submitting to UCSC genome browser.
 ```
 
-##### Plot
+#### Plot
 ```
    profile         Generate metagene profile for KAS-seq data (normalized bigWig files are needed).
    heatmap         Generate heatmap for KAS-seq data (normalized bigWig files are needed).
 ```
 
-##### Differential KAS-seq analysis
+#### Differential KAS-seq analysis
 ```
    KASexpre        Calculate normalized KAS-seq expression levels on promoter, genebody, genes or custom regions. 
    diff            Perform differential KAS-seq analysis on promoter, genebody, gene, bin or custom regions.        
    TC              Perform 'case-only' or 'case-control' differential time course(TC) analysis for (sp)KAS-seq data.
    PCA             Perform and plot PCA analysis for (sp)KAS-seq data.
 ```
-##### R-loops
+#### R-loops
 ```
    R-loop          Identify R-loops regions with spKAS-seq data.
 ```   
   
-##### Single-stranded enhancers identification
+#### Single-stranded enhancers identification
 ```
    ss_enhancer     Identify the single stranded (ss) enhancers.
    motif           Identify enriched TF binding motifs on ss_enhancers.
 ```   
   
-##### Termination length
+#### Termination length
 ```
    termilength     Calculate the transcription termination length of protein coding genes.
 ```   
  
-##### KAS-seq index
+#### KAS-seq index
 ```
    index           Calculate the pausing or termination index.
 ```   
 
-##### General help
+#### General help
 ```
    --help          Print this help menu.
    --version       Print the version of KAS-pipe2 you are using.
    --contact       Feature requests, bugs, mailing lists, etc.
 ```   
 
-### Tutorial
+## Tutorial
 
-#### Configure sub-commands:
+### Configure sub-commands:
 
-##### download
-###### Usage: KAS-pipe2 download [ -l ] [ -h ] [ -a aligner ] [ -g assembly id ] [ -d directory to save index of aligner ]
+#### download
+##### Usage: KAS-pipe2 download [ -l ] [ -h ] [ -a aligner ] [ -g assembly id ] [ -d directory to save index of aligner ]
 ```  
 Example: KAS-pipe2 download -a bowtie2 -g hg19 -d /Software/reference_genome/ 
 
@@ -141,8 +141,8 @@ Example: KAS-pipe2 download -a bowtie2 -g hg19 -d /Software/reference_genome/
 -h\-help: print this help and exit.
 ```   
 
-##### build
-###### Usage: KAS-pipe2 build [ -h ] [ -a aligner ] [ -g genome fasta ] [ -p index prefix ] [ -t threads ] [ -d index dir ]
+#### build
+##### Usage: KAS-pipe2 build [ -h ] [ -a aligner ] [ -g genome fasta ] [ -p index prefix ] [ -t threads ] [ -d index dir ]
 ```  
 Example: KAS-pipe2 build -a bowtie2 -g ./genome.fa -p hg19 -t 10 -d /Software/hg19_Bowtie2Index/ 
 
@@ -159,8 +159,8 @@ Example: KAS-pipe2 build -a bowtie2 -g ./genome.fa -p hg19 -t 10 -d /Software/hg
 -h\-help: print this help and exit.
 ```  
 
-##### install
-###### Usage: KAS-pipe2 install [ -h\--help ] [ -conda ] [ -check ] [ -t tools ] [ -KAS-pipe2 ]
+#### install
+##### Usage: KAS-pipe2 install [ -h\--help ] [ -conda ] [ -check ] [ -t tools ] [ -KAS-pipe2 ]
 ``` 
 Example: KAS-pipe2 install or KAS-pipe2 install -check
 
@@ -174,19 +174,19 @@ Example: KAS-pipe2 install or KAS-pipe2 install -check
 Note: this subcommand is used to install conda environment and specific tool that needed in KAS-pipe2.
 ``` 
 
-##### uninstall
-###### Usage: KAS-pipe2 uninstall 
+#### uninstall
+##### Usage: KAS-pipe2 uninstall 
 This subcommand is used to uninstall KAS-pipe2 conda environment.
 
-##### activate
-###### Usage: KAS-pipe2 activate
+#### activate
+##### Usage: KAS-pipe2 activate
 This subcommand is used to activate KAS-pipe2 conda environment.
 
-##### inactivate
-###### Usage: KAS-pipe2 deactivate
+#### inactivate
+##### Usage: KAS-pipe2 deactivate
 This subcommand is used to deactivate KAS-pipe2 conda environment.
 
-#### Fastqc sub-commands:
+### Fastqc sub-commands:
 
 
 ### Markdown
