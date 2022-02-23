@@ -125,11 +125,11 @@ KAS-pipe2 sub-command [options]
 
 #### Configure sub commands:
 
-<details><summary>####Download</summary>
+<details><summary>Download</summary>
 <p>
 ###### Usage and option summary:
 ###### Usage: KAS-pipe2 download [ -l ] [ -h ] [ -a aligner ] [ -g assembly id ] [ -d directory to save index of aligner ]
-```   
+```ruby   
 Example: KAS-pipe2 download -a bowtie2 -g hg19 -d /Software/reference_genome/ 
 
 -l list all of the available aligner index for reference genomes.
