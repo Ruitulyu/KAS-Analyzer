@@ -55,7 +55,7 @@ KAS-pipe2 sub-command [options]
    deactivate      Deactivate the 'KAS-pipe2' conda environment.
 ```
 	
-#### Fastqc
+- #### [Fastqc](#Fastqc)
 ```
    fastqc          Generate basic quality control metrics for KAS-seq data.
    readsnum        Calcuate the reads number of raw fastq files.
@@ -68,7 +68,7 @@ KAS-pipe2 sub-command [options]
    genomicdist     Visualize the genomic distribution for KAS-seq peaks (table and plot).
    fingerprint     Plot fingerprint for KAS-seq data.
 ```
-#### Mapping
+-#### [Mapping](#Mapping)
 ```
    trim            Trim adapter and low quality sequence, perform quality control for raw KAS-seq data.
    KAS-seq         Align KAS-seq data to the reference genome, deduplicate mapped reads, and generate several files with maped reads (bam, bed and bedGraph).
