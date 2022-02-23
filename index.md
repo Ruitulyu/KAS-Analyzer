@@ -1148,10 +1148,19 @@ Note: The 'KAS-pipe2 index' shell script is applied to calculate the pausing or 
 ### General help sub-commands:
 ---------------------------------------------------------------------------
 
-#### --help          Print this help menu.
-#### --version       Print the version of KAS-pipe2 you are using.
-#### --contact       Feature requests, bugs, mailing lists, etc.
+#### --help
+```
+Print this help menu.
+```
 
-### Support or Contact
+#### --version
+```
+Print the version of KAS-pipe2 you are using.
+```
+
+#### --contact
+```
+Feature requests, bugs, mailing lists, etc.
+```
 
 Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
