@@ -47,9 +47,9 @@ KAS-pipe2 sub-command [options]
 ----------------------------------------
 - [Configure](#Configure)
 ```	
-   download	    Downlaod the index of reference genome for aligners (bowtie, bowtie2, bwa, star).
-   build	    Build the index of reference genome for aligners (bowtie, bowtie2, bwa, star).
-   install	    Install and check the 'KAS-pipe2' conda environment; check the installation of tools.
+   download        Downlaod the index of reference genome for aligners (bowtie, bowtie2, bwa, star).
+   build           Build the index of reference genome for aligners (bowtie, bowtie2, bwa, star).
+   install         Install and check the 'KAS-pipe2' conda environment; check the installation of tools.
    uninstall       Uninstall the 'KAS-pipe2' conda environment.
    activate        Activate the 'KAS-pipe2' conda environment.
    deactivate      Deactivate the 'KAS-pipe2' conda environment.
