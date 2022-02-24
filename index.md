@@ -209,9 +209,9 @@ usage: KAS-pipe2 fastqc [ -h/--help ] [ -t threads ] [ -c contaminants ] [ -o ou
 
 Example: nohup KAS-pipe2 fastqc -t 10 -k KAS-seq.rep1.fastq.gz,KAS-seq.rep2.fastq.gz,KAS-seq.rep3.fastq.gz &
 
--t [threads]: please input number of threads to be used for quality control check. Default: 1.
+-t [threads]: please input number of threads to be used for quality control check. DEFAULT: 1.
 
--c [contaminants]: please specify a file which contains the list of contaminants (format: name[tab]sequence) to screen overrepresented sequences against. Default: no.
+-c [contaminants]: please specify a file which contains the list of contaminants (format: name[tab]sequence) to screen overrepresented sequences against. DEFAULT: no.
 
 -o [output dir]: please specify the output directory with output files.
 
@@ -333,17 +333,17 @@ nohup KAS-pipe2 correlation -m pearson -t 10 -s hg19 -r peaks -f KAS-seq_peaks.b
 On bins:
 nohup KAS-pipe2 correlation -m pearson -t 10 -s hg19 -r bins -p heatmap -o KAS-seq -l labels.txt -k KAS-seq.txt &
 
--m [correlation method]: please specify the methods to calculate correlation coefficients. e.g. pearson, kendall or spearman. Default: pearson.
+-m [correlation method]: please specify the methods to calculate correlation coefficients. e.g. pearson, kendall or spearman. DEFAULT: pearson.
 
 -t [threads]: please specify the number of threads. Default: 1.
 
 -s [assembly id]: please specify the genome assembly id of your (sp)KAS-seq data. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED.
 
--r [regions]: please specify the region types to calculate the (sp)KAS-seq density matrix. e.g. bin or peak. Default: bin.
+-r [regions]: please specify the region types to calculate the (sp)KAS-seq density matrix. e.g. bin or peak. DEFAULT: bin.
 
 -f [peaks file]: please input the merged peaks list file. Note: only valid when '-r peaks' is specified. REQUIRED.
 
--p [plot types]: please specify the plot types to generate correlation plot. Default: scatterplot.
+-p [plot types]: please specify the plot types to generate correlation plot. DEFAULT: scatterplot.
 
 -o [prefix]: please input the prefix (basename) of 'KAS-pipe2 correlation' output files. REQUIRED.
 
@@ -424,7 +424,7 @@ Example: nohup KAS-pipe2 genomicdist -o KAS-seq_genomic_distribution -p KAS-seq_
 
 -o [prefix]: please input the prefix (basename) of 'KAS-pipe2 genomicdist' output files. Default: basename of KAS-seq peak file.
 
--c: please specify if the percentages of normal genomic feature distribution is generated, which is regard as a control. Default: off.
+-c: please specify if the percentages of normal genomic feature distribution is generated, which is regard as a control. DEFAULT: off.
 
 -p [peaks]: please input the KAS-seq peak or differential KAS-seq peak file. REQUIRED.
 
@@ -441,7 +441,7 @@ Usage: KAS-pipe2 fingerprint [ -h/--help ] [ -t threads ] [ -s assembly id ] [ -
 
 Example: nohup KAS-pipe2 fingerprint -t 10 -s hg19 -p KAS-seq_fingerprint -l labels.txt -k KAS-seq_data.txt &
 
--t [threads]: please input the number of threads used for generating KAS-seq fingerprint plot. Default: 1.
+-t [threads]: please input the number of threads used for generating KAS-seq fingerprint plot. DEFAULT: 1.
 
 -s [assembly id]: please specify the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. REQUIRED.
 
@@ -481,13 +481,13 @@ Example:
 
 -a [adapter types]: adapter sequence to be trimmed. e.g. illumina, nextera or small_rna. Hint: most of the NGS data used Illumina adapter. If not specified explicitly. KAS-pipe2 trim will auto-detect.
 
--t [threads]: number of threads to be used for trimming. Default: 1.
+-t [threads]: number of threads to be used for trimming. DEFAULT: 1.
 
--f: instruct 'KAS-pipe2 trim' to check quality control before trimming. Default: off.
+-f: instruct 'KAS-pipe2 trim' to check quality control before trimming. DEFAULT: off.
 
 -q [quality]: trim low-quality ends from reads in addition to adapter removal. Default Phred score(ASCII+33): 20.
 
--l [length]: discard reads that became shorter than length INT bp because of either quality or adapter trimming. Default: 30.
+-l [length]: discard reads that became shorter than length INT bp because of either quality or adapter trimming. DEFAULT: 30.
 
 -1 [read1]: please input single-end KAS-seq raw fastq file or read 1 of paired-end KAS-seq raw fastq files. REQUIRED.
 
