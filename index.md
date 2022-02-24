@@ -46,7 +46,7 @@ KAS-pipe2 sub-command [options]
 
 ### The KAS-pipe2 sub-commands include:
 ----------------------------------------
-#### Configure
+### Configure
 ```	
    download        Downlaod the index of reference genome for aligners (bowtie2, bwa).
    build           Build the index of reference genome for aligners (bowtie2, bwa).
@@ -55,7 +55,7 @@ KAS-pipe2 sub-command [options]
    activate        Activate the 'KAS-pipe2' conda environment.
    deactivate      Deactivate the 'KAS-pipe2' conda environment.
 ```	
-#### Fastqc
+### Fastqc
 ```
    fastqc          Generate basic quality control metrics for KAS-seq data.
    readsnum        Calcuate the reads number of raw fastq files.
@@ -68,7 +68,7 @@ KAS-pipe2 sub-command [options]
    genomicdist     Visualize the genomic distribution for KAS-seq peaks (table and plot).
    fingerprint     Plot fingerprint for KAS-seq data.
 ```
-#### Mapping
+### Mapping
 ```
    trim            Trim adapter and low quality sequence, perform quality control for raw KAS-seq data.
    KAS-seq         Align KAS-seq data to the reference genome, deduplicate mapped reads, and generate several files with maped reads (bam, bed and bedGraph).
@@ -80,41 +80,41 @@ KAS-pipe2 sub-command [options]
    UCSC            Generate bedGraph files ready for submitting to UCSC genome browser.
 ```
 
-#### Summary plots
+### Summary plots
 ```
    profile         Generate metagene profile for KAS-seq data (normalized bigWig files are needed).
    heatmap         Generate heatmap for KAS-seq data (normalized bigWig files are needed).
 ```
 
-#### Differential KAS-seq analysis
+### Differential KAS-seq analysis
 ```
    KASexpre        Calculate normalized KAS-seq expression levels on promoter, genebody, genes or custom regions. 
    diff            Perform differential KAS-seq analysis on promoter, genebody, gene, bin or custom regions.        
    TC              Perform 'case-only' or 'case-control' differential time course(TC) analysis for (sp)KAS-seq data.
    PCA             Perform and plot PCA analysis for (sp)KAS-seq data.
 ```
-#### R-loops
+### R-loops
 ```
    R-loop          Identify R-loops regions with spKAS-seq data.
 ```   
   
-#### Single-stranded enhancers identification
+### Single-stranded enhancers identification
 ```
    ss_enhancer     Identify the single stranded (ss) enhancers.
    motif           Identify enriched TF binding motifs on ss_enhancers.
 ```   
   
-#### Termination length
+### Termination length
 ```
    termilength     Calculate the transcription termination length of protein coding genes.
 ```   
  
-#### KAS-seq index
+### KAS-seq index
 ```
    index           Calculate the pausing or termination index.
 ```   
 
-#### General help
+### General help
 ```
    --help          Print this help menu.
    --version       Print the version of KAS-pipe2 you are using.
