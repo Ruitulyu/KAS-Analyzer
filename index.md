@@ -1197,5 +1197,3 @@ Print the version of KAS-pipe2 you are using.
 ```
 Feature requests, bugs, mailing lists, etc.
 ```
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
