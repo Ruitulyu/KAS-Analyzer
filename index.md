@@ -226,7 +226,7 @@ Calculate the reads number of raw sequencing files.
 ``` 
 usage: KAS-pipe2 readsnum [ -h/--help ] [ -o prefix ] [ -f format ] 
 
-Example: nohup KAS-pipe2 readsnum -p KAS-seq_reads_num -f fastq.gz &
+Example: nohup KAS-pipe2 readsnum -o KAS-seq_reads_num -f fastq.gz &
 
 -o [prefix]: please specify the prefix (basename) of 'KAS-pipe2 readsnum' output files. REQUIRED.
 
