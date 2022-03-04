@@ -6,7 +6,7 @@ set -e
 
 ## Read arguments                                                     
 usageHelp="Usage: KAS-pipe2 readsnum [ -h/--help ] [ -o prefix ] [ -f format ] "
-exampleHelp="Example: nohup KAS-pipe2 readsnum -p KAS-seq_reads_num -f fastq.gz &"
+exampleHelp="Example: nohup KAS-pipe2 readsnum -o KAS-seq_reads_num -f fastq.gz &"
 prefixHelp="-o [prefix]: please specify the prefix (basename) of 'KAS-pipe2 readsnum' output files. REQUIRED."
 formatHelp="-f [format]: please specify the format of raw reads data. e.g. fastq, fq, fastq.gz, fasta, fa or fa.gz. REQUIRED."
 helpHelp="-h/--help: print this help and exit.

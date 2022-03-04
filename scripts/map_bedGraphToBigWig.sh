@@ -5,8 +5,8 @@
 set -e
 
 ## Read arguments                                                     
-usageHelp="Usage: KAS-pipe2 bedGraphToBigWig [ -h/--help ] [ -k KAS-seq ] [ -s assembly id ]"
-exampleHelp="Example: nohup KAS-pipe2 bedGraphToBigWig -k KAS-seq_data.txt -s hg19 &"
+usageHelp="Usage: KAS-pipe2 ToBigWig [ -h/--help ] [ -k KAS-seq ] [ -s assembly id ]"
+exampleHelp="Example: nohup KAS-pipe2 ToBigWig -k KAS-seq_data.txt -s hg19 &"
 KASseqHelp="-k [KAS-seq]: please input the text file containing the bedGraph files generated from 'KAS-pipe2 KAS-seq'. REQUIRED.
 Example:
 KAS-seq_WT.rep1.nor.bg
@@ -15,7 +15,7 @@ KAS-seq_KO.rep1.nor.bg
 KAS-seq_KO.rep2.nor.bg    ---KAS-seq_data.txt"
 assemblyidHelp="-s [assembly id]: please input the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the normalized KAS-seq bedGraph files. REQUIRED."
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 bedGraphToBigWig' shell script is applied to transfer (sp)KAS-seq bedGraph to bigWig files."
+Note: The 'KAS-pipe2 ToBigWig' shell script is applied to convert (sp)KAS-seq bedGraph files to bigWig files."
 
 printHelpAndExit() {
     echo -e ""
@@ -102,4 +102,4 @@ echo "done."
 echo ""
 done
 
-echo "'KAS-pipe2 bedGraphToBigWig' run successfully!"
+echo "'KAS-pipe2 ToBigWig' run successfully!"

@@ -30,19 +30,19 @@ set -e
 ###
 ### KAS-pipe2 is a collection of command line tools for KAS-seq or strand specific KAS-seq(spKAS-seq) data analysis.
 ### Version:   v2.0
-### About:     KAS-pipe2 is mainly developed by Ruitu Lyu, current postdoc fellow in Prof. Chuan He's group at the University of Chicago.
-### Docs:      https://github.com/Ruitulyu/KAS-pipe2/blob/master/README.md
+### About:     KAS-pipe2 is mainly developed by Ruitu Lyu, postdoctoral fellow in Prof. Chuan He's group at the University of Chicago.
+### Docs:      https://ruitulyu.github.io/KAS-pipe2/
 ### Code:      https://github.com/Ruitulyu/KAS-pipe2
-### Mail:      https://groups.google.com/forum/#!forum/KAS-pipe2-discuss
+### Mail:      https://github.com/Ruitulyu/KAS-pipe2/discussions
 ###
 ### Usage:
-### KAS-pipe2 <subcommand> [options]
+### KAS-pipe2 <sub command> [options]
 ###
 ### The KAS-pipe2 sub-commands include:
 ###
 ### [ Configure ]
-###    download        Downlaod the index of reference genome for aligners (bowtie, bowtie2, bwa, star).
-###    build           Build the index of reference genome for aligners (bowtie, bowtie2, bwa, star).
+###    download        Downlaod the index of reference genome for aligners (bowtie2, bwa).
+###    build           Build the index of reference genome for aligners (bowtie2, bwa).
 ###    install         Install and check the 'KAS-pipe2' conda environment; check the installation of tools.
 ###    uninstall       Uninstall the 'KAS-pipe2' conda environment.
 ###    activate        Activate the 'KAS-pipe2' conda environment.
@@ -60,21 +60,21 @@ set -e
 ###    genomicdist     Visualize the genomic distribution for KAS-seq peaks (table and plot).
 ###    fingerprint     Plot fingerprint for KAS-seq data.
 ###
-### [ Map ]
+### [ Mapping ]
 ###    trim            Trim adapter and low quality sequence, perform quality control for raw KAS-seq data.
 ###    KAS-seq         Map KAS-seq data to the reference genome, deduplicate mapped reads, and generate several files with maped reads (bam, bed and bedGraph).
 ###    spKAS-seq       Map strand specific KAS-seq (spKAS-seq) data. Note: we strongly recommend paired-end sequencing for spKAS-seq data to accurately measure the fragments size.
 ###    peakscalling    Call broad or sharp peaks for KAS-seq data.
 ###    normalize       Normalize KAS-seq data with bedGraph density files.
-###    bedGraphToBigWig Transfer normalized bedGraph file to bigWig file.
-###    targetgenes     Define target or associated genes (promoter, genebody, terminator or gene) of KAS-seq peaks, R-loops or enhancers loci."
+###    ToBigWig        Convert normalized bedGraph files to bigWig files.
+###    targetgenes     Define target or associated genes (promoter, genebody, terminator or gene) of KAS-seq peaks, R-loops or enhancers loci.
 ###    UCSC            Generate bedGraph files ready for submitting to UCSC genome browser.
 ###
-### [ Plot ]
+### [ Summary plots ]
 ###    profile         Generate metagene profile for KAS-seq data (normalized bigWig files are needed).
 ###    heatmap         Generate heatmap for KAS-seq data (normalized bigWig files are needed).
 ###   
-### [ Differential analysis ]
+### [ Differential KAS-seq analysis ]
 ###    KASexpre        Calculate normalized KAS-seq expression levels on promoter, genebody, genes or custom regions. 
 ###    diff            Perform differential KAS-seq analysis on promoter, genebody, gene, bin or custom regions.        
 ###    TC              Perform 'case-only' or 'case-control' differential time course(TC) analysis for (sp)KAS-seq data.
@@ -83,7 +83,7 @@ set -e
 ### [ R-loops ]
 ###    R-loop          Identify R-loops regions with spKAS-seq data.
 ###   
-### [ Enhancers identification ]
+### [ Single-stranded enhancers ]
 ###    ss_enhancer     Identify the single stranded (ss) enhancers.
 ###    motif           Identify enriched TF binding motifs on ss_enhancers.
 ###   
@@ -112,8 +112,8 @@ version() {
 contact() {
     echo "
 - For further help, or to report a bug, please 
-  email the bedtools mailing list: 
-     KAS-pip2-discuss@googlegroups.com
+  check the KAS-pipe2 github issue: 
+     https://github.com/Ruitulyu/KAS-pipe2/issues
 
 - The development repository can be found at: 
      https://github.com/Ruitulyu/KAS-pipe2
@@ -207,7 +207,7 @@ elif [[ "$1" == "peakscalling" ]]; then
 elif [[ "$1" == "normalize" ]]; then
    ${SH_SCRIPT_DIR}/scripts/map_normalize.sh $( echo $* | cut -d " " -f 2- )
 
-elif [[ "$1" == "bedGraphToBigWig" ]]; then
+elif [[ "$1" == "ToBigWig" ]]; then
    ${SH_SCRIPT_DIR}/scripts/map_bedGraphToBigWig.sh $( echo $* | cut -d " " -f 2- )
 
 elif [[ "$1" == "targetgenes" ]]; then
@@ -244,7 +244,7 @@ elif [[ "$1" == "R-loop" ]]; then
 elif [[ "$1" == "index" ]]; then
    ${SH_SCRIPT_DIR}/scripts/calculate_index.sh $( echo $* | cut -d " " -f 2- )
 
-# run 'Enhancers identification' shell scripts.
+# run 'Single-stranded enhancers identification' shell scripts.
 elif [[ "$1" == "ss_enhancer" ]]; then
    ${SH_SCRIPT_DIR}/scripts/define_ss_enhancers.sh $( echo $* | cut -d " " -f 2- )
 

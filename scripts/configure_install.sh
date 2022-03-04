@@ -5,13 +5,15 @@
 set -e
 
 ## Read arguments                                                     
-usageHelp="Usage: KAS-pipe2 install [ -h\--help ] [ -conda ] [ -check ] [ -t tools ] [ -KAS-pipe2 ] - This subcommand is used to install conda environment and specific tool that needed in KAS-pipe2."
+usageHelp="Usage: KAS-pipe2 install [ -h\--help ] [ -conda ] [ -check ] [ -t tools ] [ -KAS-pipe2 ]"
 exampleHelp="Example: KAS-pipe2 install or KAS-pipe2 install -check"
 condaHelp="-conda: check the installation or install anaconda in your computer."
 checkHelp="-check: list the installed and uninstalled tools."
 KASpipe2Help="-KAS-pipe2: install and configure the KAS-pipe2 conda environment."
 toolsHelp="-t [tools]: check the installation of specific tool, if not, will install automaticially."
-helpHelp="-h\-help: print this help and exit."
+helpHelp="-h\-help: print this help and exit.
+Note: this subcommand is used to install conda environment and specific tool that needed in KAS-pipe2."
+
 
 printHelpAndExit() {
     echo -e ""	
