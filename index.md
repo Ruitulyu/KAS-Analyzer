@@ -75,7 +75,7 @@ KAS-pipe2 sub-command [options]
    spKAS-seq       Align strand specific KAS-seq (spKAS-seq) data. Note: we strongly recommend paired-end sequencing for spKAS-seq data to accurately measure the fragment size.
    peakscalling    Call broad or sharp peaks for KAS-seq data.
    normalize       Normalize KAS-seq data with bedGraph density files.
-   bedGraphToBigWig Transfer normalized bedGraph file to bigWig file.
+   ToBigWig        Convert normalized bedGraph files to bigWig files.
    targetgenes     Define target or associated genes (promoter, genebody, terminator or gene) of KAS-seq peaks, R-loops or enhancers loci."
    UCSC            Generate bedGraph files ready for submitting to UCSC genome browser.
 ```
@@ -623,12 +623,12 @@ Example:
 Note: The 'KAS-pipe2 normalize' shell script is applied to normalize spKAS-seq or KAS-seq data.
 ```
 
-### bedGraphToBigWig
-Transfer normalized bedGraph file to bigWig file.
+### ToBigWig
+Convert normalized bedGraph file to bigWig file.
 ```
-Usage: KAS-pipe2 bedGraphToBigWig [ -h/--help ] [ -k KAS-seq ] [ -s assembly id ]
+Usage: KAS-pipe2 ToBigWig [ -h/--help ] [ -k KAS-seq ] [ -s assembly id ]
 
-Example: nohup KAS-pipe2 bedGraphToBigWig -k KAS-seq_data.txt -s hg19 &
+Example: nohup KAS-pipe2 ToBigWig -k KAS-seq_data.txt -s hg19 &
 
 -k [KAS-seq]: please input the text file containing the bedGraph files generated from 'KAS-pipe2 KAS-seq'. REQUIRED.
 Example:
@@ -640,7 +640,7 @@ KAS-seq_KO.rep2.nor.bg    ---KAS-seq_data.txt
 -s [assembly id]: please input the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the normalized KAS-seq bedGraph files. REQUIRED.
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 bedGraphToBigWig' shell script is applied to transfer (sp)KAS-seq bedGraph to bigWig files.
+Note: The 'KAS-pipe2 ToBigWig' shell script is applied to transfer (sp)KAS-seq bedGraph to bigWig files.
 ```
 
 ### targetgenes
