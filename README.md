@@ -1,8 +1,9 @@
 # KAS-pipe2
 ## A user-friendly toolkit for exploring (sp)KAS-seq data ##
+<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-pipe2.png"  height="180" align="right" />
 
 ----------------------------------------
-KAS-pipe2 is a collection of command line tools specifically developped for exploring KAS-seq or strand-specific (sp)KAS-seq data, including the basic processing tools for quality control, reference genome index, raw reads mapping, and heatmaps and summary plots. KAS-pipe2 also includes many novel features and completely new frame design compared to KAS-pipe. e.g. time-courese(TC) KAS-seq differential analysis, R-loop identification (only for spKAS-seq), ss-enhancers, motif,  index calculation, termination length and so on. 
+KAS-pipe2 is a collection of command line tools specifically developped for exploring KAS-seq or strand-specific (sp)KAS-seq data, including the basic processing tools for quality control, reference genome index, raw reads mapping, and heatmaps and summary plots. KAS-pipe2 also includes many novel command line tools and completely new frame design compared to the first version of KAS-pipe. e.g. time-courese(TC) KAS-seq differential analysis, R-loop identification (only for spKAS-seq), single-stranded enhancers identification, motif calling,  pausing and termination index calculation, termination length and so on. 
 
 KAS-seq is a kethoxal-assisted single-stranded DNA sequencing (KAS-seq) approach, based on the fast and specific reaction between N3-kethoxal and guanines in ssDNA. KAS-seq allows rapid (within 5 min), sensitive and genome-wide capture and mapping of ssDNA produced by transcriptionally active RNA polymerases or other processes in situ using as few as 1,000 cells. KAS-seq can also enable definition of a group of enhancers that are single-stranded. Overall, KAS-seq facilitates fast and accurate analysis of transcription dynamics and enhancer activities in both low-input and high-throughput manner. Strand-specific KAS-seq (spKAS-seq) was further developped to identify in vivo genome-wide R-loops with strand specificity using as few as 50,000 cells by mapping the exposed single-stranded DNA (ssDNA) caused by RNA-DNA duplex R-loop formation.
 
@@ -11,7 +12,7 @@ KAS-seq is a kethoxal-assisted single-stranded DNA sequencing (KAS-seq) approach
 
 
 ### Strand-specific (sp)KAS-seq:
-<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/spKAS-seq_procedure.jpg" width="550" height="350">
+<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/spKAS-seq_procedure.jpg" width="470" height="320">
 
 ----------------------------------------
 
@@ -39,7 +40,7 @@ Our [documentation](https://ruitulyu.github.io/KAS-pipe2/) contains more details
 
 **Install by cloning KAS-pipe2 git repository on github:**
 
-You can install KAS-pipe2 on command line (linux/mac) by cloning git repository on github:
+You can install KAS-pipe2 using command line (linux/mac) by cloning git repository on github:
 
 	$ git clone https://github.com/Ruitulyu/KAS-pipe2.git
 	$ cd KAS-pipe2
