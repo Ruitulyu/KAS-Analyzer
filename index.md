@@ -597,9 +597,9 @@ Note: This shell script mainly invoke macs14 or macs2 for calling (sp)KAS-seq da
 ### normalize 
 Normalize KAS-seq data with bedGraph density files.
 ```
-Usage: KAS-pipe2 normalize [ -h/--help ] [ -k KAS-seq ] [ -r ratios ]
+Usage: KAS-pipe2 normalize [ -h/--help ] [ -k KAS-seq ] [ -r ratios ] [ -b ] [ -s assembly id ]
 
-Example: nohup KAS-pipe2 normalize -k KAS-seq_data.txt -r ratios.txt &
+Example: nohup KAS-pipe2 normalize -k KAS-seq_data.txt -r ratios.txt -b -s mm10 &
 
 -k [KAS-seq_data.txt]: please input the text file containing the bedGraph files generated from 'KAS-pipe2 (sp)KAS-seq'. REQUIRED.
 Example:
@@ -614,6 +614,10 @@ Example:
 1.20
 1.30
 1.23                 ---ratios.txt
+
+-b: please specify if you want to convert the normalized bedGraph files into bigWig files. DEFAULT: off.
+
+-s [assembly id]: please input the reference genome assembly id of bedGraph files. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the normalized KAS-seq bedGraph files. REQUIRED only if -b was specified.
 
 -h/--help: print this help and exit.
 Note: The 'KAS-pipe2 normalize' shell script is applied to normalize spKAS-seq or KAS-seq data.
