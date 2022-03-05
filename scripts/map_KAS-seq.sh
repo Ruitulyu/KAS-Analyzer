@@ -64,7 +64,7 @@ while getopts 'ha:t:i:ue:o:s:1:2:' opt; do
         a) aligner=$OPTARG ;;
         t) threads=$OPTARG ;;
         i) indexpath=$OPTARG ;;
-	u) unique="on"
+	u) unique="on" ;;
 	e) extendlength=$OPTARG ;;
         o) prefix=$OPTARG ;;
         s) assemblyid=$OPTARG ;;
