@@ -1,5 +1,5 @@
 # KAS-pipe2
-## A integrative toolkit for exploring (sp)KAS-seq data ##
+## An integrative toolkit for exploring (sp)KAS-seq data ##
 <img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-pipe2.png"  height="180" align="right" />
 
 ----------------------------------------
