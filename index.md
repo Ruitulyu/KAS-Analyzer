@@ -1,4 +1,4 @@
-# KAS-pipe2: an integrative toolkit for exploring KAS-seq data
+# KAS-pipe2: an integrated toolkit for exploring KAS-seq data
 
 ## Author: Ruitu Lyu, Chemistry department, the University of Chicago 
 ---------------------------------------------------------------------------
