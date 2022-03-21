@@ -12,9 +12,6 @@ fastqc
 homer
 
 ucsc-bedgraphtobigwig
-ucsc-bigwiginfo
-ucsc-bedclip
-ucsc-bedtobigbed
 ucsc-bigWigAverageOverBed
 ucsc-bedsort
 
