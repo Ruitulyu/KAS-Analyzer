@@ -45,6 +45,7 @@ You can install KAS-pipe2 using command line (linux/mac) by cloning git reposito
 	$ git clone https://github.com/Ruitulyu/KAS-pipe2.git
 	$ cd KAS-pipe2
 	$ bash ./setup.sh
+	$ source ~/.bashrc
 	
 	# If anaconda or miniconda was not installed on your system.
 	$ KAS-pipe2 install -conda
