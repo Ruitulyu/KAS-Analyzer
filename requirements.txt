@@ -1,18 +1,13 @@
 # for python3
 # conda repos: defaults, bioconda, conda-forge, r
 
-tabix
 samtools
-htslib ==1.9
-sambamba ==0.6.6
-samstats ==0.2.1
 bedtools
 picard
 fastqc
 homer
 
 ucsc-bedgraphtobigwig
-ucsc-bigWigAverageOverBed
 ucsc-bedsort
 
 r-base
@@ -21,8 +16,6 @@ r-devtools
 r-corrplot
 r-ggpubr
 r-RColorBrewer
-r-snow
-r-snowfall
 r-bitops
 r-catools
 bioconductor-rsamtools
@@ -32,7 +25,6 @@ bioconductor-complexheatmap
 
 bowtie2
 bwa
-pybigwig
 openssl ==1.0.2t  # important to get the same random seed for "shuf"
 deeptools
 cutadapt
@@ -47,8 +39,6 @@ pyopenssl
 
 numpy
 scipy
-pandas
-jinja2
 gsl
 matplotlib
 
