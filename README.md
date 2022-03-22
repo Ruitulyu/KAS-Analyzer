@@ -50,7 +50,7 @@ You can install KAS-pipe2 using command line (linux/mac) by cloning git reposito
 	# If anaconda or miniconda was not installed on your system.
 	$ KAS-pipe2 install -conda
 	
-	# Install conda 'KAS-pipe2' environment. 
+	# Install conda 'KAS-pipe2' environment, which may last 1-2 hours. 
 	$ KAS-pipe2 install -KAS-pipe2
 	
 	# Activate conda 'KAS-pipe2' environment.
