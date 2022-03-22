@@ -1,5 +1,5 @@
 # KAS-pipe2
-## A user-friendly toolkit for exploring (sp)KAS-seq data ##
+## An integrated toolkit for exploring (sp)KAS-seq data ##
 <img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-pipe2.png"  height="180" align="right" />
 
 ----------------------------------------
@@ -45,11 +45,12 @@ You can install KAS-pipe2 using command line (linux/mac) by cloning git reposito
 	$ git clone https://github.com/Ruitulyu/KAS-pipe2.git
 	$ cd KAS-pipe2
 	$ bash ./setup.sh
+	$ source ~/.bashrc
 	
 	# If anaconda or miniconda was not installed on your system.
 	$ KAS-pipe2 install -conda
 	
-	# Install conda 'KAS-pipe2' environment. 
+	# Install conda 'KAS-pipe2' environment, which may last 1-2 hours. 
 	$ KAS-pipe2 install -KAS-pipe2
 	
 	# Activate conda 'KAS-pipe2' environment.
