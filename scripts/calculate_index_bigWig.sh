@@ -183,65 +183,50 @@ if [[ $index == "pausing" ]] ;then
    echo "done."
    echo ""
 
-   # calculate the average KAS density of all samples.
-   echo "Calculate the average KAS density of all samples on ${assemblyid} Refseq promoter or genebody ..."
-   echo ""
-   awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/NF }' ${prefix}_on_${assemblyid}_Refseq.promoter.bed > ${prefix}_on_${assemblyid}_Refseq.promoter.average
-   awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/NF }' ${prefix}_on_${assemblyid}_Refseq.genebody.bed > ${prefix}_on_${assemblyid}_Refseq.genebody.average
-   echo "done."
-   echo ""
-
    echo "Filtering matrix of KAS density on ${assemblyid} Refseq promoter ..."
-   paste ${prefix}_on_${assemblyid}_Refseq.promoter.average ${assemblyid}_Refseq.promoter.genenames ${prefix}_on_${assemblyid}_Refseq.promoter.bed | sort -k 1 -n -r | sort -u -k2,2 -k3,3 | awk '$1>=5 {print $0}' > ${prefix}_on_${assemblyid}_Refseq.promoter.filter.bed
+   paste ${assemblyid}_Refseq.promoter.genenames ${prefix}_on_${assemblyid}_Refseq.promoter.bed | sort -k 1 -n -r | sort -u -k1,1 -k2,2 > ${prefix}_on_${assemblyid}_Refseq.promoter.filter.bed
    
-   paste ${prefix}_on_${assemblyid}_Refseq.genebody.average ${assemblyid}_Refseq.genebody.genenames ${prefix}_on_${assemblyid}_Refseq.genebody.bed | sort -k 1 -n -r | sort -u -k2,2 -k3,3 > ${prefix}_on_${assemblyid}_Refseq.genebody.filter.bed
+   paste ${assemblyid}_Refseq.genebody.genenames ${prefix}_on_${assemblyid}_Refseq.genebody.bed | sort -k 1 -n -r | sort -u -k1,1 -k2,2 > ${prefix}_on_${assemblyid}_Refseq.genebody.filter.bed
    echo "done."
    echo ""
    
    for ((i=1; i<=${number_of_samples}; i++))
    do
    echo "Calculate the pausing index on ${assemblyid} Refseq genes for the ${i}th sample."
-   awk -v x=$i '{printf("%s\t%s\t%.2f\n",$2,$3,$(x+6))}' ${prefix}_on_${assemblyid}_Refseq.promoter.filter.bed > ${prefix}_on_${assemblyid}_Refseq.promoter.filter.KAS-seq.${i}
-   awk -v x=$i '{printf("%s\t%s\t%.2f\n",$2,$3,$(x+6))}' ${prefix}_on_${assemblyid}_Refseq.genebody.filter.bed > ${prefix}_on_${assemblyid}_Refseq.genebody.filter.KAS-seq.${i}
+   awk -v x=$i '$(x+5)>=5 {printf("%s\t%s\t%.2f\n",$1,$2,$(x+5))}' ${prefix}_on_${assemblyid}_Refseq.promoter.filter.bed > ${prefix}_on_${assemblyid}_Refseq.promoter.filter.KAS-seq.${i}
+   awk -v x=$i '{printf("%s\t%s\t%.2f\n",$1,$2,$(x+5))}' ${prefix}_on_${assemblyid}_Refseq.genebody.filter.bed > ${prefix}_on_${assemblyid}_Refseq.genebody.filter.KAS-seq.${i}
 
-   awk 'NR==FNR{a[$1]=$3;}NR!=FNR{print $0"\t"a[$1]}' ${prefix}_on_${assemblyid}_Refseq.genebody.filter.KAS-seq.${i} ${prefix}_on_${assemblyid}_Refseq.promoter.filter.KAS-seq.${i} | awk '{ if(NF==3){printf("%.2f\n",1)} else{printf("%.2f\n",$3/($4+0.01))} }' > ${prefix}_on_${assemblyid}_Refseq.gene.filter.KAS-seq.${i}
+   awk 'NR==FNR{a[$1]=$3;}NR!=FNR{print $0"\t"a[$1]}' ${prefix}_on_${assemblyid}_Refseq.genebody.filter.KAS-seq.${i} ${prefix}_on_${assemblyid}_Refseq.promoter.filter.KAS-seq.${i} | awk '{ if(NF==3){printf("%s\t%s\t%.2f\n",$1,$2,"1")} else{printf("%s\t%s\t%.2f\n",$1,$2,$3/($4+0.01))} }' > ${prefix}_on_${assemblyid}_Refseq.gene.filter.KAS-seq.${i}
+
+   echo -e "genename\tstrand" > ${prefix}.header1.txt
+   awk '{for(i=1;i<=NF;i++) a[i,NR]=$i}END{for(i=1;i<=NF;i++) {for(j=1;j<=NR;j++) printf a[i,j] "\t";print ""}}' $labels | awk -v x=$i '{printf("%s\n",$x)}' > ${prefix}.${i}.header2.txt
+   paste ${prefix}.header1.txt ${prefix}.${i}.header2.txt > ${prefix}.${i}.header.txt
+
+   labels_selected=$(sed -n ''$i'p' $labels)
+   
+   cat ${prefix}.${i}.header.txt ${prefix}_on_${assemblyid}_Refseq.gene.filter.KAS-seq.${i} > ${prefix}_${labels_selected}_on_${assemblyid}_Refseq_gene_pausing_index.txt
 
    rm -f ${prefix}_on_${assemblyid}_Refseq.promoter.filter.KAS-seq.${i}
    rm -f ${prefix}_on_${assemblyid}_Refseq.genebody.filter.KAS-seq.${i}
+   rm -f ${prefix}_on_${assemblyid}_Refseq.gene.filter.KAS-seq.${i}
+   rm -f ${prefix}.header1.txt
+   rm -f ${prefix}.${i}.header2.txt
+   rm -f ${prefix}.${i}.header.txt
 
    echo "done."
    echo ""
    done
-   
-   echo "Generating the final pausing index on ${assemblyid}_Refseq.promoter.bed for all samples ..."
-   awk '{printf("%s\t%s\n",$2,$3)}' ${prefix}_on_${assemblyid}_Refseq.promoter.filter.bed > ${prefix}_on_${assemblyid}_Refseq.promoter.filter.genename
-   paste ${prefix}_on_${assemblyid}_Refseq.promoter.filter.genename ${prefix}_on_${assemblyid}_Refseq.gene.filter.KAS-seq.* > ${prefix}_on_${assemblyid}_Refseq.gene.filter.without_header.txt
-
-   echo -e "genename\tstrand" > ${prefix}.header1.txt
-   awk '{for(i=1;i<=NF;i++) a[i,NR]=$i}END{for(i=1;i<=NF;i++) {for(j=1;j<=NR;j++) printf a[i,j] "\t";print ""}}' $labels > ${prefix}.header2.txt
-   paste ${prefix}.header1.txt ${prefix}.header2.txt > ${prefix}.header.txt
-
-   cat ${prefix}.header.txt ${prefix}_on_${assemblyid}_Refseq.gene.filter.without_header.txt > ${prefix}_on_${assemblyid}_Refseq_gene_pausing_index.txt
-   echo "done."
-   echo ""
 
    echo "Clean up the intermediate files."
+   echo ""
    rm -f ${prefix}_on_${assemblyid}_Refseq.promoter.npz
    rm -f ${prefix}_on_${assemblyid}_Refseq.promoter.tab
    rm -f ${prefix}_on_${assemblyid}_Refseq.genebody.npz
    rm -f ${prefix}_on_${assemblyid}_Refseq.genebody.tab
    rm -f ${assemblyid}_Refseq.promoter.genenames
    rm -f ${assemblyid}_Refseq.genebody.genenames
-   rm -f ${prefix}_on_${assemblyid}_Refseq.promoter.average
-   rm -f ${prefix}_on_${assemblyid}_Refseq.promoter.average
    rm -f ${prefix}_on_${assemblyid}_Refseq.promoter.filter.bed
    rm -f ${prefix}_on_${assemblyid}_Refseq.genebody.filter.bed
-   rm -f ${prefix}_on_${assemblyid}_Refseq.gene.filter.KAS-seq.*
-   rm -f ${prefix}_on_${assemblyid}_Refseq.promoter.filter.genename
-   rm -f ${prefix}_on_${assemblyid}_Refseq.gene.filter.without_header.txt
-   rm -f ${prefix}.header1.txt
-   rm -f ${prefix}.header2.txt
-   rm -f ${prefix}.header.txt
    echo "done."
    echo ""
 
@@ -268,56 +253,53 @@ elif [[ $index == "termination" ]] ;then
    echo ""
 
    echo "Filtering matrix of KAS density on ${assemblyid} Refseq genebody ..."
-   paste ${prefix}_on_${assemblyid}_Refseq.terminator.average ${assemblyid}_Refseq.terminator.genenames ${prefix}_on_${assemblyid}_Refseq.terminator.bed | sort -k 1 -n -r | sort -u -k2,2 -k3,3 > ${prefix}_on_${assemblyid}_Refseq.terminator.filter.bed
+   echo ""
+   paste ${assemblyid}_Refseq.terminator.genenames ${prefix}_on_${assemblyid}_Refseq.terminator.bed | sort -k 1 -n -r | sort -u -k1,1 -k2,2 > ${prefix}_on_${assemblyid}_Refseq.terminator.filter.bed
 
-   paste ${prefix}_on_${assemblyid}_Refseq.genebody.average ${assemblyid}_Refseq.genebody.genenames ${prefix}_on_${assemblyid}_Refseq.genebody.bed | sort -k 1 -n -r | sort -u -k2,2 -k3,3 | awk '$1>=2 {print $0}' > ${prefix}_on_${assemblyid}_Refseq.genebody.filter.bed
+   paste ${assemblyid}_Refseq.genebody.genenames ${prefix}_on_${assemblyid}_Refseq.genebody.bed | sort -k 1 -n -r | sort -u -k1,1 -k2,2 > ${prefix}_on_${assemblyid}_Refseq.genebody.filter.bed
    echo "done."
    echo ""
 
    for ((i=1; i<=${number_of_samples}; i++))
    do
    echo "Calculate the pausing index on ${assemblyid} Refseq genes for the ${i}th sample."
-   awk -v x=$i '{printf("%s\t%s\t%.2f\n",$2,$3,$(x+6))}' ${prefix}_on_${assemblyid}_Refseq.terminator.filter.bed > ${prefix}_on_${assemblyid}_Refseq.terminator.filter.KAS-seq.${i}
-   awk -v x=$i '{printf("%s\t%s\t%.2f\n",$2,$3,$(x+6))}' ${prefix}_on_${assemblyid}_Refseq.genebody.filter.bed > ${prefix}_on_${assemblyid}_Refseq.genebody.filter.KAS-seq.${i}
+   echo ""
+   awk -v x=$i '{printf("%s\t%s\t%.2f\n",$1,$2,$(x+5))}' ${prefix}_on_${assemblyid}_Refseq.terminator.filter.bed > ${prefix}_on_${assemblyid}_Refseq.terminator.filter.KAS-seq.${i}
+   awk -v x=$i '$(x+5)>=5 {printf("%s\t%s\t%.2f\n",$1,$2,$(x+5))}' ${prefix}_on_${assemblyid}_Refseq.genebody.filter.bed > ${prefix}_on_${assemblyid}_Refseq.genebody.filter.KAS-seq.${i}
 
-   awk 'NR==FNR{a[$1]=$3;}NR!=FNR{print $0"\t"a[$1]}' ${prefix}_on_${assemblyid}_Refseq.terminator.filter.KAS-seq.${i} ${prefix}_on_${assemblyid}_Refseq.genebody.filter.KAS-seq.${i} | awk '{ if(NF==3){printf("%.2f\n",nan)} else{printf("%.2f\n",$4/($3+0.1))} }' > ${prefix}_on_${assemblyid}_Refseq.gene.filter.KAS-seq.${i}
+   awk 'NR==FNR{a[$1]=$3;}NR!=FNR{print $0"\t"a[$1]}' ${prefix}_on_${assemblyid}_Refseq.terminator.filter.KAS-seq.${i} ${prefix}_on_${assemblyid}_Refseq.genebody.filter.KAS-seq.${i} | awk '{ if(NF==3){printf("%s\t%s\t%.2f\n",$1,$2,"nan")} else{printf("%s\t%s\t%.2f\n",$1,$2,$4/($3+0.1))} }' > ${prefix}_on_${assemblyid}_Refseq.gene.filter.KAS-seq.${i}
  
+
+   echo -e "genename\tstrand" > ${prefix}.header1.txt
+   awk '{for(i=1;i<=NF;i++) a[i,NR]=$i}END{for(i=1;i<=NF;i++) {for(j=1;j<=NR;j++) printf a[i,j] "\t";print ""}}' $labels | awk -v x=$i '{printf("%s\n",$x)}' > ${prefix}.${i}.header2.txt
+   paste ${prefix}.header1.txt ${prefix}.${i}.header2.txt > ${prefix}.${i}.header.txt
+
+   labels_selected=$(sed -n ''$i'p' $labels)
+
+   cat ${prefix}.${i}.header.txt ${prefix}_on_${assemblyid}_Refseq.gene.filter.KAS-seq.${i} > ${prefix}_${labels_selected}_on_${assemblyid}_Refseq_gene_termination_index.txt
+
    rm -f ${prefix}_on_${assemblyid}_Refseq.terminator.filter.KAS-seq.${i}
    rm -f ${prefix}_on_${assemblyid}_Refseq.genebody.filter.KAS-seq.${i}
+   rm -f ${prefix}_on_${assemblyid}_Refseq.gene.filter.KAS-seq.${i}
+   rm -f ${prefix}.header1.txt
+   rm -f ${prefix}.${i}.header2.txt
+   rm -f ${prefix}.${i}.header.txt
 
    echo "done."
    echo ""
    done
 
-   echo "Generating the final termination index on ${assemblyid}_Refseq.terminator.bed for all samples ..."
-   awk '{printf("%s\t%s\n",$2,$3)}' ${prefix}_on_${assemblyid}_Refseq.genebody.filter.bed > ${prefix}_on_${assemblyid}_Refseq.genebody.filter.genename
-   paste ${prefix}_on_${assemblyid}_Refseq.genebody.filter.genename ${prefix}_on_${assemblyid}_Refseq.gene.filter.KAS-seq.* > ${prefix}_on_${assemblyid}_Refseq.gene.filter.without_header.txt
-
-   echo -e "genename\tstrand" > ${prefix}.header1.txt
-   awk '{for(i=1;i<=NF;i++) a[i,NR]=$i}END{for(i=1;i<=NF;i++) {for(j=1;j<=NR;j++) printf a[i,j] "\t";print ""}}' $labels > ${prefix}.header2.txt
-   paste ${prefix}.header1.txt ${prefix}.header2.txt > ${prefix}.header.txt
-
-   cat ${prefix}.header.txt ${prefix}_on_${assemblyid}_Refseq.gene.filter.without_header.txt > ${prefix}_on_${assemblyid}_Refseq_gene_termination_index.txt
-   echo "done."
-   echo ""
-
    echo "Clean up the intermediate files."
    rm -f ${prefix}_on_${assemblyid}_Refseq.terminator.npz
    rm -f ${prefix}_on_${assemblyid}_Refseq.terminator.tab
+   rm -f ${prefix}_on_${assemblyid}_Refseq.terminator.bed
    rm -f ${prefix}_on_${assemblyid}_Refseq.genebody.npz
    rm -f ${prefix}_on_${assemblyid}_Refseq.genebody.tab
+   rm -f ${prefix}_on_${assemblyid}_Refseq.genebody.bed
    rm -f ${assemblyid}_Refseq.terminator.genenames
    rm -f ${assemblyid}_Refseq.genebody.genenames
-   rm -f ${prefix}_on_${assemblyid}_Refseq.terminator.average
-   rm -f ${prefix}_on_${assemblyid}_Refseq.genebody.average
    rm -f ${prefix}_on_${assemblyid}_Refseq.terminator.filter.bed
    rm -f ${prefix}_on_${assemblyid}_Refseq.genebody.filter.bed
-   rm -f ${prefix}_on_${assemblyid}_Refseq.gene.filter.KAS-seq.*
-   rm -f ${prefix}_on_${assemblyid}_Refseq.genebody.filter.genename
-   rm -f ${prefix}_on_${assemblyid}_Refseq.gene.filter.without_header.txt
-   rm -f ${prefix}.header1.txt
-   rm -f ${prefix}.header2.txt
-   rm -f ${prefix}.header.txt
    echo "done."
    echo ""
 

@@ -242,8 +242,8 @@ if [[ $paired_or_single_end == "single" ]] ;then
    echo ""
    samtools rmdup -s ${prefix}_sorted.bam ${prefix}_rmdup.bam >> .${prefix}_SE_spKAS-seq_deduplication_ratios.txt 2>&1
    samtools index ${prefix}_rmdup.bam
-   unique_reads_num=$( samtools view -h ${prefix}_rmdup.bam | grep chr | grep ^@ -v | awk '{print $1}' | sort -u | wc -l )
-   echo "Number of unique mapped reads: $unique_reads_num" >> ${prefix}_SE_spKAS-seq_mapping_summary.txt
+   deduplicated_reads_num=$( samtools view -h ${prefix}_rmdup.bam | grep chr | grep ^@ -v | awk '{print $1}' | sort -u | wc -l )
+   echo "Number of deduplicated mapped reads: $deduplicated_reads_num" >> ${prefix}_SE_spKAS-seq_mapping_summary.txt
    echo "" >> ${prefix}_SE_spKAS-seq_mapping_summary.txt
    duplication_ratios=$( awk '{print $6}' .${prefix}_SE_spKAS-seq_deduplication_ratios.txt | awk '{printf("%s\n",$1*100"%")}' )
    echo "Duplication ratios. samtools: $duplication_ratios" >> ${prefix}_SE_spKAS-seq_mapping_summary.txt
@@ -255,6 +255,12 @@ if [[ $paired_or_single_end == "single" ]] ;then
       echo "Filter the unique mapped reads ..."
       echo ""
       samtools view -q 10 -b ${prefix}_rmdup.bam | bamToBed -i - | awk '$3-'${extendlength}'>0 {if ($6~"+") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$2,$2+'${extendlength}',$4,$5,$6); else if ($6~"-") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$3-'${extendlength}',$3,$4,$5,$6)}' | intersectBed -a - -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v | intersectBed -a - -b ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes.bed -wa -f 1 > ${prefix}.ext${extendlength}.unique.bed
+      
+      # calculate the number of deduplicated and unique mapped reads.
+      unique_mapped_reads_num=$( wc -l ${prefix}.ext${extendlength}.unique.bed | awk '{print $1}' )
+      echo "" >> ${prefix}_SE_KAS-seq_mapping_summary.txt
+      echo "Number of unique mapped reads: $unique_mapped_reads_num" >> ${prefix}_SE_KAS-seq_mapping_summary.txt     
+
       genomeCoverageBed -bg -i ${prefix}.ext${extendlength}.unique.bed -g ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes > ${prefix}.ext${extendlength}.unique.bg
       echo "done."
       echo ""
@@ -508,18 +514,7 @@ elif [[ $paired_or_single_end == "paired" ]]; then
    samtools index ${prefix}_rmdup.bam
    echo "'picard MarkDuplicates' done."
    echo ""
-
-   if [[ $unique == "on" ]] ;then
-      echo "Filter the unique mapped reads ..."
-      echo ""
-      samtools view -q 10 ${prefix}_rmdup.bam | ${SH_SCRIPT_DIR}/../src/SAMtoBED -i - -o ${prefix}.unique.bed -x -v >> /dev/null 2>&1
-      intersectBed -a ${prefix}.unique.bed -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v > ${prefix}.unique.rmbl.bed
-      mv ${prefix}.unique.rmbl.bed ${prefix}.unique.bed
-      genomeCoverageBed -bg -i ${prefix}.unique.bed -g ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes > ${prefix}.unique.bg
-      echo "done."
-      echo ""
-   fi
-
+   
    # estimate the exact size of KAS-seq fragments with mapped read1 and read2.
    echo "Combine 'properly paired' alignments into a single BED interval. ${prefix}_rmdup.bam into ${prefix}.bed."
    echo ""
@@ -527,13 +522,30 @@ elif [[ $paired_or_single_end == "paired" ]]; then
    paired_alignments_num=$( grep "Paired alignments (fragments):" .${prefix}_PE_spKAS-seq_fragment_length.txt | awk '{printf("%d\n",$4/2)}' )
    unpaired_alignments_num=$( grep "Unpaired alignments:" .${prefix}_PE_spKAS-seq_fragment_length.txt | awk '{printf("%d\n",$3/2)}' )
    alignments_num=$(( paired_alignments_num + unpaired_alignments_num ))
-   echo "Number of unique mapped reads: $alignments_num" >> ${prefix}_PE_spKAS-seq_mapping_summary.txt
+   echo "Number of deduplicated mapped reads: $alignments_num" >> ${prefix}_PE_spKAS-seq_mapping_summary.txt
    echo "" >> ${prefix}_PE_spKAS-seq_mapping_summary.txt
 
    duplication_ratios=$( grep "Unknown Library" ${prefix}.PCR_duplicates | awk '{printf("%.2f\n",$9*100)}' | awk '{print $1"%"}' )
    echo "Duplication ratios. picard: $duplication_ratios" >> ${prefix}_PE_spKAS-seq_mapping_summary.txt
    echo "" >> ${prefix}_PE_spKAS-seq_mapping_summary.txt
    rm -f ${prefix}.PCR_duplicates
+
+   if [[ $unique == "on" ]] ;then
+      echo "Filter the unique mapped reads ..."
+      echo ""
+      samtools view -q 10 ${prefix}_rmdup.bam | ${SH_SCRIPT_DIR}/../src/SAMtoBED -i - -o ${prefix}.unique.bed -x -v >> /dev/null 2>&1
+      intersectBed -a ${prefix}.unique.bed -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v > ${prefix}.unique.rmbl.bed
+      mv ${prefix}.unique.rmbl.bed ${prefix}.unique.bed
+      
+      # calculate the number of deduplicated and unique mapped reads.
+      unique_mapped_reads_num=$( wc -l ${prefix}.unique.bed | awk '{print $1}' )
+      echo "Number of unique mapped reads: $unique_mapped_reads_num" >> ${prefix}_PE_KAS-seq_mapping_summary.txt
+      echo "" ${prefix}_PE_KAS-seq_mapping_summary.txt
+
+      genomeCoverageBed -bg -i ${prefix}.unique.bed -g ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes > ${prefix}.unique.bg
+      echo "done."
+      echo ""
+   fi
 
    sed -i "/^Warning/d" .${prefix}_PE_spKAS-seq_fragment_length.txt
    fragment_length=$( grep "Average fragment length:" .${prefix}_PE_spKAS-seq_fragment_length.txt | awk '{printf("%s\n",$4)}' )

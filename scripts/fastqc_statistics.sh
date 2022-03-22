@@ -121,20 +121,20 @@ fi
 number_of_summary=$( awk 'END {print NR}' $summary )
 
 # Input the header of output summary file.
-echo -e "samples\traw_reads\tmapped_reads\tmapping_ratios\tunique_reads\tduplication_ratios" > ${prefix}_summary.txt
+echo -e "Samples\tClean_reads\tMapped_reads\tMapping_ratios\tUnique_reads\tDuplication_ratios" > ${prefix}_summary.txt
 
 for ((j=1; j<=${number_of_summary}; j++))
 do
 Summary_selected=$( sed -n ''$j'p' $summary )
 Basename_selected=$( sed -n ''$j'p' $labels )
 
-Raw_reads=$( grep "KAS-seq reads:" $Summary_selected | awk '{print $5}' )
+Clean_reads=$( grep "KAS-seq reads:" $Summary_selected | awk '{print $5}' )
 Mapped_reads=$( grep "Number of mapped reads." $Summary_selected | awk '{print $6}' )
 Mapping_ratios=$( grep "Mapping ratios:" $Summary_selected | awk '{print $3}' )
 Unique_reads=$( grep "Number of unique mapped reads:" $Summary_selected | awk '{print $6}' )
 Duplication_ratios=$( grep "Duplication ratios." $Summary_selected | awk '{print $4}' )
 
-echo -e "$Basename_selected\t$Raw_reads\t$Mapped_reads\t$Mapping_ratios\t$Unique_reads\t$Duplication_ratios" >> ${prefix}_summary.txt
+echo -e "$Basename_selected\t$Clean_reads\t$Mapped_reads\t$Mapping_ratios\t$Unique_reads\t$Duplication_ratios" >> ${prefix}_summary.txt
 done
 
 rm -f ${prefix}.summary_basename.txt

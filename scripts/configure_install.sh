@@ -82,6 +82,12 @@ rm -f .uninstalled_tools.txt
 
 # function to install tools.
 installtools() {
+if [[ $tools == "bedGraphToBigWig" ]]; then
+   tools=ucsc-bedgraphtobigwig
+elif [[ $tools == "trim_galore" ]]; then
+   tools=trim-galore
+fi
+	
 if ! type $tools >/dev/null 2>&1 ;then
    echo ""
    echo "$tools was not installed, install $tools with 'conda'"

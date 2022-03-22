@@ -260,7 +260,8 @@ elif [[ $regions == "gene" ]] ;then
 
    for ((i=1; i<=${number_of_samples}; i++))
    do
-   echo "Calculate the normalized KAS-seq expression on ${assemblyid} Refseq genes for the ${i}th sample."	
+   echo "Calculate the normalized KAS-seq expression on ${assemblyid} Refseq genes for the ${i}th sample."
+   echo ""
    awk -v x=$i '{printf("%s\t%.2f\n",$2,$(x+6))}' ${prefix}_on_${assemblyid}_Refseq.promoter.filter.bed > ${prefix}_on_${assemblyid}_Refseq.promoter.filter.KAS-seq.${i}
    awk -v x=$i '{printf("%s\t%.2f\n",$2,$(x+6))}' ${prefix}_on_${assemblyid}_Refseq.genebody.filter.bed > ${prefix}_on_${assemblyid}_Refseq.genebody.filter.KAS-seq.${i}
 

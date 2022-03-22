@@ -15,7 +15,7 @@ Example:
 WT.peaks.rep1.bed
 WT.peaks.rep2.bed              ---peaks.txt"
 assemblyidHelp="-s [assembly id]: please specify the genome assembly id of (sp)KAS-seq data. -g [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
-labelsHelp="-l [labels]: please input the text file containing the labels of (sp)KAS-seq data that show in 'KAS-pipe2 termination_length' output files. DEFAULT: basename of KAS-seq file.
+labelsHelp="-l [labels]: please input the text file containing the labels of (sp)KAS-seq data that show in 'KAS-pipe2 termilength' output files. DEFAULT: basename of KAS-seq file.
 Example:
 WT.rep1
 WT.rep2                        ---labels.txt"
