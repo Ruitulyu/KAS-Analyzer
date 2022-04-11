@@ -28,12 +28,12 @@ KO_rep2
 KO_rep2                       ---labels.txt"
 KASseqHelp="-k [KAS-seq]: please input the text file containing the indexed bam files of (sp)KAS-seq data that used to calculate correlation coefficient and generate correlation plots. REQUIRED.
 Example:
-KAS-seq_WT.rep1.bam
-KAS-seq_WT.rep2.bam
-KAS-seq_WT.rep3.bam
-KAS-seq_KO.rep1.bam
-KAS-seq_KO.rep2.bam
-KAS-seq_KO.rep3.bam           ---KAS-seq_data.txt"
+KAS-seq_WT.rep1.bigWig
+KAS-seq_WT.rep2.bigWig
+KAS-seq_WT.rep3.bigWig
+KAS-seq_KO.rep1.bigWig
+KAS-seq_KO.rep2.bigWig
+KAS-seq_KO.rep3.bigWig        ---KAS-seq_data.txt"
 helpHelp="-h: print this help and exit.
 Note: The 'KAS-pipe2 correlation' shell script is applied to calculate correlation coefficients and generate correlation plots between replicates or (sp)KAS-seq data of different conditions."
 
@@ -312,12 +312,12 @@ if [[ $plots == "heatmap" ]]; then
    echo ""
    Rscript --vanilla ${SH_SCRIPT_DIR}/../R/Plotcorr_heatmap.R ${prefix}_on_${regions}.txt
 
-   mv KAS-seq_corr_heatmap.png ${prefix}_corr_heatmap.png
-   mv KAS-seq_corr_heatmap.svg ${prefix}_corr_heatmap.svg
-   mv KAS-seq_corr_circle.png ${prefix}_corr_circle.png
-   mv KAS-seq_corr_circle.svg ${prefix}_corr_circle.svg
-   mv KAS-seq_correlation.csv ${prefix}_correlation.csv
-   mv KAS-seq_correlation_pvalue.csv ${prefix}_correlation_pvalue.csv
+   mv KAS-seq_corr_heatmap.png ${prefix}_KAS-seq_corr_heatmap.png
+   mv KAS-seq_corr_heatmap.svg ${prefix}_KAS-seq_corr_heatmap.svg
+   mv KAS-seq_corr_circle.png ${prefix}_KAS-seq_corr_circle.png
+   mv KAS-seq_corr_circle.svg ${prefix}_KAS-seq_corr_circle.svg
+   mv KAS-seq_correlation.csv ${prefix}_KAS-seq_correlation.csv
+   mv KAS-seq_correlation_pvalue.csv ${prefix}_KAS-seq_correlation_pvalue.csv
    echo "done."
    echo ""
 
@@ -328,8 +328,8 @@ elif [[ $plots == "scatterplot" ]]; then
    echo ""   
    Rscript --vanilla ${SH_SCRIPT_DIR}/../R/Plotcorr_scatterplot.R ${prefix}_on_${regions}.txt ${methods}
 
-   mv KAS-seq_corr_scatterplot.png ${prefix}_corr_scatterplot.png
-   mv KAS-seq_corr_scatterplot.svg ${prefix}_corr_scatterplot.svg
+   mv KAS-seq_corr_scatterplot.png ${prefix}_KAS-seq_corr_scatterplot.png
+   mv KAS-seq_corr_scatterplot.svg ${prefix}_KAS-seq_corr_scatterplot.svg
    echo "done."
    echo ""
    
@@ -338,8 +338,8 @@ elif [[ $plots == "scatterplot" ]]; then
    echo ""   
    Rscript --vanilla ${SH_SCRIPT_DIR}/../R/Plotcorr_scatterplot_matrix.R ${prefix}_on_${regions}.txt
    
-   mv KAS-seq_corr_scatterplot_matrix.png ${prefix}_corr_scatterplot_matrix.png
-   mv KAS-seq_corr_scatterplot_matrix.svg ${prefix}_corr_scatterplot_matrix.svg
+   mv KAS-seq_corr_scatterplot_matrix.png ${prefix}_KAS-seq_corr_scatterplot_matrix.png
+   mv KAS-seq_corr_scatterplot_matrix.svg ${prefix}_KAS-seq_corr_scatterplot_matrix.svg
    echo "done."
    echo ""
 

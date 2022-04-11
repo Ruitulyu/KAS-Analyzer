@@ -6,7 +6,7 @@ set -e
 
 # help arguments
 usageHelp="Usage: KAS-pipe2 ss_enhancer [ -h/--help ] [ -o prefix ] [ -t threads ] [ -s assembly id ] [ -e enhancer ] [ -p peaks ] [ -k KAS-seq ] "
-exampleHelp="Example: nohup KAS-pipe2 ss_enhancer -o KAS-seq_ss_enhancers -s mm10 -e H3K27ac_enhancers.bed -p KAS-seq_peaks.bed -k KAS-seq.rep1.bam,KAS-seq.rep2.bam &"
+exampleHelp="Example: nohup KAS-pipe2 ss_enhancer -o KAS-seq_ss_enhancers -s mm10 -e H3K27ac_enhancers.bed -p KAS-seq_peaks.bed -k KAS-seq.rep1.bigWig,KAS-seq.rep2.bigWig &"
 prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 ss_enhancer' output files. Default: basename of enhancer file."
 threadsHelp="-t [threads]: please specify the number of threads used for single stranded (ss) enhancers identification. Default: 1."
 assemblyidHelp="-s [assembly id]: please specify the genome assembly id. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
@@ -139,7 +139,7 @@ echo ""
 echo "Generate the left and right shores of enhancer regions: ${enhancer}.KAS.distal.bed ."
 echo ""
 awk '{printf("%s\t%d\t%d\t%d\n",$1,$2,$3,$3-$2)}' ${enhancer}.KAS.distal.bed | awk '{ if($2-$4<0){printf("%s\t%d\t%d\t%s\n",$1,0,$2,"enhancer"FNR)} else{printf("%s\t%d\t%d\t%s\n",$1,$2-$4,$2,"enhancer"FNR)} }' > ${enhancer}.KAS.distal.left.bed
-awk '{printf("%s\t%d\t%d\t%d\n",$1,$2,$3,$3-$2)}' ${enhancer}.KAS.distal.bed | awk '{printf("%s\t%d\t%d\t%s\n",$1,$3,$3+$4,"enhancer"FNR)}' > ${enhancer}.KAS.distal.right.bed
+awk '{printf("%s\t%d\t%d\t%d\n",$1,$2,$3,$3-$2)}' ${enhancer}.KAS.distal.bed | awk '{printf("%s\t%d\t%d\t%s\n",$1,$3,$3+$4,"enhancer"FNR)}' | intersectBed -a - -b ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes.bed -wa -wb | awk '{ if($7-$3>=0){printf("%s\t%d\t%d\t%s\n",$1,$2,$3,$4)} else{printf("%s\t%d\t%d\t%s\n",$1,$2,$7,$4)} }' > ${enhancer}.KAS.distal.right.bed
 echo "done."
 echo ""
 
