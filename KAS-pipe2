@@ -228,7 +228,7 @@ elif [[ "$1" == "KASexpre" ]]; then
    ${SH_SCRIPT_DIR}/scripts/calculate_KAS_expression.sh $( echo $* | cut -d " " -f 2- )
 
 elif [[ "$1" == "diff" ]]; then
-   ${SH_SCRIPT_DIR}/scripts/diff_regions_bigWig.sh $( echo $* | cut -d " " -f 2- )
+   ${SH_SCRIPT_DIR}/scripts/diff_regions.sh $( echo $* | cut -d " " -f 2- )
 
 elif [[ "$1" == "TC" ]]; then
    ${SH_SCRIPT_DIR}/scripts/KAS-seq_timecourse.sh $( echo $* | cut -d " " -f 2- )
