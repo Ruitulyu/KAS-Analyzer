@@ -193,8 +193,8 @@ Rscript --vanilla ${SH_SCRIPT_DIR}/../R/Piechart_plot.R ${prefix}_peaks_${assemb
 echo "done."
 echo ""
 
-mv KAS-seq_peaks_genomic_distribution_pie_chart.png ${prefix}_genomic_distribution_pie_chart.png
-mv KAS-seq_peaks_genomic_distribution_pie_chart.svg ${prefix}_genomic_distribution_pie_chart.svg
+mv KAS-seq_peaks_genomic_distribution_pie_chart.png ${prefix}_KAS-seq_genomic_distribution_pie_chart.png
+mv KAS-seq_peaks_genomic_distribution_pie_chart.svg ${prefix}_KAS-seq_genomic_distribution_pie_chart.svg
 # rm -f ${prefix}_peaks_${assemblyid}_genomic_distribution.txt
 
 echo "'KAS-pipe2 genomicdist' run successfully!"

@@ -120,8 +120,8 @@ Rscript --vanilla ${SH_SCRIPT_DIR}/../R/Fragmentsize_plot.R ${prefix}_fragmentsi
 echo "done."
 echo ""
 
-mv KAS-seq_fragment_size_density_plot.png ${prefix}_fragment_size_density_plot.png
-mv KAS-seq_fragment_size_density_plot.svg ${prefix}_fragment_size_density_plot.svg
+mv KAS-seq_fragment_size_density_plot.png ${prefix}_KAS-seq_fragment_size_density_plot.png
+mv KAS-seq_fragment_size_density_plot.svg ${prefix}_KAS-seq_fragment_size_density_plot.svg
 
 # rm -f ${prefix}_fragmentsize.txt
 

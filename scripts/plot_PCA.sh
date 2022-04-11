@@ -373,11 +373,11 @@ Rscript --vanilla ${SH_SCRIPT_DIR}/../R/PCA_plot.R ${prefix}_on_${assemblyid}_${
 echo "done."
 echo ""
 
-mv KAS-seq_PCA_plot.png ${prefix}_PCA_plot.png
-mv KAS-seq_PCA_plot.svg ${prefix}_PCA_plot.svg
+mv KAS-seq_PCA_plot.png ${prefix}_KAS-seq_PCA_plot.png
+mv KAS-seq_PCA_plot.svg ${prefix}_KAS-seq_PCA_plot.svg
 
-mv KAS-seq_percentage_of_variances.png ${prefix}_percentage_of_variances.png
-mv KAS-seq_percentage_of_variances.svg ${prefix}_percentage_of_variances.svg
+mv KAS-seq_percentage_of_variances.png ${prefix}_KAS-seq_percentage_of_variances.png
+mv KAS-seq_percentage_of_variances.svg ${prefix}_KAS-seq_percentage_of_variances.svg
 
 rm -f $KASseq_list
 rm -f ${prefix}.labels_basename.txt

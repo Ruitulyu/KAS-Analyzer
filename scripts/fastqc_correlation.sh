@@ -356,12 +356,12 @@ if [[ "${plots}" == "heatmap" ]]; then
    echo ""
    Rscript --vanilla ${SH_SCRIPT_DIR}/../R/Plotcorr_heatmap.R ${prefix}_on_${regions}.txt
 
-   mv KAS-seq_corr_heatmap.png ${prefix}_corr_heatmap.png
-   mv KAS-seq_corr_heatmap.svg ${prefix}_corr_heatmap.svg
-   mv KAS-seq_corr_circle.png ${prefix}_corr_circle.png
-   mv KAS-seq_corr_circle.svg ${prefix}_corr_circle.svg
-   mv KAS-seq_correlation.csv ${prefix}_correlation.csv
-   mv KAS-seq_correlation_pvalue.csv ${prefix}_correlation_pvalue.csv
+   mv KAS-seq_corr_heatmap.png ${prefix}_KAS-seq_corr_heatmap.png
+   mv KAS-seq_corr_heatmap.svg ${prefix}_KAS-seq_corr_heatmap.svg
+   mv KAS-seq_corr_circle.png ${prefix}_KAS-seq_corr_circle.png
+   mv KAS-seq_corr_circle.svg ${prefix}_KAS-seq_corr_circle.svg
+   mv KAS-seq_correlation.csv ${prefix}_KAS-seq_correlation.csv
+   mv KAS-seq_correlation_pvalue.csv ${prefix}_KAS-seq_correlation_pvalue.csv
    echo "done."
    echo ""
 
@@ -372,8 +372,8 @@ elif [[ "${plots}" == "scatterplot" ]]; then
    echo ""   
    Rscript --vanilla ${SH_SCRIPT_DIR}/../R/Plotcorr_scatterplot.R ${prefix}_on_${regions}.txt ${methods}
 
-   mv KAS-seq_corr_scatterplot.png ${prefix}_corr_scatterplot.png
-   mv KAS-seq_corr_scatterplot.svg ${prefix}_corr_scatterplot.svg
+   mv KAS-seq_corr_scatterplot.png ${prefix}_KAS-seq_corr_scatterplot.png
+   mv KAS-seq_corr_scatterplot.svg ${prefix}_KAS-seq_corr_scatterplot.svg
    echo "done."
    echo ""
    
@@ -382,8 +382,8 @@ elif [[ "${plots}" == "scatterplot" ]]; then
    echo ""   
    Rscript --vanilla ${SH_SCRIPT_DIR}/../R/Plotcorr_scatterplot_matrix.R ${prefix}_on_${regions}.txt
    
-   mv KAS-seq_corr_scatterplot_matrix.png ${prefix}_corr_scatterplot_matrix.png
-   mv KAS-seq_corr_scatterplot_matrix.svg ${prefix}_corr_scatterplot_matrix.svg
+   mv KAS-seq_corr_scatterplot_matrix.png ${prefix}_KAS-seq_corr_scatterplot_matrix.png
+   mv KAS-seq_corr_scatterplot_matrix.svg ${prefix}_KAS-seq_corr_scatterplot_matrix.svg
    echo "done."
    echo ""
 

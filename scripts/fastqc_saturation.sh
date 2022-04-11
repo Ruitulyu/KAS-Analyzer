@@ -266,8 +266,8 @@ Rscript --vanilla ${SH_SCRIPT_DIR}/../R/Saturation_lineplot.R ${prefix}_saturati
 echo "done."
 echo ""
 
-mv KAS-seq_saturation_plot.png ${prefix}_saturation_plot.png
-mv KAS-seq_saturation_plot.svg ${prefix}_saturation_plot.svg
+mv KAS-seq_saturation_plot.png ${prefix}_KAS-seq_saturation_plot.png
+mv KAS-seq_saturation_plot.svg ${prefix}_KAS-seq_saturation_plot.svg
 # rm -f ${prefix}_saturation.txt
 
 echo "'KAS-pipe2 saturation' run successfully!"
