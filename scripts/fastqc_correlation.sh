@@ -351,7 +351,7 @@ elif [[ $regions == "peak" ]]; then
 
 fi
 
-if [[ "${plot_types}" == "heatmap" ]]; then
+if [[ "${plots}" == "heatmap" ]]; then
    echo "Plot correlation heatmap ..."
    echo ""
    Rscript --vanilla ${SH_SCRIPT_DIR}/../R/Plotcorr_heatmap.R ${prefix}_on_${regions}.txt
@@ -365,7 +365,7 @@ if [[ "${plot_types}" == "heatmap" ]]; then
    echo "done."
    echo ""
 
-elif [[ "${plot_types}" == "scatterplot" ]]; then
+elif [[ "${plots}" == "scatterplot" ]]; then
    if [ "$number_of_samples" -eq 2 ]; then
    
    echo "Plot correlation scatterplot using ${methods} method ..."
