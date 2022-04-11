@@ -7,8 +7,8 @@ set -e
 # help arguments
 usageHelp="Usage: KAS-pipe2 KASexpre [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -r regions ] [ -p peaks ] [ -l labels ] [ -k KAS-seq ] "
 exampleHelp="Example: nohup KAS-pipe2 KASexpre -o KAS-seq_expression -t 10 -s mm10 -r promoter -l labels.txt -k KAS-seq_data.txt &"
-threadsHelp="-t [threads]: please specify the number of threads used for calculating KAS expression. Default: 1."
-prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 KASexpre' output files. Default: basename of KAS-seq data."
+threadsHelp="-t [threads]: please specify the number of threads used for calculating KAS expression. DEFAULT: 1."
+prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 KASexpre' output files. REQUIRED."
 assemblyidHelp="-s [assembly id]: please specify the genome assembly id of KAS-seq data. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 regionsHelp="-r [regions]: please specify the types of genomic regions. e.g. promoter, genebody, gene or peak. REQUIRED."
 peaksHelp="-p [peaks]: please specify the custom regions file used for KAS index calculation. OPTIONAL."
@@ -97,6 +97,14 @@ if ! type deeptools > /dev/null 2>&1 ;then
 fi
 
 # Required options.
+
+if test -z $prefix ;then
+   echo ""	
+   echo "Please input the prefix (basename) of 'KAS-pipe2 KASexpre' output files."	
+   echo ""
+   exit 1
+fi   
+
 if test -z $assemblyid ;then
    echo ""
    echo "Please specify the reference genome assembly id of (sp)KAS-seq data. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. -s [assembly id]"

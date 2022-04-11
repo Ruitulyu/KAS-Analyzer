@@ -6,7 +6,7 @@ set -e
 
 # help arguments
 usageHelp="Usage: KAS-pipe2 complexity [ -h/--help ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ]"
-exampleHelp="Example: nohup KAS-pipe2 complexity -p KAS-seq_complexity -l labels.txt -k KAS-seq.txt &"
+exampleHelp="Example: nohup KAS-pipe2 complexity -o KAS-seq_complexity -l labels.txt -k KAS-seq.txt &"
 prefixHelp="-o [KAS-seq_complexity]: please input the prefix (basename) of 'KAS-pipe2 complexity' output files. REQUIRED."
 labelsHelp="-l [labels.txt]: please input the text file containing the labels of KAS-seq or spKAS-seq data complexity metric. Default: basename of KAS-seq files.
 Example:

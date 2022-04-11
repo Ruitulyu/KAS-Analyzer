@@ -8,7 +8,7 @@ set -e
 usageHelp="Usage: KAS-pipe2 ss_enhancer [ -h/--help ] [ -o prefix ] [ -t threads ] [ -s assembly id ] [ -e enhancer ] [ -p peaks ] [ -k KAS-seq ] "
 exampleHelp="Example: nohup KAS-pipe2 ss_enhancer -o KAS-seq_ss_enhancers -s mm10 -e H3K27ac_enhancers.bed -p KAS-seq_peaks.bed -k KAS-seq.rep1.bam,KAS-seq.rep2.bam &"
 prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 ss_enhancer' output files. Default: basename of enhancer file."
-threadsHelp="-t [threads]: please specify the number of threads used for single stranded (ss) enhancers identification. Default: 1."
+threadsHelp="-t [threads]: please specify the number of threads used for single stranded (ss) enhancers identification. DEFAULT: 1."
 assemblyidHelp="-s [assembly id]: please specify the genome assembly id. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 enhancerHelp="-e [enhancer]: please specify the enhancer file used for single stranded (ss) enhancers identification. Enhancer file can be H3K27ac, P300 or Med1 ChIP-seq peaks file. REQUIRED."
 peaksHelp="-p [peaks]: please specify the (sp)KAS-seq peaks file. REQUIRED."
@@ -147,7 +147,7 @@ number_of_samples=$( awk 'END {print NF}' ${prefix}.KASseq.txt )
 cat /dev/null > ${prefix}.KAS-seq.RPKM.bigWig.txt
 for ((i=1; i<=${number_of_samples}; i++))
 do
-sample_selected=$( awk -v x=$i '{print $x}' .KASseq.txt )
+sample_selected=$( awk -v x=$i '{print $x}' ${prefix}.KASseq.txt )
 echo "Generate the index of $sample_selected."
 echo ""
 samtools index $sample_selected
@@ -156,7 +156,7 @@ echo ""
 
 echo "Normalize $sample_selected using RPKM and output bigWig file ..."
 echo ""
-bamCoverage -b $sample_selected --outFileFormat bigwig -p $threads -bl ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed --effectiveGenomeSize $genomesize --normalizeUsing RPKM -o ${sample_selected}.bigWig
+bamCoverage -b $sample_selected --outFileFormat bigwig -p $threads -bl ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed --effectiveGenomeSize $genomesize --normalizeUsing RPKM -o ${sample_selected}.bigWig > /dev/null 2>&1
 echo ${sample_selected}.bigWig >> ${prefix}.KAS-seq.RPKM.bigWig.txt
 echo "done."
 echo ""
@@ -170,7 +170,7 @@ echo ""
 cat /dev/null > ${prefix}.labels.txt
 for ((i=1; i<=${number_of_samples}; i++))
 do
-sample_selected=$( awk -v x=$i '{print $x}' .KASseq.txt )
+sample_selected=$( awk -v x=$i '{print $x}' ${prefix}.KASseq.txt )
 labels_basename=$( basename ${sample_selected} .bam )
 echo ${labels_basename} >> ${prefix}.labels.txt
 done
@@ -190,7 +190,7 @@ echo ""
 echo "Generate the left and right shores of enhancer regions: ${enhancer}.KAS.distal.bed ."
 echo ""
 awk '{printf("%s\t%d\t%d\t%d\n",$1,$2,$3,$3-$2)}' ${enhancer}.KAS.distal.bed | awk '{ if($2-$4<0){printf("%s\t%d\t%d\t%s\n",$1,0,$2,"enhancer"FNR)} else{printf("%s\t%d\t%d\t%s\n",$1,$2-$4,$2,"enhancer"FNR)} }' > ${enhancer}.KAS.distal.left.bed
-awk '{printf("%s\t%d\t%d\t%d\n",$1,$2,$3,$3-$2)}' ${enhancer}.KAS.distal.bed | awk '{printf("%s\t%d\t%d\t%s\n",$1,$3,$3+$4,"enhancer"FNR)}' > ${enhancer}.KAS.distal.right.bed
+awk '{printf("%s\t%d\t%d\t%d\n",$1,$2,$3,$3-$2)}' ${enhancer}.KAS.distal.bed | awk '{printf("%s\t%d\t%d\t%s\n",$1,$3,$3+$4,"enhancer"FNR)}' | intersectBed -a - -b ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes.bed -wa -wb | awk '{ if($7-$3>=0){printf("%s\t%d\t%d\t%s\n",$1,$2,$3,$4)} else{printf("%s\t%d\t%d\t%s\n",$1,$2,$7,$4)} }' > ${enhancer}.KAS.distal.right.bed
 echo "done."
 echo ""
 

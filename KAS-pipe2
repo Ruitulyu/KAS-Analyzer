@@ -177,7 +177,7 @@ elif [[ "$1" == "fragmentsize" ]]; then
    ${SH_SCRIPT_DIR}/scripts/fastqc_fragmentsize.sh $( echo $* | cut -d " " -f 2- )
 
 elif [[ "$1" == "correlation" ]]; then
-   ${SH_SCRIPT_DIR}/scripts/fastqc_correlation_bigWig.sh $( echo $* | cut -d " " -f 2- )
+   ${SH_SCRIPT_DIR}/scripts/fastqc_correlation.sh $( echo $* | cut -d " " -f 2- )
 
 elif [[ "$1" == "saturation" ]]; then
    ${SH_SCRIPT_DIR}/scripts/fastqc_saturation.sh $( echo $* | cut -d " " -f 2- )

@@ -54,7 +54,7 @@ You can install KAS-pipe2 using command line (linux/mac) by cloning git reposito
 	$ KAS-pipe2 install -KAS-pipe2
 	
 	# Activate conda 'KAS-pipe2' environment.
-	$ KAS-pipe2 activate
+	$ conda activate KAS-pipe2
 	
 ------------------------------------	
 

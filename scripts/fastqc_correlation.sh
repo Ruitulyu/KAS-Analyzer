@@ -10,13 +10,13 @@ exampleHelp="Example:
 On peaks:             
 nohup KAS-pipe2 correlation -m pearson -t 10 -s hg19 -r peaks -f KAS-seq_peaks.bed -p heatmap -o KAS-seq -l labels.txt -k KAS-seq.txt &
 On bins:
-nohup KAS-pipe2 correlation -m pearson -t 10 -s hg19 -r bins -p heatmap -o KAS-seq -l labels.txt -k KAS-seq.txt &"
-methodsHelp="-m [correlation method]: please specify the methods to calculate correlation coefficients. e.g. pearson, kendall or spearman. Default: pearson."
-threadsHelp="-t [threads]: please specify the number of threads. Default: 1."
+nohup KAS-pipe2 correlation -m pearson -t 10 -s hg19 -r bin -p heatmap -o KAS-seq -l labels.txt -k KAS-seq.txt &"
+methodsHelp="-m [correlation method]: please specify the methods to calculate correlation coefficients. e.g. pearson, kendall or spearman. DEFAULT: pearson."
+threadsHelp="-t [threads]: please specify the number of threads. DEFAULT: 1."
 assemblyidHelp="-s [assembly id]: please specify the genome assembly id of your (sp)KAS-seq data. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
-regionsHelp="-r [regions]: please specify the region types to calculate the (sp)KAS-seq density matrix. e.g. bin or peak. Default: bin."
+regionsHelp="-r [regions]: please specify the region types to calculate the (sp)KAS-seq density matrix. e.g. bin or peak. DEFAULT: bin."
 peakfileHelp="-f [peaks file]: please input the merged peaks list file. Note: only valid when '-r peaks' is specified. REQUIRED." 
-plotsHelp="-p [plot types]: please specify the plot types to generate correlation plot. Default: scatterplot."
+plotsHelp="-p [plot types]: please specify the plot types to generate correlation plot. DEFAULT: scatterplot."
 prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 correlation' output files. REQUIRED."
 labelsHelp="-l [labels]: please input the text file containing the labels of (sp)KAS-seq data that show in heatmap or scatterplot. REQUIRED.
 Example:

@@ -6,7 +6,7 @@ set -e
 
 # arguments                                                     
 usageHelp="Usage: KAS-pipe2 fingerprint [ -h/--help ] [ -t threads ] [ -s assembly id ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ] "
-exampleHelp="Example: nohup KAS-pipe2 fingerprint -t 10 -s hg19 -p KAS-seq_fingerprint -l labels.txt -k KAS-seq_data.txt &"
+exampleHelp="Example: nohup KAS-pipe2 fingerprint -t 10 -s hg19 -o KAS-seq_fingerprint -l labels.txt -k KAS-seq_data.txt &"
 threadsHelp="-t [threads]: please input the number of threads used for generating KAS-seq fingerprint plot. Default: 1."
 assemblyidHelp="-s [assembly id]: please specify the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. REQUIRED."
 prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 fingerprint' output files. REQUIRED"

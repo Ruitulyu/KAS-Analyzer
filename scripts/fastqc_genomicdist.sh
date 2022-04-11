@@ -7,8 +7,8 @@ set -e
 # help arguments
 usageHelp="Usage: KAS-pipe2 genomicdist [ -h/--help ] [ -o prefix ] [ -c ] [ -p peaks ] [ -s assembly id ]"
 exampleHelp="Example: nohup KAS-pipe2 genomicdist -o KAS-seq_genomic_distribution -p KAS-seq_peaks.bed -s hg19 &"
-prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 genomicdist' output files. Default: basename of KAS-seq peak file."
-controlHelp="-c: please specify if the percentages of normal genomic feature distribution is generated, which is regard as a control. Default: off."
+prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 genomicdist' output files. DEFAULT: basename of KAS-seq peak file."
+controlHelp="-c: please specify if the percentages of normal genomic feature distribution is generated, which is regard as a control. DEFAULT: off."
 peaksHelp="-p [peaks]: please input the KAS-seq peak or differential KAS-seq peak file. REQUIRED."
 assemblyid="-s [assembly id]: please specify the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. REQUIRED."
 helpHelp="-h/--help: print this help and exit.
