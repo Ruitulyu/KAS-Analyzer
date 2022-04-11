@@ -31,7 +31,7 @@ png(file="KAS-seq_corr_scatterplot.png", bg="transparent")
 ggscatter(KAS.matrix, x = colnames(KAS.matrix)[1], y = colnames(KAS.matrix)[2],
           color = "lightgray", add = "reg.line", conf.int = TRUE,
           add.params = list(color = "steelblue",fill = "steelblue")) +
-          stat_cor(method = args[2])
+          stat_cor(method = args[2]) + ylim(c(2,8)) + xlim(c(2,8))
 
 dev.off()
 
@@ -40,7 +40,7 @@ svg(file="KAS-seq_corr_scatterplot.svg", bg="transparent")
 ggscatter(KAS.matrix, x = colnames(KAS.matrix)[1], y = colnames(KAS.matrix)[2],
           color = "lightgray", add = "reg.line", conf.int = TRUE,
           add.params = list(color = "steelblue",fill = "steelblue")) +
-          stat_cor(method = args[2])
+          stat_cor(method = args[2]) + ylim(c(2,8)) + xlim(c(2,8))
 dev.off()
 
 #http://www.sthda.com/english/wiki/wiki.php?title=ggplot2-scatterplot-easy-scatter-plot-using-ggplot2-and-r-statistical-software 
