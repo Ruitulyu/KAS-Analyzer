@@ -335,7 +335,7 @@ nohup KAS-pipe2 correlation -m pearson -t 10 -s hg19 -r bins -p heatmap -o KAS-s
 
 -m [correlation method]: please specify the methods to calculate correlation coefficients. e.g. pearson, kendall or spearman. DEFAULT: pearson.
 
--t [threads]: please specify the number of threads. Default: 1.
+-t [threads]: please specify the number of threads. DEFAULT: 1.
 
 -s [assembly id]: please specify the genome assembly id of your (sp)KAS-seq data. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED.
 
@@ -376,7 +376,7 @@ Usage: KAS-pipe2 saturation [ -h/--help ] [ -o prefix ] [ -s assembly id ] [ -c 
 
 Example: nohup KAS-pipe2 saturation -o KAS-seq_saturation -c KAS-seq_Input.bed -k KAS-seq.bed &
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 saturation' output files. Default: basename of KAS-seq data.
+-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 saturation' output files. DEFAULT: basename of KAS-seq data.
 
 -s [assembly id]: please specify the genome assembly id of (sp)KAS-seq data. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED.
 
@@ -439,7 +439,7 @@ Plot fingerprint for KAS-seq data.
 ```
 Usage: KAS-pipe2 fingerprint [ -h/--help ] [ -t threads ] [ -s assembly id ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ] 
 
-Example: nohup KAS-pipe2 fingerprint -t 10 -s hg19 -p KAS-seq_fingerprint -l labels.txt -k KAS-seq_data.txt &
+Example: nohup KAS-pipe2 fingerprint -t 10 -s hg19 -o KAS-seq_fingerprint -l labels.txt -k KAS-seq_data.txt &
 
 -t [threads]: please input the number of threads used for generating KAS-seq fingerprint plot. DEFAULT: 1.
 
@@ -1080,7 +1080,7 @@ Example: nohup KAS-pipe2 ss_enhancer -o KAS-seq_ss_enhancers -s mm10 -e H3K27ac_
 
 -o [prefix]: please input the prefix (basename) of 'KAS-pipe2 ss_enhancer' output files. Default: basename of enhancer file.
 
--t [threads]: please specify the number of threads used for single stranded (ss) enhancers identification. Default: 1.
+-t [threads]: please specify the number of threads used for single stranded (ss) enhancers identification. DEFAULT: 1.
 
 -s [assembly id]: please specify the genome assembly id. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED.
 
@@ -1101,7 +1101,7 @@ Usage: KAS-pipe2 motif [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly 
 
 Example: nohup KAS-pipe2 motif -o KAS-seq_enhancers_motifs -t 10 -s mm10 -e enhancers.bed -c control_background_peaks.bed &
 
--t [threads]: please specify the number of threads used for enriched TF motifs on transcribing enhancers. Default: 1.
+-t [threads]: please specify the number of threads used for enriched TF motifs on transcribing enhancers. DEFAULT: 1.
 
 -s [assembly id]: please specify the genome assembly id of enhancers regulatory elements. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED.
 
@@ -1164,13 +1164,13 @@ Example: nohup KAS-pipe2 index -o KAS-seq_pausing_index -t 10 -s hg19 -i pausing
 
 -o [prefix]: please input the prefix (basename) of 'KAS-pipe2 index' output files. REQUIRED.
 
--t [threads]: please specify the number of threads used for the pausing or termination index calculation. Default: 1.
+-t [threads]: please specify the number of threads used for the pausing or termination index calculation. DEFAULT: 1.
 
 -s [assembly id]: please specify the genome assembly id of KAS-seq data. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED.
 
 -i [index]: please specify the index type you want to calculate. e.g. pausing or termination. REQUIRED.
 
--l [labels]: please input the text file containing the labels of (sp)KAS-seq that show in 'KAS-pipe2 index' output files. Default: basename of KAS-seq files.
+-l [labels]: please input the text file containing the labels of (sp)KAS-seq that show in 'KAS-pipe2 index' output files. DEFAULT: basename of KAS-seq files.
 Example:
 WT_rep1
 WT.rep2                        ---labels.txt
