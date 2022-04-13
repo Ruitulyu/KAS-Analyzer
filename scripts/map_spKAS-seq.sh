@@ -278,10 +278,10 @@ if [[ $paired_or_single_end == "single" ]] ;then
    # extend the single-end spKAS-seq deduplicated mapped reads to extendlength.
    echo "Extend the deduplicated reads in ${prefix}.bed to ${extendlength}."
    echo ""
-   awk '$3-'${extendlength}'>0 {if ($6~"+") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$2,$2+'${extendlength}',$4,$5,$6); else if ($6~"-") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$3-'${extendlength}',$3,$4,$5,$6)}' ${prefix}.bed > ${prefix}.ext${extendlength}.bed
+   awk '$3-'${extendlength}'>0 {if ($6~"+") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$2,$2+'${extendlength}',$4,$5,$6); else if ($6~"-") printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$3-'${extendlength}',$3,$4,$5,$6)}' ${prefix}.bed | sortBed -i > ${prefix}.ext${extendlength}.bed
    echo "'extend' done."
    echo ""
-
+   
    echo "Transfer ${prefix}.ext${extendlength}.bed into ${prefix}.ext${extendlength}.bg with genomeCoverageBed."
    echo ""
    genomeCoverageBed -bg -i ${prefix}.ext${extendlength}.bed -g ${SH_SCRIPT_DIR}/../chrom_size/${assemblyid}.chrom.sizes > ${prefix}.ext${extendlength}.bg
@@ -425,12 +425,12 @@ if [[ $paired_or_single_end == "single" ]] ;then
       mv ../${prefix}/${prefix}_R-loop.density.bg ./
 #     mv ../${prefix}/${prefix}_R-loop.density.bigWig ./
       cd ..
+      cd ${prefix}
       echo "Move R-loops identification output files into 'R-loops' folder. done."
       echo ""
       fi
 
    # clean up the .sam, sorted .bam and unextended .bed files.
-   cd ${prefix}
    rm -f ${prefix}.sam
    rm -f ${prefix}_rmdup.bam.bai
    rm -f ${prefix}_rmdup.bam
@@ -534,7 +534,7 @@ elif [[ $paired_or_single_end == "paired" ]]; then
       echo "Filter the unique mapped reads ..."
       echo ""
       samtools view -q 10 ${prefix}_rmdup.bam | ${SH_SCRIPT_DIR}/../src/SAMtoBED -i - -o ${prefix}.unique.bed -x -v >> /dev/null 2>&1
-      intersectBed -a ${prefix}.unique.bed -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v > ${prefix}.unique.rmbl.bed
+      intersectBed -a ${prefix}.unique.bed -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v | sortBed -i > ${prefix}.unique.rmbl.bed
       mv ${prefix}.unique.rmbl.bed ${prefix}.unique.bed
       
       # calculate the number of deduplicated and unique mapped reads.
@@ -549,7 +549,6 @@ elif [[ $paired_or_single_end == "paired" ]]; then
 
    sed -i "/^Warning/d" .${prefix}_PE_spKAS-seq_fragment_length.txt
    fragment_length=$( grep "Average fragment length:" .${prefix}_PE_spKAS-seq_fragment_length.txt | awk '{printf("%s\n",$4)}' )
-   echo "" >> ${prefix}_PE_spKAS-seq_mapping_summary.txt
    echo "Length of DNA fragments: $fragment_length" >> ${prefix}_PE_spKAS-seq_mapping_summary.txt
    echo "" >> ${prefix}_PE_spKAS-seq_mapping_summary.txt
    rm -f .${prefix}_PE_spKAS-seq_fragment_length.txt
@@ -567,17 +566,14 @@ elif [[ $paired_or_single_end == "paired" ]]; then
    echo ""
    samtools view -hbf 64 ${prefix}_rmdup.bam > ${prefix}_rmdup.R1.bam
    bamToBed -i ${prefix}_rmdup.R1.bam | grep "^chrM" -v | sed "s/\/1//g" > ${prefix}_rmdup.R1.bed
-
-   intersectBed -a ${prefix}.rmbl.bed -b ${prefix}_rmdup.R1.bed -wa -wb -F 1 | awk '$4==$8 {printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$2,$3,$8,$9,$10)}' > ${prefix}.6bed
-   mv ${prefix}.6bed ${prefix}.bed
-
+   intersectBed -a ${prefix}.rmbl.bed -b ${prefix}_rmdup.R1.bed -wa -wb -F 1 | awk '$4==$8 {printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$2,$3,$8,$9,$10)}' | sortBed -i > ${prefix}.bed
    echo "done."
    echo ""
 
    if [[ $unique == "on" ]] ;then
       echo "Attach strand information into combined alignments for uniquely mapped reads ..."
       echo "done."
-      intersectBed -a ${prefix}.unique.bed -b ${prefix}_rmdup.R1.bed -wa -wb -F 1 | awk '$4==$8 {printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$2,$3,$8,$9,$10)}' > ${prefix}.unique.6bed
+      intersectBed -a ${prefix}.unique.bed -b ${prefix}_rmdup.R1.bed -wa -wb -F 1 | awk '$4==$8 {printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,$2,$3,$8,$9,$10)}' | sortBed -i > ${prefix}.unique.6bed
       mv ${prefix}.unique.6bed ${prefix}.unique.bed
       echo "done."
       echo ""
@@ -715,12 +711,12 @@ elif [[ $paired_or_single_end == "paired" ]]; then
       mv ../${prefix}/${prefix}_R-loop.density.bg ./
 #     mv ../${prefix}/${prefix}_R-loop.density.bigWig ./
       cd ..
+      cd ${prefix}
       echo "Move R-loops identification output files into 'R-loops' folder. done."
       echo ""
    fi
 
    # clean up the .sam, sorted .bam and unextended .bed files.i
-   cd ${prefix}
    rm -f ${prefix}.sam
    rm -f ${prefix}_rmdup.bam.bai
    rm -f ${prefix}_rmdup.bam

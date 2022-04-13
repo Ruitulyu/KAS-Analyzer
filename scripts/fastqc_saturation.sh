@@ -6,7 +6,7 @@ set -e
 
 # help arguments
 usageHelp="Usage: KAS-pipe2 saturation [ -h/--help ] [ -o prefix ] [ -s assembly id ] [ -c control ] [ -k KAS-seq ]"
-exampleHelp="Example: nohup KAS-pipe2 saturation -o KAS-seq_saturation -c KAS-seq_Input.bed -k KAS-seq.bed &"
+exampleHelp="Example: nohup KAS-pipe2 saturation -o KAS-seq_saturation -s hg19 -c KAS-seq_Input.bed -k KAS-seq.bed &"
 prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 saturation' output files. Default: basename of KAS-seq data."
 assemblyidHelp="-s [assembly id]: please specify the genome assembly id of (sp)KAS-seq data. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 controlHelp="-c [control]: please input the control data (input of (sp)KAS-seq data) containing uniquely mapped reads. e.g. -c KAS-seq_Input.bed. REQUIRED. Note: reads number of KAS-seq and Input should be similar."

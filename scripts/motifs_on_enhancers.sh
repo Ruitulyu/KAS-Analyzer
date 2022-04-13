@@ -7,7 +7,7 @@ set -e
 # help arguments
 usageHelp="Usage: KAS-pipe2 motif [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -e enhancer position file ] [ -c control position file ] "
 exampleHelp="Example: nohup KAS-pipe2 motif -o KAS-seq_enhancers_motifs -t 10 -s mm10 -e enhancers.bed -c control_background_peaks.bed &"
-threadsHelp="-t [threads]: please specify the number of threads used for enriched TF motifs on transcribing enhancers. Default: 1."
+threadsHelp="-t [threads]: please specify the number of threads used for enriched TF motifs on transcribing enhancers. DEFAULT: 1."
 prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 motif' output files. Default: basename of enhancers file."
 assemblyidHelp="-s [assembly id]: please specify the genome assembly id of enhancers regulatory elements. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 enhancersHelp="-e [enhaner]: please specify the enhancers position file in bed format. REQUIRED."

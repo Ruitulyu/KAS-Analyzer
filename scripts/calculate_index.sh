@@ -8,7 +8,7 @@ set -e
 usageHelp="Usage: KAS-pipe2 index [ -h/--help ] [ -o prefix ] [ -t threads ] [ -s assembly id ] [ -i index types ] [ -l labels ] [ -k KAS-seq ]"
 exampleHelp="Example: nohup KAS-pipe2 index -o KAS-seq_pausing_index -t 10 -s hg19 -i pausing -l labels.txt -k KAS-seq.txt &"
 prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 index' output files. REQUIRED."
-threadsHelp="-t [threads]: please specify the number of threads used for the pausing or termination index calculation. Default: 1."
+threadsHelp="-t [threads]: please specify the number of threads used for the pausing or termination index calculation. DEFAULT: 1."
 assemblyidHelp="-s [assembly id]: please specify the genome assembly id of KAS-seq data. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 indexHelp="-i [index]: please specify the index type you want to calculate. e.g. pausing or termination. REQUIRED."
 labelsHelp="-l [labels]: please input the text file containing the labels of (sp)KAS-seq that show in 'KAS-pipe2 index' output files. Default: basename of KAS-seq files.
