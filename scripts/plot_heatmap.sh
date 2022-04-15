@@ -11,7 +11,7 @@ Genomic features(genebody, TSS or TES):
 nohup KAS-pipe2 heatmap -t 10 -s hg19 -o KAS-seq_heatmap -r genebody -q -c Reds -l labels.txt -k KAS-seq.txt &
 Custom regions(peaks. e.g. enhancers.bed):
 nohup KAS-pipe2 heatmap -t 10 -o KAS-seq_heatmap -r peaks -q -p KAS-seq_peaks.bed -c Reds,Reds,Blues,Blues -l labels.txt -k KAS-seq.txt &"
-threadsHelp="-t [threads]: please specify the number of threads used for generating (sp)KAS-seq heatmap plot. Default: 1."
+threadsHelp="-t [threads]: please specify the number of threads used for generating (sp)KAS-seq heatmap plot. DEFAULT: 1."
 assemblyidHelp="-s [assemblyid]: please specify the genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED only for 'genomic features' mode."
 sortHelp="-q: please specify to sort the regions. Default: off."
 sortsampleusingHelp="-u [sample using]: please specify the samples list to sort the regions. e.g. -u 1,2,3"

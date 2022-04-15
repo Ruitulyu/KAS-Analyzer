@@ -6,14 +6,14 @@ set -e
 
 # help arguments
 usageHelp="Usage: KAS-pipe2 PCA [ -h/--help ] [ -o prefix ] [ -t threads ] [ -r regions ] [ -s assembly id ] [ -b bin size ] [ -p peaks] [ -l labels ] [ -k KAS-seq ]"
-exampleHelp="Example: nohup KAS-pipe2 PCA -o KAS-seq_PCA -r bin -s mm10 -l labels.txt -k KAS-seq.txt &"
+exampleHelp="Example: nohup KAS-pipe2 PCA -o KAS-seq_PCA -t 10 -r bin -s mm10 -l labels.txt -k KAS-seq.txt &"
 prefixHelp="-o [KAS-seq_PCA]: please input the prefix (basename) of 'KAS-pipe2 PCA' output files. REQUIRED."
-threadsHelp="-t [threads]: please specify the number of threads used for perform PCA analysis. Default: 1."
-regionsHelp="-r [regions]: please specify the regions used to perform PCA analysis. e.g. promoter, genebody, peak or bin. Default: bin."
+threadsHelp="-t [threads]: please specify the number of threads used for perform PCA analysis. DEFAULT: 1."
+regionsHelp="-r [regions]: please specify the regions used to perform PCA analysis. e.g. promoter, genebody, peak or bin. DEFAULT: bin."
 assemblyidHelp="-s [assemblyid]: please specify the reference genome assembly id of your (sp)KAS-seq data. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
-binsizeHelp="-b [bin size]: please specify the bin size for bins mode: '-r bins'. Default: 10000."
+binsizeHelp="-b [bin size]: please specify the bin size for bins mode: '-r bins'. DEFAULT: 10000."
 peaksHelp="-p [peaks file]: please input the custom regions file that used to perform PCA analysis. REQUIRED in 'peak' mode."
-labelsHelp="-l [labels.txt]: please input the text file containing the labels of (sp)KAS-seq data that shown in the PCA plot. Default: basename of KAS-seq data.
+labelsHelp="-l [labels.txt]: please input the text file containing the labels of (sp)KAS-seq data that shown in the PCA plot. DEFAULT: basename of KAS-seq data.
 Example:
 0h
 4h
