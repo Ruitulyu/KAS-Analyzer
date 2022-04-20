@@ -234,7 +234,7 @@ elif [[ "$1" == "TC" ]]; then
    ${SH_SCRIPT_DIR}/scripts/KAS-seq_timecourse.sh $( echo $* | cut -d " " -f 2- )
 
 elif [[ "$1" == "PCA" ]]; then
-   ${SH_SCRIPT_DIR}/scripts/plot_PCA.sh $( echo $* | cut -d " " -f 2- )
+   ${SH_SCRIPT_DIR}/scripts/plot_PCA_bigWig.sh $( echo $* | cut -d " " -f 2- )
 
 # run 'R-loops' shell scripts.
 elif [[ "$1" == "R-loop" ]]; then
@@ -246,7 +246,7 @@ elif [[ "$1" == "index" ]]; then
 
 # run 'Single-stranded enhancers identification' shell scripts.
 elif [[ "$1" == "ss_enhancer" ]]; then
-   ${SH_SCRIPT_DIR}/scripts/define_ss_enhancers.sh $( echo $* | cut -d " " -f 2- )
+   ${SH_SCRIPT_DIR}/scripts/define_ss_enhancers_bigWig.sh $( echo $* | cut -d " " -f 2- )
 
 elif [[ "$1" == "motif" ]]; then
    ${SH_SCRIPT_DIR}/scripts/motifs_on_enhancers.sh $( echo $* | cut -d " " -f 2- )

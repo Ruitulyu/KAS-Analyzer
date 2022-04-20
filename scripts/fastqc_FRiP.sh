@@ -139,8 +139,8 @@ readsnum=$( wc -l $sample_selected | awk '{print $1}' )
 Inside_reads_percentage=$( awk -v x=${readsnum_on_peaks} -v y=${readsnum} 'BEGIN{printf "%.2f\n",x*100/y}' )
 Outside_reads_percentage=$( awk -v x=${readsnum_on_peaks} -v y=${readsnum} 'BEGIN{printf "%.2f\n",100-x*100/y}' )
 
-echo -e "Inside\t${label_selected}\t${Inside_reads_percentage}" >> ${prefix}_FRiP.txt
 echo -e "Outside\t${label_selected}\t${Outside_reads_percentage}" >> ${prefix}_FRiP.txt
+echo -e "Inside\t${label_selected}\t${Inside_reads_percentage}" >> ${prefix}_FRiP.txt
 echo "done."
 echo ""
 done

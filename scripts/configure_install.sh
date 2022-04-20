@@ -25,6 +25,8 @@ printHelpAndExit() {
     echo -e ""
     echo -e "$checkHelp"
     echo -e ""
+    echo -e "$KASpipe2Help"
+    echo -e ""
     echo -e "$toolsHelp"
     echo -e ""
     echo -e "$helpHelp"
