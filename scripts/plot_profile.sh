@@ -23,7 +23,7 @@ regionsHelp="-r [regions]: please specify the regions types for generating metag
 peaksHelp="-p [peaks file]: please specify the peak file. REQUIRED only for 'custom regions: peaks' mode."
 peakslistHelp="-f [peaks list]: please specify the peak files list. e.g. peaks_cluster1.bed,peaks_cluster2.bed,peaks_cluster3.bed. REQUIRED only for 'custom regions: peakslist' mode. Note: only one KAS-seq bigWig file is needed."
 colorsHelp="-c [colors]: please specify the color list for (sp)KAS-seq data in metagene profile plot. Note: the number of colors in the profile plot needs to be consistent with the number of KAS-seq bigWig files. REQUIRED. Note: the list of valid color names https://matplotlib.org/examples/color/named_colors.html."
-labelsHelp="-l [labels.txt]: please input the text file containing the labels of (sp)KAS-seq data or peaks files (-f need to be specified) that used for generating metagene profile. Default: basename of (sp)KAS-seq bigWig files or peaks files.
+labelsHelp="-l [labels.txt]: please input the text file containing the labels of (sp)KAS-seq data or peaks files (-f need to be specified) that used for generating metagene profile. DEFAULT: basename of (sp)KAS-seq bigWig files or peaks files.
 Example:
 WT_rep1          Cluster1
 WT.rep2          Cluster2
