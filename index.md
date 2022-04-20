@@ -21,14 +21,14 @@ You can install KAS-pipe2 on command line (linux/mac) by cloning git repository 
 	$ cd KAS-pipe2
 	$ bash ./setup.sh
 	
-	# If anaconda or miniconda was not installed on your system.
+	# If anaconda or miniconda was not installed on your system. #OPTIONAL
 	$ KAS-pipe2 install -conda
 	
 	# Install conda 'KAS-pipe2' environment. 
 	$ KAS-pipe2 install -KAS-pipe2
 	
 	# Activate conda 'KAS-pipe2' environment.
-	$ KAS-pipe2 activate
+	$ conda activate KAS-pipe2
 	
 ## Overview
 ---------------------------------------------------------------------------
@@ -155,7 +155,7 @@ Example: KAS-pipe2 build -a bowtie2 -g ./genome.fa -p hg19 -t 10 -d /Software/hg
 
 -g [genome fasta]: please input the path of reference genome fasta file. REQUIRED.
 
--t [threads]: please specify the number of threads. Default: 1.
+-t [threads]: please specify the number of threads. DEFAULT: 1.
 
 -p [index prefix]: please input the prefix (basename) of the aligners' (bowtie, bowtie2 or bwa) reference genome index. Default: basename of fasta file .
 
@@ -174,6 +174,8 @@ Example: KAS-pipe2 install or KAS-pipe2 install -check
 -conda: check the installation or install anaconda in your computer.
 
 -check: list the installed and uninstalled tools.
+
+-KAS-pipe2: install and configure the KAS-pipe2 conda environment.
 
 -t [tools]: check the installation of specific tool, if not, will install automaticially.
 
@@ -485,7 +487,7 @@ Example:
 
 -f: instruct 'KAS-pipe2 trim' to check quality control before trimming. DEFAULT: off.
 
--q [quality]: trim low-quality ends from reads in addition to adapter removal. Default Phred score(ASCII+33): 20.
+-q [quality]: trim low-quality ends from reads in addition to adapter removal. DEFAULT Phred score(ASCII+33): 20.
 
 -l [length]: discard reads that became shorter than length INT bp because of either quality or adapter trimming. DEFAULT: 30.
 
@@ -737,7 +739,7 @@ nohup KAS-pipe2 profile -t 10 -o KAS-seq_different_clusters -r peakslist -f peak
 
 -c [colors]: please specify the color list for (sp)KAS-seq data in metagene profile plot. Note: the number of colors in the profile plot needs to be consistent with the number of KAS-seq bigWig files. REQUIRED. Note: the list of valid color names https://matplotlib.org/examples/color/named_colors.html.
 
--l [labels.txt]: please input the text file containing the labels of (sp)KAS-seq data or peaks files (-f need to be specified) that used for generating metagene profile. Default: basename of (sp)KAS-seq bigWig files or peaks files.
+-l [labels.txt]: please input the text file containing the labels of (sp)KAS-seq data or peaks files (-f need to be specified) that used for generating metagene profile. DEFAULT: basename of (sp)KAS-seq bigWig files or peaks files.
 Example:
 WT_rep1          Cluster1
 WT.rep2          Cluster2
@@ -992,19 +994,19 @@ Example: nohup KAS-pipe2 PCA -o KAS-seq_PCA -r bin -s mm10 -l labels.txt -k KAS-
 
 -o [KAS-seq_PCA]: please input the prefix (basename) of 'KAS-pipe2 PCA' output files. REQUIRED.
 
--t [threads]: please specify the number of threads used for perform PCA analysis. Default: 1.
+-t [threads]: please specify the number of threads used for perform PCA analysis. DEFAULT: 1.
 
--r [regions]: please specify the regions used to perform PCA analysis. e.g. promoter, genebody, peak or bin. Default: bin.
+-r [regions]: please specify the regions used to perform PCA analysis. e.g. promoter, genebody, peak or bin. DEFAULT: bin.
 
 -s [assemblyid]: please specify the reference genome assembly id of your (sp)KAS-seq data. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED.
 
--r [regions]: please specify the regions used to perform PCA analysis. e.g. promoter, genebody, peak or bin. Default: bin.
+-r [regions]: please specify the regions used to perform PCA analysis. e.g. promoter, genebody, peak or bin. DEFAULT: bin.
 
--b [bin size]: please specify the bin size for bins mode: '-r bins'. Default: 10000.
+-b [bin size]: please specify the bin size for bins mode: '-r bins'. DEFAULT: 10000.
 
 -p [peaks file]: please input the custom regions file that used to perform PCA analysis. REQUIRED in 'peak' mode.
 
--l [labels.txt]: please input the text file containing the labels of (sp)KAS-seq data that shown in the PCA plot. Default: basename of KAS-seq data.
+-l [labels.txt]: please input the text file containing the labels of (sp)KAS-seq data that shown in the PCA plot. DEFAULT: basename of KAS-seq data.
 Example:
 0h
 4h
