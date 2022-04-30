@@ -15,7 +15,12 @@ if (length(args) == 0) {
 
 ## -----------------------------------------------------------------------------
 #install and load ggpubr package.
-#install.packages("ggpubr",repos = "http://cran.us.r-project.org")
+packages <- c("ggpubr") 
+
+if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+install.packages(setdiff(packages, rownames(installed.packages())))}
+
+# install.packages("ggpubr",repos = "http://cran.us.r-project.org")
 # if(!require(devtools)) install.packages("devtools")
 # devtools::install_github("kassambara/ggpubr")
 

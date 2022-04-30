@@ -17,8 +17,18 @@ if (length(args) == 0) {
 #install and load easyggplot2 package.
 Sys.setenv(TAR = "/bin/tar")
 Sys.getenv("TAR")
+packages <- c("devtools")
+
+if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+install.packages(setdiff(packages, rownames(installed.packages())))}
+
 # install.packages("devtools")
 library(devtools)
+
+packages <- c("kassambara/easyGgplot2")
+if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+devtools::install_github(setdiff(packages, rownames(installed.packages())))}
+
 # devtools::install_github("kassambara/easyGgplot2")
 library(easyGgplot2)
 

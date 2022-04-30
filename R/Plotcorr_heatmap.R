@@ -21,6 +21,11 @@ KAS.matrix <- as.data.frame(read.table(args[1], header = T))
 
 ## -----------------------------------------------------------------------------
 # install and load corrplot package.
+packages <- c("corrplot","RColorBrewer")
+
+if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+install.packages(setdiff(packages, rownames(installed.packages())))}
+
 # install.packages("corrplot",repos = "http://cran.us.r-project.org")
 # install.packages("RColorBrewer",repos = "http://cran.us.r-project.org")
 library("corrplot")

@@ -1,29 +1,20 @@
 # for python3
 # conda repos: defaults, bioconda, conda-forge, r
 
-samtools ==1.9
-bedtools ==2.27.1
+samtools
+bedtools
 picard
-fastqc ==0.11.6
+fastqc
 homer
 
 ucsc-bedgraphtobigwig
 ucsc-bedsort
 
 r-base
-# r-essentials
-r-devtools
-r-corrplot
-r-ggpubr
-r-RColorBrewer
-bioconductor-rsamtools
-bioconductor-deseq2
-bioconductor-impulsede2
-bioconductor-complexheatmap
 
-bowtie2 ==2.3.4.3
+bowtie2
 bwa
-deeptools ==3.5.1
+deeptools
 cutadapt
 trim-galore 
-macs2 ==2.2.7.1
+macs2

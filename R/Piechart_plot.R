@@ -14,8 +14,13 @@ if (length(args) == 0) {
 }
 
 ## -----------------------------------------------------------------------------
-#install and load ggplot2 package.
-#install.packages("ggplot2")
+# install and load ggplot2 package.
+packages <- c("ggplot2") 
+
+if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+install.packages(setdiff(packages, rownames(installed.packages())))}
+
+# install.packages("ggplot2")
 library(ggplot2)
 
 ## -----------------------------------------------------------------------------

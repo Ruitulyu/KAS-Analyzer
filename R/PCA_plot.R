@@ -15,6 +15,11 @@ if (length(args) == 0) {
 
 ## -----------------------------------------------------------------------------
 #install and load package.
+packages <- c("factoextra", "FactoMineR") 
+
+if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+install.packages(setdiff(packages, rownames(installed.packages())))}
+
 # install.packages("factoextra")
 library(factoextra)
 # install.packages("FactoMineR")

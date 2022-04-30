@@ -21,14 +21,24 @@ coldata <- as.data.frame(read.table(args[2], header = T))
 
 ## -----------------------------------------------------------------------------
 # install and load ImpulseDE2 package
+packages <- c("BiocManager") 
+
+if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+install.packages(setdiff(packages, rownames(installed.packages())))}
+
 # if (!requireNamespace("BiocManager", quietly = TRUE))
 # install.packages("BiocManager",repos = "http://cran.us.r-project.org")
+
+packages <- c("ImpulseDE2")
+
+if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+BiocManager::install(setdiff(packages, rownames(installed.packages())))}
 
 # BiocManager::install("ImpulseDE2")
 library(ImpulseDE2)
 
 # BiocManager::install("ComplexHeatmap")
-library(ComplexHeatmap)
+# library(ComplexHeatmap)
 
 ## -----------------------------------------------------------------------------
 # Perform case-control time course(TC) KAS-seq differential analysis using ImpulseDE2 package with batch effect normalization.

@@ -15,18 +15,25 @@ if (length(args) == 0) {
 
 ## -----------------------------------------------------------------------------
 #install and load easyggplot2 package.
+packages <- c("devtools") 
+if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+install.packages(setdiff(packages, rownames(installed.packages())))}
+
 # install.packages("devtools")
 library(devtools)
 Sys.setenv(TAR = "/bin/tar")
 Sys.getenv("TAR")
+
+packages <- c("kassambara/easyGgplot2")
+if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+devtools::install_github(setdiff(packages, rownames(installed.packages())))}
+
 # devtools::install_github("kassambara/easyGgplot2")
 library(easyGgplot2)
 
 ## -----------------------------------------------------------------------------
 # use shell input
-
 fragmentsize <- as.data.frame(read.table(args[1], header = TRUE))
-
 
 ## -----------------------------------------------------------------------------
 # Plot the fragment size of KAS-seq data and save it to png format.

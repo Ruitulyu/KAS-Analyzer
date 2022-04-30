@@ -15,11 +15,16 @@ if (length(args) == 0) {
 
 ## -----------------------------------------------------------------------------
 #install and load easyggplot2 package.
+packages <- c("devtools") 
+
+if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+install.packages(setdiff(packages, rownames(installed.packages())))}
+
 # install.packages("devtools")
 library(devtools)
 Sys.setenv(TAR = "/bin/tar")
 
-# devtools::install_github("kassambara/easyGgplot2")
+devtools::install_github("kassambara/easyGgplot2")
 library(easyGgplot2)
 
 ## -----------------------------------------------------------------------------
