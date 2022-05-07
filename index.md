@@ -395,7 +395,7 @@ Calculate the complexity metric for (sp)KAS-seq data, including the PCR Bottlene
 ```
 Usage: KAS-pipe2 complexity [ -h/--help ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ]
 
-Example: nohup KAS-pipe2 complexity -p KAS-seq_complexity -l labels.txt -k KAS-seq.txt &
+Example: nohup KAS-pipe2 complexity -o KAS-seq_complexity -l labels.txt -k KAS-seq.txt &
 
 -o [KAS-seq_complexity]: please input the prefix (basename) of 'KAS-pipe2 complexity' output files. REQUIRED.
 
