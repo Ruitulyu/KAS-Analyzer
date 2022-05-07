@@ -116,17 +116,17 @@ if [[ $features == "promoter" ]] || [[ $features == "genebody" ]] || [[ $feature
    echo "done."
    echo ""
 
-elif [[ $features == "enhancer" ]]
+elif [[ $features == "enhancer" ]] ;then
    echo "Define the gene annotation based on the $length bp distance to TSS."
    echo ""
-   awk -v x=${length} '{if(($2+$3)/2-x>=0){printf("%s\t%d\t%d\t%d\t%d\t%s\t%d\t%s\t\n",$1,($2+$3)/2-x,($2+$3)/2+x,$2,$3,$4,$5,$6)} else{printf("%s\t%d\t%d\t%d\t%d\t%s\t%d\t%s\t\n",$1,"0",($2+$3)/2+x,$2,$3,$4,$5,$6)} }' ${SH_SCRIPT_DIR}/../annotation/${assemblyid}/${assemblyid}_Refseq.promoter.bed > ${assemblyid}_Refseq.promoter.${length}.bed
+   awk -v x=${length} '{if(($2+$3)/2-x>=0) {printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,($2+$3)/2-x,($2+$3)/2+x,$4,$5,$6)} else{printf("%s\t%d\t%d\t%s\t%d\t%s\n",$1,"0",($2+$3)/2+x,$4,$5,$6)} }' ${SH_SCRIPT_DIR}/../annotation/${assemblyid}/${assemblyid}_Refseq.promoter.bed > ${assemblyid}_Refseq.promoter.${length}.bed
    echo "done."
    echo ""
 
    echo "Define the associated genes of enhancers: $peaks ..."
    echo ""
-   colnum=$(awk '{print NF}' $peaks)
-   intersectBed -a $peaks -b ${assemblyid}/${assemblyid}_Refseq.promoter.${length}.bed -wa -wb -f 0.5 -loj | cut -f$((colnum+1)),$((colnum+2)),$((colnum+3)) > ${prefix}_associated_genes.txt
+   colnum=$(awk '{print NF}' $peaks | head -n 1 )
+   intersectBed -a $peaks -b ${assemblyid}_Refseq.promoter.${length}.bed -wa -wb -f 0.5 -loj | cut -f$((colnum+1)),$((colnum+2)),$((colnum+3)) --complement | sort -u | sortBed -i > ${prefix}_associated_genes.txt
    rm -f ${assemblyid}_Refseq.promoter.${length}.bed
    echo "done."
    echo ""
