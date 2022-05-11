@@ -12,7 +12,7 @@ nohup KAS-pipe2 TC -o KAS-seq_timecourse -t 10 -g mm10 -r bin -d case_only -a Ca
 
 Case-control:
 nohup KAS-pipe2 TC -o KAS-seq_timecourse -t 10 -g mm10 -r bin -d case_control -a Case_control.annotation.txt -l labels.txt -k KAS-seq_data.txt &"
-threadsHelp="-t [threads]: please specify the number of threads used for calculating KAS index. DEFAULT: 1."
+threadsHelp="-t [threads]: please specify the number of threads used for performing differential time-course KAS-seq analysis. DEFAULT: 1."
 prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 KASindex' output files. REQUIRED."
 assemblyidHelp="-g [assembly id]: please specify the genome assembly id of KAS-seq data. -g [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 regionsHelp="-r [regions]: please specify the types of genomic regions. e.g. promoter, genebody, bin, gene or peak. REQUIRED."
