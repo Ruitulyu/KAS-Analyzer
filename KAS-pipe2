@@ -29,7 +29,7 @@ set -e
 
 ###
 ### KAS-pipe2 is a collection of command line tools for KAS-seq or strand specific KAS-seq(spKAS-seq) data analysis.
-### Version:   v2.0
+### Version:   v2.0.0
 ### About:     KAS-pipe2 is mainly developed by Ruitu Lyu, postdoctoral fellow in Prof. Chuan He's group at the University of Chicago.
 ### Docs:      https://ruitulyu.github.io/KAS-pipe2/
 ### Code:      https://github.com/Ruitulyu/KAS-pipe2
@@ -75,7 +75,6 @@ set -e
 ###    heatmap         Generate heatmap for KAS-seq data (normalized bigWig files are needed).
 ###   
 ### [ Differential KAS-seq analysis ]
-###    KASexpre        Calculate normalized KAS-seq expression levels on promoter, genebody, genes or custom regions. 
 ###    diff            Perform differential KAS-seq analysis on promoter, genebody, gene, bin or custom regions.        
 ###    TC              Perform 'case-only' or 'case-control' differential time course(TC) analysis for (sp)KAS-seq data.
 ###    PCA             Perform and plot PCA analysis for (sp)KAS-seq data.
@@ -92,6 +91,7 @@ set -e
 ###  
 ### [ KAS-seq index ]    
 ###    index           Calculate the pausing or termination index.
+###    KASindex        Calculate the KAS index on promoter, genebody, genes or custom regions.
 ###
 ### [ General help ]
 ###    --help          Print this help menu.
@@ -243,6 +243,9 @@ elif [[ "$1" == "R-loop" ]]; then
 # run 'KAS index' shell scripts.
 elif [[ "$1" == "index" ]]; then
    ${SH_SCRIPT_DIR}/scripts/calculate_index.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "KASindex" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/calculate_KAS_index.sh $( echo $* | cut -d " " -f 2- )
 
 # run 'Single-stranded enhancers identification' shell scripts.
 elif [[ "$1" == "ss_enhancer" ]]; then
