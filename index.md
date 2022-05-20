@@ -88,7 +88,6 @@ KAS-pipe2 sub-command [options]
 
 ### Differential KAS-seq analysis
 ```
-   KASexpre        Calculate normalized KAS-seq expression levels on promoter, genebody, genes or custom regions. 
    diff            Perform differential KAS-seq analysis on promoter, genebody, gene, bin or custom regions.        
    TC              Perform 'case-only' or 'case-control' differential time course(TC) analysis for (sp)KAS-seq data.
    PCA             Perform and plot PCA analysis for (sp)KAS-seq data.
@@ -112,6 +111,7 @@ KAS-pipe2 sub-command [options]
 ### KAS-seq index
 ```
    index           Calculate the pausing or termination index.
+   KASindex        Calculate normalized KAS-seq expression levels on promoter, genebody, genes or custom regions. 
 ```   
 
 ### General help
@@ -809,41 +809,6 @@ Note: The 'KAS-pipe2 heatmap' shell script is applied to generate heatmap plots 
 ### Differential analysis sub-commands:
 ---------------------------------------------------------------------------
 
-### KASexpre
-Calculate normalized KAS-seq expression levels on promoter, genebody, genes or custom regions.
-```
-Usage: KAS-pipe2 KASexpre [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -r regions ] [ -p peaks ] [ -l labels ] [ -k KAS-seq ] 
- 
-Example: nohup KAS-pipe2 KASexpre -o KAS-seq_expression -t 10 -s mm10 -r TSS -l labels.txt -k KAS-seq_data.txt &
-
--t [threads]: please specify the number of threads used for calculating KAS expression. Default: 1.
-
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 KASexpre' output files. Default: basename of KAS-seq data.
-
--s [assembly id]: please specify the genome assembly id of KAS-seq data. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED.
-
--r [regions]: please specify the types of genomic regions. e.g. promoter, genebody, gene or peak. REQUIRED.
-
--p [peaks]: please specify the custom regions file used for KAS index calculation. OPTIONAL.
-
--l [labels]: please input the text file containing the labels of (sp)KAS-seq data that show in output files. REQUIRED.
-Example:
-WT.rep1
-WT.rep2
-KO.rep1
-KO.rep2                       ---labels.txt
-
--k [KAS-seq]: please input the text file containing the indexed bam files of (sp)KAS-seq data that used to calculate KAS expression. REQUIRED.
-Example:
-KAS-seq_WT.rep1.bam
-KAS-seq_WT.rep2.bam
-KAS-seq_KO.rep1.bam
-KAS-seq_KO.rep2.bam           ---KAS-seq_data.txt
-
--h/--help: print this help and exit.
-Note: The 'KAS-pipe2 KASexpre' shell script is applied to calculate normalized KAS-seq expression levels on promoter, genebody, genes or custom regions.
-```
-
 ### diff
 Perform differential KAS-seq analysis on promoter, genebody, gene, bin or custom regions.
 ```
@@ -1186,6 +1151,40 @@ KAS-seq_WT_rep2.bam            ---KAS-seq.txt
 Note: The 'KAS-pipe2 index' shell script is applied to calculate the pausing or termination index.
 ```
 
+### KASindex
+Calculate normalized KAS-seq expression levels on promoter, genebody, genes or custom regions.
+```
+Usage: KAS-pipe2 KASindex [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -r regions ] [ -p peaks ] [ -l labels ] [ -k KAS-seq ] 
+ 
+Example: nohup KAS-pipe2 KASindex -o KAS-seq_expression -t 10 -s mm10 -r TSS -l labels.txt -k KAS-seq_data.txt &
+
+-t [threads]: please specify the number of threads used for calculating KAS expression. Default: 1.
+
+-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 KASexpre' output files. Default: basename of KAS-seq data.
+
+-s [assembly id]: please specify the genome assembly id of KAS-seq data. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED.
+
+-r [regions]: please specify the types of genomic regions. e.g. promoter, genebody, gene or peak. REQUIRED.
+
+-p [peaks]: please specify the custom regions file used for KAS index calculation. OPTIONAL.
+
+-l [labels]: please input the text file containing the labels of (sp)KAS-seq data that show in output files. REQUIRED.
+Example:
+WT.rep1
+WT.rep2
+KO.rep1
+KO.rep2                       ---labels.txt
+
+-k [KAS-seq]: please input the text file containing the indexed bam files of (sp)KAS-seq data that used to calculate KAS expression. REQUIRED.
+Example:
+KAS-seq_WT.rep1.bam
+KAS-seq_WT.rep2.bam
+KAS-seq_KO.rep1.bam
+KAS-seq_KO.rep2.bam           ---KAS-seq_data.txt
+
+-h/--help: print this help and exit.
+Note: The 'KAS-pipe2 KASexpre' shell script is applied to calculate normalized KAS-seq expression levels on promoter, genebody, genes or custom regions.
+```
 ### General help sub-commands:
 ---------------------------------------------------------------------------
 
