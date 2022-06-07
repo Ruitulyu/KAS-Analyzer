@@ -1,8 +1,5 @@
 #!/usr/bin/python
 
-# John M. Gaspar (jsh58@wildcats.unh.edu)
-# May 2017
-
 # This script converts a SAM file to BED format.
 #   It combines "properly paired" alignments into
 #   a single BED interval.  There are options to
