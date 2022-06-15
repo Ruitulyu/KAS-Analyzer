@@ -772,7 +772,7 @@ nohup KAS-pipe2 heatmap -t 10 -o KAS-seq_heatmap -r peaks -q -p KAS-seq_peaks.be
 
 -s [assemblyid]: please specify the genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED only for 'genomic features' mode.
 
--q: please specify to sort the regions. Default: off.
+-q: please specify to sort the regions. DEFAULT: off.
 
 -u [sample using]: please specify the samples list to sort the regions. e.g. -u 1,2,3
 
