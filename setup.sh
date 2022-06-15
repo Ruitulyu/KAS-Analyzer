@@ -35,6 +35,7 @@ fi
 # get the path of shell script.
 SH_SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 
+chmod u+x ${SH_SCRIPT_DIR}/KAS-pipe2
 chmod 755 ${SH_SCRIPT_DIR}/scripts/*sh
 echo export PATH=\"${SH_SCRIPT_DIR}:"$"PATH\" >> $HOME/.bashrc
 . $HOME/.bashrc
