@@ -7,25 +7,25 @@ set -e
 # help arguments
 usageHelp="Usage: KAS-pipe2 KASindex [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -r regions ] [ -p peaks ] [ -l labels ] [ -k KAS-seq ] "
 exampleHelp="Example: nohup KAS-pipe2 KASindex -o KAS-seq_expression -t 10 -s mm10 -r promoter -l labels.txt -k KAS-seq_data.txt &"
-threadsHelp="-t [threads]: please specify the number of threads used for calculating KAS expression. DEFAULT: 1."
-prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 KASexpre' output files. REQUIRED."
+threadsHelp="-t [threads]: please specify the number of threads used for calculating elongation index. DEFAULT: 1."
+prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 KASindex' output files. REQUIRED."
 assemblyidHelp="-s [assembly id]: please specify the genome assembly id of KAS-seq data. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 regionsHelp="-r [regions]: please specify the types of genomic regions. e.g. promoter, genebody, gene or peak. REQUIRED."
-peaksHelp="-p [peaks]: please specify the custom regions file used for KAS index calculation. OPTIONAL."
+peaksHelp="-p [peaks]: please specify the custom regions file used for elongation index calculation. OPTIONAL."
 labelsHelp="-l [labels]: please input the text file containing the labels of (sp)KAS-seq data that show in output files. REQUIRED.
 Example:
 WT.rep1
 WT.rep2
 KO.rep1
 KO.rep2                       ---labels.txt"
-KASseqHelp="-k [KAS-seq]: please input the text file containing the indexed bam files of (sp)KAS-seq data that used to calculate KAS expression. REQUIRED.
+KASseqHelp="-k [KAS-seq]: please input the text file containing the indexed bam files of (sp)KAS-seq data that used to calculate elongation index. REQUIRED.
 Example:
 KAS-seq_WT.rep1.bam
 KAS-seq_WT.rep2.bam
 KAS-seq_KO.rep1.bam
 KAS-seq_KO.rep2.bam           ---KAS-seq_data.txt"
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 KASindex' shell script is applied to calculate normalized KAS-seq expression levels on promoter, genebody, genes or custom regions."
+Note: The 'KAS-pipe2 KASindex' shell script is applied to calculate elongation index on promoter, genebody, genes or custom regions."
 
 printHelpAndExit() {
     echo -e "$usageHelp"
@@ -153,7 +153,7 @@ fi
 
 if test -z $regions ;then
     echo ""
-    echo "Please specify the types of genomic regions used for KAS expression calculation. e.g. promoter, genebody, gene or peak. REQUIRED. -r [regions]"
+    echo "Please specify the types of genomic regions used for elongation index calculation. e.g. promoter, genebody, gene or peak. REQUIRED. -r [regions]"
     echo ""
     exit 1
 fi
@@ -168,14 +168,14 @@ fi
 
 if [[ $regions == "peak" ]] && test -z $peaks ;then
    echo ""
-   echo "Please specify the custom regions file used for KAS expression calculation."
+   echo "Please specify the custom regions file used for elongation index calculation."
    echo ""
    exit 1
 fi 
 
 if test -z $KASseq ;then
    echo ""
-   echo "Please input the text file containing the bigWig files of (sp)KAS-seq data that used to calculate KAS expression. -k [KAS-seq] "
+   echo "Please input the text file containing the bigWig files of (sp)KAS-seq data that used to calculate elongation index. -k [KAS-seq] "
    echo ""
    exit 1
 fi   
@@ -234,7 +234,7 @@ KASseq_list=$(awk '{for(i=1;i<=NF;i++) a[i,NR]=$i}END{for(i=1;i<=NF;i++) {for(j=
 labels_list=$(awk '{for(i=1;i<=NF;i++) a[i,NR]=$i}END{for(i=1;i<=NF;i++) {for(j=1;j<=NR;j++) printf a[i,j] "\t";print ""}}' $labels)
 
 if [[ $regions == "promoter" ]] || [[ $regions == "genebody" ]] ;then
-   echo "Calculating KAS-seq expression on ${assemblyid} Refseq ${regions} ..."
+   echo "Calculating elongation index on ${assemblyid} Refseq ${regions} ..."
    echo ""
    multiBigwigSummary BED-file --bwfiles $KASseq_list --BED ${SH_SCRIPT_DIR}/../annotation/${assemblyid}/${assemblyid}_Refseq.${regions}.bed --labels $labels_list -p $threads -out ${prefix}_on_${assemblyid}_Refseq.${regions}.npz --outRawCounts ${prefix}_on_${assemblyid}_Refseq.${regions}.tab > /dev/null 2>&1
 
@@ -243,18 +243,18 @@ if [[ $regions == "promoter" ]] || [[ $regions == "genebody" ]] ;then
    echo "done."
    echo ""
 
-   # calculate the average KAS expression of every single row in the table.
-   echo "Calculating the average KAS-seq expression on ${assemblyid}_Refseq.${regions}.bed ..."
+   # calculate the elongation index of every single row in the table.
+   echo "Calculating the average elongation index on ${assemblyid}_Refseq.${regions}.bed ..."
    awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/NF }' ${prefix}_on_${assemblyid}_Refseq.${regions}.bed > ${prefix}_on_${assemblyid}_Refseq.${regions}.average
    echo ""
 
-   # filter the ${regions} with KAS expression over 0.5.
-   echo "Filtering matrix of normalized KAS expression on ${assemblyid}_Refseq.${regions}.bed ..."
+   # filter the ${regions} with elongation index over 2.
+   echo "Filtering matrix of elongation index on ${assemblyid}_Refseq.${regions}.bed ..."
    paste ${prefix}_on_${assemblyid}_Refseq.${regions}.average ${assemblyid}_Refseq.${regions}.genenames ${prefix}_on_${assemblyid}_Refseq.${regions}.bed | sort -k 1 -n -r | sort -u -k2,2 -k3,3 | awk '$1>=2 {print $0}' > ${prefix}_on_${assemblyid}_Refseq.${regions}.filter.bed
    echo "done."
    echo ""
 
-   echo "Generating the final normalized KAS expression on ${assemblyid}_Refseq.${regions}.bed ..."
+   echo "Generating the final elongation index on ${assemblyid}_Refseq.${regions}.bed ..."
    cut -f1,2,3,4,5,6 --complement ${prefix}_on_${assemblyid}_Refseq.${regions}.filter.bed | awk '{for(i=1;i<=NF;i++){printf "%.2f\t", $i}; printf "\n"}' > ${prefix}_on_${assemblyid}_Refseq.${regions}.filter.matrix
    awk '{printf("%s\t%d\t%d\t%s\t%s\n",$4,$5,$6,$2,$3)}' ${prefix}_on_${assemblyid}_Refseq.${regions}.filter.bed > ${prefix}_on_${assemblyid}_Refseq.${regions}.filter.genes
 
@@ -264,7 +264,7 @@ if [[ $regions == "promoter" ]] || [[ $regions == "genebody" ]] ;then
    awk '{for(i=1;i<=NF;i++) a[i,NR]=$i}END{for(i=1;i<=NF;i++) {for(j=1;j<=NR;j++) printf a[i,j] "\t";print ""}}' $labels > ${prefix}.header2.txt
    paste ${prefix}.header1.txt ${prefix}.header2.txt > ${prefix}.header.txt
 
-   cat ${prefix}.header.txt ${prefix}_on_${assemblyid}_Refseq.${regions}.without_header.txt > ${prefix}_on_${assemblyid}_Refseq_${regions}_KAS-seq_expression.txt
+   cat ${prefix}.header.txt ${prefix}_on_${assemblyid}_Refseq.${regions}.without_header.txt > ${prefix}_on_${assemblyid}_Refseq_${regions}_elongation_index.txt
    echo "done."
    echo ""
 
@@ -287,7 +287,7 @@ if [[ $regions == "promoter" ]] || [[ $regions == "genebody" ]] ;then
 
 elif [[ $regions == "gene" ]] ;then
 
-   echo "Calculate KAS expression on ${assemblyid} Refseq genes."
+   echo "Calculate elongation index on ${assemblyid} Refseq genes."
    echo ""
    multiBigwigSummary BED-file --bwfiles $KASseq_list --BED ${SH_SCRIPT_DIR}/../annotation/${assemblyid}/${assemblyid}_Refseq.promoter.bed --labels $labels_list -p $threads -out ${prefix}_on_${assemblyid}_Refseq.promoter.npz --outRawCounts ${prefix}_on_${assemblyid}_Refseq.promoter.tab > /dev/null 2>&1
    multiBigwigSummary BED-file --bwfiles $KASseq_list --BED ${SH_SCRIPT_DIR}/../annotation/${assemblyid}/${assemblyid}_Refseq.genebody.bed --labels $labels_list -p $threads -out ${prefix}_on_${assemblyid}_Refseq.genebody.npz --outRawCounts ${prefix}_on_${assemblyid}_Refseq.genebody.tab > /dev/null 2>&1
@@ -300,15 +300,15 @@ elif [[ $regions == "gene" ]] ;then
    echo ""
 
    # calculate the average KAS expression of every single row in the table.
-   echo "Calculate the average KAS expression on ${assemblyid} Refseq promoter and genebody ..."
+   echo "Calculate the average elongation index on ${assemblyid} Refseq promoter and genebody ..."
    echo ""
    awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/NF }' ${prefix}_on_${assemblyid}_Refseq.promoter.bed > ${prefix}_on_${assemblyid}_Refseq.promoter.average
    awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/NF }' ${prefix}_on_${assemblyid}_Refseq.genebody.bed > ${prefix}_on_${assemblyid}_Refseq.genebody.average
    echo "done."
    echo ""
 
-   # filter the promoter or genebody with averaged KAS expression lower than 0.5.
-   echo "Filter matrix of normalized KAS expression on ${assemblyid} Refseq promoter and genebody ..."
+   # filter the promoter or genebody with averaged KAS expression lower than 2.
+   echo "Filter matrix of elongation index on ${assemblyid} Refseq promoter and genebody ..."
    paste ${prefix}_on_${assemblyid}_Refseq.promoter.average ${assemblyid}_Refseq.promoter.genenames ${prefix}_on_${assemblyid}_Refseq.promoter.bed | sort -k 1 -n -r | sort -u -k2,2 -k3,3 | awk '$1>=2 {print $0}' > ${prefix}_on_${assemblyid}_Refseq.promoter.filter.bed
 
    paste ${prefix}_on_${assemblyid}_Refseq.genebody.average ${assemblyid}_Refseq.genebody.genenames ${prefix}_on_${assemblyid}_Refseq.genebody.bed | sort -k 1 -n -r | sort -u -k2,2 -k3,3 > ${prefix}_on_${assemblyid}_Refseq.genebody.filter.bed
@@ -317,7 +317,7 @@ elif [[ $regions == "gene" ]] ;then
 
    for ((i=1; i<=${number_of_samples}; i++))
    do
-   echo "Calculate the normalized KAS-seq expression on ${assemblyid} Refseq genes for the ${i}th sample."	
+   echo "Calculate the elongation index on ${assemblyid} Refseq genes for the ${i}th sample."	
    awk -v x=$i '{printf("%s\t%.2f\n",$2,$(x+6))}' ${prefix}_on_${assemblyid}_Refseq.promoter.filter.bed > ${prefix}_on_${assemblyid}_Refseq.promoter.filter.KAS-seq.${i}
    awk -v x=$i '{printf("%s\t%.2f\n",$2,$(x+6))}' ${prefix}_on_${assemblyid}_Refseq.genebody.filter.bed > ${prefix}_on_${assemblyid}_Refseq.genebody.filter.KAS-seq.${i}
 
@@ -331,7 +331,7 @@ elif [[ $regions == "gene" ]] ;then
    echo ""
    done
 
-   echo "Generating the final KAS expression on ${assemblyid}_Refseq.gene.bed for all samples ..."
+   echo "Generating the final elongation index on ${assemblyid}_Refseq.gene.bed for all samples ..."
    awk '{printf("%s\t%s\n",$2,$3)}' ${prefix}_on_${assemblyid}_Refseq.promoter.filter.bed > ${prefix}_on_${assemblyid}_Refseq.promoter.filter.genename
    paste ${prefix}_on_${assemblyid}_Refseq.promoter.filter.genename > ${prefix}_on_${assemblyid}_Refseq.gene.filter.0.without_header.txt
 
@@ -346,7 +346,7 @@ elif [[ $regions == "gene" ]] ;then
    awk '{for(i=1;i<=NF;i++) a[i,NR]=$i}END{for(i=1;i<=NF;i++) {for(j=1;j<=NR;j++) printf a[i,j] "\t";print ""}}' $labels > ${prefix}.header2.txt
    paste ${prefix}.header1.txt ${prefix}.header2.txt > ${prefix}.header.txt
 
-   cat ${prefix}.header.txt ${prefix}_on_${assemblyid}_Refseq.gene.filter.${number_of_samples}.without_header.txt > ${prefix}_on_${assemblyid}_Refseq_gene_KAS-seq_expression.txt
+   cat ${prefix}.header.txt ${prefix}_on_${assemblyid}_Refseq.gene.filter.${number_of_samples}.without_header.txt > ${prefix}_on_${assemblyid}_Refseq_gene_elongation_index.txt
    echo "done."
    echo ""
 
@@ -376,7 +376,7 @@ elif [[ $regions == "gene" ]] ;then
 
 elif [[ $regions == "peak" ]]; then
 
-   echo "Calculate KAS expression on ${peaks}."
+   echo "Calculate elongation index on ${peaks}."
    echo ""
    peaks_basename=$( basename ${peaks} .bed )
    multiBigwigSummary BED-file --bwfiles $KASseq_list --BED ${peaks} --labels $labels_list -p $threads -out ${prefix}_on_${peaks_basename}.npz --outRawCounts ${prefix}_on_${peaks_basename}.tab > /dev/null 2>&1
@@ -384,7 +384,7 @@ elif [[ $regions == "peak" ]]; then
    echo "done."
    echo ""
 
-   echo "Generate the final KAS expression on ${peaks} ..."
+   echo "Generate the final elongation index on ${peaks} ..."
    cut -f1,2,3 --complement ${prefix}_on_${peaks_basename}.bed | awk '{for(i=1;i<=NF;i++){printf "%.2f\t", $i}; printf "\n"}' > ${prefix}_on_${peaks_basename}.matrix
    awk '{printf("%s\t%d\t%d\t%s\n",$1,$2,$3,"peak"FNR)}' ${prefix}_on_${peaks_basename}.bed > ${prefix}_on_${peaks_basename}.4bed
  
@@ -393,7 +393,7 @@ elif [[ $regions == "peak" ]]; then
    awk '{for(i=1;i<=NF;i++) a[i,NR]=$i}END{for(i=1;i<=NF;i++) {for(j=1;j<=NR;j++) printf a[i,j] "\t";print ""}}' $labels > ${prefix}.header2.txt
    paste ${prefix}.header1.txt ${prefix}.header2.txt > ${prefix}.header.txt
 
-   cat ${prefix}.header.txt ${prefix}_on_${peaks_basename}.without_header.txt > ${prefix}_on_${peaks_basename}_KAS-seq_expression.txt
+   cat ${prefix}.header.txt ${prefix}_on_${peaks_basename}.without_header.txt > ${prefix}_on_${peaks_basename}_elongation_index.txt
    echo "done."
    echo ""
 

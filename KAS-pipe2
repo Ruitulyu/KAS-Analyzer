@@ -224,9 +224,6 @@ elif [[ "$1" == "heatmap" ]]; then
    ${SH_SCRIPT_DIR}/scripts/plot_heatmap.sh $( echo $* | cut -d " " -f 2- )
 
 # run 'Differential analysis' shell scripts.
-elif [[ "$1" == "KASexpre" ]]; then
-   ${SH_SCRIPT_DIR}/scripts/calculate_KAS_expression.sh $( echo $* | cut -d " " -f 2- )
-
 elif [[ "$1" == "diff" ]]; then
    ${SH_SCRIPT_DIR}/scripts/diff_regions.sh $( echo $* | cut -d " " -f 2- )
 

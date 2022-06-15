@@ -282,7 +282,7 @@ elif [[ $regions == "promoter" ]] || [[ $regions == "genebody" ]] ;then
 
    # filter the ${regions} with KAS density over 5.
    echo "Filtering matrix of KAS-seq density on ${assemblyid}_Refseq.${regions}.bed ..."
-   paste ${prefix}_on_${assemblyid}_Refseq.${regions}.average ${assemblyid}_Refseq.${regions}.genenames ${prefix}_on_${assemblyid}_Refseq.${regions}.bed | awk '$1>=5 {print $0}' > ${prefix}_on_${assemblyid}_Refseq.${regions}.filter.bed
+   paste ${prefix}_on_${assemblyid}_Refseq.${regions}.average ${assemblyid}_Refseq.${regions}.genenames ${prefix}_on_${assemblyid}_Refseq.${regions}.bed | awk '$1>=3 {print $0}' > ${prefix}_on_${assemblyid}_Refseq.${regions}.filter.bed
    echo "done."
    echo ""	
 
