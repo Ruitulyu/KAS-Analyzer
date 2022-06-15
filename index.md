@@ -111,7 +111,7 @@ KAS-pipe2 sub-command [options]
 ### KAS-seq index
 ```
    index           Calculate the pausing or termination index.
-   KASindex        Calculate normalized KAS-seq expression levels on promoter, genebody, genes or custom regions. 
+   KASindex        Calculate KAS-seq index on promoter, genebody, genes or custom regions. 
 ```   
 
 ### General help
@@ -192,13 +192,13 @@ usage: KAS-pipe2 uninstall
 ### activate 
 Activate 'KAS-pipe2' conda environment.
 ``` 
-usage: KAS-pipe2 activate
+usage: conda activate KAS-pipe2
 ``` 
 
 ### deactivate 
 Deactivate 'KAS-pipe2' conda environment.
 ``` 
-usage: KAS-pipe2 deactivate
+usage: conda deactivate
 ``` 
 
 ### Fastqc sub-commands: 
