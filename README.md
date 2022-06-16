@@ -152,7 +152,7 @@ Generate metagene profile of KAS-seq read density on gene coding regions (TSS, g
 
 Generate heatmap of KAS-seq read density on gene coding regions (TSS, genebody or TES):
 
-       	$ nohup KAS-pipe2 heatmap -t 10 -s hg19 -o HEK293T_KAS-seq_heatmap -r genebody -q -c Reds -l labels.txt -k KAS-seq.normalized.txt &
+        $ nohup KAS-pipe2 heatmap -t 10 -s hg19 -o HEK293T_KAS-seq_heatmap -r genebody -q -c Reds -l labels.txt -k KAS-seq.normalized.txt &
 
 
 **Calculate transcription-related metrics**
