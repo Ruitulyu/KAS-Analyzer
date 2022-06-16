@@ -60,6 +60,7 @@ You can install KAS-pipe2 using command line (linux) by cloning git repository o
 ### Quick start
 
 **Download test data**
+User can download test KAS-seq data in HEK293T cells:
 
 $ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349532/SRR10349532 ./
 $ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349533/SRR10349533 ./
