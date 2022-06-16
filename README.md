@@ -128,6 +128,16 @@ Generate KAS-seq read-density files that can be viewed in the UCSC genome browse
        
         $ nohup KAS-pipe2 UCSC -k KAS-seq.txt -n UCSC_track_names.txt &
 	
+**Generate summary plots of KAS-seq signals**
+
+Metagene profile of KAS-seq read density on gene coding regions (TSS, genebody or TES):
+
+        $ nohup KAS-pipe2 profile -t 10 -s hg19 -o HEK293T_KAS-seq_profile -r genebody -c red,blue,green,purple -l labels.txt -k KAS-seq.txt &
+
+Heatmap of KAS-seq read density on gene coding regions:
+
+       	$ nohup KAS-pipe2 heatmap -t 10 -s hg19 -o HEK293T_KAS-seq_heatmap -r genebody -q -c Reds -l labels.txt -k KAS-seq.txt &
+	
 
 
 
