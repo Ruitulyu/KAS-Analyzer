@@ -199,9 +199,11 @@ Example metagene profile:
 <img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_metagene_profile.png"  height="240" align="left" >
 
 
+
 Example metagene heatmap:
 
 <img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_metagene_heatmap.png"  height="550" align="left" >
+
 
 
 **Calculate transcription-related metrics**
