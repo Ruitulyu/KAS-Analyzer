@@ -131,7 +131,7 @@ Fingerprint plot of KAS-seq data:
 
 Example fingerprint plot:
 
-<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_fingerprint_plot.png"  height="180" align="middle" > 
+<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_fingerprint_plot.png"  height="240" align="middle" > 
 
 
 
@@ -141,7 +141,7 @@ Fraction of reads in peaks (FRiP) scores:
 	
 Example fraction of reads in peaks (FRiP) scores:
 
-<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_FRiP.png"  height="180" align="middle" > 
+<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_FRiP.png"  height="240" align="middle" > 
 
 
 Calculate the complexity metrics for KAS-seq data, including PCR Bottlenecking Coefficient and Non-Redundant Fraction (NRF):
@@ -162,7 +162,7 @@ Calculate the correlation coefficient and pvalue, generate scatterplot for repli
 
 Example scatterplot between two replicates:
 
-<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_pearson_scatterplot.png"  height="180" align="middle" > 
+<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_pearson_scatterplot.png"  height="240" align="middle" > 
 
 
 Generate KAS-seq read-density files that can be viewed in the UCSC genome browser:
@@ -171,7 +171,7 @@ Generate KAS-seq read-density files that can be viewed in the UCSC genome browse
 
 Example KAS-seq data snapshot of UCSC genome browser:
 
-<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_snapshot.png"  height="180" align="middle" > 
+<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_snapshot.png"  height="240" align="middle" > 
 
 
 **Normalization of KAS-seq data**
@@ -196,7 +196,7 @@ Generate heatmap of KAS-seq read density on gene coding regions (TSS, genebody o
 
 Example metagene profile and heatmap:
 
-<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_metagene_profile.png"  height="180" align="left" /> <img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_metagene_heatmap.png"  height="360" align="middle" />
+<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_metagene_profile.png"  height="240" align="left" /> <img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_metagene_heatmap.png"  height="600" align="middle" />
 
 
 **Calculate transcription-related metrics**
