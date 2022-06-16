@@ -69,47 +69,68 @@ User can download test KAS-seq data in HEK293T cells:
         $ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349535/SRR10349535 ./ &
 
         $ mv SRR10349532 HEK293T_KAS-Input.rep1.sra
-	$ mv SRR10349533 HEK293T_KAS-Input.rep2.sra
-	$ mv SRR10349534 HEK293T_KAS-seq.rep1.sra
-	$ mv SRR10349535 HEK293T_KAS-seq.rep2.sra
+        $ mv SRR10349533 HEK293T_KAS-Input.rep2.sra
+        $ mv SRR10349534 HEK293T_KAS-seq.rep1.sra
+        $ mv SRR10349535 HEK293T_KAS-seq.rep2.sra
 	
-	$ fastq-dump HEK293T_KAS-Input.rep1.sra &
-	$ fastq-dump HEK293T_KAS-Input.rep2.sra &
-	$ fastq-dump HEK293T_KAS-seq.rep1.sra &
-	$ fastq-dump HEK293T_KAS-seq.rep2.sra &
+        $ fastq-dump HEK293T_KAS-Input.rep1.sra 
+        $ fastq-dump HEK293T_KAS-Input.rep2.sra &
+        $ fastq-dump HEK293T_KAS-seq.rep1.sra &
+        $ fastq-dump HEK293T_KAS-seq.rep2.sra &
 	
-	$ rm -rf *sra
-	$ gzip *fastq &
+        $ rm -rf *sra
+        $ gzip *fastq &
 	
 **Trimming of adapter and poor quality sequence**
 
         $ nohup KAS-pipe2 trim -a illumina -t 10 -1 HEK293T_KAS-Input.rep1.fastq.gz &
-	$ nohup KAS-pipe2 trim -a illumina -t 10 -1 HEK293T_KAS-Input.rep2.fastq.gz &
-	$ nohup KAS-pipe2 trim -a illumina -t 10 -1 HEK293T_KAS-seq.rep1.fastq.gz &
+        $ nohup KAS-pipe2 trim -a illumina -t 10 -1 HEK293T_KAS-Input.rep2.fastq.gz &
+        $ nohup KAS-pipe2 trim -a illumina -t 10 -1 HEK293T_KAS-seq.rep1.fastq.gz &
         $ nohup KAS-pipe2 trim -a illumina -t 10 -1 HEK293T_KAS-seq.rep2.fastq.gz &
 	
 **Read alignment of KAS-seq and Input control data**
         
-	$ nohup KAS-pipe2 KAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o HEK293T_KAS-Input.rep1 -s hg19 -1 HEK293T_KAS-Input.rep1_trimmed.fq.gz &
-	$ nohup KAS-pipe2 KAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o HEK293T_KAS-Input.rep2 -s hg19 -1 HEK293T_KAS-Input.rep2_trimmed.fq.gz &
-	$ nohup KAS-pipe2 KAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o HEK293T_KAS-seq.rep1 -s hg19 -1 HEK293T_KAS-seq.rep1_trimmed.fq.gz &
-	$ nohup KAS-pipe2 KAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o HEK293T_KAS-seq.rep2 -s hg19 -1 HEK293T_KAS-seq.rep2_trimmed.fq.gz &
+        $ nohup KAS-pipe2 KAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o HEK293T_KAS-Input.rep1 -s hg19 -1 HEK293T_KAS-Input.rep1_trimmed.fq.gz &
+        $ nohup KAS-pipe2 KAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o HEK293T_KAS-Input.rep2 -s hg19 -1 HEK293T_KAS-Input.rep2_trimmed.fq.gz &
+        $ nohup KAS-pipe2 KAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o HEK293T_KAS-seq.rep1 -s hg19 -1 HEK293T_KAS-seq.rep1_trimmed.fq.gz &
+        $ nohup KAS-pipe2 KAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o HEK293T_KAS-seq.rep2 -s hg19 -1 HEK293T_KAS-seq.rep2_trimmed.fq.gz &
 	
 Here, the user can generate a read alignment summary report: 
         $ cd Summary
-	$ KAS-pipe2 statistics -o HEK293T_KAS-seq_statistics -s summary.txt &
+        $ KAS-pipe2 statistics -o HEK293T_KAS-seq_statistics -s summary.txt &
  
 **KAS-seq peaks calling**	
          
 Call merged KAS-seq peaks with two KAS-seq replicates:	 
 	 
-	$ nohup KAS-pipe2 peakscalling -t HEK293T_KAS-seq.rep1.ext150.bed,HEK293T_KAS-seq.rep2.ext150.bed -c HEK293T_KAS-Input.rep1.ext150.bed,HEK293T_KAS-Input.rep2.ext150.bed -o HEK293T_KAS-seq -g hg19 &
+        $ nohup KAS-pipe2 peakscalling -t HEK293T_KAS-seq.rep1.ext150.bed,HEK293T_KAS-seq.rep2.ext150.bed -c HEK293T_KAS-Input.rep1.ext150.bed,HEK293T_KAS-Input.rep2.ext150.bed -o HEK293T_KAS-seq -g hg19 &
 	
 Call KAS-seq peaks with KAS-seq data individually:
         
-	$ nohup KAS-pipe2 peakscalling -t HEK293T_KAS-seq.rep1.ext150.bed -c HEK293T_KAS-Input.rep1.ext150.bed -o HEK293T_rep1_KAS-seq -g hg19 &
-	$ nohup KAS-pipe2 peakscalling -t HEK293T_KAS-seq.rep2.ext150.bed -c HEK293T_KAS-Input.rep2.ext150.bed -o HEK293T_rep2_KAS-seq -g hg19 &
+        $ nohup KAS-pipe2 peakscalling -t HEK293T_KAS-seq.rep1.ext150.bed -c HEK293T_KAS-Input.rep1.ext150.bed -o HEK293T_rep1_KAS-seq -g hg19 &
+        $ nohup KAS-pipe2 peakscalling -t HEK293T_KAS-seq.rep2.ext150.bed -c HEK293T_KAS-Input.rep2.ext150.bed -o HEK293T_rep2_KAS-seq -g hg19 &
 	
+**Quality control**
+
+Fraction of reads in peaks (FRiP) scores:
+
+        $ nohup KAS-pipe2 FRiP -o HEK293T_KAS-seq_FRiP -p peaks_files.txt -l labels.txt -k KAS-seq.txt &
+	
+Calculate the complexity metric for KAS-seq data, including PCR Bottlenecking Coefficient and Non-Redundant Fraction (NRF):
+        
+        $ nohup KAS-pipe2 complexity -o HEK293T_KAS-seq_complexity -l labels.txt -k KAS-seq.txt &
+
+Calculate the correlation coefficient and pvalue, generate scatterplot for replicates of KAS-seq data:
+ 
+        $ nohup KAS-pipe2 correlation -m pearson -t 10 -s hg19 -r bin -p heatmap -o KAS-seq -l labels.txt -k KAS-seq.txt &
+
+Generate KAS-seq read-density files that can be viewed in the UCSC genome browser:
+       
+        $ nohup KAS-pipe2 UCSC -k KAS-seq.txt -n UCSC_track_names.txt &
+	
+
+
+
 	
 ------------------------------------	
 
