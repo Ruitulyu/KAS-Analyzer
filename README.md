@@ -201,8 +201,27 @@ Example metagene profile and heatmap:
 
 **Calculate transcription-related metrics**
 
+Calculate pausing index (PI) of RNA Pol II:
 
+        $ nohup KAS-pipe2 index -o HEK293T_pausing_index -t 10 -s hg19 -i pausing -l labels.txt -k KAS-seq.txt &
+         
+Calculate elongation index (EI) of RNA Pol II:
+
+        $ nohup KAS-pipe2 KASindex -o HEK293T_elongation_index -t 10 -s hg19 -r gene -l labels.txt -k KAS-seq.txt &
 	
+Calculate termination index (TI) of RNA Pol II:
+
+        $ nohup KAS-pipe2 index -o HEK293T_termination_index -t 10 -s hg19 -i termination -l labels.txt -k KAS-seq.txt &
+	
+Calculate termination length (TL) of RNA Pol II:
+	
+	$ nohup KAS-pipe2 termilength -o HEK293T_termination_length -t 10 -g hg19 -p peaks.txt -l labels.txt -k KAS-seq.txt &
+	
+**Identify single-stranded transcribing enhancers (SST-enhancer)**
+        
+	$ nohup KAS-pipe2 SST_enhancer -o HEK293T_SST_enhancers -t 10 -s mm10 -e H3K27ac_enhancers.bed -p KAS-seq_peaks.bed -k KAS-seq.rep1.nor.bigWig,KAS-seq.rep2.nor.bigWig &
+
+**For other functionalities implemented in KAS-pipe2, such as identification of genome-wide R-loops (only for spKAS-seq) and differential RNA Pols activity analysis, please check the tutorial at [Documentation](https://ruitulyu.github.io/KAS-pipe2/)**
 ------------------------------------	
 
 This tool suite is developed by the [Dr. Ruitu Lyu](https://scholar.google.com/citations?user=7nt2ezgAAAAJ&hl=en) at [Prof. Chuan He's lab](https://he-group.uchicago.edu/) of [the University of Chicago](https://www.uchicago.edu/).
