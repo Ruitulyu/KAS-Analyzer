@@ -242,11 +242,11 @@ elif [[ "$1" == "index" ]]; then
    ${SH_SCRIPT_DIR}/scripts/calculate_index.sh $( echo $* | cut -d " " -f 2- )
 
 elif [[ "$1" == "KASindex" ]]; then
-   ${SH_SCRIPT_DIR}/scripts/calculate_KAS_index.sh $( echo $* | cut -d " " -f 2- )
+   ${SH_SCRIPT_DIR}/scripts/calculate_KAS_index_bigWig.sh $( echo $* | cut -d " " -f 2- )
 
-# run 'Single-stranded enhancers identification' shell scripts.
-elif [[ "$1" == "ss_enhancer" ]]; then
-   ${SH_SCRIPT_DIR}/scripts/define_ss_enhancers_bigWig.sh $( echo $* | cut -d " " -f 2- )
+# run 'Single-stranded transcribing enhancers (SST_enhancers) identification' shell scripts.
+elif [[ "$1" == "SST_enhancer" ]]; then
+   ${SH_SCRIPT_DIR}/scripts/define_SST_enhancers_bigWig.sh $( echo $* | cut -d " " -f 2- )
 
 elif [[ "$1" == "motif" ]]; then
    ${SH_SCRIPT_DIR}/scripts/motifs_on_enhancers.sh $( echo $* | cut -d " " -f 2- )
