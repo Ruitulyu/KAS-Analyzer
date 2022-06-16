@@ -61,7 +61,7 @@ You can install KAS-pipe2 using command line (linux) by cloning git repository o
 
 **Download test data**
 
-Users can download example KAS-seq data in HEK293T cells:
+Users can download example KAS-seq data in HEK293T cells from Gene Expression Omnibus (GEO):
 
         $ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349532/SRR10349532 ./ &
         $ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349533/SRR10349533 ./ &
@@ -98,7 +98,9 @@ Users can download example KAS-seq data in HEK293T cells:
 Here, the user can generate a read alignment summary report: 
         $ cd Summary
         $ KAS-pipe2 statistics -o HEK293T_KAS-seq_statistics -s summary.txt &
- 
+
+**Normalization**
+
 **KAS-seq peaks calling**	
          
 Call merged KAS-seq peaks with two KAS-seq replicates:	 
@@ -111,6 +113,10 @@ Call KAS-seq peaks with KAS-seq data individually:
         $ nohup KAS-pipe2 peakscalling -t HEK293T_KAS-seq.rep2.ext150.bed -c HEK293T_KAS-Input.rep2.ext150.bed -o HEK293T_KAS-seq.rep2 -g hg19 &
 	
 **Quality control**
+
+Fingerprint plot of KAS-seq data:
+
+        $ nohup KAS-pipe2 fingerprint -t 10 -s hg19 -o HEK293T_KAS-seq_fingerprint -l labels.txt -k KAS-seq_data.txt &
 
 Fraction of reads in peaks (FRiP) scores:
 
@@ -128,16 +134,26 @@ Generate KAS-seq read-density files that can be viewed in the UCSC genome browse
        
         $ nohup KAS-pipe2 UCSC -k KAS-seq.txt -n UCSC_track_names.txt &
 	
+**Normalization of KAS-seq data**
+
+Using the number of uniquely mapped reads:
+
+        $ nohup KAS-pipe2 normalize -u readsnum -k HEK293T_KAS-seq_data.txt -r ratios.txt -b -s hg19 &
+
+Using Reads Per Kilobase per Million mapped reads (RPKM):
+
+        $ nohup KAS-pipe2 normalize -u RPKM -k HEK293T_KAS-seq_data.txt -b -s hg19 &
+		
 **Generate summary plots of KAS-seq signals**
 
 Generate metagene profile of KAS-seq read density on gene coding regions (TSS, genebody or TES):
 
-        $ nohup KAS-pipe2 profile -t 10 -s hg19 -o HEK293T_KAS-seq_profile -r genebody -c red,blue,green,purple -l labels.txt -k KAS-seq.txt &
+        $ nohup KAS-pipe2 profile -t 10 -s hg19 -o HEK293T_KAS-seq_profile -r genebody -c red,blue,green,purple -l labels.txt -k KAS-seq.normalized.txt &
 
 Generate heatmap of KAS-seq read density on gene coding regions (TSS, genebody or TES):
 
-       	$ nohup KAS-pipe2 heatmap -t 10 -s hg19 -o HEK293T_KAS-seq_heatmap -r genebody -q -c Reds -l labels.txt -k KAS-seq.txt &
-	
+       	$ nohup KAS-pipe2 heatmap -t 10 -s hg19 -o HEK293T_KAS-seq_heatmap -r genebody -q -c Reds -l labels.txt -k KAS-seq.normalized.txt &
+
 
 **Calculate transcription-related metrics**
 
