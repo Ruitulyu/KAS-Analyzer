@@ -57,6 +57,10 @@ You can install KAS-pipe2 using command line (linux) by cloning git repository o
 	$ conda activate KAS-pipe2
 	
 ------------------------------------	
+### Quick start
+
+
+------------------------------------	
 
 This tool suite is developed by the [Dr. Ruitu Lyu](https://scholar.google.com/citations?user=7nt2ezgAAAAJ&hl=en) at [Prof. Chuan He's lab](https://he-group.uchicago.edu/) of [the University of Chicago](https://www.uchicago.edu/).
 
