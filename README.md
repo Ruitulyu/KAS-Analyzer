@@ -60,15 +60,57 @@ You can install KAS-pipe2 using command line (linux) by cloning git repository o
 ### Quick start
 
 **Download test data**
+
 User can download test KAS-seq data in HEK293T cells:
 
-$ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349532/SRR10349532 ./
-$ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349533/SRR10349533 ./
-$ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349534/SRR10349534 ./
-$ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349535/SRR10349535 ./
+        $ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349532/SRR10349532 ./ &
+        $ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349533/SRR10349533 ./ &
+        $ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349534/SRR10349534 ./ &
+        $ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349535/SRR10349535 ./ &
 
-$ mv SRR10349532 HEK293T_KAS-Input.sra
+        $ mv SRR10349532 HEK293T_KAS-Input.rep1.sra
+	$ mv SRR10349533 HEK293T_KAS-Input.rep2.sra
+	$ mv SRR10349534 HEK293T_KAS-seq.rep1.sra
+	$ mv SRR10349535 HEK293T_KAS-seq.rep2.sra
+	
+	$ fastq-dump HEK293T_KAS-Input.rep1.sra &
+	$ fastq-dump HEK293T_KAS-Input.rep2.sra &
+	$ fastq-dump HEK293T_KAS-seq.rep1.sra &
+	$ fastq-dump HEK293T_KAS-seq.rep2.sra &
+	
+	$ rm -rf *sra
+	$ gzip *fastq &
+	
+**Trimming of adapter and poor quality sequence**
 
+        $ nohup KAS-pipe2 trim -a illumina -t 10 -1 HEK293T_KAS-Input.rep1.fastq.gz &
+	$ nohup KAS-pipe2 trim -a illumina -t 10 -1 HEK293T_KAS-Input.rep2.fastq.gz &
+	$ nohup KAS-pipe2 trim -a illumina -t 10 -1 HEK293T_KAS-seq.rep1.fastq.gz &
+        $ nohup KAS-pipe2 trim -a illumina -t 10 -1 HEK293T_KAS-seq.rep2.fastq.gz &
+	
+**Read alignment of KAS-seq and Input control data**
+        
+	$ nohup KAS-pipe2 KAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o HEK293T_KAS-Input.rep1 -s hg19 -1 HEK293T_KAS-Input.rep1_trimmed.fq.gz &
+	$ nohup KAS-pipe2 KAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o HEK293T_KAS-Input.rep2 -s hg19 -1 HEK293T_KAS-Input.rep2_trimmed.fq.gz &
+	$ nohup KAS-pipe2 KAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o HEK293T_KAS-seq.rep1 -s hg19 -1 HEK293T_KAS-seq.rep1_trimmed.fq.gz &
+	$ nohup KAS-pipe2 KAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o HEK293T_KAS-seq.rep2 -s hg19 -1 HEK293T_KAS-seq.rep2_trimmed.fq.gz &
+	
+Here, the user can generate a read alignment summary report: 
+        $ cd Summary
+	$ KAS-pipe2 statistics -o HEK293T_KAS-seq_statistics -s summary.txt &
+ 
+**KAS-seq peaks calling**	
+         
+Call merged KAS-seq peaks with two KAS-seq replicates:	 
+	 
+	$ nohup KAS-pipe2 peakscalling -t HEK293T_KAS-seq.rep1.ext150.bed,HEK293T_KAS-seq.rep2.ext150.bed -c HEK293T_KAS-Input.rep1.ext150.bed,HEK293T_KAS-Input.rep2.ext150.bed -o HEK293T_KAS-seq -g hg19 &
+	
+Call KAS-seq peaks with KAS-seq data individually:
+        
+	$ nohup KAS-pipe2 peakscalling -t HEK293T_KAS-seq.rep1.ext150.bed -c HEK293T_KAS-Input.rep1.ext150.bed -o HEK293T_rep1_KAS-seq -g hg19 &
+	$ nohup KAS-pipe2 peakscalling -t HEK293T_KAS-seq.rep2.ext150.bed -c HEK293T_KAS-Input.rep2.ext150.bed -o HEK293T_rep2_KAS-seq -g hg19 &
+	
+	
 ------------------------------------	
 
 This tool suite is developed by the [Dr. Ruitu Lyu](https://scholar.google.com/citations?user=7nt2ezgAAAAJ&hl=en) at [Prof. Chuan He's lab](https://he-group.uchicago.edu/) of [the University of Chicago](https://www.uchicago.edu/).
