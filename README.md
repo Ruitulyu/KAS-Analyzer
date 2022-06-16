@@ -96,8 +96,20 @@ Users can download example KAS-seq data in HEK293T cells from Gene Expression Om
         $ nohup KAS-pipe2 KAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o HEK293T_KAS-seq.rep2 -s hg19 -1 HEK293T_KAS-seq.rep2_trimmed.fq.gz &
 	
 Here, the user can generate a read alignment summary report: 
+       
         $ cd Summary
         $ KAS-pipe2 statistics -o HEK293T_KAS-seq_statistics -s summary.txt &
+ 
+Example summary report: 
+
+|Samples         | Raw_reads      | Clean_reads   | Mapped_reads | Deduplicated reads | Mapping_ratios | Duplication_ratios |
+|     :---:      |     :---:      |     :---:     |    :---:     |        :---:       |      :---:     |        :---:       |
+|  KAS-seq_rep1  | 39,249,037     | 39,194,455    | 38,608,066   | 31,874,927         | 98.50%         |  17.44%            |
+|  KAS-seq_rep2  | 37,235,447     | 37,195,072    | 36,623,472   | 30,659,014         | 98.46%         |  16.29%            |
+|   Input_rep1   | 45,182,939     | 45,162,826    | 44,306,192   | 41,261,883         | 98.10%         |  6.87%             |
+|   Input_rep2   | 39,911,067     | 39,886,186    | 39,065,103   | 36,158,950         | 97.94%         |  7.44%             |
+
+
 
 **Normalization**
 
@@ -154,6 +166,9 @@ Generate heatmap of KAS-seq read density on gene coding regions (TSS, genebody o
 
         $ nohup KAS-pipe2 heatmap -t 10 -s hg19 -o HEK293T_KAS-seq_heatmap -r genebody -q -c Reds -l labels.txt -k KAS-seq.normalized.txt &
 
+Example metagene profile and heatmap:
+
+<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-pipe2.png"  height="180" align="left" /> <img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-pipe2.png"  height="180" align="middle" />
 
 **Calculate transcription-related metrics**
 
