@@ -104,10 +104,10 @@ Example summary report:
 
 |Samples         | Raw_reads      | Clean_reads   | Mapped_reads | Deduplicated reads | Mapping_ratios | Duplication_ratios |
 |     :---:      |     :---:      |     :---:     |    :---:     |        :---:       |      :---:     |        :---:       |
-|  KAS-seq_rep1  | 39,249,037     | 39,194,455    | 38,608,066   | 31,874,927         | 98.50%         |  17.44%            |
-|  KAS-seq_rep2  | 37,235,447     | 37,195,072    | 36,623,472   | 30,659,014         | 98.46%         |  16.29%            |
-|   Input_rep1   | 45,182,939     | 45,162,826    | 44,306,192   | 41,261,883         | 98.10%         |  6.87%             |
-|   Input_rep2   | 39,911,067     | 39,886,186    | 39,065,103   | 36,158,950         | 97.94%         |  7.44%             |
+|  KAS-seq.rep1  | 39,249,037     | 39,194,455    | 38,608,066   | 31,874,927         | 98.50%         |  17.44%            |
+|  KAS-seq.rep2  | 37,235,447     | 37,195,072    | 36,623,472   | 30,659,014         | 98.46%         |  16.29%            |
+|   Input.rep1   | 45,182,939     | 45,162,826    | 44,306,192   | 41,261,883         | 98.10%         |  6.87%             |
+|   Input.rep2   | 39,911,067     | 39,886,186    | 39,065,103   | 36,158,950         | 97.94%         |  7.44%             |
 
 
 **Normalization**
@@ -131,7 +131,7 @@ Fingerprint plot of KAS-seq data:
 
 Example fingerprint plot:
 
-<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-pipe2.png"  height="180" align="middle" > 
+<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_fingerprint_plot.png"  height="180" align="middle" > 
 
 
 
@@ -141,7 +141,7 @@ Fraction of reads in peaks (FRiP) scores:
 	
 Example fraction of reads in peaks (FRiP) scores:
 
-<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-pipe2.png"  height="180" align="middle" > 
+<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_FRiP.png"  height="180" align="middle" > 
 
 
 Calculate the complexity metrics for KAS-seq data, including PCR Bottlenecking Coefficient and Non-Redundant Fraction (NRF):
@@ -151,10 +151,10 @@ Calculate the complexity metrics for KAS-seq data, including PCR Bottlenecking C
 Example complexity metrics of KAS-seq data in HEK293T cells:
 |Samples         | PBC     | Bottlenecking_level | NRF     | Complexity |
 |     :---:      | :---:   |     :---:           | :---:   | :---:      |
-|  KAS-seq_rep1  | 0.88    | None                | 0.84    | Ideal      |
-|  KAS-seq_rep2  | 0.89    | None                | 0.85    | Ideal      |
-|   Input_rep1   | 0.96    | None                | 0.95    | Ideal      |
-|   Input_rep2   | 0.95    | None                | 0.95    | Ideal      |
+|  KAS-seq.rep1  | 0.88    | None                | 0.84    | Ideal      |
+|  KAS-seq.rep2  | 0.89    | None                | 0.85    | Ideal      |
+|   Input.rep1   | 0.96    | None                | 0.95    | Ideal      |
+|   Input.rep2   | 0.95    | None                | 0.95    | Ideal      |
 
 Calculate the correlation coefficient and pvalue, generate scatterplot for replicates of KAS-seq data:
  
@@ -162,7 +162,7 @@ Calculate the correlation coefficient and pvalue, generate scatterplot for repli
 
 Example scatterplot between two replicates:
 
-<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-pipe2.png"  height="180" align="middle" > 
+<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_pearson_scatterplot.png"  height="180" align="middle" > 
 
 
 Generate KAS-seq read-density files that can be viewed in the UCSC genome browser:
@@ -171,7 +171,7 @@ Generate KAS-seq read-density files that can be viewed in the UCSC genome browse
 
 Example KAS-seq data snapshot of UCSC genome browser:
 
-<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-pipe2.png"  height="180" align="middle" > 
+<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_snapshot.png"  height="180" align="middle" > 
 
 
 **Normalization of KAS-seq data**
@@ -196,7 +196,7 @@ Generate heatmap of KAS-seq read density on gene coding regions (TSS, genebody o
 
 Example metagene profile and heatmap:
 
-<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-pipe2.png"  height="180" align="left" /> <img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-pipe2.png"  height="180" align="middle" />
+<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_metagene_profile.png"  height="180" align="left" /> <img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_metagene_heatmap.png"  height="360" align="middle" />
 
 
 **Calculate transcription-related metrics**
