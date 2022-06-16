@@ -59,6 +59,14 @@ You can install KAS-pipe2 using command line (linux) by cloning git repository o
 ------------------------------------	
 ### Quick start
 
+**Download test data**
+
+$ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349532/SRR10349532 ./
+$ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349533/SRR10349533 ./
+$ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349534/SRR10349534 ./
+$ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349535/SRR10349535 ./
+
+$ mv SRR10349532 HEK293T_KAS-Input.sra
 
 ------------------------------------	
 
