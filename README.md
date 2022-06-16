@@ -162,7 +162,7 @@ Calculate the correlation coefficient and pvalue, generate scatterplot for repli
 
 Example scatterplot between two replicates:
 
-<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_pearson_scatterplot.png"  height="240" align="middle" > 
+<img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_pearson_scatterplot.png"  height="260" align="middle" > 
 
 
 Generate KAS-seq read-density files that can be viewed in the UCSC genome browser:
@@ -221,7 +221,7 @@ Calculate termination length (TL) of RNA Pol II:
         
 	$ nohup KAS-pipe2 SST_enhancer -o HEK293T_SST_enhancers -t 10 -s mm10 -e H3K27ac_enhancers.bed -p KAS-seq_peaks.bed -k KAS-seq.rep1.nor.bigWig,KAS-seq.rep2.nor.bigWig &
 
-**For other functionalities implemented in KAS-pipe2, such as identification of genome-wide R-loops (only for spKAS-seq) and differential RNA Pols activity analysis (two-conditions or time-course KAS-seq data), please check the tutorial at [Documentation](https://ruitulyu.github.io/KAS-pipe2/)**
+**For other functionalities implemented in KAS-pipe2, such as "identification of genome-wide R-loops" (only for spKAS-seq) and "differential RNA Pols activity analysis" (two-conditions or time-course KAS-seq data), please check the tutorial at [Documentation](https://ruitulyu.github.io/KAS-pipe2/)**
 ------------------------------------	
 
 This tool suite is developed by the [Dr. Ruitu Lyu](https://scholar.google.com/citations?user=7nt2ezgAAAAJ&hl=en) at [Prof. Chuan He's lab](https://he-group.uchicago.edu/) of [the University of Chicago](https://www.uchicago.edu/).
