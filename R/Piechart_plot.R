@@ -15,13 +15,17 @@ if (length(args) == 0) {
 
 ## -----------------------------------------------------------------------------
 # install and load ggplot2 package.
-packages <- c("ggplot2") 
+all_packages <- c("ggplot2") 
 
-if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
-install.packages(setdiff(packages, rownames(installed.packages())))}
+for (package in all_packages){
+  if (!require(package, character.only = TRUE)){
+    install.packages(package, dependencies = TRUE)
+    library(package, character.only = TRUE)
+  }
+}
 
 # install.packages("ggplot2")
-library(ggplot2)
+# library(ggplot2)
 
 ## -----------------------------------------------------------------------------
 # use shell input

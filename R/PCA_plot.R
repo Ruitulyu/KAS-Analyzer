@@ -15,15 +15,19 @@ if (length(args) == 0) {
 
 ## -----------------------------------------------------------------------------
 #install and load package.
-packages <- c("factoextra", "FactoMineR") 
+all_packages <- c("factoextra", "FactoMineR") 
 
-if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
-install.packages(setdiff(packages, rownames(installed.packages())))}
+for (package in all_packages){
+  if (!require(package, character.only = TRUE)){
+    install.packages(package, dependencies = TRUE)
+    library(package, character.only = TRUE)
+  }
+}
 
 # install.packages("factoextra")
-library(factoextra)
+# library(factoextra)
 # install.packages("FactoMineR")
-library(FactoMineR)
+# library(FactoMineR)
 
 ## -----------------------------------------------------------------------------
 # use shell input

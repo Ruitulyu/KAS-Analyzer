@@ -16,7 +16,16 @@ if (length(args) == 0) {
 ## -----------------------------------------------------------------------------
 # use shell input.
 KAS.matrix <- as.data.frame(read.table(args[1], header = T))
+
 # install.packages("ggpubr",repos = "http://cran.us.r-project.org")
+all_packages <- c("ggpubr")
+
+for (package in all_packages){
+  if (!require(package, character.only = TRUE)){
+    install.packages(package, dependencies = TRUE)
+    library(package, character.only = TRUE)
+  }
+}
 
 ## -----------------------------------------------------------------------------
 # Plot the correlation using a matrix of scatter plot and save it to png format.

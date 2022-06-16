@@ -21,21 +21,29 @@ coldata <- as.data.frame(read.table(args[2], header = T))
 
 ## -----------------------------------------------------------------------------
 # install and load ImpulseDE2 package
-packages <- c("BiocManager") 
+all_packages <- c("BiocManager") 
 
-if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
-install.packages(setdiff(packages, rownames(installed.packages())))}
+for (package in all_packages){
+  if (!require(package, character.only = TRUE)){
+    install.packages(package, dependencies = TRUE)
+    library(package, character.only = TRUE)
+  }
+}
 
 # if (!requireNamespace("BiocManager", quietly = TRUE))
 # install.packages("BiocManager",repos = "http://cran.us.r-project.org")
 
-packages <- c("ImpulseDE2")
+all_packages <- c("ImpulseDE2","ComplexHeatmap")
 
-if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
-BiocManager::install(setdiff(packages, rownames(installed.packages())))}
+for (package in all_packages){
+  if (!require(package, character.only = TRUE)){
+    BiocManager::install(package, dependencies = TRUE)
+    library(package, character.only = TRUE)
+  }
+}
 
 # BiocManager::install("ImpulseDE2")
-library(ImpulseDE2)
+# library(ImpulseDE2)
 
 # BiocManager::install("ComplexHeatmap")
 # library(ComplexHeatmap)

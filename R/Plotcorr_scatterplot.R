@@ -15,16 +15,19 @@ if (length(args) == 0) {
 
 ## -----------------------------------------------------------------------------
 #install and load ggpubr package.
-packages <- c("ggpubr") 
+all_packages <- c("ggpubr")
 
-if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
-install.packages(setdiff(packages, rownames(installed.packages())))}
+for (package in all_packages){
+  if (!require(package, character.only = TRUE)){
+    install.packages(package, dependencies = TRUE)
+    library(package, character.only = TRUE)
+  }
+}
 
 # install.packages("ggpubr",repos = "http://cran.us.r-project.org")
 # if(!require(devtools)) install.packages("devtools")
 # devtools::install_github("kassambara/ggpubr")
-
-library("ggpubr")
+# library("ggpubr")
 
 ## -----------------------------------------------------------------------------
 # use shell input.

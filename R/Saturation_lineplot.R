@@ -15,17 +15,31 @@ if (length(args) == 0) {
 
 ## -----------------------------------------------------------------------------
 #install and load easyggplot2 package.
-packages <- c("devtools") 
+all_packages <- c("devtools")
 
-if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
-install.packages(setdiff(packages, rownames(installed.packages())))}
+for (package in all_packages){
+  if (!require(package, character.only = TRUE)){
+    install.packages(package, dependencies = TRUE)
+    library(package, character.only = TRUE)
+  }
+}
 
 # install.packages("devtools")
-library(devtools)
-Sys.setenv(TAR = "/bin/tar")
+# library(devtools)
 
-devtools::install_github("kassambara/easyGgplot2")
-library(easyGgplot2)
+all_packages <- c("easyGgplot2")
+
+for (package in all_packages){
+  if (!require(package, character.only = TRUE)){
+    devtools::install_github(package, dependencies = TRUE)
+    library(package, character.only = TRUE)
+  }
+}
+
+# devtools::install_github("kassambara/easyGgplot2")
+# library(easyGgplot2)
+
+Sys.setenv(TAR = "/bin/tar")
 
 ## -----------------------------------------------------------------------------
 # use shell input

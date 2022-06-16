@@ -21,15 +21,19 @@ KAS.matrix <- as.data.frame(read.table(args[1], header = T))
 
 ## -----------------------------------------------------------------------------
 # install and load corrplot package.
-packages <- c("corrplot","RColorBrewer")
+all_packages <- c("corrplot","RColorBrewer")
 
-if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
-install.packages(setdiff(packages, rownames(installed.packages())))}
+for (package in all_packages){
+  if (!require(package, character.only = TRUE)){
+    install.packages(package, dependencies = TRUE)
+    library(package, character.only = TRUE)
+  }
+}
 
 # install.packages("corrplot",repos = "http://cran.us.r-project.org")
 # install.packages("RColorBrewer",repos = "http://cran.us.r-project.org")
-library("corrplot")
-library("RColorBrewer")
+# library("corrplot")
+# library("RColorBrewer")
 
 ## -----------------------------------------------------------------------------
 # please refer to http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram.

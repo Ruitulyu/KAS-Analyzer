@@ -23,17 +23,28 @@ coldata <- read.table(args[2], header = T)
 # install and load DESeq2 package
 # if (!requireNamespace("BiocManager", quietly = TRUE))
 # install.packages("BiocManager",repos = "http://cran.us.r-project.org")
-packages <- c("BiocManager")
+all_packages <- c("BiocManager") 
 
-if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
-install.packages(setdiff(packages, rownames(installed.packages())),repos = "http://cran.us.r-project.org")}
+for (package in all_packages){
+  if (!require(package, character.only = TRUE)){
+    install.packages(package, dependencies = TRUE)
+    library(package, character.only = TRUE)
+  }
+}
+
+
+all_packages <- c("DESeq2")
+
+for (package in all_packages){
+  if (!require(package, character.only = TRUE)){
+    BiocManager::install(package, dependencies = TRUE)
+    library(package, character.only = TRUE)
+  }
+}
+
 
 # BiocManager::install("DESeq2")
-packages <- c("DESeq2")
-
-if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
-BiocManager::install(setdiff(packages, rownames(installed.packages())))}
-library(DESeq2)
+# library(DESeq2)
 
 ## -----------------------------------------------------------------------------
 #generate DESeqDataSet
