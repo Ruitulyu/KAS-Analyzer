@@ -61,7 +61,7 @@ You can install KAS-pipe2 using command line (linux) by cloning git repository o
 
 **Download test data**
 
-User can download test KAS-seq data in HEK293T cells:
+Users can download example KAS-seq data in HEK293T cells:
 
         $ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349532/SRR10349532 ./ &
         $ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349533/SRR10349533 ./ &
@@ -130,15 +130,16 @@ Generate KAS-seq read-density files that can be viewed in the UCSC genome browse
 	
 **Generate summary plots of KAS-seq signals**
 
-Metagene profile of KAS-seq read density on gene coding regions (TSS, genebody or TES):
+Generate metagene profile of KAS-seq read density on gene coding regions (TSS, genebody or TES):
 
         $ nohup KAS-pipe2 profile -t 10 -s hg19 -o HEK293T_KAS-seq_profile -r genebody -c red,blue,green,purple -l labels.txt -k KAS-seq.txt &
 
-Heatmap of KAS-seq read density on gene coding regions:
+Generate heatmap of KAS-seq read density on gene coding regions (TSS, genebody or TES):
 
        	$ nohup KAS-pipe2 heatmap -t 10 -s hg19 -o HEK293T_KAS-seq_heatmap -r genebody -q -c Reds -l labels.txt -k KAS-seq.txt &
 	
 
+**Calculate transcription-related metrics**
 
 
 	
