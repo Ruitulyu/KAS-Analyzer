@@ -144,7 +144,7 @@ Example fraction of reads in peaks (FRiP) scores:
 <img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_FRiP.png"  height="240" align="middle" > 
 
 
-Calculate the complexity metrics for KAS-seq data, including PCR Bottlenecking Coefficient and Non-Redundant Fraction (NRF):
+Calculate library complexity metrics for KAS-seq data, including PCR Bottlenecking Coefficient and Non-Redundant Fraction (NRF):
         
         $ nohup KAS-pipe2 complexity -o HEK293T_KAS-seq_complexity -l labels.txt -k KAS-seq.txt &
 
