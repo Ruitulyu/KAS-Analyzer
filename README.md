@@ -134,7 +134,6 @@ Example fingerprint plot:
 <img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_fingerprint_plot.png"  height="240" align="middle" > 
 
 
-
 Fraction of reads in peaks (FRiP) scores:
 
         $ nohup KAS-pipe2 FRiP -o HEK293T_KAS-seq_FRiP -p peaks_files.txt -l labels.txt -k KAS-seq.txt &
@@ -148,7 +147,7 @@ Calculate library complexity metrics for KAS-seq data, including PCR Bottlenecki
         
         $ nohup KAS-pipe2 complexity -o HEK293T_KAS-seq_complexity -l labels.txt -k KAS-seq.txt &
 
-Example complexity metrics of KAS-seq data in HEK293T cells:
+Example library complexity metrics of KAS-seq data in HEK293T cells:
 |Samples         | PBC     | Bottlenecking_level | NRF     | Complexity |
 |     :---:      | :---:   |     :---:           | :---:   | :---:      |
 |  KAS-seq.rep1  | 0.88    | None                | 0.84    | Ideal      |
@@ -160,7 +159,7 @@ Calculate the correlation coefficient and pvalue, generate scatterplot for repli
  
         $ nohup KAS-pipe2 correlation -m pearson -t 10 -s hg19 -r bin -p heatmap -o KAS-seq -l labels.txt -k KAS-seq.txt &
 
-Example scatterplot between two replicates:
+Example scatterplot between two replicates of KAS-seq data:
 
 <img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_pearson_scatterplot.png"  height="260" align="middle" > 
 
@@ -169,7 +168,7 @@ Generate KAS-seq read-density files that can be viewed in the UCSC genome browse
        
         $ nohup KAS-pipe2 UCSC -k KAS-seq.txt -n UCSC_track_names.txt &
 
-Example KAS-seq data snapshot of UCSC genome browser:
+Example snapshot of KAS-seq data custom tracks from UCSC Genome Browser:
 
 <img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_snapshot.png"  height="240" align="middle" > 
 
