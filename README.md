@@ -110,8 +110,6 @@ Example summary report:
 |   Input.rep2   | 39,911,067     | 39,886,186    | 39,065,103   | 36,158,950         | 97.94%         |  7.44%             |
 
 
-**Normalization**
-
 **KAS-seq peaks calling**	
          
 Call merged KAS-seq peaks with two KAS-seq replicates:	 
@@ -220,7 +218,7 @@ Calculate termination length (TL) of RNA Pol II:
         
 	$ nohup KAS-pipe2 SST_enhancer -o HEK293T_SST_enhancers -t 10 -s mm10 -e H3K27ac_enhancers.bed -p KAS-seq_peaks.bed -k KAS-seq.rep1.nor.bigWig,KAS-seq.rep2.nor.bigWig &
 
-**For other functionalities implemented in KAS-pipe2, such as "identification of genome-wide R-loops" (only for spKAS-seq) and "differential RNA Pols activity analysis" (two-conditions or time-course KAS-seq data), please check the tutorial.**
+**For other functionalities implemented in KAS-pipe2, such as "identification of genome-wide R-loops" (only for spKAS-seq) and "differential RNA Pols activity analysis" (two-conditions or time-course KAS-seq data), please check the [tutorial](https://ruitulyu.github.io/KAS-pipe2/).**
 ------------------------------------	
 
 This tool suite is developed by the [Dr. Ruitu Lyu](https://scholar.google.com/citations?user=7nt2ezgAAAAJ&hl=en) at [Prof. Chuan He's lab](https://he-group.uchicago.edu/) of [the University of Chicago](https://www.uchicago.edu/).
