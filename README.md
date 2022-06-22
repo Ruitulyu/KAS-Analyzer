@@ -72,14 +72,11 @@ Users can download example KAS-seq data in HEK293T cells from Gene Expression Om
         $ mv SRR10349533 HEK293T_KAS-Input.rep2.sra
         $ mv SRR10349534 HEK293T_KAS-seq.rep1.sra
         $ mv SRR10349535 HEK293T_KAS-seq.rep2.sra
-	
-        $ fastq-dump HEK293T_KAS-Input.rep1.sra 
+        
+        $ fastq-dump HEK293T_KAS-Input.rep1.sra & 
         $ fastq-dump HEK293T_KAS-Input.rep2.sra &
         $ fastq-dump HEK293T_KAS-seq.rep1.sra &
-        $ fastq-dump HEK293T_KAS-seq.rep2.sra &
-	
-        $ rm -rf *sra
-        $ gzip *fastq &
+        $ fastq-dump HEK293T_KAS-seq.rep2.sra &	
 	
 **Trimming of adapter and poor quality sequence**
 
