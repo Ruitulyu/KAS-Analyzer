@@ -32,7 +32,7 @@ Our [documentation](https://ruitulyu.github.io/KAS-pipe2/) contains more details
 
 >If you have any questions about the KAS-pipe2, please post your questions to [github discussions](https://github.com/Ruitulyu/KAS-pipe2/discussions).
 
->For more specific **troubleshooting, feedback, and tool suggestions**, please post to [github issue](https://github.com/Ruitulyu/KAS-pipe2/issues) or send emails to the authors: lvruitu@gmail.com.
+>For more specific **troubleshooting, feedback, and suggestions**, please post to [github issue](https://github.com/Ruitulyu/KAS-pipe2/issues) or send emails to the authors: lvruitu@gmail.com.
 
 -----------------------------------------
 
