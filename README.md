@@ -102,7 +102,7 @@ Here, the user can generate a read alignment summary report:
  
 Example summary report: 
 
-|Samples         | Raw_reads      | Clean_reads   | Mapped_reads | Deduplicated reads | Mapping_ratios | Duplication_ratios |
+|Samples         | Raw reads      | Clean reads   | Mapped reads | Deduplicated reads | Mapping ratios | Duplication ratios |
 |     :---:      |     :---:      |     :---:     |    :---:     |        :---:       |      :---:     |        :---:       |
 |  KAS-seq.rep1  | 39,249,037     | 39,194,455    | 38,608,066   | 31,874,927         | 98.50%         |  17.44%            |
 |  KAS-seq.rep2  | 37,235,447     | 37,195,072    | 36,623,472   | 30,659,014         | 98.46%         |  16.29%            |
@@ -146,7 +146,7 @@ Calculate library complexity metrics for KAS-seq data, including PCR Bottlenecki
         $ nohup KAS-pipe2 complexity -o HEK293T_KAS-seq_complexity -l labels.txt -k KAS-seq.txt &
 
 Example library complexity metrics of KAS-seq data in HEK293T cells:
-|Samples         | PBC     | Bottlenecking_level | NRF     | Complexity |
+|Samples         | PBC     | Bottlenecking level | NRF     | Complexity |
 |     :---:      | :---:   |     :---:           | :---:   | :---:      |
 |  KAS-seq.rep1  | 0.88    | None                | 0.84    | Ideal      |
 |  KAS-seq.rep2  | 0.89    | None                | 0.85    | Ideal      |
