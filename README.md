@@ -11,16 +11,16 @@ KAS-seq is a kethoxal-assisted single-stranded DNA sequencing (KAS-seq) approach
 <img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/regular_KAS-seq_procedure.png">
 
 
-### Strand-specific (sp)KAS-seq:
+### Strand-specific KAS-seq (spKAS-seq):
 <img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/spKAS-seq_procedure.jpg" width="470" height="320">
 
 ----------------------------------------
 
 ## Citation:
 
-1. Wu, Tong, Ruitu Lyu, Qiancheng You, and Chuan He. [Kethoxal-assisted single-stranded DNA sequencing captures global transcription dynamics and enhancer activity in situ.](https://www.nature.com/articles/s41592-020-0797-9) Nature methods 17, no. 5 (2020): 515-523.
+1. Tong, Wu, Ruitu Lyu, Qiancheng You, and Chuan He. [Kethoxal-assisted single-stranded DNA sequencing captures global transcription dynamics and enhancer activity in situ.](https://www.nature.com/articles/s41592-020-0797-9) Nature methods 17, no. 5 (2020): 515-523.
 
-2. Lyu, Ruitu, Tong Wu, Allen C. Zhu, Diana C. West-Szymanski, Xiaocheng Weng, Mengjie Chen, and Chuan He. [KAS-seq: genome-wide sequencing of single-stranded DNA by N3-kethoxal–assisted labeling.](https://www.nature.com/articles/s41596-021-00647-6) Nature protocols (2022): 1-19.
+2. Ruitu, Lyu, Tong Wu, Allen C. Zhu, Diana C. West-Szymanski, Xiaocheng Weng, Mengjie Chen, and Chuan He. [KAS-seq: genome-wide sequencing of single-stranded DNA by N3-kethoxal–assisted labeling.](https://www.nature.com/articles/s41596-021-00647-6) Nature protocols (2022): 1-19.
 
 ----------------------------------------
 
@@ -172,11 +172,11 @@ Example snapshot of KAS-seq data custom tracks from UCSC Genome Browser:
 
 Using the number of uniquely mapped reads:
 
-        $ nohup KAS-pipe2 normalize -u readsnum -k HEK293T_KAS-seq_data.txt -r ratios.txt -b -s hg19 &
+        $ nohup KAS-pipe2 normalize -m ratios -k HEK293T_KAS-seq_data.txt -r ratios.txt -b -s hg19 &
 
 Using Reads Per Kilobase per Million mapped reads (RPKM):
 
-        $ nohup KAS-pipe2 normalize -u RPKM -k HEK293T_KAS-seq_data.txt -b -s hg19 &
+        $ nohup KAS-pipe2 normalize -m RPKM -k HEK293T_KAS-seq_data.txt -b -s hg19 &
 		
 **Generate summary plots of KAS-seq signals**
 
