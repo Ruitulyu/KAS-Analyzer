@@ -99,8 +99,8 @@ KAS-pipe2 sub-command [options]
   
 ### Single-stranded enhancers identification
 ```
-   SST_enhancer     Identify the single-stranded transcribing enhancers (SST_enhancers).
-   motif           Identify enriched TF binding motifs on ss_enhancers.
+   SST_enhancer    Identify the single-stranded transcribing enhancers (SST_enhancers).
+   motif           Identify enriched TF binding motifs on single-stranded transcribing enhancers.
 ```   
   
 ### Termination length
