@@ -157,7 +157,7 @@ echo ""
    KASseq_basename=$(basename ${sample_selected} .bg) 
    echo "Normalizing $sample_selected ..."
    echo ""
-   awk -v ratio="$ratio_selected" '{printf("%s\t%d\t%d\t%.2f\n",$1,$2,$3,$4*ratio)}' $sample_selected > ${KASseq_basename}.nor.bg 
+   awk -v ratio="$ratio_selected" '{printf("%s\t%d\t%d\t%.2f\n",$1,$2,$3,$4*ratio)}' $sample_selected | intersectBed -a - -b ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed -v > ${KASseq_basename}.nor.bg 
    echo "done."
    echo ""
 
