@@ -41,21 +41,22 @@ Our [documentation](https://ruitulyu.github.io/KAS-pipe2/) contains more details
 **Install by cloning KAS-pipe2 git repository on github:**
 
 You can install KAS-pipe2 using command line (linux) by cloning git repository on github:
+```
+git clone https://github.com/Ruitulyu/KAS-pipe2.git
+cd KAS-pipe2
+bash ./setup.sh
+source ~/.bashrc
+	
+# If anaconda or miniconda was not installed on your system. #OPTIONAL.
+KAS-pipe2 install -conda
+	
+# Install conda 'KAS-pipe2' environment, which may last 1-2 hours. 
+KAS-pipe2 install -KAS-pipe2
+	
+# Activate conda 'KAS-pipe2' environment.
+conda activate KAS-pipe2
+```	
 
-	$ git clone https://github.com/Ruitulyu/KAS-pipe2.git
-	$ cd KAS-pipe2
-	$ bash ./setup.sh
-	$ source ~/.bashrc
-	
-	# If anaconda or miniconda was not installed on your system. #OPTIONAL.
-	$ KAS-pipe2 install -conda
-	
-	# Install conda 'KAS-pipe2' environment, which may last 1-2 hours. 
-	$ KAS-pipe2 install -KAS-pipe2
-	
-	# Activate conda 'KAS-pipe2' environment.
-	$ conda activate KAS-pipe2
-	
 ------------------------------------	
 ### Quick start
 
@@ -63,7 +64,7 @@ You can install KAS-pipe2 using command line (linux) by cloning git repository o
 
 Users can download example KAS-seq data in HEK293T cells from Gene Expression Omnibus (GEO):
 Note: Install sra-tools using "conda install -c bioconda sra-tools", if fastq-dump is not available.
-
+```
         $ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349532/SRR10349532 ./ &
         $ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349533/SRR10349533 ./ &
         $ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349534/SRR10349534 ./ &
@@ -78,7 +79,7 @@ Note: Install sra-tools using "conda install -c bioconda sra-tools", if fastq-du
         $ fastq-dump HEK293T_KAS-Input.rep2.sra &
         $ fastq-dump HEK293T_KAS-seq.rep1.sra &
         $ fastq-dump HEK293T_KAS-seq.rep2.sra &	
-	
+```	
 **Trimming of adapter and poor quality sequence**
 
         $ nohup KAS-pipe2 trim -a illumina -t 10 -1 HEK293T_KAS-Input.rep1.fastq.gz &
@@ -115,21 +116,23 @@ Call merged KAS-seq peaks with two KAS-seq replicates:
         $ nohup KAS-pipe2 peakscalling -t HEK293T_KAS-seq.rep1.ext150.bed,HEK293T_KAS-seq.rep2.ext150.bed -c HEK293T_KAS-Input.rep1.ext150.bed,HEK293T_KAS-Input.rep2.ext150.bed -o HEK293T_KAS-seq -g hg19 &
 	
 Call KAS-seq peaks with KAS-seq data individually:
-        
-        $ nohup KAS-pipe2 peakscalling -t HEK293T_KAS-seq.rep1.ext150.bed -c HEK293T_KAS-Input.rep1.ext150.bed -o HEK293T_KAS-seq.rep1 -g hg19 &
-        $ nohup KAS-pipe2 peakscalling -t HEK293T_KAS-seq.rep2.ext150.bed -c HEK293T_KAS-Input.rep2.ext150.bed -o HEK293T_KAS-seq.rep2 -g hg19 &
+```        
+nohup KAS-pipe2 peakscalling -t HEK293T_KAS-seq.rep1.ext150.bed -c HEK293T_KAS-Input.rep1.ext150.bed -o HEK293T_KAS-seq.rep1 -g hg19 &
+nohup KAS-pipe2 peakscalling -t HEK293T_KAS-seq.rep2.ext150.bed -c HEK293T_KAS-Input.rep2.ext150.bed -o HEK293T_KAS-seq.rep2 -g hg19 &
+```
 	
 **Quality control**
 
 Fingerprint plot of KAS-seq data:
 ```
-        $ nohup KAS-pipe2 fingerprint -t 10 -s hg19 -o HEK293T_KAS-seq_fingerprint -l labels.txt -k KAS-seq_data.txt &
+nohup KAS-pipe2 fingerprint -t 10 -s hg19 -o HEK293T_KAS-seq_fingerprint -l labels.txt -k KAS-seq_data.txt &
+
+Example "labels.txt" and "KAS-seq_data.txt" :
 
 KAS-seq.rep1                            HEK293T_KAS-seq.rep1.bam             
 KAS-seq.rep2                            HEK293T_KAS-seq.rep2.bam
 Input.rep1                              HEK293T_Input.rep1.bam
 Input.rep2     ---labels.txt            HEK293T_Input.rep2.bam         ---KAS-seq_data.txt
-
 ```
 
 Example fingerprint plot:
