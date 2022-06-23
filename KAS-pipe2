@@ -83,7 +83,7 @@ set -e
 ###    R-loop          Identify R-loops regions with spKAS-seq data.
 ###   
 ### [ Single-stranded enhancers ]
-###    ss_enhancer     Identify the single stranded (ss) enhancers.
+###    SST_enhancer    Identify the single-stranded transcribing enhancers (SST_enhancers).
 ###    motif           Identify enriched TF binding motifs on ss_enhancers.
 ###   
 ### [ Termination length ]
