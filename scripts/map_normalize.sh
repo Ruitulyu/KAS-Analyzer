@@ -7,7 +7,7 @@ set -e
 ## Read arguments                                                     
 usageHelp="Usage: KAS-pipe2 normalize [ -h/--help ] [-m methods ] [ -k KAS-seq ] [ -r ratios ] [ -b ] [ -s assembly id ]"
 exampleHelp="Example: nohup KAS-pipe2 normalize -m ratios -k KAS-seq_data.txt -r ratios.txt -b -s mm10 &"
-methodsHelp="-m [methods]: please input the methods used for KAS-seq data normalization. e.g. ratios or RPKM. DEFAULT: ratios"
+methodsHelp="-m [methods]: please input the methods used for KAS-seq data normalization. e.g. ratios or RPKM. DEFAULT: ratios."
 KASseqHelp="-k [KAS-seq_data.txt]: please input the text file containing the bedGraph files generated from 'KAS-pipe2 (sp)KAS-seq'. REQUIRED.
 Example:
 -m ratios:                            -m FPKM:
