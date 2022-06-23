@@ -34,7 +34,7 @@ KAS-seq_WT_rep2.nor.bigWig
 KAS-seq_KO_rep1.nor.bigWig
 KAS-seq_KO_rep2.nor.bigWig     ---KAS-seq.txt"
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 heatmap' shell script is applied to generate heatmap plots for (sp)KAS-seq data on genomic features( genebody, TSS or TES) or provided custom regions. 'KAS-pipe2 heatmap' shell script mainly invoke deeptools 'computeMatrix' and 'plotHeatmap', please refer to https://deeptools.readthedocs.io/en/develop/content/list_of_tools.html for more information."
+Note: The 'KAS-pipe2 heatmap' shell script is applied to generate heatmap plots for (sp)KAS-seq data on genomic features (genebody, TSS or TES) or provided custom regions. 'KAS-pipe2 heatmap' shell script mainly invoke deeptools 'computeMatrix' and 'plotHeatmap', please refer to https://deeptools.readthedocs.io/en/develop/content/list_of_tools.html for more information."
 
 # print help function.
 printHelpAndExit() {
