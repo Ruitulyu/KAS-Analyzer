@@ -5,7 +5,7 @@
 set -e
 
 ## Read arguments                                                     
-usageHelp="Usage: KAS-pipe2 UCSC [ -h/--help ] [ -k KAS-seq ] [ -n UCSC track ] [ -c track colors ]"
+usageHelp="Usage: KAS-pipe2 UCSC [ -h/--help ] [ -k KAS-seq ] [ -l UCSC track ] [ -c track colors ]"
 exampleHelp="Example: nohup KAS-pipe2 UCSC -k KAS-seq_data.txt -n UCSC_track_names.txt &"
 KASseqHelp="-k [KAS-seq]: please input the text file containing the bedGraph files generated from 'KAS-pipe2 KAS-seq'. REQUIRED.
 Example:
@@ -55,11 +55,11 @@ if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
 fi
 
 # get the value of options.
-while getopts 'hk:n:c:' opt; do
+while getopts 'hk:l:c:' opt; do
     case $opt in
         h) printHelpAndExit 0;;
         k) KASseq=$OPTARG ;;
-        n) trackname=$OPTARG ;;
+        l) trackname=$OPTARG ;;
 	c) trackcolor=$OPTARG ;;
         ?) printHelpAndExit 0;;
     esac

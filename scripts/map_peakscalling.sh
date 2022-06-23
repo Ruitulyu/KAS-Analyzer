@@ -5,10 +5,10 @@
 set -e
 
 ## Read arguments                                                     
-usageHelp="Usage: KAS-pipe2 peakscalling [ -h ] [ -m peaks caller ] [ -t KAS-seq ] [ -c Control ] [ -b mode ] [ -o prefix ] [ -p pvalue or qvalue ] [ -g assembly id ]."
+usageHelp="Usage: KAS-pipe2 peakscalling [ -h ] [ -m peaks caller ] [ -k KAS-seq ] [ -c Control ] [ -b mode ] [ -o prefix ] [ -p pvalue or qvalue ] [ -g assembly id ]."
 exampleHelp="Example: nohup KAS-pipe2 peakscalling -t KAS-seq.rep1.bed,KAS-seq.rep2.bed -c Control_Input.rep1.bed,Control_Input.rep2.bed -o KAS-seq -g hg19 &"
 peakscallerHelp="-m [peaks caller]: please input the peaks caller (macs14, macs2) that you want to use for KAS-seq peaks calling. DEFAULT: macs2."
-KASseqHelp="-t [KAS-seq]: please input the KAS-seq bed or bam files. e.g. KAS-seq.rep1.bed,KAS-seq.rep2.bed or KAS-seq.rep1.bam,KAS-seq.rep2.bam. REQUIRED."
+KASseqHelp="-k [KAS-seq]: please input the KAS-seq bed or bam files. e.g. KAS-seq.rep1.bed,KAS-seq.rep2.bed or KAS-seq.rep1.bam,KAS-seq.rep2.bam. REQUIRED."
 controlHelp="-c [Control]: please input the KAS-seq control bed or bam files. e.g. KAS-seq_Input.rep1.bed,KAS-seq_Input.rep2.bed or KAS-seq_Input.rep1.bam,KAS-seq_Input.rep2.bam. OPTIONAL."
 modeHelp="-b [mode]: specify macs2 to perferm KAS-seq peaks calling with 'broad' or 'sharp' mode. -b option only works for macs2. DEFAULT: broad."
 prefixHelp="-o [prefix]: please input the prefix (basename), which will be used to generate the name of 'KAS-pipe2 peakscalling' output files. REQUIRED."
@@ -50,11 +50,11 @@ if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
 fi
 
 # get the value of options.
-while getopts 'hm:t:c:b:o:p:g:' opt; do
+while getopts 'hm:k:c:b:o:p:g:' opt; do
     case $opt in
         h) printHelpAndExit 0;;
         m) peakscaller=$OPTARG ;;
-        t) KASseq=$OPTARG ;;
+        k) KASseq=$OPTARG ;;
         c) control=$OPTARG ;;
 	b) mode=$OPTARG ;;
         o) prefix=$OPTARG ;;

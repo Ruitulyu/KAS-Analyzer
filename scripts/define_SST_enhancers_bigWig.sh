@@ -167,7 +167,7 @@ echo ""
 
 echo "Identify the single stranded (ss) enhancers ..."
 echo ""
-paste ${prefix}_on_${enhancer}.KAS.distal.3bed ${prefix}_on_${enhancer}.KAS.distal.average ${prefix}_on_${enhancer}.KAS.distal.left.average ${prefix}_on_${enhancer}.KAS.distal.right.average | awk '$4*2/($5+$6+0.1)>=1.5 {print $0}' | awk '{printf("%s\t%d\t%d\t%s\t%.2f\t%.2f\n",$1,$2,$3,"ss_enhancer"FNR,$4,$4*2/($5+$6+0.1))}' > ${prefix}_ss_enhancers.txt
+paste ${prefix}_on_${enhancer}.KAS.distal.3bed ${prefix}_on_${enhancer}.KAS.distal.average ${prefix}_on_${enhancer}.KAS.distal.left.average ${prefix}_on_${enhancer}.KAS.distal.right.average | awk '$4*2/($5+$6+0.1)>=1.5 {print $0}' | awk '{printf("%s\t%d\t%d\t%s\t%.2f\t%.2f\n",$1,$2,$3,"ss_enhancer"FNR,$4,$4*2/($5+$6+0.1))}' > ${prefix}_SST_enhancers.txt
 echo "done."
 echo ""
 

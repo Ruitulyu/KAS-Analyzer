@@ -14,7 +14,7 @@ exampleHelp="Example:
        Note: Bowtie2 Index example: /absolute path/Bowtie2Index/hg19; bwa Index example: /absolute path/BWAIndex/hg19.fa"
 alignerHelp="-a [aligner]: please specify the aligner (bowtie2 or bwa) you want to use to map KAS-seq data. DEFAULT: bowtie2."
 threadsHelp="-t [threads]: please input the number of threads used for KAS-seq data mapping. DEFAULT: 1."
-indexpathHelp="-i [index path]: please input the absolute path of reference genome index for aligner. REQUIRED."
+indexpathHelp="-i [index path]: please input the absolute path of reference genome index for aligner. Note: the path to a folder followed by a prefix of genome index. REQUIRED."
 uniqueHelp="-u: please specify to filter the unique mapped reads. DEFAULT: off."
 extendlengthHelp="-e [extendlengthHelp]: please input the extend length for single-end KAS-seq data. DEFAULT: 150."
 prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 KAS-seq' output files. REQUIRED."

@@ -62,6 +62,7 @@ You can install KAS-pipe2 using command line (linux) by cloning git repository o
 **Download test data**
 
 Users can download example KAS-seq data in HEK293T cells from Gene Expression Omnibus (GEO):
+Note: Install sra-tools using "conda install -c bioconda sra-tools", if fastq-dump is not available.
 
         $ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349532/SRR10349532 ./ &
         $ wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349533/SRR10349533 ./ &
@@ -123,6 +124,11 @@ Call KAS-seq peaks with KAS-seq data individually:
 Fingerprint plot of KAS-seq data:
 
         $ nohup KAS-pipe2 fingerprint -t 10 -s hg19 -o HEK293T_KAS-seq_fingerprint -l labels.txt -k KAS-seq_data.txt &
+
+KAS-seq.rep1                            HEK293T_KAS-seq.rep1.bam             
+KAS-seq.rep2                            HEK293T_KAS-seq.rep2.bam
+Input.rep1                              HEK293T_Input.rep1.bam
+Input.rep2     ---labels.txt            HEK293T_Input.rep2.bam         ---KAS-seq_data.txt
 
 Example fingerprint plot:
 

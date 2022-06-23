@@ -15,7 +15,7 @@ exampleHelp="Example:
        nohup KAS-pipe2 spKAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o spKAS-seq -r -s hg19 -1 spKAS-seq.trim.R1.fastq.gz -2 spKAS-seq.trim.R2.fastq.gz &
        Note: Bowtie2 Index example: /absolute path/Bowtie2Index/hg19."
 threadsHelp="-t [threads]: please specify the number of threads used for spKAS-seq data mapping. DEFAULT: 1."
-indexpathHelp="-i [index path]: please input the absolute path of reference genome index for aligner. REQUIRED."
+indexpathHelp="-i [index path]: please input the absolute path of reference genome index for aligner. Note: the path to a folder followed by a prefix of genome index. REQUIRED."
 uniqueHelp="-u: please specify to filter the unique mapped reads. DEFAULT: off."
 rloopsHelp="-r: please specify if identify R-loops regions with spKAS-seq data. DEFAULT: off."
 foldchangeHelp="-f [fold change cutoff]: please specify the fold change cutoff of spKAS-seq reads difference between plus and minus strands used for R-loops identification. DEFAULT: 2."

@@ -141,14 +141,14 @@ echo ""
 
 # plot the fingerprint.
 echo "Generating fingerprint plot of svg format ..."
-plotFingerprint -b $KASseq_list --labels $labels_list --minMappingQuality 10 --skipZeros --ignoreDuplicates --region 1 --numberOfSamples 500000 -T "${prefix}_fingerprint_plot" --plotFile ${prefix}_fingerprint_plot.svg --plotFileFormat svg --outRawCounts ${prefix}_fingerprint_plot.tab --numberOfProcessors $threads --blackListFileName ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed
-rm -f ${prefix}_fingerprint_plot.tab
+# plotFingerprint -b $KASseq_list --labels $labels_list --minMappingQuality 10 --skipZeros --ignoreDuplicates --region 1 --numberOfSamples 500000 -T "${prefix}_fingerprint_plot" --plotFile ${prefix}_fingerprint_plot.svg --plotFileFormat svg --outRawCounts ${prefix}_fingerprint_plot.tab --numberOfProcessors $threads --blackListFileName ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed
+# rm -f ${prefix}_fingerprint_plot.tab
 echo "done."
 echo ""
 
 echo "Generating fingerprint plot of png format."
 plotFingerprint -b $KASseq_list --labels $labels_list --minMappingQuality 10 --skipZeros --ignoreDuplicates --region 1 --numberOfSamples 500000 -T "${prefix}_fingerprint_plot" --plotFile ${prefix}_fingerprint_plot.png --plotFileFormat png --outRawCounts ${prefix}_fingerprint_plot.tab --numberOfProcessors $threads --blackListFileName ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed
-rm -f ${prefix}_fingerprint_plot.tab
+# rm -f ${prefix}_fingerprint_plot.tab
 echo "done."
 echo ""
 
