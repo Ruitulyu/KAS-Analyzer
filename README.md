@@ -122,13 +122,15 @@ Call KAS-seq peaks with KAS-seq data individually:
 **Quality control**
 
 Fingerprint plot of KAS-seq data:
-
+'''
         $ nohup KAS-pipe2 fingerprint -t 10 -s hg19 -o HEK293T_KAS-seq_fingerprint -l labels.txt -k KAS-seq_data.txt &
 
 KAS-seq.rep1                            HEK293T_KAS-seq.rep1.bam             
 KAS-seq.rep2                            HEK293T_KAS-seq.rep2.bam
 Input.rep1                              HEK293T_Input.rep1.bam
 Input.rep2     ---labels.txt            HEK293T_Input.rep2.bam         ---KAS-seq_data.txt
+
+'''
 
 Example fingerprint plot:
 
