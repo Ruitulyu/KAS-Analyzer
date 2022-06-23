@@ -99,7 +99,7 @@ KAS-pipe2 sub-command [options]
   
 ### Single-stranded enhancers identification
 ```
-   ss_enhancer     Identify the single stranded (ss) enhancers.
+   SST_enhancer     Identify the single-stranded transcribing enhancers (SST_enhancers).
    motif           Identify enriched TF binding motifs on ss_enhancers.
 ```   
   
@@ -1035,30 +1035,30 @@ spKAS-seq_rep3.bed          ---KAS-seq.txt
 Note: The 'KAS-pipe2 R-loops' shell script is applied to identify R-loops from multiples pKAS-seq data.
 ```
 
-### Single-stranded enhancers identification sub-commands:
+### Single-stranded transcribing enhancers (SST enhancers) identification sub-commands:
 ---------------------------------------------------------------------------
 
-### ss_enhancer
-Identify the single stranded (ss) enhancers.
+### SST_enhancer
+Identify the single-stranded transcribing enhancers (SST enhancers).
 ```
-Usage: KAS-pipe2 ss_enhancer [ -h/--help ] [ -o prefix ] [ -t threads ] [ -s assembly id ] [ -e enhancer ] [ -p peaks ] [ -k KAS-seq ] 
+Usage: KAS-pipe2 SST_enhancer [ -h/--help ] [ -o prefix ] [ -t threads ] [ -s assembly id ] [ -e enhancer ] [ -p peaks ] [ -k KAS-seq ] 
 
-Example: nohup KAS-pipe2 ss_enhancer -o KAS-seq_ss_enhancers -s mm10 -e H3K27ac_enhancers.bed -p KAS-seq_peaks.bed -k KAS-seq.rep1.bam,KAS-seq.rep2.bam &
+Example: nohup KAS-pipe2 SST_enhancer -o KAS-seq_SST_enhancers -s mm10 -e H3K27ac_enhancers.bed -p KAS-seq_peaks.bed -k KAS-seq.rep1.bam,KAS-seq.rep2.bam &
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 ss_enhancer' output files. DEFAULT: basename of enhancer file.
+-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 SST_enhancer' output files. DEFAULT: basename of enhancer file.
 
--t [threads]: please specify the number of threads used for single stranded (ss) enhancers identification. DEFAULT: 1.
+-t [threads]: please specify the number of threads used for single-stranded transcribing enhancers (SST enhancers) identification. DEFAULT: 1.
 
 -s [assembly id]: please specify the genome assembly id. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED.
 
--e [enhancer]: please specify the enhancer file used for single stranded (ss) enhancers identification. Enhancer file can be H3K27ac, P300 or Med1 ChIP-seq peaks file. REQUIRED.
+-e [enhancer]: please specify the enhancer file used for single-stranded transcribing enhancers (SST enhancers) identification. Enhancer file can be H3K27ac, P300 or Med1 ChIP-seq peaks file. REQUIRED.
 
 -p [peaks]: please specify the (sp)KAS-seq peaks file. REQUIRED.
 
--k [KAS-seq]: please specify the indexed bam file of KAS-seq data used for single stranded (ss) enhancers identification. e.g. KAS-seq.rep1.bam,KAS-seq.rep2.bam. REQUIRED.
+-k [KAS-seq]: please specify the indexed bam file of KAS-seq data used for single-stranded transcribing enhancers (SST enhancers) identification. e.g. KAS-seq.rep1.bam,KAS-seq.rep2.bam. REQUIRED.
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 ss_enhancer' shell script is applied to identify single stranded (ss) enhancers.
+Note: The 'KAS-pipe2 ss_enhancer' shell script is applied to identify single-stranded transcribing enhancers (SST enhancers).
 ```
 
 ### motif
