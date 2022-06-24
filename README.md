@@ -162,7 +162,6 @@ Example "labels.txt" and "KAS-seq.txt" :
 
 KAS-seq.rep1                            HEK293T_KAS-seq.rep1.ext150.bed
 KAS-seq.rep2     ---labels.txt          HEK293T_KAS-seq.rep2.ext150.bed        ---KAS-seq.txt
-
 ```
 	
 Example fraction of reads in peaks (FRiP) scores:
@@ -174,6 +173,11 @@ Calculate library complexity metrics for KAS-seq data, including PCR Bottlenecki
 
 ```        
 nohup KAS-pipe2 complexity -o HEK293T_KAS-seq_complexity -l labels.txt -k KAS-seq.txt &
+
+Example "labels.txt" and "KAS-seq.txt" :
+
+KAS-seq.rep1                              HEK293T_KAS-seq.rep1.bam
+KAS-seq.rep2      ---labels.txt           HEK293T_KAS-seq.rep2.bam        ---KAS-seq.txt
 ```
 Example library complexity metrics of KAS-seq data in HEK293T cells:
 |Samples         | PBC     | Bottlenecking level | NRF     | Complexity |
@@ -192,7 +196,6 @@ Example "labels.txt" and "KAS-seq.txt" :
 
 KAS-seq.rep1                             HEK293T_KAS-seq.rep1.bam
 KAS-seq.rep2     ---labels.txt           HEK293T_KAS-seq.rep2.bam          ---KAS-seq.txt
-
 ```
 
 Example scatterplot between two replicates of KAS-seq data:
@@ -209,7 +212,6 @@ Example "KAS-seq.txt" and "UCSC_track_names.txt" :
 
 HEK293T_KAS-seq.rep1.ext150.bg                               KAS-seq.rep1
 HEK293T_KAS-seq.rep2.ext150.bg       ---KAS-seq.txt          KAS-seq.rep2        ---UCSC_track_names.txt
-
 ```
 
 Example snapshot of KAS-seq data custom tracks from UCSC Genome Browser:
@@ -228,7 +230,6 @@ Example "HEK293T_KAS-seq_data.txt" and "ratios.txt" :
 
 HEK293T_KAS-seq.rep1.ext150.bg                                            1.2
 HEK293T_KAS-seq.rep1.ext150.bg       ---HEK293T_KAS-seq_data.txt          1.4       ---ratios.txt
-
 ```
 
 Using Reads Per Kilobase per Million mapped reads (RPKM):
@@ -240,7 +241,6 @@ Example "HEK293T_KAS-seq_data.txt" :
 
 HEK293T_KAS-seq.rep1.rmdup.bam
 HEK293T_KAS-seq.rep2.rmdup.bam       ---HEK293T_KAS-seq_data.txt
-
 ```
 		
 **Generate summary plots of KAS-seq signals**
