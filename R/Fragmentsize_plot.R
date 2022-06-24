@@ -29,12 +29,12 @@ for (package in all_packages){
 Sys.setenv(TAR = "/bin/tar")
 Sys.getenv("TAR")
 
-all_packages <- c("easyGgplot2")
+all_packages <- c("kassambara/easyGgplot2")
 
 for (package in all_packages){
-  if (!require(package, character.only = TRUE)){
+  if (!require("easyGgplot2", character.only = TRUE)){
     devtools::install_github(package, dependencies = TRUE)
-    library(package, character.only = TRUE)
+    library("easyGgplot2", character.only = TRUE)
   }
 }
 

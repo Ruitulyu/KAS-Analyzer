@@ -15,7 +15,7 @@ if (length(args) == 0) {
 
 ## -----------------------------------------------------------------------------
 #install and load ggpubr package.
-all_packages <- c("ggpubr")
+all_packages <- c("devtools")
 
 for (package in all_packages){
   if (!require(package, character.only = TRUE)){
@@ -24,9 +24,19 @@ for (package in all_packages){
   }
 }
 
+all_packages <- c("kassambara/ggpubr")
+
+for (package in all_packages){
+  if (!require("ggpubr", character.only = TRUE)){
+    devtools::install_github(package, dependencies = TRUE)
+    library("ggpubr", character.only = TRUE)
+  }
+}
+
 # install.packages("ggpubr",repos = "http://cran.us.r-project.org")
 # if(!require(devtools)) install.packages("devtools")
 # devtools::install_github("kassambara/ggpubr")
+# or install.packages("ggpubr")
 # library("ggpubr")
 
 ## -----------------------------------------------------------------------------

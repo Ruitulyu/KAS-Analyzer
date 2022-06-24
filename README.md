@@ -86,6 +86,7 @@ fastq-dump HEK293T_KAS-seq.rep2.sra &
 **Trimming of adapter and poor quality sequence**
 
 ```
+Note: the "nohup" command is optional, which means "no hang up" and writes the screen output to "nohup.out" file.
 nohup KAS-pipe2 trim -a illumina -t 10 -1 HEK293T_KAS-Input.rep1.fastq.gz &
 nohup KAS-pipe2 trim -a illumina -t 10 -1 HEK293T_KAS-Input.rep2.fastq.gz &
 nohup KAS-pipe2 trim -a illumina -t 10 -1 HEK293T_KAS-seq.rep1.fastq.gz &
@@ -103,9 +104,9 @@ nohup KAS-pipe2 KAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o HEK293
 	
 Here, the user can generate a read alignment summary report: 
 
-```       
-cd Summary
-KAS-pipe2 statistics -o HEK293T_KAS-seq_statistics -s summary.txt &
+```
+# Run from "Summary" directory.
+KAS-pipe2 statistics -o HEK293T_KAS-seq_statistics -s /absolute path/Summary/ &
 ```
  
 Example summary report: 
@@ -122,13 +123,15 @@ Example summary report:
          
 Call merged KAS-seq peaks with two KAS-seq replicates:	 
 
-```	 
+```
+# Run from "Bed_files" directory.	 
 nohup KAS-pipe2 peakscalling -t HEK293T_KAS-seq.rep1.ext150.bed,HEK293T_KAS-seq.rep2.ext150.bed -c HEK293T_KAS-Input.rep1.ext150.bed,HEK293T_KAS-Input.rep2.ext150.bed -o HEK293T_KAS-seq -g hg19 &
 ```
 	
 Call KAS-seq peaks with KAS-seq data individually:
 
-```        
+```
+# Run from "Bed_files" directory. 
 nohup KAS-pipe2 peakscalling -t HEK293T_KAS-seq.rep1.ext150.bed -c HEK293T_KAS-Input.rep1.ext150.bed -o HEK293T_KAS-seq.rep1 -g hg19 &
 nohup KAS-pipe2 peakscalling -t HEK293T_KAS-seq.rep2.ext150.bed -c HEK293T_KAS-Input.rep2.ext150.bed -o HEK293T_KAS-seq.rep2 -g hg19 &
 ```
@@ -138,6 +141,7 @@ nohup KAS-pipe2 peakscalling -t HEK293T_KAS-seq.rep2.ext150.bed -c HEK293T_KAS-I
 Fingerprint plot of KAS-seq data:
 
 ```
+# Run from "Bam_files" directory.
 nohup KAS-pipe2 fingerprint -t 10 -s hg19 -o HEK293T_KAS-seq_fingerprint -l labels.txt -k KAS-seq_data.txt &
 
 Example "labels.txt" and "KAS-seq_data.txt" :
@@ -158,10 +162,10 @@ Fraction of reads in peaks (FRiP) scores:
 ```
 nohup KAS-pipe2 FRiP -o HEK293T_KAS-seq_FRiP -p peaks_files.txt -l labels.txt -k KAS-seq.txt &
 
-Example "labels.txt" and "KAS-seq.txt" :
+Example "peaks_files.txt", "labels.txt", and "KAS-seq.txt" :
 
-KAS-seq.rep1                            HEK293T_KAS-seq.rep1.ext150.bed
-KAS-seq.rep2     ---labels.txt          HEK293T_KAS-seq.rep2.ext150.bed        ---KAS-seq.txt
+HEK293T_KAS-seq.rep1_peaks.broadPeak                                 KAS-seq.rep1                            HEK293T_KAS-seq.rep1.ext150.bed
+HEK293T_KAS-seq.rep2_peaks.broadPeak     ---peaks_files.txt          KAS-seq.rep2     ---labels.txt          HEK293T_KAS-seq.rep2.ext150.bed     ---KAS-seq.txt
 ```
 	
 Example fraction of reads in peaks (FRiP) scores:
@@ -171,13 +175,14 @@ Example fraction of reads in peaks (FRiP) scores:
 
 Calculate library complexity metrics for KAS-seq data, including PCR Bottlenecking Coefficient and Non-Redundant Fraction (NRF):
 
-```        
+```
+# Run from "Bam_files" directory.        
 nohup KAS-pipe2 complexity -o HEK293T_KAS-seq_complexity -l labels.txt -k KAS-seq.txt &
 
 Example "labels.txt" and "KAS-seq.txt" :
 
-KAS-seq.rep1                              HEK293T_KAS-seq.rep1.bam
-KAS-seq.rep2      ---labels.txt           HEK293T_KAS-seq.rep2.bam        ---KAS-seq.txt
+KAS-seq.rep1                              HEK293T_KAS-seq.rep1_sorted.bam
+KAS-seq.rep2      ---labels.txt           HEK293T_KAS-seq.rep2_sorted.bam      ---KAS-seq.txt
 ```
 Example library complexity metrics of KAS-seq data in HEK293T cells:
 |Samples         | PBC     | Bottlenecking level | NRF     | Complexity |
@@ -190,12 +195,13 @@ Example library complexity metrics of KAS-seq data in HEK293T cells:
 Calculate the correlation coefficient and pvalue, generate scatterplot for replicates of KAS-seq data:
 
 ``` 
+# Run from "Bam_files" directory.
 nohup KAS-pipe2 correlation -m pearson -t 10 -s hg19 -r bin -p heatmap -o KAS-seq -l labels.txt -k KAS-seq.txt &
 
 Example "labels.txt" and "KAS-seq.txt" :
 
 KAS-seq.rep1                             HEK293T_KAS-seq.rep1.bam
-KAS-seq.rep2     ---labels.txt           HEK293T_KAS-seq.rep2.bam          ---KAS-seq.txt
+KAS-seq.rep2     ---labels.txt           HEK293T_KAS-seq.rep2.bam     ---KAS-seq.txt
 ```
 
 Example scatterplot between two replicates of KAS-seq data:
@@ -205,13 +211,14 @@ Example scatterplot between two replicates of KAS-seq data:
 
 Generate KAS-seq read density files that can be viewed in the UCSC genome browser:
 
-```       
+```
+# Run from "BedGraph_files" directory.
 nohup KAS-pipe2 UCSC -k KAS-seq.txt -n UCSC_track_names.txt &
 
 Example "KAS-seq.txt" and "UCSC_track_names.txt" :
 
 HEK293T_KAS-seq.rep1.ext150.bg                               KAS-seq.rep1
-HEK293T_KAS-seq.rep2.ext150.bg       ---KAS-seq.txt          KAS-seq.rep2        ---UCSC_track_names.txt
+HEK293T_KAS-seq.rep2.ext150.bg     ---KAS-seq.txt          KAS-seq.rep2     ---UCSC_track_names.txt
 ```
 
 Example snapshot of KAS-seq data custom tracks from UCSC Genome Browser:
@@ -224,23 +231,26 @@ Example snapshot of KAS-seq data custom tracks from UCSC Genome Browser:
 Using the number of uniquely mapped reads:
 
 ```
+# Run from "BedGraph_files" directory.
 nohup KAS-pipe2 normalize -m ratios -k HEK293T_KAS-seq_data.txt -r ratios.txt -b -s hg19 &
 
 Example "HEK293T_KAS-seq_data.txt" and "ratios.txt" :
 
-HEK293T_KAS-seq.rep1.ext150.bg                                            1.2
-HEK293T_KAS-seq.rep1.ext150.bg       ---HEK293T_KAS-seq_data.txt          1.4       ---ratios.txt
+HEK293T_KAS-seq.rep1.ext150.bg                                           1.2
+HEK293T_KAS-seq.rep1.ext150.bg      ---HEK293T_KAS-seq_data.txt          1.4       ---ratios.txt
 ```
 
 Using Reads Per Kilobase per Million mapped reads (RPKM):
 
 ```
+# Run from "Bam_files" directory.
 nohup KAS-pipe2 normalize -m RPKM -k HEK293T_KAS-seq_data.txt -b -s hg19 &
 
-Example "HEK293T_KAS-seq_data.txt" :
+Example "HEK293T_KAS-seq_data.txt":
+Note: the bam files need to be deduplicated.
 
 HEK293T_KAS-seq.rep1.rmdup.bam
-HEK293T_KAS-seq.rep2.rmdup.bam       ---HEK293T_KAS-seq_data.txt
+HEK293T_KAS-seq.rep2.rmdup.bam      ---HEK293T_KAS-seq_data.txt
 ```
 		
 **Generate summary plots of KAS-seq signals**
@@ -248,13 +258,15 @@ HEK293T_KAS-seq.rep2.rmdup.bam       ---HEK293T_KAS-seq_data.txt
 Generate metagene profile of KAS-seq read density on gene coding regions (TSS, genebody or TES):
 
 ```
-nohup KAS-pipe2 profile -t 10 -s hg19 -o HEK293T_KAS-seq_profile -r genebody -c red,blue,green,purple -l labels.txt -k KAS-seq.normalized.txt &
+# Run from "BedGraph_files" directory.
+nohup KAS-pipe2 profile -t 10 -s hg19 -o HEK293T_KAS-seq_profile -r genebody -c red,blue,green,purple -l labels.txt -k KAS-seq.normalized.bigWig.txt &
 ```
 
 Generate heatmap of KAS-seq read density on gene coding regions (TSS, genebody or TES):
 
 ```
-nohup KAS-pipe2 heatmap -t 10 -s hg19 -o HEK293T_KAS-seq_heatmap -r genebody -q -c Reds -l labels.txt -k KAS-seq.normalized.txt &
+# Run from "BedGraph_files" directory.
+nohup KAS-pipe2 heatmap -t 10 -s hg19 -o HEK293T_KAS-seq_heatmap -r genebody -q -c Reds -l labels.txt -k KAS-seq.normalized.bigWig.txt &
 ```
 
 Example heatmap and metagene profile of KAS-seq signals on gene coding regions:
@@ -267,31 +279,36 @@ Example heatmap and metagene profile of KAS-seq signals on gene coding regions:
 Calculate pausing index (PI) of RNA Pol II:
 
 ```
+# Run from "Bam_files" directory.
 nohup KAS-pipe2 index -o HEK293T_pausing_index -t 10 -s hg19 -i pausing -l labels.txt -k KAS-seq.txt &
 ```
       
 Calculate elongation index (EI) of RNA Pol II:
 
 ```
+# Run from "BedGraph_files" directory.
 nohup KAS-pipe2 KASindex -o HEK293T_elongation_index -t 10 -s hg19 -r gene -l labels.txt -k KAS-seq.txt &
 ```
 	
 Calculate termination index (TI) of RNA Pol II:
 
 ```
+# Run from "Bam_files" directory.
 nohup KAS-pipe2 index -o HEK293T_termination_index -t 10 -s hg19 -i termination -l labels.txt -k KAS-seq.txt &
 ```
 	
 Calculate termination length (TL) of RNA Pol II:
 
-```	
+```
+# Run from "Bam_files" directory.
 nohup KAS-pipe2 termilength -o HEK293T_termination_length -t 10 -g hg19 -p peaks.txt -l labels.txt -k KAS-seq.txt &
 ```
 	
 **Identify single-stranded transcribing enhancers (SST enhancers)**
 
 ```
-nohup KAS-pipe2 SST_enhancer -o HEK293T_SST_enhancers -t 10 -s mm10 -e H3K27ac_enhancers.bed -p KAS-seq_peaks.bed -k KAS-seq.rep1.nor.bigWig,KAS-seq.rep2.nor.bigWig &
+# Run from "BedGraph_files" directory.
+nohup KAS-pipe2 SST_enhancer -o HEK293T_SST_enhancers -t 10 -s hg19 -e H3K27ac_enhancers.bed -p HEK293T_KAS-seq_peaks.broadPeak -k HEK293T_KAS-seq.rep1.ext150.nor.bigWig,HEK293T_KAS-seq.rep1.ext150.nor.bigWig &
 ```
 
 **For more details on the above tools, and other features implemented in KAS-pipe2, such as "identification of genome-wide R-loops" (only for spKAS-seq) and "differential RNA Pols activity analysis" (two-conditions or time-course KAS-seq data), please check the [tutorial](https://ruitulyu.github.io/KAS-pipe2/).**
