@@ -149,7 +149,7 @@ Example "labels.txt" and "KAS-seq_data.txt" :
 KAS-seq.rep1                            HEK293T_KAS-seq.rep1.bam             
 KAS-seq.rep2                            HEK293T_KAS-seq.rep2.bam
 Input.rep1                              HEK293T_Input.rep1.bam
-Input.rep2     ---labels.txt            HEK293T_Input.rep2.bam         ---KAS-seq_data.txt
+Input.rep2       ---labels.txt          HEK293T_Input.rep2.bam        ---KAS-seq_data.txt
 ```
 
 Example fingerprint plot:
@@ -217,7 +217,7 @@ nohup KAS-pipe2 UCSC -k KAS-seq.txt -n UCSC_track_names.txt &
 
 Example "KAS-seq.txt" and "UCSC_track_names.txt" :
 
-HEK293T_KAS-seq.rep1.ext150.bg                               KAS-seq.rep1
+HEK293T_KAS-seq.rep1.ext150.bg                             KAS-seq.rep1
 HEK293T_KAS-seq.rep2.ext150.bg     ---KAS-seq.txt          KAS-seq.rep2     ---UCSC_track_names.txt
 ```
 
