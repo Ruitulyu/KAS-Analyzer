@@ -243,7 +243,7 @@ Generate the table containing (sp)KAS-seq mapping statistics.
 ```
 usage: KAS-pipe2 statistics [ -h/--help ] [ -o prefix ] [ -l labels ] [ -s summary folder ]
 
-Example: nohup KAS-pipe2 statistics -o KAS-seq_statistics -l labels.txt -s summary.txt &
+Example: nohup KAS-pipe2 statistics -o KAS-seq_statistics -l labels.txt -s /absolute path/Summary/ &
 
 -o [prefix]: please input the prefix (basename) of 'KAS-pipe2 statistics' output files. REQUIRED.
 
@@ -574,13 +574,13 @@ Note: The 'KAS-pipe2 spKAS-seq' shell script mainly invoke bowtie2 for spKAS-seq
 ### peakscalling
 Call broad or sharp peaks for KAS-seq data.
 ```
-Usage: KAS-pipe2 peakscalling [ -h ] [ -m peaks caller ] [ -t KAS-seq ] [ -c Control ] [ -b mode ] [ -o prefix ] [ -p pvalue or qvalue ] [ -g assembly id ]
+Usage: KAS-pipe2 peakscalling [ -h ] [ -m peaks caller ] [ -k KAS-seq ] [ -c Control ] [ -b mode ] [ -o prefix ] [ -p pvalue or qvalue ] [ -g assembly id ]
 
 Example: nohup KAS-pipe2 peakscalling -t KAS-seq.rep1.bed,KAS-seq.rep2.bed -c Control_Input.rep1.bed,Control_Input.rep2.bed -o KAS-seq -g hg19 &
 
 -m [peaks caller]: please input the peaks caller (macs14, macs2) that you want to use for KAS-seq peaks calling. DEFAULT: macs2.
 
--t [KAS-seq]: please input the KAS-seq bed or bam files. e.g. KAS-seq.rep1.bed,KAS-seq.rep2.bed or KAS-seq.rep1.bam,KAS-seq.rep2.bam. REQUIRED.
+-k [KAS-seq]: please input the KAS-seq bed or bam files. e.g. KAS-seq.rep1.bed,KAS-seq.rep2.bed or KAS-seq.rep1.bam,KAS-seq.rep2.bam. REQUIRED.
 
 -c [Control]: please input the KAS-seq control bed or bam files. e.g. KAS-seq_Input.rep1.bed,KAS-seq_Input.rep2.bed or KAS-seq_Input.rep1.bam,KAS-seq_Input.rep2.bam. OPTIONAL.
 
@@ -599,16 +599,19 @@ Note: This shell script mainly invoke macs14 or macs2 for calling (sp)KAS-seq da
 ### normalize 
 Normalize KAS-seq data with bedGraph density files.
 ```
-Usage: KAS-pipe2 normalize [ -h/--help ] [ -k KAS-seq ] [ -r ratios ] [ -b ] [ -s assembly id ]
+Usage: KAS-pipe2 normalize [ -h/--help ] [-m methods ] [ -k KAS-seq ] [ -r ratios ] [ -b ] [ -s assembly id ]
 
-Example: nohup KAS-pipe2 normalize -k KAS-seq_data.txt -r ratios.txt -b -s mm10 &
+Example: nohup KAS-pipe2 normalize -m ratios -k KAS-seq_data.txt -r ratios.txt -b -s mm10 &
+
+-m [methods]: please input the methods used for KAS-seq data normalization. e.g. ratios or RPKM. DEFAULT: ratios.
 
 -k [KAS-seq_data.txt]: please input the text file containing the bedGraph files generated from 'KAS-pipe2 (sp)KAS-seq'. REQUIRED.
 Example:
-KAS-seq_WT.rep1.bg
-KAS-seq_WT.rep2.bg
-KAS-seq_KO.rep1.bg 
-KAS-seq_KO.rep2.bg   ---KAS-seq_data.txt
+-m ratios:                                       -m FPKM:
+KAS-seq_WT.rep1.bg                               KAS-seq_WT.rep1.bam
+KAS-seq_WT.rep2.bg                               KAS-seq_WT.rep2.bam
+KAS-seq_KO.rep1.bg                               KAS-seq_KO.rep1.bam
+KAS-seq_KO.rep2.bg   ---KAS-seq_data.txt         KAS-seq_KO.rep1.bam      ---KAS-seq_data.txt
 
 -r [ratios.txt]: please input the text file containing ratios that used to normalize KAS-seq data, which can be calculated based on mapped reads number or SpikeIn reads. The order and number of ratios should be the consistent with KAS-seq bedGraph files. REQUIRED.
 Example:
@@ -673,7 +676,7 @@ Note: The 'KAS-pipe2 targetgenes' shell script is applied to define target or as
 ### UCSC
 Generate bedGraph files ready for submitting to UCSC genome browser.
 ```
-Usage: KAS-pipe2 UCSC [ -h/--help ] [ -k KAS-seq ] [ -n UCSC track ] [ -c track colors ] 
+Usage: KAS-pipe2 UCSC [ -h/--help ] [ -k KAS-seq ] [ -l UCSC track ] [ -c track colors ] 
 
 Example: nohup KAS-pipe2 UCSC -k KAS-seq_data.txt -n UCSC_track_names.txt &
 
@@ -684,7 +687,7 @@ KAS-seq_WT.rep2.nor.bg
 KAS-seq_KO.rep1.nor.bg 
 KAS-seq_KO.rep2.nor.bg    ---KAS-seq_data.txt
 
--n [UCSC track]: please input the text file containing the track names of KAS-seq or spKAS-seq data that you want to visualize on UCSC genome browser. REQUIRED.
+-l [UCSC track]: please input the text file containing the track names of KAS-seq or spKAS-seq data that you want to visualize on UCSC genome browser. REQUIRED.
 Example: 
 KAS-seq_WT.rep1 
 KAS-seq_WT.rep2
