@@ -146,10 +146,10 @@ nohup KAS-pipe2 fingerprint -t 10 -s hg19 -o HEK293T_KAS-seq_fingerprint -l labe
 
 Example "labels.txt" and "KAS-seq_data.txt" :
 
-KAS-seq.rep1                            HEK293T_KAS-seq.rep1.bam             
-KAS-seq.rep2                            HEK293T_KAS-seq.rep2.bam
-Input.rep1                              HEK293T_Input.rep1.bam
-Input.rep2       ---labels.txt          HEK293T_Input.rep2.bam        ---KAS-seq_data.txt
+KAS-seq.rep1                            HEK293T_KAS-seq.rep1_rmdup.bam             
+KAS-seq.rep2                            HEK293T_KAS-seq.rep2_rmdup.bam
+Input.rep1                              HEK293T_Input.rep1_rmdup.bam
+Input.rep2       ---labels.txt          HEK293T_Input.rep2_rmdup.bam        ---KAS-seq_data.txt
 ```
 
 Example fingerprint plot:
