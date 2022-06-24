@@ -65,7 +65,7 @@ conda activate KAS-pipe2
 Users can download example KAS-seq data in HEK293T cells from Gene Expression Omnibus (GEO):
 
 ```
-Note: Install sra-tools using "conda install -c bioconda sra-tools", if fastq-dump is not available.
+Note: install sra-tools using "conda install -c bioconda sra-tools" if fastq-dump is not available in your system.
 
 wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349532/SRR10349532 ./ &
 wget https://sra-pub-run-odp.s3.amazonaws.com/sra/SRR10349533/SRR10349533 ./ &
@@ -157,6 +157,12 @@ Fraction of reads in peaks (FRiP) scores:
 
 ```
 nohup KAS-pipe2 FRiP -o HEK293T_KAS-seq_FRiP -p peaks_files.txt -l labels.txt -k KAS-seq.txt &
+
+Example "labels.txt" and "KAS-seq.txt" :
+
+KAS-seq.rep1                            HEK293T_KAS-seq.rep1.ext150.bed
+KAS-seq.rep2     ---labels.txt          HEK293T_KAS-seq.rep2.ext150.bed        ---KAS-seq.txt
+
 ```
 	
 Example fraction of reads in peaks (FRiP) scores:
@@ -181,6 +187,12 @@ Calculate the correlation coefficient and pvalue, generate scatterplot for repli
 
 ``` 
 nohup KAS-pipe2 correlation -m pearson -t 10 -s hg19 -r bin -p heatmap -o KAS-seq -l labels.txt -k KAS-seq.txt &
+
+Example "labels.txt" and "KAS-seq.txt" :
+
+KAS-seq.rep1                             HEK293T_KAS-seq.rep1.bam
+KAS-seq.rep2     ---labels.txt           HEK293T_KAS-seq.rep2.bam          ---KAS-seq.txt
+
 ```
 
 Example scatterplot between two replicates of KAS-seq data:
@@ -188,10 +200,16 @@ Example scatterplot between two replicates of KAS-seq data:
 <img src="https://github.com/Ruitulyu/KAS-pipe2/blob/main/image/KAS-seq_pearson_scatterplot.png"  height="260" align="middle" > 
 
 
-Generate KAS-seq read-density files that can be viewed in the UCSC genome browser:
+Generate KAS-seq read density files that can be viewed in the UCSC genome browser:
 
 ```       
 nohup KAS-pipe2 UCSC -k KAS-seq.txt -n UCSC_track_names.txt &
+
+Example "KAS-seq.txt" and "UCSC_track_names.txt" :
+
+HEK293T_KAS-seq.rep1.ext150.bg                               KAS-seq.rep1
+HEK293T_KAS-seq.rep2.ext150.bg       ---KAS-seq.txt          KAS-seq.rep2        ---UCSC_track_names.txt
+
 ```
 
 Example snapshot of KAS-seq data custom tracks from UCSC Genome Browser:
@@ -205,12 +223,24 @@ Using the number of uniquely mapped reads:
 
 ```
 nohup KAS-pipe2 normalize -m ratios -k HEK293T_KAS-seq_data.txt -r ratios.txt -b -s hg19 &
+
+Example "HEK293T_KAS-seq_data.txt" and "ratios.txt" :
+
+HEK293T_KAS-seq.rep1.ext150.bg                                            1.2
+HEK293T_KAS-seq.rep1.ext150.bg       ---HEK293T_KAS-seq_data.txt          1.4       ---ratios.txt
+
 ```
 
 Using Reads Per Kilobase per Million mapped reads (RPKM):
 
 ```
 nohup KAS-pipe2 normalize -m RPKM -k HEK293T_KAS-seq_data.txt -b -s hg19 &
+
+Example "HEK293T_KAS-seq_data.txt" :
+
+HEK293T_KAS-seq.rep1.rmdup.bam
+HEK293T_KAS-seq.rep2.rmdup.bam       ---HEK293T_KAS-seq_data.txt
+
 ```
 		
 **Generate summary plots of KAS-seq signals**
