@@ -266,8 +266,8 @@ if [[ $paired_or_single_end == "single" ]]; then
      
       # clean up the .sam, sorted .bam and unextended .bed files.
       rm -f ${prefix}.sam
-#     rm -f ${prefix}_rmdup.bam.bai
-#     rm -f ${prefix}_rmdup.bam
+      rm -f ${prefix}_rmdup.bam.bai
+      rm -f ${prefix}_rmdup.bam
       rm -f ${prefix}.bed
       echo "Clean up intermediate files. done."
       echo ""
@@ -278,8 +278,6 @@ if [[ $paired_or_single_end == "single" ]]; then
       cd Bam_files
       mv ../${prefix}/${prefix}_sorted.bam ./
       mv ../${prefix}/${prefix}_sorted.bam.bai ./
-      mv ../${prefix}/${prefix}_rmdup.bam ./
-      mv ../${prefix}/${prefix}_rmdup.bam.bai
       cd ..
 
       # move bedGraph files into BedGraph files.
@@ -392,8 +390,8 @@ if [[ $paired_or_single_end == "single" ]]; then
 
       # clean up the .sam, sorted .bam and unextended .bed files.
       rm -f ${prefix}.sam
-#     rm -f ${prefix}_rmdup.bam.bai
-#     rm -f ${prefix}_rmdup.bam
+      rm -f ${prefix}_rmdup.bam.bai
+      rm -f ${prefix}_rmdup.bam
       rm -f ${prefix}.bed
       echo "Clean up intermediate files. done."
       echo ""
@@ -404,8 +402,6 @@ if [[ $paired_or_single_end == "single" ]]; then
       cd Bam_files
       mv ../${prefix}/${prefix}_sorted.bam ./
       mv ../${prefix}/${prefix}_sorted.bam.bai ./
-      mv ../${prefix}/${prefix}_rmdup.bam ./
-      mv ../${prefix}/${prefix}_rmdup.bam.bai
       cd ..
 
       # move bedGraph files into BedGraph files.
@@ -560,8 +556,8 @@ elif [[ $paired_or_single_end == "paired" ]] ;then
 
       # clean up the .sam, sorted .bam and unextended .bed files.
       rm -f ${prefix}.sam
-#     rm -f ${prefix}_rmdup.bam.bai
-#     rm -f ${prefix}_rmdup.bam
+      rm -f ${prefix}_rmdup.bam.bai
+      rm -f ${prefix}_rmdup.bam
       rm -f ${prefix}_rmdup.R1.bam
       rm -f ${prefix}_rmdup.R1.bed
       rm -f ${prefix}.sort.bed
@@ -574,8 +570,6 @@ elif [[ $paired_or_single_end == "paired" ]] ;then
       cd Bam_files
       mv ../${prefix}/${prefix}_sorted.bam ./
       mv ../${prefix}/${prefix}_sorted.bam.bai ./
-      mv ../${prefix}/${prefix}_rmdup.bam ./
-      mv ../${prefix}/${prefix}_rmdup.bam.bai ./
       cd ..
 
       # move bedGraph files into BedGraph files.
@@ -723,8 +717,8 @@ elif [[ $paired_or_single_end == "paired" ]] ;then
 
       # clean up the .sam, sorted .bam and unextended .bed files.
       rm -f ${prefix}.sam
-#     rm -f ${prefix}_rmdup.bam.bai
-#     rm -f ${prefix}_rmdup.bam
+      rm -f ${prefix}_rmdup.bam.bai
+      rm -f ${prefix}_rmdup.bam
       rm -f ${prefix}_rmdup.R1.bam
       rm -f ${prefix}_rmdup.R1.bed
       rm -f ${prefix}.sort.bed
@@ -737,8 +731,6 @@ elif [[ $paired_or_single_end == "paired" ]] ;then
       cd Bam_files
       mv ../${prefix}/${prefix}_sorted.bam ./
       mv ../${prefix}/${prefix}_sorted.bam.bai ./
-      mv ../${prefix}/${prefix}_rmdup.bam ./
-      mv ../${prefix}/${prefix}_rmdup.bam.bai ./
       cd ..
 
       # move bedGraph files into BedGraph files.

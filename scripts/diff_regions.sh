@@ -272,7 +272,7 @@ if [[ $regions == "bin" ]]; then
    #calculate the average value of very single row in the table. 
    echo "Calculating the average KAS-seq signals on ${assemblyid} 1kb bins ..."
    echo ""
-   awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print  a[j]/NF }' ${prefix}_on_1kb_bins.bed > ${prefix}_on_1kb_bins.average
+   awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print  a[j]/(NF-3) }' ${prefix}_on_1kb_bins.bed > ${prefix}_on_1kb_bins.average
    echo "done."
    echo ""
 
@@ -435,7 +435,7 @@ elif [[ $regions == "promoter" ]] || [[ $regions == "genebody" ]] ;then
    # calculate the average KAS index of every single row in the table.
    echo "Calculating the average KAS-seq signals on ${assemblyid}_Refseq.${regions}.bed ..."
    echo ""
-   awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/NF }' ${prefix}_on_${assemblyid}_Refseq.${regions}.bed > ${prefix}_on_${assemblyid}_Refseq.${regions}.average
+   awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/(NF-3) }' ${prefix}_on_${assemblyid}_Refseq.${regions}.bed > ${prefix}_on_${assemblyid}_Refseq.${regions}.average
    echo "done."
    echo ""
 
@@ -531,8 +531,8 @@ elif [[ $regions == "gene" ]] ;then
    # calculate the average KAS expression of every single row in the table.
    echo "Calculate the average KAS density on ${assemblyid} Refseq promoter and genebody ..."
    echo ""
-   awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/NF }' ${prefix}_on_${assemblyid}_Refseq.promoter.bed > ${prefix}_on_${assemblyid}_Refseq.promoter.average
-   awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/NF }' ${prefix}_on_${assemblyid}_Refseq.genebody.bed > ${prefix}_on_${assemblyid}_Refseq.genebody.average
+   awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/(NF-3) }' ${prefix}_on_${assemblyid}_Refseq.promoter.bed > ${prefix}_on_${assemblyid}_Refseq.promoter.average
+   awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/(NF-3) }' ${prefix}_on_${assemblyid}_Refseq.genebody.bed > ${prefix}_on_${assemblyid}_Refseq.genebody.average
    echo "done."
    echo ""
 

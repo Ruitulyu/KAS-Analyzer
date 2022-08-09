@@ -206,9 +206,9 @@ sed "s/nan/0/g" ${prefix}_on_${enhancer}.KAS.distal.tab | sed "1d" | sortBed -i 
 sed "s/nan/0/g" ${prefix}_on_${enhancer}.KAS.distal.left.tab | sed "1d" | sortBed -i > ${prefix}_on_${enhancer}.KAS.distal.left.bed
 sed "s/nan/0/g" ${prefix}_on_${enhancer}.KAS.distal.right.tab | sed "1d" | sortBed -i > ${prefix}_on_${enhancer}.KAS.distal.right.bed
 
-awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/NF }' ${prefix}_on_${enhancer}.KAS.distal.bed > ${prefix}_on_${enhancer}.KAS.distal.average
-awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/NF }' ${prefix}_on_${enhancer}.KAS.distal.left.bed > ${prefix}_on_${enhancer}.KAS.distal.left.average
-awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/NF }' ${prefix}_on_${enhancer}.KAS.distal.right.bed > ${prefix}_on_${enhancer}.KAS.distal.right.average
+awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/(NF-3) }' ${prefix}_on_${enhancer}.KAS.distal.bed > ${prefix}_on_${enhancer}.KAS.distal.average
+awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/(NF-3) }' ${prefix}_on_${enhancer}.KAS.distal.left.bed > ${prefix}_on_${enhancer}.KAS.distal.left.average
+awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/(NF-3) }' ${prefix}_on_${enhancer}.KAS.distal.right.bed > ${prefix}_on_${enhancer}.KAS.distal.right.average
 
 awk '{printf("%s\t%d\t%d\n",$1,$2,$3)}' ${prefix}_on_${enhancer}.KAS.distal.bed > ${prefix}_on_${enhancer}.KAS.distal.3bed
 

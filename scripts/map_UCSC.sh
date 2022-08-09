@@ -6,14 +6,14 @@ set -e
 
 ## Read arguments                                                     
 usageHelp="Usage: KAS-pipe2 UCSC [ -h/--help ] [ -k KAS-seq ] [ -l UCSC track ] [ -c track colors ]"
-exampleHelp="Example: nohup KAS-pipe2 UCSC -k KAS-seq_data.txt -n UCSC_track_names.txt &"
+exampleHelp="Example: nohup KAS-pipe2 UCSC -k KAS-seq_data.txt -l UCSC_track_names.txt &"
 KASseqHelp="-k [KAS-seq]: please input the text file containing the bedGraph files generated from 'KAS-pipe2 KAS-seq'. REQUIRED.
 Example:
 KAS-seq_WT.rep1.nor.bg
 KAS-seq_WT.rep2.nor.bg
 KAS-seq_KO.rep1.nor.bg 
 KAS-seq_KO.rep2.nor.bg    ---KAS-seq_data.txt"
-tracknameHelp="-n [UCSC track]: please input the text file containing the track names of KAS-seq or spKAS-seq data that you want to visualize on UCSC genome browser. REQUIRED.
+tracknameHelp="-l [UCSC track]: please input the text file containing the track names of KAS-seq or spKAS-seq data that you want to visualize on UCSC genome browser. REQUIRED.
 Example: 
 KAS-seq_WT.rep1 
 KAS-seq_WT.rep2

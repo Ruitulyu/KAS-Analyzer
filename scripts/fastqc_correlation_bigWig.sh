@@ -234,7 +234,7 @@ if [[ $regions == "bin" ]]; then
    # calculate the average value of every single row in the table.
    echo "Calculate the average KAS-seq density on 1kb bins ..."
    echo ""
-   awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/NF }' ${prefix}_on_${regions}.bed > ${prefix}_on_${regions}.average
+   awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/(NF-3) }' ${prefix}_on_${regions}.bed > ${prefix}_on_${regions}.average
    echo "done."
    echo ""
 

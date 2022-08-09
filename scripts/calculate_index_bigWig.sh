@@ -247,8 +247,8 @@ elif [[ $index == "termination" ]] ;then
    # calculate the average KAS density of all samples.
    echo "Calculate the average KAS density of all samples on ${assemblyid} Refseq terminator or genebody ..."
    echo ""
-   awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/NF }' ${prefix}_on_${assemblyid}_Refseq.terminator.bed > ${prefix}_on_${assemblyid}_Refseq.terminator.average
-   awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/NF }' ${prefix}_on_${assemblyid}_Refseq.genebody.bed > ${prefix}_on_${assemblyid}_Refseq.genebody.average
+   awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/(NF-3) }' ${prefix}_on_${assemblyid}_Refseq.terminator.bed > ${prefix}_on_${assemblyid}_Refseq.terminator.average
+   awk 'BEGIN{if(NR>0) a[NR]=0}{if(NR>0) for(i=4; i<=NF; i++) a[NR]+=$i}END{for(j in a) print a[j]/(NF-3) }' ${prefix}_on_${assemblyid}_Refseq.genebody.bed > ${prefix}_on_${assemblyid}_Refseq.genebody.average
    echo "done."
    echo ""
 
