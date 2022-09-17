@@ -98,64 +98,64 @@ fi
 if [ "$aligner" == "bowtie2" ]; then
    # download human bowtie2 index.
    if [[ "$assemblyid" == "hg18" ]] ;then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/hg18_Bowtie2Index/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/hg18_Bowtie2Index/
       echo "$assemblyid $aligner index download successfully!"
 
    elif [[ "$assemblyid" == "hg19" ]] ;then      
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/hg19_Bowtie2Index/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/hg19_Bowtie2Index/
       echo "$assemblyid $aligner index download successfully!"
 
    elif [[ "$assemblyid" == "hg38" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/hg38_Bowtie2Index/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/hg38_Bowtie2Index/
       echo "$assemblyid $aligner index download successfully!"
 
    # download mouse bowtie2 index.   
    elif [[ "$assemblyid" == "mm9" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/mm9_Bowtie2Index/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/mm9_Bowtie2Index/
       echo "$assemblyid $aligner index download successfully!"
 
    elif [[ "$assemblyid" == "mm10" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/mm10_Bowtie2Index/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/mm10_Bowtie2Index/
       echo "$assemblyid $aligner index download successfully!"
 
    elif [[ "$assemblyid" == "mm39" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/mm39_Bowtie2Index/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/mm39_Bowtie2Index/
       echo "$assemblyid $aligner index download successfully!"
 
    # download fruit fly bowtie2 index.
    elif [[ "$assemblyid" == "dm3" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/dm3_Bowtie2Index/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/dm3_Bowtie2Index/
       echo "$assemblyid $aligner index download successfully!"
 
    elif [[ "$assemblyid" == "dm6" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/dm6_Bowtie2Index/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/dm6_Bowtie2Index/
       echo "$assemblyid $aligner index download successfully!"
 
    # download rat bowtie2 index.
    elif [[ "$assemblyid" == "rn6" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/rn6_Bowtie2Index/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/rn6_Bowtie2Index/
       echo "$assemblyid $aligner index download successfully!"
 
    elif [[ "$assemblyid" == "dn7" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/rn7_Bowtie2Index/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/rn7_Bowtie2Index/
       echo "$assemblyid $aligner index download successfully!"
 
    # download C. elegans bowtie index.
    elif [[ "$assemblyid" == "ce10" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/ce10_Bowtie2Index/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/ce10_Bowtie2Index/
       echo "$assemblyid $aligner index download successfully!"
 
    elif [[ "$assemblyid" == "ce11" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/ce11_Bowtie2Index/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/ce11_Bowtie2Index/
       echo "$assemblyid $aligner index download successfully!"
 
    # download zebra fish bowtie2 index.
    elif [[ "$assemblyid" == "danRer10" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/danRer10_Bowtie2Index/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/danRer10_Bowtie2Index/
       echo "$assemblyid $aligner index download successfully!"
 
    elif [[ "$assemblyid" == "danRer11" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/danRer11_Bowtie2Index/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/danRer11_Bowtie2Index/
       echo "$assemblyid $aligner index download successfully!"
 
    # test the unavailable assembly id.
@@ -170,64 +170,64 @@ elif [ "$aligner" == "bwa" ]; then
 
    # download human bwa index.
    if [[ "$assemblyid" == "hg18" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/hg18_BWAIndex/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/hg18_BWAIndex/
       echo "$assemblyid $aligner index download successfully!"
 
    elif [[ "$assemblyid" == "hg19" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/hg19_BWAIndex/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/hg19_BWAIndex/
       echo "$assemblyid $aligner index download successfully!"
 
    elif [[ "$assemblyid" == "hg38" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/hg38_BWAIndex/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/hg38_BWAIndex/
       echo "$assemblyid $aligner index download successfully!"
 
    # download mouse bwa index.
    elif [[ "$assemblyid" == "mm9" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/mm9_BWAIndex/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/mm9_BWAIndex/
       echo "$assemblyid $aligner index download successfully!"
 
    elif [[ "$assemblyid" == "mm10" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/mm10_BWAIndex/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/mm10_BWAIndex/
       echo "$assemblyid $aligner index download successfully!"
 
    elif [[ "$assemblyid" == "mm39" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/mm39_BWAIndex/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/mm39_BWAIndex/
       echo "$assemblyid $aligner index download successfully!"
 
    # download fruit fly bwa index.
    elif [[ "$assemblyid" == "dm3" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/dm3_BWAIndex/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/dm3_BWAIndex/
       echo "$assemblyid $aligner index download successfully!"
 
    elif [[ "$assemblyid" == "dm6" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/dm6_BWAIndex/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/dm6_BWAIndex/
       echo "$assemblyid $aligner index download successfully!"
 
    # download rat bwa index.
    elif [[ "$assemblyid" == "rn6" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/rn6_BWAIndex/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/rn6_BWAIndex/
       echo "$assemblyid $aligner index download successfully!"
 
    elif [[ "$assemblyid" == "dn7" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/rn7_BWAIndex/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/rn7_BWAIndex/
       echo "$assemblyid $aligner index download successfully!"
 
    # download C. elegans bwa index.
    elif [[ "$assemblyid" == "ce10" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/ce10_BWAIndex/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/ce10_BWAIndex/
       echo "$assemblyid $aligner index download successfully!"
 
    elif [[ "$assemblyid" == "ce11" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/ce11_BWAIndex/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/ce11_BWAIndex/
       echo "$assemblyid $aligner index download successfully!"
 
    # download zebra fish bwa index.
    elif [[ "$assemblyid" == "danRer10" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/danRer10_BWAIndex/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/danRer10_BWAIndex/
       echo "$assemblyid $aligner index download successfully!"
 
    elif [[ "$assemblyid" == "danRer11" ]]; then
-      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir http://128.135.119.125/helab_genome_index/danRer11_BWAIndex/
+      wget -r -np -nH --cut-dirs=1 --reject "index.html*" -P $indexdir https://rt.chuan.science/helab_genome_index/danRer11_BWAIndex/
       echo "$assemblyid $aligner index download successfully!"
 
    # test the unavailable assembly id.
