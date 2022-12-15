@@ -95,6 +95,7 @@ KAS-pipe2 sub-command [options]
 ### R-loops
 ```
    R-loop          Identify R-loops regions with spKAS-seq data.
+   RNaseH          Identify R-loops regions sensitive to RNase H treatment.
 ```   
   
 ### Single-stranded enhancers identification
@@ -1036,6 +1037,35 @@ spKAS-seq_rep3.bed          ---KAS-seq.txt
 
 -h/--help: print this help and exit.
 Note: The 'KAS-pipe2 R-loops' shell script is applied to identify R-loops from multiples pKAS-seq data.
+```
+
+### RNaseH
+Identify R-loops regions sensitive to RNase H treatment.
+```
+Usage: KAS-pipe2 RNaseH [ -h/--help ] [ -p threads ] [ -o prefix ] [ -r WT_R-loop.bed ] [ -f fold change ] [ -c WT_R-loop_density ] [ -t RNaseH_R-loop_density ]
+
+Example: nohup KAS-pipe2 RNaseH -p 10 -o RNaseH_sensitive_R-loops -r WT_R-loop.bed -f 2 -c WT_R-loop_density.txt -t RNaseH_R-loop_density.txt &
+
+-p [threads]: please specify the number of threads used for R-loops identification. DEFAULT: 1.
+
+-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 RNaseH' output files. REQUIRED.
+
+-r [WT_R-loops.bed]: please specify the R-loop list defined using spKAS-seq data in cells without RNase H treatment. REQUIRED.
+
+-f [fold change]: please specify the fold change threshold of R-loop density difference between WT and RNase H samples used for the identification of R-loops sensitive to RNase H treatment. DEFAULT: 2.
+
+-c [WT_R-loop_density.txt]: please input the text file containing WT R-loop density files. REQUIRED.
+Example:
+WT_R-loop.rep1.bigWig
+WT_R-loop.rep2.bigWig           ---WT_R-loop_density.txt
+
+-t [RNaseH_R-loop_density.txt]: please input the text file containing RNase H R-loop density files. REQUIRED.
+Example:
+RNaseH_R-loop.rep1.bigWig
+RNaseH_R-loop.rep2.bigWig       ---RNaseH_R-loop_density.txt
+
+-h/--help: print this help and exit.
+Note: The 'KAS-pipe2 RNaseH' shell script is applied to identify R-loops sensitive to RNase H treatment.
 ```
 
 ### Single-stranded transcribing enhancers (SST enhancers) identification sub-commands:
