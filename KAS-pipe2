@@ -81,6 +81,7 @@ set -e
 ###
 ### [ R-loops ]
 ###    R-loop          Identify R-loops regions with spKAS-seq data.
+###    RNaseH          Identify R-loops regions sensitive to RNase H treatment.
 ###   
 ### [ Single-stranded enhancers ]
 ###    SST_enhancer    Identify the single-stranded transcribing enhancers (SST_enhancers).
@@ -236,6 +237,9 @@ elif [[ "$1" == "PCA" ]]; then
 # run 'R-loops' shell scripts.
 elif [[ "$1" == "R-loop" ]]; then
    ${SH_SCRIPT_DIR}/scripts/define_R-loops.sh $( echo $* | cut -d " " -f 2- )
+
+elif [[ "$1" == "RNaseH" ]]; then   
+   ${SH_SCRIPT_DIR}/scripts/define_R-loops_sensitive_to_RNaseH.sh $( echo $* | cut -d " " -f 2- )
 
 # run 'KAS index' shell scripts.
 elif [[ "$1" == "index" ]]; then
