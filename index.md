@@ -1,50 +1,56 @@
-# KAS-pipe2: an integrated toolkit for exploring KAS-seq data
+# KAS-Analyzer: an integrated toolkit for exploring KAS-seq data
 
 ## Author: Ruitu Lyu, Chemistry department, the University of Chicago 
 ---------------------------------------------------------------------------
 <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5f2zpl0mkwd&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
-![Image](https://raw.githubusercontent.com/Ruitulyu/KAS-pipe2/main/image/KAS-pipe2.png)
+![Image](https://raw.githubusercontent.com/Ruitulyu/KAS-Analyzer/main/image/KAS-Analyzer.png)
 
 ## Introduction
 
-KAS-pipe2 is a collection of command line tools specifically developped for exploring KAS-seq or strand-specific (sp)KAS-seq data, including the basic processing tools for quality control, reference genome index, raw reads mapping, and heatmaps and summary plots. KAS-pipe2 also includes many novel features and completely new frame design compared to KAS-pipe. e.g. time-courese(TC) KAS-seq differential analysis, R-loop identification (only for spKAS-seq), ss-enhancers, motif, index calculation, termination length and so on.
+KAS-Analyzer is a collection of command line tools specifically developped for exploring KAS-seq or strand-specific (sp)KAS-seq data, including the basic processing tools for quality control, reference genome index, raw reads mapping, and heatmaps and summary plots. KAS-pipe2 also includes many novel features and completely new frame design compared to KAS-pipe. e.g. time-courese(TC) KAS-seq differential analysis, R-loop identification (only for spKAS-seq), ss-enhancers, motif, index calculation, termination length and so on.
 
-KAS-pipe2 is still on active development and the source code is hosted on [GitHub](https://github.com/Ruitulyu/KAS-pipe2).
+KAS-pipe2 is still on active development and the source code is hosted on [GitHub](https://github.com/Ruitulyu/KAS-Analyzer).
 
 ## Installation
 
-**Install by cloning KAS-pipe2 git repository on github:**
+**Install by cloning KAS-Analyzer git repository on github:**
 
-You can install KAS-pipe2 on command line (linux/mac) by cloning git repository on github:
+You can install KAS-Analyzer on command line (linux/mac) by cloning git repository on github:
 
-	$ git clone https://github.com/Ruitulyu/KAS-pipe2.git
-	$ cd KAS-pipe2
+	$ git clone https://github.com/Ruitulyu/KAS-Analyzer.git
+	$ cd KAS-Analyzer
 	$ bash ./setup.sh
 	
 	# If anaconda or miniconda was not installed on your system. #OPTIONAL
-	$ KAS-pipe2 install -conda
+	$ KAS-Analyzer install -conda
 	
-	# Install conda 'KAS-pipe2' environment. 
-	$ KAS-pipe2 install -KAS-pipe2
+	# Make sure you have Mamba installed. If not, you can install it in your base Conda environment with the following command.
+        $ conda install mamba -c conda-forge
+
+        # Install 'KAS-Analyzer' environment using mamba. 
+        $ mamba env create -f ./environment.yml
+
+        # or
+	$ KAS-Analyzer install -KAS-Analyzer
 	
-	# Activate conda 'KAS-pipe2' environment.
-	$ conda activate KAS-pipe2
+	# Activate conda 'KAS-Analyzer' environment.
+	$ conda activate KAS-Analyzer
 	
 ## Overview
 ---------------------------------------------------------------------------
 
-KAS-pipe2 is a collection of command line tools for KAS-seq or strand specific KAS-seq(spKAS-seq) data analysis.
+KAS-Analyzer is a collection of command line tools for KAS-seq or strand specific KAS-seq(spKAS-seq) data analysis.
 ```
 Version:   v2.0
-About:     KAS-pipe2 is mainly developed by Ruitu Lyu, postdoc fellow in Prof. Chuan He's group at the University of Chicago.
-Docs:      https://ruitulyu.github.io/KAS-pipe2/
-Code:      https://github.com/Ruitulyu/KAS-pipe2
-Mail:      https://github.com/Ruitulyu/KAS-pipe2/discussions
+About:     KAS-Analyzer is mainly developed by Ruitu Lyu, postdoc fellow in Prof. Chuan He's group at the University of Chicago.
+Docs:      https://ruitulyu.github.io/KAS-Analyzer/
+Code:      https://github.com/Ruitulyu/KAS-Analyzer
+Mail:      https://github.com/Ruitulyu/KAS-Analyzer/discussions
 ```
 ### Usage:
-KAS-pipe2 sub-command [options]
+KAS-Analyzer sub-command [options]
 
-### The KAS-pipe2 sub-commands include:
+### The KAS-Analyzer sub-commands include:
 ----------------------------------------
 ### Configure
 ```	
@@ -118,7 +124,7 @@ KAS-pipe2 sub-command [options]
 ### General help
 ```
    --help          Print this help menu.
-   --version       Print the version of KAS-pipe2 you are using.
+   --version       Print the version of KAS-Analyzer you are using.
    --contact       Feature requests, bugs, mailing lists, etc.
 ```   
 
