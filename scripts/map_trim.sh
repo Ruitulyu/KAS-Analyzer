@@ -4,21 +4,21 @@
 set -e
 
 ## Read arguments                                                     
-usageHelp="Usage: KAS-pipe2 trim [ -h ] [ -a adapter ] [ -t threads ] [ -f ] [ -q quality ] [ -l length ] [ -1 read1 ] [ -2 read2 ]"
+usageHelp="Usage: KAS-Analyzer trim [ -h ] [ -a adapter ] [ -t threads ] [ -f ] [ -q quality ] [ -l length ] [ -1 read1 ] [ -2 read2 ]"
 exampleHelp="Example:
        Single-end:
-       nohup KAS-pipe2 trim -a illumina -t 10 -1 KAS-seq.fastq.gz &
+       nohup KAS-Analyzer trim -a illumina -t 10 -1 KAS-seq.fastq.gz &
        Paired-end:
-       nohup KAS-pipe2 trim -a illumina -t 10 -1 KAS-seq.R1.fastq.gz -2 KAS-seq.R2.fastq.gz &"
-adapterHelp="-a [adapter types]: adapter sequence to be trimmed. e.g. illumina, nextera or small_rna. Hint: most of the NGS data used Illumina adapter. If not specified explicitly. KAS-pipe2 trim will auto-detect."
+       nohup KAS-Analyzer trim -a illumina -t 10 -1 KAS-seq.R1.fastq.gz -2 KAS-seq.R2.fastq.gz &"
+adapterHelp="-a [adapter types]: adapter sequence to be trimmed. e.g. illumina, nextera or small_rna. Hint: most of the NGS data used Illumina adapter. If not specified explicitly. KAS-Analyzer trim will auto-detect."
 threadsHelp="-t [threads]: number of threads to be used for trimming. DEFAULT: 1."
-fastqcHelp="-f: instruct 'KAS-pipe2 trim' to check quality control before trimming. DEFAULT: off."
+fastqcHelp="-f: instruct 'KAS-Analyzer trim' to check quality control before trimming. DEFAULT: off."
 qualityHelp="-q [quality]: trim low-quality ends from reads in addition to adapter removal. Default Phred score(ASCII+33): 20."
 lengthHelp="-l [length]: discard reads that became shorter than length INT bp because of either quality or adapter trimming. DEFAULT: 30."
 read1Help="-1 [read1]: please input single-end KAS-seq raw fastq file or read 1 of paired-end KAS-seq raw fastq files. REQUIRED."
 read2Help="-2 [read2]: please input read2 of paired-end KAS-seq raw fastq files."
 helpHelp="-h: print this help and exit.
-Note: The 'KAS-pipe2 trim' shell script mainly invoke the trim-galore, please refer to http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/ for more information."
+Note: The 'KAS-Analyzer trim' shell script mainly invoke the trim-galore, please refer to http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/ for more information."
 
 # print help function.
 printHelpAndExit() {
@@ -45,7 +45,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 trim' will print the help.
+# if no parameters was provided, 'KAS-Analyzer trim' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
    printHelpAndExit
 fi
@@ -120,7 +120,7 @@ if test -z $length ;then
 fi
 
 if test -z $adapter ;then
-   echo "Adapter is not provided, 'KAS-pipe2 trim' will autodetect the adapter."
+   echo "Adapter is not provided, 'KAS-Analyzer trim' will autodetect the adapter."
 
 elif test -n "$adapter" && [[ $adapter != "illumina" ]] && [[ $adapter != "nextera" ]] && [[ $adapter != "small_rna" ]] ;then
    echo ""
@@ -217,4 +217,4 @@ elif [[ $paired_or_single_end == "paired" ]] ;then
    rm -f ${read2}_trimming_report.txt
 fi  
 
-echo "'KAS-pipe2 trim' run successfully!"
+echo "'KAS-Analyzer trim' run successfully!"

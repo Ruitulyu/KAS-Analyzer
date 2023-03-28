@@ -1,27 +1,27 @@
 #!/bin/bash
-# 'KAS-pipe2 fragmentsize' was developed by Ruitu Lyu on 12-14-2021.
+# 'KAS-Analyzer fragmentsize' was developed by Ruitu Lyu on 12-14-2021.
 
 # Stop on error
 set -e
 
 # help arguments
-usageHelp="Usage: KAS-pipe2 fragmentsize [ -h/--help ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ]"
-exampleHelp="Example: nohup KAS-pipe2 fragmentsize -o KAS-seq_fragmentsize -l labels.txt -k KAS-seq.txt &"
-prefixHelp="-o [prefix]: please specify the prefix (basename) of 'KAS-pipe2 fragmentsize' output files. REQUIRED."
+usageHelp="Usage: KAS-Analyzer fragmentsize [ -h/--help ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ]"
+exampleHelp="Example: nohup KAS-Analyzer fragmentsize -o KAS-seq_fragmentsize -l labels.txt -k KAS-seq.txt &"
+prefixHelp="-o [prefix]: please specify the prefix (basename) of 'KAS-Analyzer fragmentsize' output files. REQUIRED."
 labelsHelp="-l [labels.txt]: please input the text file containing the labels of paired-end KAS-seq or spKAS-seq data that show in fragment size plot. Default: basename of (sp)KAS-seq bed files.
 Example:
 WT.rep1
 WT.rep2
 WT.rep3
 WT.rep4                        ---labels.txt"
-KASseqHelp="-k [KAS-seq.txt]: please input the text file containing bed files (uniquely mapped reads from 'KAS-pipe2 (sp)KAS-seq'), which are used to calcuate fragment size of DNA fragments. The order and number of (sp)KAS-seq bed files should be the consistent with the labels in labels.txt file. REQUIRED.
+KASseqHelp="-k [KAS-seq.txt]: please input the text file containing bed files (uniquely mapped reads from 'KAS-Analyzer (sp)KAS-seq'), which are used to calcuate fragment size of DNA fragments. The order and number of (sp)KAS-seq bed files should be the consistent with the labels in labels.txt file. REQUIRED.
 Example:
 KAS-seq_WT_PE.rep1.bed
 KAS-seq_WT_PE.rep2.bed
 KAS-seq_WT_PE.rep3.bed
 KAS-seq_WT_PE.rep4.bed         ---KAS-seq.txt"
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 fragmentsize' shell script is applied to calculate and plot fragment size of (sp)KAS-seq data. Note: it only works for paired-end (sp)KAS-seq data."
+Note: The 'KAS-Analyzer fragmentsize' shell script is applied to calculate and plot fragment size of (sp)KAS-seq data. Note: it only works for paired-end (sp)KAS-seq data."
 
 printHelpAndExit() {
     echo -e ""
@@ -40,7 +40,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 fragmentsize' will print the help.
+# if no parameters was provided, 'KAS-Analyzer fragmentsize' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
@@ -59,14 +59,14 @@ done
 # Required options.
 if test -z $prefix ;then
    echo ""
-   echo "Please specify the prefix (basename) of 'KAS-pipe2 fragmentsize' output files. -o [prefix]"
+   echo "Please specify the prefix (basename) of 'KAS-Analyzer fragmentsize' output files. -o [prefix]"
    echo ""
    exit -1
 fi
 
 if test -z $KASseq ;then
    echo ""
-   echo "Please input the text file containing bed files (uniquely mapped reads from 'KAS-pipe2 (sp)KAS-seq'), which are used to calcuate fragment size of DNA fragments. -k [KAS-seq]"
+   echo "Please input the text file containing bed files (uniquely mapped reads from 'KAS-Analyzer (sp)KAS-seq'), which are used to calcuate fragment size of DNA fragments. -k [KAS-seq]"
    echo ""
    exit -1
 fi
@@ -125,4 +125,4 @@ mv KAS-seq_fragment_size_density_plot.svg ${prefix}_KAS-seq_fragment_size_densit
 
 # rm -f ${prefix}_fragmentsize.txt
 
-echo "'KAS-pipe2 fragmentsize' run successfully!"
+echo "'KAS-Analyzer fragmentsize' run successfully!"

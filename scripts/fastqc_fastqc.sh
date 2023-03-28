@@ -1,18 +1,18 @@
 #!/bin/bash
-# 'KAS-pipe2 fastqc' was developped by Ruitu Lyu on 12-10-2021.
+# 'KAS-Analyzer fastqc' was developped by Ruitu Lyu on 12-10-2021.
 
 # Stop on error
 set -e
 
 ## Read arguments                                                     
-usageHelp="Usage: KAS-pipe2 fastqc [ -h/--help ] [ -t threads ] [ -c contaminants ] [ -o output dir ] [ -k KAS-seq ] "
-exampleHelp="Example: nohup KAS-pipe2 fastqc -t 10 -k KAS-seq.rep1.fastq.gz,KAS-seq.rep2.fastq.gz,KAS-seq.rep3.fastq.gz &"
+usageHelp="Usage: KAS-Analyzer fastqc [ -h/--help ] [ -t threads ] [ -c contaminants ] [ -o output dir ] [ -k KAS-seq ] "
+exampleHelp="Example: nohup KAS-Analyzer fastqc -t 10 -k KAS-seq.rep1.fastq.gz,KAS-seq.rep2.fastq.gz,KAS-seq.rep3.fastq.gz &"
 threadsHelp="-t [threads]: please input number of threads to be used for quality control check. Default: 1."
 contaminantsHelp="-c [contaminants]: please specify a file which contains the list of contaminants (format: name[tab]sequence) to screen overrepresented sequences against. Default: no."
 outputdirHelp="-o [output dir]: please specify the output directory with output files."
 KASseqHelp="-k [KAS-seq]: please input the KAS-seq data that you want to know the quality control, like sequencing quality, duplicates, contaminants (adapter sequence)."
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 fastqc' shell script is applied to check quality control and identify a potential type of problem in your KAS-seq data in non-interactive mode. It mainly invoke FASTQC, please refer to the FASTQC official website for more information."
+Note: The 'KAS-Analyzer fastqc' shell script is applied to check quality control and identify a potential type of problem in your KAS-seq data in non-interactive mode. It mainly invoke FASTQC, please refer to the FASTQC official website for more information."
 
 printHelpAndExit() {
     echo -e ""
@@ -33,7 +33,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters or '--help' was provided, 'KAS-pipe2 fastqc' will print the help.
+# if no parameters or '--help' was provided, 'KAS-Analyzer fastqc' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
@@ -95,4 +95,4 @@ else
 fi 
 
 
-echo "'KAS-pipe2 fastqc' run successfully!"
+echo "'KAS-Analyzer fastqc' run successfully!"

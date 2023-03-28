@@ -1,20 +1,20 @@
 #!/bin/bash
-# 'KAS-pipe2 SST_enhancer' was developed by Ruitu Lyu on 1-22-2022.
+# 'KAS-Analyzer SST_enhancer' was developed by Ruitu Lyu on 1-22-2022.
 
 # Stop on error
 set -e
 
 # help arguments
-usageHelp="Usage: KAS-pipe2 SST_enhancer [ -h/--help ] [ -o prefix ] [ -t threads ] [ -s assembly id ] [ -e enhancer ] [ -p peaks ] [ -k KAS-seq ] "
-exampleHelp="Example: nohup KAS-pipe2 SST_enhancer -o KAS-seq_SST_enhancers -t 10 -s mm10 -e H3K27ac_enhancers.bed -p KAS-seq_peaks.bed -k KAS-seq.rep1.bam,KAS-seq.rep2.bam &"
-prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 SST_enhancer' output files. DEFAULT: basename of enhancer file."
+usageHelp="Usage: KAS-Analyzer SST_enhancer [ -h/--help ] [ -o prefix ] [ -t threads ] [ -s assembly id ] [ -e enhancer ] [ -p peaks ] [ -k KAS-seq ] "
+exampleHelp="Example: nohup KAS-Analyzer SST_enhancer -o KAS-seq_SST_enhancers -t 10 -s mm10 -e H3K27ac_enhancers.bed -p KAS-seq_peaks.bed -k KAS-seq.rep1.bam,KAS-seq.rep2.bam &"
+prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer SST_enhancer' output files. DEFAULT: basename of enhancer file."
 threadsHelp="-t [threads]: please specify the number of threads used for single-stranded transcribing enhancers (SST_enhancers) identification. DEFAULT: 1."
 assemblyidHelp="-s [assembly id]: please specify the genome assembly id. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 enhancerHelp="-e [enhancer]: please specify the enhancer file used for single-stranded transcribing enhancers (SST_enhancers) identification. Enhancer file can be H3K27ac, P300 or Med1 ChIP-seq peaks file. REQUIRED."
 peaksHelp="-p [peaks]: please specify the (sp)KAS-seq peaks file. REQUIRED."
 KASseqHelp="-k [KAS-seq]: please specify the indexed bam file of KAS-seq data used for single-stranded transcribing enhancers (SST_enhancers) identification. e.g. KAS-seq.rep1.bam,KAS-seq.rep2.bam. REQUIRED."
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 SST_enhancer' shell script is applied to identify single-stranded transcribing enhancers (SST_enhancers)."
+Note: The 'KAS-Analyzer SST_enhancer' shell script is applied to identify single-stranded transcribing enhancers (SST_enhancers)."
 
 printHelpAndExit() {
     echo -e ""
@@ -39,7 +39,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 SST_enhancer' will print the help.
+# if no parameters was provided, 'KAS-Analyzer SST_enhancer' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
    printHelpAndExit
 fi
@@ -245,4 +245,4 @@ rm -f ${prefix}_on_${enhancer}.KAS.distal.right.average
 echo "done."
 echo ""
 
-echo "'KAS-pipe2 SST_enhancer' run successfully."
+echo "'KAS-Analyzer SST_enhancer' run successfully."

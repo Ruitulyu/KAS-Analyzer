@@ -1,13 +1,13 @@
 #!/bin/bash
-# 'KAS-pipe2 complexity' was developed by Ruitu Lyu on 1-10-2022.
+# 'KAS-Analyzer complexity' was developed by Ruitu Lyu on 1-10-2022.
 
 # Stop on error
 set -e
 
 # help arguments
-usageHelp="Usage: KAS-pipe2 complexity [ -h/--help ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ]"
-exampleHelp="Example: nohup KAS-pipe2 complexity -o KAS-seq_complexity -l labels.txt -k KAS-seq.txt &"
-prefixHelp="-o [KAS-seq_complexity]: please input the prefix (basename) of 'KAS-pipe2 complexity' output files. REQUIRED."
+usageHelp="Usage: KAS-Analyzer complexity [ -h/--help ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ]"
+exampleHelp="Example: nohup KAS-Analyzer complexity -o KAS-seq_complexity -l labels.txt -k KAS-seq.txt &"
+prefixHelp="-o [KAS-seq_complexity]: please input the prefix (basename) of 'KAS-Analyzer complexity' output files. REQUIRED."
 labelsHelp="-l [labels.txt]: please input the text file containing the labels of KAS-seq or spKAS-seq data complexity metric. Default: basename of KAS-seq files.
 Example:
 WT.rep1
@@ -21,7 +21,7 @@ KAS-seq.rep2.bam
 KAS-seq.rep3.bam
 KAS-seq.rep4.bam     ---KAS-seq.txt"
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 complexity' shell script is applied to calculate the library complexity metric of (sp)KAS-seq data including, the PCR Bottlenecking Coefficient and Non-Redundant Fraction (NRF) for KAS-seq. Please refer to https://www.encodeproject.org/data-standards/terms/ for more details about the library complexity metric."
+Note: The 'KAS-Analyzer complexity' shell script is applied to calculate the library complexity metric of (sp)KAS-seq data including, the PCR Bottlenecking Coefficient and Non-Redundant Fraction (NRF) for KAS-seq. Please refer to https://www.encodeproject.org/data-standards/terms/ for more details about the library complexity metric."
 
 printHelpAndExit() {
     echo -e ""
@@ -40,7 +40,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 complexity' will print the help.
+# if no parameters was provided, 'KAS-Analyzer complexity' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
@@ -58,14 +58,14 @@ done
 # Required options.
 if test -z $KASseq ;then
    echo ""
-   echo "Please input the text file containing the bam files without removing redundant reads generated from 'KAS-pipe2 KAS-seq'. -k [KAS-seq.txt]"
+   echo "Please input the text file containing the bam files without removing redundant reads generated from 'KAS-Analyzer KAS-seq'. -k [KAS-seq.txt]"
    echo ""
    exit -1
 fi
 
 if test -z $prefix ;then
    echo ""
-   echo "Please input the prefix (basename) of 'KAS-pipe2 complexity' output files. -o [prefix]."
+   echo "Please input the prefix (basename) of 'KAS-Analyzer complexity' output files. -o [prefix]."
    echo ""
    exit -1
 fi
@@ -138,4 +138,4 @@ done
 
 rm -f ${prefix}.labels_basename.txt
 
-echo "'KAS-pipe2 complexity' run successfully!"
+echo "'KAS-Analyzer complexity' run successfully!"

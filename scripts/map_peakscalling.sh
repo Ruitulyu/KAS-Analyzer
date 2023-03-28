@@ -1,17 +1,17 @@
 #!/bin/bash
-# 'KAS-pipe2 peakscalling' was developed by Ruitu Lyu on 12-09-2021.
+# 'KAS-Analyzer peakscalling' was developed by Ruitu Lyu on 12-09-2021.
 
 # Stop on error
 set -e
 
 ## Read arguments                                                     
-usageHelp="Usage: KAS-pipe2 peakscalling [ -h ] [ -m peaks caller ] [ -k KAS-seq ] [ -c Control ] [ -b mode ] [ -o prefix ] [ -p pvalue or qvalue ] [ -g assembly id ]."
-exampleHelp="Example: nohup KAS-pipe2 peakscalling -k KAS-seq.rep1.bed,KAS-seq.rep2.bed -c Control_Input.rep1.bed,Control_Input.rep2.bed -o KAS-seq -g hg19 &"
+usageHelp="Usage: KAS-Analyzer peakscalling [ -h ] [ -m peaks caller ] [ -k KAS-seq ] [ -c Control ] [ -b mode ] [ -o prefix ] [ -p pvalue or qvalue ] [ -g assembly id ]."
+exampleHelp="Example: nohup KAS-Analyzer peakscalling -k KAS-seq.rep1.bed,KAS-seq.rep2.bed -c Control_Input.rep1.bed,Control_Input.rep2.bed -o KAS-seq -g hg19 &"
 peakscallerHelp="-m [peaks caller]: please input the peaks caller (macs14, macs2) that you want to use for KAS-seq peaks calling. DEFAULT: macs2."
 KASseqHelp="-k [KAS-seq]: please input the KAS-seq bed or bam files. e.g. KAS-seq.rep1.bed,KAS-seq.rep2.bed or KAS-seq.rep1.bam,KAS-seq.rep2.bam. REQUIRED."
 controlHelp="-c [Control]: please input the KAS-seq control bed or bam files. e.g. KAS-seq_Input.rep1.bed,KAS-seq_Input.rep2.bed or KAS-seq_Input.rep1.bam,KAS-seq_Input.rep2.bam. OPTIONAL."
 modeHelp="-b [mode]: specify macs2 to perferm KAS-seq peaks calling with 'broad' or 'sharp' mode. -b option only works for macs2. DEFAULT: broad."
-prefixHelp="-o [prefix]: please input the prefix (basename), which will be used to generate the name of 'KAS-pipe2 peakscalling' output files. REQUIRED."
+prefixHelp="-o [prefix]: please input the prefix (basename), which will be used to generate the name of 'KAS-Analyzer peakscalling' output files. REQUIRED."
 cutoffHelp="-p [pvalue or qvalue]: please input the pvalue or qvalue for KAS-seq peaks calling with macs14 or macs2. DEFAULT: macs14: 1e-7; macs2: 0.01"
 assemblyidHelp="-g [assembly id]: please specify the reference genome assembly id of KAS-seq data. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 # genome size. e.g. human(hs): 2.7e9; mouse(mm): 1.87e9; C.elegans(ce): 9e7; fruitfly(dm): 1.2e8; rat(rn): 2.5e9; zebrafish(danRer): 1e9.
@@ -44,7 +44,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 peakscalling' will print the help.
+# if no parameters was provided, 'KAS-Analyzer peakscalling' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
@@ -227,4 +227,4 @@ printHelpAndExit 0
 
 fi
 
-echo "'KAS-pipe2 peakscalling' run successfully!"
+echo "'KAS-Analyzer peakscalling' run successfully!"

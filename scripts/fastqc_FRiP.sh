@@ -1,13 +1,13 @@
 #!/bin/bash
-# 'KAS-pipe2 FRiP' was developed by Ruitu Lyu on 12-11-2021.
+# 'KAS-Analyzer FRiP' was developed by Ruitu Lyu on 12-11-2021.
 
 # Stop on error
 set -e
 
 # help arguments
-usageHelp="Usage: KAS-pipe2 FRiP [ -h/--help ] [ -o prefix ] [ -p peaks ] [ -l labels ] [ -k KAS-seq ]"
-exampleHelp="Example: nohup KAS-pipe2 FRiP -o KAS-seq_FRiP -p peaks_files.txt -l labels.txt -k KAS-seq.txt &"
-prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 FRiP' output files. REQUIRED."
+usageHelp="Usage: KAS-Analyzer FRiP [ -h/--help ] [ -o prefix ] [ -p peaks ] [ -l labels ] [ -k KAS-seq ]"
+exampleHelp="Example: nohup KAS-Analyzer FRiP -o KAS-seq_FRiP -p peaks_files.txt -l labels.txt -k KAS-seq.txt &"
+prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer FRiP' output files. REQUIRED."
 peaksHelp="-p [peaks]: please input the text file containing the peaks files. REQUIRED.
 Example:
 KAS-seq_WT_rep1_peaks.bed
@@ -20,14 +20,14 @@ WT_rep1
 WT.rep2
 KO.rep1
 KO.rep2                        ---labels.txt"
-KASseqHelp="-k [KAS-seq]: please input the text file containing bed files (uniquely mapped reads used for 'KAS-pipe2 peakcalling'), which are used to calcuate fraction of reads in peaks (FRiP) score. The order and number of (sp)KAS-seq data should be the consistent with the labels file. REQUIRED.
+KASseqHelp="-k [KAS-seq]: please input the text file containing bed files (uniquely mapped reads used for 'KAS-Analyzer peakcalling'), which are used to calcuate fraction of reads in peaks (FRiP) score. The order and number of (sp)KAS-seq data should be the consistent with the labels file. REQUIRED.
 Example:
 KAS-seq_WT_rep1.bed
 KAS-seq_WT_rep2.bed
 KAS-seq_KO_rep1.bed
 KAS-seq_KO_rep2.bed            ---KAS-seq.txt"
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 FRiP' shell script is applied to calculate and plot fraction of reads in peaks (FRiP) scores."
+Note: The 'KAS-Analyzer FRiP' shell script is applied to calculate and plot fraction of reads in peaks (FRiP) scores."
 
 printHelpAndExit() {
     echo -e ""
@@ -48,7 +48,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 FRiP' will print the help.
+# if no parameters was provided, 'KAS-Analyzer FRiP' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
    printHelpAndExit
 fi
@@ -68,7 +68,7 @@ done
 # Required options.
 if test -z $prefix ;then
    echo ""
-   echo "Please input the prefix (basename) of 'KAS-pipe2 FRiP' output files. -o [prefix]"
+   echo "Please input the prefix (basename) of 'KAS-Analyzer FRiP' output files. -o [prefix]"
    echo ""
    exit -1
 fi
@@ -82,7 +82,7 @@ fi
 
 if test -z $KASseq ;then
    echo ""
-   echo "Please input the text file containing bed files (uniquely mapped reads used for 'KAS-pipe2 peakcalling'). -k [KAS-seq]"
+   echo "Please input the text file containing bed files (uniquely mapped reads used for 'KAS-Analyzer peakcalling'). -k [KAS-seq]"
    echo ""
    exit -1
 fi
@@ -123,7 +123,7 @@ fi
 # get the path of shell scripts.
 SH_SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 
-# output the header of 'KAS-pipe2 FRiP' output files.
+# output the header of 'KAS-Analyzer FRiP' output files.
 echo -e "Types\tlabels\tPercentage" > ${prefix}_FRiP.txt
 
 # calculate the number of reads on peaks(FRiP) for every sample.
@@ -156,4 +156,4 @@ mv KAS-seq_fraction_of_reads_in_peaks.png ${prefix}_FRiP.png
 mv KAS-seq_fraction_of_reads_in_peaks.svg ${prefix}_FRiP.svg
 # rm -f ${prefix}_FRiP.txt
 
-echo "'KAS-pipe2 FRiP' run successfully!"
+echo "'KAS-Analyzer FRiP' run successfully!"

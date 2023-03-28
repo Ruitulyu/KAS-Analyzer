@@ -1,17 +1,17 @@
 #!/bin/bash
-# 'KAS-pipe2 index' was developed by Ruitu Lyu on 1-22-2022.
+# 'KAS-Analyzer index' was developed by Ruitu Lyu on 1-22-2022.
 
 # Stop on error
 set -e
 
 # help arguments
-usageHelp="Usage: KAS-pipe2 index [ -h/--help ] [ -o prefix ] [ -t threads ] [ -s assembly id ] [ -i index types ] [ -l labels ] [ -k KAS-seq ]"
-exampleHelp="Example: nohup KAS-pipe2 index -o KAS-seq_pausing_index -t 10 -s hg19 -i pausing -l labels.txt -k KAS-seq.txt &"
-prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 index' output files. REQUIRED."
+usageHelp="Usage: KAS-Analyzer index [ -h/--help ] [ -o prefix ] [ -t threads ] [ -s assembly id ] [ -i index types ] [ -l labels ] [ -k KAS-seq ]"
+exampleHelp="Example: nohup KAS-Analyzer index -o KAS-seq_pausing_index -t 10 -s hg19 -i pausing -l labels.txt -k KAS-seq.txt &"
+prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer index' output files. REQUIRED."
 threadsHelp="-t [threads]: please specify the number of threads used for the pausing or termination index calculation. Default: 1."
 assemblyidHelp="-s [assembly id]: please specify the genome assembly id of KAS-seq data. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 indexHelp="-i [index]: please specify the index type you want to calculate. e.g. pausing or termination. REQUIRED."
-labelsHelp="-l [labels]: please input the text file containing the labels of (sp)KAS-seq that show in 'KAS-pipe2 index' output files. Default: basename of KAS-seq files.
+labelsHelp="-l [labels]: please input the text file containing the labels of (sp)KAS-seq that show in 'KAS-Analyzer index' output files. Default: basename of KAS-seq files.
 Example:
 WT_rep1
 WT.rep2                        ---labels.txt"
@@ -20,7 +20,7 @@ Example:
 KAS-seq_WT_rep1.bigWig
 KAS-seq_WT_rep2.bigWig         ---KAS-seq.txt"
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 index' shell script is applied to calculate the pausing or termination index."
+Note: The 'KAS-Analyzer index' shell script is applied to calculate the pausing or termination index."
 
 printHelpAndExit() {
     echo -e ""
@@ -45,7 +45,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 index' will print the help.
+# if no parameters was provided, 'KAS-Analyzer index' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
@@ -91,7 +91,7 @@ fi
 # Required options.
 if test -z $prefix ;then
    echo ""
-   echo "Please input the prefix (basename) of 'KAS-pipe2 index' output files. -o [prefix]"
+   echo "Please input the prefix (basename) of 'KAS-Analyzer index' output files. -o [prefix]"
    echo ""
    exit -1
 fi
@@ -307,4 +307,4 @@ fi
 
 rm -f ${prefix}.labels_basename.txt
 
-echo "'KAS-pipe2 index' run successfully."
+echo "'KAS-Analyzer index' run successfully."

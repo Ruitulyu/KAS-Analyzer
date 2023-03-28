@@ -1,18 +1,18 @@
 #!/bin/bash
-# 'KAS-pipe2 install' was developed by Ruitu Lyu on 12-10-2021.
+# 'KAS-Analyzer install' was developed by Ruitu Lyu on 12-10-2021.
 
 # Stop on error
 set -e
 
 ## Read arguments                                                     
-usageHelp="Usage: KAS-pipe2 install [ -h\--help ] [ -conda ] [ -check ] [ -t tools ] [ -KAS-pipe2 ]"
-exampleHelp="Example: KAS-pipe2 install or KAS-pipe2 install -check"
+usageHelp="Usage: KAS-Analyzer install [ -h\--help ] [ -conda ] [ -check ] [ -t tools ] [ -KAS-Analyzer ]"
+exampleHelp="Example: KAS-Analyzer install or KAS-Analyzer install -check"
 condaHelp="-conda: check the installation or install anaconda in your computer."
 checkHelp="-check: list the installed and uninstalled tools."
-KASpipe2Help="-KAS-pipe2: install and configure the KAS-pipe2 conda environment."
+KASpipe2Help="-KAS-Analyzer: install and configure the KAS-Analyzer conda environment."
 toolsHelp="-t [tools]: check the installation of specific tool, if not, will install automaticially."
 helpHelp="-h\-help: print this help and exit.
-Note: this subcommand is used to install conda environment and specific tool that needed in KAS-pipe2."
+Note: this subcommand is used to install conda environment and specific tool that needed in KAS-Analyzer."
 
 
 printHelpAndExit() {
@@ -34,7 +34,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 install' will print the help.
+# if no parameters was provided, 'KAS-Analyzer install' will print the help.
 if [[ $# == 0 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
@@ -56,9 +56,9 @@ else
 fi     	
 }
 
-# function to check the installed and uninstalled tools.
+# function to check the installed and uninstalled packages.
 checkinstall() {
-all_tools="bedtools bwa bowtie2 macs2 macs14 deeptools homer fastqc cutadapt trim_galore bedGraphToBigWig samtools picard R"
+all_tools="bedtools bwa bowtie2 macs2 epic2=0.0.52 deeptools homer fastqc cutadapt trim_galore bedGraphToBigWig samtools picard R"
 cat /dev/null > .installed_tools.txt
 cat /dev/null > .uninstalled_tools.txt
 for ((i=1; i<=14; i++))	
@@ -92,9 +92,9 @@ fi
 	
 if ! type $tools >/dev/null 2>&1 ;then
    echo ""
-   echo "$tools was not installed, install $tools with 'conda'"
+   echo "$tools was not installed, install $tools with 'mamba'"
    echo ""
-   conda install -c bioconda $tools
+   mamba install $tools
    echo "done."
    echo ""
 else
@@ -102,23 +102,25 @@ else
 fi   
 }	
 
-installKAS-pipe2() {
-CONDA_ENV_PY3=KAS-pipe2
-REQ_TXT_PY3=${SH_SCRIPT_DIR}/../requirements.txt
+installKAS-Analyzer() {
+CONDA_ENV_PY3=KAS-Analyzer
+REQ_TXT_PY3=${SH_SCRIPT_DIR}/../environment.yml
 
 # conda --version  # check if conda exist.
-echo "=== Installing KAS-pipe2 pipeline's conda environments ==="
-conda create -n ${CONDA_ENV_PY3} --file ${REQ_TXT_PY3} -y -c defaults -c bioconda -c conda-forge -c r
+# mamba --version  # check if mamba exist.
+echo "=== Installing KAS-Analyzer pipeline's conda environments ==="
+# conda create -n ${CONDA_ENV_PY3} --file ${REQ_TXT_PY3} -y -c defaults -c bioconda -c conda-forge -c r
+mamba env create -f ${REQ_TXT_PY3}
 
-echo "=== Configuring for KAS-pipe2 pipeline's conda environments ==="
+echo "=== Configuring for KAS-Analyzer pipeline's conda environments ==="
 CONDA_PREFIX_PY3=$(conda env list | grep -P "\b${CONDA_ENV_PY3}\s" | awk '{if (NF==3) print $3; else print $2}')
 
 if [ ! "${CONDA_PREFIX_PY3}" ] ;then
-   echo "Error: 'KAS-pipe2' conda environments not found."
+   echo "Error: 'KAS-Analyzer' conda environments not found."
    echo "Try to reinstall pipeline's Conda environments."
    echo
    echo "1) $ bash configure_uninstall.sh"
-   echo "2) $ KAS-pipe2 install -KAS-pipe2"
+   echo "2) $ KAS-Analyzer install -KAS-Analyzer"
    exit 1
 fi
 
@@ -161,12 +163,12 @@ echo "export R_LIBS=\${OLD_R_LIBS}" >> ${CONDA_DEACTIVATE_SH}
 echo "unset OLD_R_HOME" >> ${CONDA_DEACTIVATE_SH}
 echo "unset OLD_R_LIBS" >> ${CONDA_DEACTIVATE_SH}
 
-echo "Configure KAS-pipe2 conda environment successfully!"
+echo "Configure KAS-Analyzer conda environment successfully!"
 }
 
 
 # get the value of options.
-ARGS=`getopt -a -o hackt: --long help,conda,check,KAS-pipe2,tools: -- "$@"`
+ARGS=`getopt -a -o hackt: --long help,conda,check,KAS-Analyzer,tools: -- "$@"`
 
 if [ $? != 0 ];then
         echo "Terminating..."
@@ -190,8 +192,8 @@ do
             checkinstall
             shift
             ;;
-        -k | --KAS-pipe2 | -KAS-pipe2)
-            installKAS-pipe2
+        -k | --KAS-Analyzer | -KAS-Analyzer)
+            installKAS-Analyzer
             shift
             ;;	    
         -t | --tools | -tools)

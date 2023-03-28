@@ -1,24 +1,24 @@
 #!/bin/bash
-# 'KAS-pipe2 profile' was developed by Ruitu Lyu on 12-14-2021.
+# 'KAS-Analyzer profile' was developed by Ruitu Lyu on 12-14-2021.
 
 # Stop on error
 set -e
 
 # help arguments
-usageHelp="Usage: KAS-pipe2 profile [ -h/--help ] [ -t threads ] [ -s assembly id ] [ -e length ] [ -o prefix ] [ -r regions ] [ -p peaks file ] [ -f peaks files list ] [ -l labels ] [ -c colors ] [ -k KAS-seq ]"
+usageHelp="Usage: KAS-Analyzer profile [ -h/--help ] [ -t threads ] [ -s assembly id ] [ -e length ] [ -o prefix ] [ -r regions ] [ -p peaks file ] [ -f peaks files list ] [ -l labels ] [ -c colors ] [ -k KAS-seq ]"
 exampleHelp="Example: 
 Genomic features(genebody, TSS or TES):
-nohup KAS-pipe2 profile -t 10 -s hg19 -o KAS-seq_genebody -r genebody -c red,blue,green,purple -l labels.txt -k KAS-seq.txt &
+nohup KAS-Analyzer profile -t 10 -s hg19 -o KAS-seq_genebody -r genebody -c red,blue,green,purple -l labels.txt -k KAS-seq.txt &
 
 Custom regions(peaks. e.g. enhancers.bed):
-nohup KAS-pipe2 profile -t 10 -o KAS-seq_peaks -r peaks -p KAS-seq_peaks.bed -c red,blue,green,purple -l labels.txt -k KAS-seq.txt &
+nohup KAS-Analyzer profile -t 10 -o KAS-seq_peaks -r peaks -p KAS-seq_peaks.bed -c red,blue,green,purple -l labels.txt -k KAS-seq.txt &
 
 KAS-seq signal on different regions (-f [peaks list] must be specified):
-nohup KAS-pipe2 profile -t 10 -o KAS-seq_different_clusters -r peakslist -f peaks_cluster1.bed,peaks_cluster2.bed,peaks_cluster3.bed -c red,green,purple -l labels.txt -k KAS-seq.txt &"
+nohup KAS-Analyzer profile -t 10 -o KAS-seq_different_clusters -r peakslist -f peaks_cluster1.bed,peaks_cluster2.bed,peaks_cluster3.bed -c red,green,purple -l labels.txt -k KAS-seq.txt &"
 threadsHelp="-t [threads]: please input the number of threads used for generating (sp)KAS-seq metagene profile plot. DEFAULT: 1."
 assemblyidHelp="-s [assemblyid]: please specify the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. REQUIRED only for 'genomic features' mode."
 lengthHelp="-e [length]: please specify the distance upstream of the start site of the regions defined in the region file. If the regions are genebody, this would be the distance upstream of the transcription start site. DEFAULT: 3000."
-prefixHelp="-o [KAS-seq_profile]: please input the prefix (basename), which will be used to generate the name of 'KAS-pipe2 metageneprofile' output files. REQUIRED."
+prefixHelp="-o [KAS-seq_profile]: please input the prefix (basename), which will be used to generate the name of 'KAS-Analyzer metageneprofile' output files. REQUIRED."
 regionsHelp="-r [regions]: please specify the regions types for generating metagene profile plot. e.g. Genomic features: genebody, TSS or TES; Custom regions: peaks or peakslist. REQUIRED."
 peaksHelp="-p [peaks file]: please specify the peak file. REQUIRED only for 'custom regions: peaks' mode."
 peakslistHelp="-f [peaks list]: please specify the peak files list. e.g. peaks_cluster1.bed,peaks_cluster2.bed,peaks_cluster3.bed. REQUIRED only for 'custom regions: peakslist' mode. Note: only one KAS-seq bigWig file is needed."
@@ -29,14 +29,14 @@ WT_rep1          Cluster1
 WT.rep2          Cluster2
 KO.rep1          Cluster3
 KO.rep2   or                        ---labels.txt"
-KASseqHelp="-k [KAS-seq.txt]: please input the text file containing normalized (sp)KAS-seq bigWig files, which can be generated with 'KAS-pipe2 normalize' and 'KAS-pipe2 bedGraphToBigWig' shell scripts. The order and number of (sp)KAS-seq bigWig files should be the consistent with the labels file when provided. REQUIRED.
+KASseqHelp="-k [KAS-seq.txt]: please input the text file containing normalized (sp)KAS-seq bigWig files, which can be generated with 'KAS-Analyzer normalize' and 'KAS-Analyzer bedGraphToBigWig' shell scripts. The order and number of (sp)KAS-seq bigWig files should be the consistent with the labels file when provided. REQUIRED.
 Example:
 KAS-seq_WT_rep1.nor.bigWig
 KAS-seq_WT_rep2.nor.bigWig
 KAS-seq_KO_rep1.nor.bigWig
 KAS-seq_KO_rep2.nor.bigWig          ---KAS-seq.txt"
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 profile' shell script is applied to generate metagene profile for (sp)KAS-seq data on genomic features( genebody, TSS or TES) or provided custom regions. 'KAS-pipe2 metageneprofile' shell script mainly invoke deeptools 'computeMatrix' and 'plotProfile', please refer to https://deeptools.readthedocs.io/en/develop/content/list_of_tools.html for more information."
+Note: The 'KAS-Analyzer profile' shell script is applied to generate metagene profile for (sp)KAS-seq data on genomic features( genebody, TSS or TES) or provided custom regions. 'KAS-Analyzer metageneprofile' shell script mainly invoke deeptools 'computeMatrix' and 'plotProfile', please refer to https://deeptools.readthedocs.io/en/develop/content/list_of_tools.html for more information."
 
 # print help function.
 printHelpAndExit() {
@@ -70,7 +70,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 metageneprofile' will print the help.
+# if no parameters was provided, 'KAS-Analyzer metageneprofile' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
@@ -105,7 +105,7 @@ fi
 # Required options.
 if test -z $prefix ;then
    echo ""
-   echo "Please input the prefix (basename) of 'KAS-pipe2 metageneprofile' output files. -o [prefix]"
+   echo "Please input the prefix (basename) of 'KAS-Analyzer metageneprofile' output files. -o [prefix]"
    echo ""
    exit -1
 fi
@@ -234,7 +234,7 @@ labels_list=$(awk '{for(i=1;i<=NF;i++) a[i,NR]=$i}END{for(i=1;i<=NF;i++) {for(j=
 
 rm -f ${prefix}.labels_basename.txt
 
-# get the absolute path of 'KAS-pipe2 metageneprofile' shell script.
+# get the absolute path of 'KAS-Analyzer metageneprofile' shell script.
 SH_SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 
 if [[ $regions == "genebody" ]] ;then
@@ -412,4 +412,4 @@ elif [[ $regions == "peaks" ]] ;then
    fi
 fi
 
-echo "'KAS-pipe2 metageneprofile' run successfully!"
+echo "'KAS-Analyzer metageneprofile' run successfully!"

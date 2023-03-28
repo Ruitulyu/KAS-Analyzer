@@ -1,12 +1,12 @@
 #!/bin/bash
-# 'KAS-pipe2 download' was developped by Ruitu Lyu on 12-01-2021.
+# 'KAS-Analyzer download' was developped by Ruitu Lyu on 12-01-2021.
 
 # Stop on error
 set -e
 
 ## Read arguments                                                     
-usageHelp="Usage: KAS-pipe2 download [ -l ] [ -h ] [ -a aligner ] [ -g assembly id ] [ -d directory to save index of aligner ]"
-exampleHelp="Example: KAS-pipe2 download -a bowtie2 -g hg19 -d /Software/reference_genome/ "
+usageHelp="Usage: KAS-Analyzer download [ -l ] [ -h ] [ -a aligner ] [ -g assembly id ] [ -d directory to save index of aligner ]"
+exampleHelp="Example: KAS-Analyzer download -a bowtie2 -g hg19 -d /Software/reference_genome/ "
 listHelp="-l list all of the available aligner index for reference genomes."
 alignerHelp="-a [aligner]: aligner name you want to use, e.g. bowtie, bowtie2 or bwa. REQUIRED."
 assemblyidHelp="-g [assembly id]: reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9,mm10,mm39; Fruitfly: dm3, dm6; Rat: rn6, rn7; C.elegans: ce10, ce11; Zebra fish: danRer10, danRer11. REQUIRED."
@@ -58,7 +58,7 @@ list() {
     exit -1
 }
 
-# if no parameters or '--help' was provided, KAS-pipe2 download will print the help.
+# if no parameters or '--help' was provided, KAS-Analyzer download will print the help.
 if [[ $# == 0 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi

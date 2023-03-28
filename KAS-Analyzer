@@ -28,25 +28,25 @@ set -e
 #$#########
 
 ###
-### KAS-pipe2 is a collection of command line tools for KAS-seq or strand specific KAS-seq(spKAS-seq) data analysis.
-### Version:   v2.0.0
-### About:     KAS-pipe2 is mainly developed by Ruitu Lyu, postdoctoral fellow in Prof. Chuan He's group at the University of Chicago.
-### Docs:      https://ruitulyu.github.io/KAS-pipe2/
-### Code:      https://github.com/Ruitulyu/KAS-pipe2
-### Mail:      https://github.com/Ruitulyu/KAS-pipe2/discussions
+### KAS-Analyzer is a collection of command line tools for KAS-seq data analysis.
+### Version:   v1.0.0
+### About:     KAS-Analyzer is mainly developed by Ruitu Lyu, postdoctoral fellow in Prof. Chuan He's group at the University of Chicago.
+### Docs:      https://ruitulyu.github.io/KAS-Analyzer/
+### Code:      https://github.com/Ruitulyu/KAS-Analyzer/
+### Mail:      https://github.com/Ruitulyu/KAS-Analyzer/discussions
 ###
 ### Usage:
-### KAS-pipe2 <sub command> [options]
+### KAS-Analyzer <sub command> [options]
 ###
-### The KAS-pipe2 sub-commands include:
+### The KAS-Analyzer sub-commands include:
 ###
 ### [ Configure ]
 ###    download        Downlaod the index of reference genome for aligners (bowtie2, bwa).
 ###    build           Build the index of reference genome for aligners (bowtie2, bwa).
-###    install         Install and check the 'KAS-pipe2' conda environment; check the installation of tools.
-###    uninstall       Uninstall the 'KAS-pipe2' conda environment.
-###    activate        Activate the 'KAS-pipe2' conda environment.
-###    deactivate      Deactivate the 'KAS-pipe2' conda environment.
+###    install         Install and check the 'KAS-Analyzer' conda environment; check the installation of tools.
+###    uninstall       Uninstall the 'KAS-Analyzer' conda environment.
+###    activate        Activate the 'KAS-Analyzer' conda environment.
+###    deactivate      Deactivate the 'KAS-Analyzer' conda environment.
 ###
 ### [ Fastqc ]
 ###    fastqc          Generate basic quality control metrics for KAS-seq data.
@@ -96,31 +96,31 @@ set -e
 ###
 ### [ General help ]
 ###    --help          Print this help menu.
-###    --version       Print the version of KAS-pipe2 you are using.
+###    --version       Print the version of KAS-Analyzer you are using.
 ###    --contact       Feature requests, bugs, mailing lists, etc.
 ###
 
-# Help message for KAS-pipe2
+# Help message for KAS-Analyzer
 
 help() {
     sed -rn 's/^### ?//;T;p' "$0"
 }
 
 version() {
-    echo "KAS-pipe2 v2.0"
+    echo "KAS-Analyzer v1.0"
 }
 
 contact() {
     echo "
 - For further help, or to report a bug, please 
-  check the KAS-pipe2 github issue: 
-     https://github.com/Ruitulyu/KAS-pipe2/issues
+  check the KAS-Analyzer github issue: 
+     https://github.com/Ruitulyu/KAS-Analyzer/issues
 
 - The development repository can be found at: 
-     https://github.com/Ruitulyu/KAS-pipe2
+     https://github.com/Ruitulyu/KAS-Analyzer
 
 - Stable releases of bedtools can be found at: 
-     https://github.com/Ruitulyu/KAS-pipe2"
+     https://github.com/Ruitulyu/KAS-Analyzer"
 }
 
 if [[ $# == 0 ]] || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
@@ -141,7 +141,7 @@ fi
 # get the path of shell scripts.
 SH_SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 
-# Run the sub-commands submitted into KAS-pipe2.
+# Run the sub-commands submitted into KAS-Analyzer.
 # run 'Configure' shell scripts.
 if [[ "$1" == "download" ]]; then
    ${SH_SCRIPT_DIR}/scripts/configure_download.sh $( echo $* | cut -d " " -f 2- )

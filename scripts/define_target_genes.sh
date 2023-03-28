@@ -1,23 +1,23 @@
 #!/bin/bash
-# 'KAS-pipe2 targetgenes' was developed by Ruitu Lyu on 1-22-2022.
+# 'KAS-Analyzer targetgenes' was developed by Ruitu Lyu on 1-22-2022.
 
 # Stop on error
 set -e
 
 # help arguments
-usageHelp="Usage: KAS-pipe2 targetgenes [ -h/--help ] [ -o prefix ] [ -s assembly id ] [ -f features ] [ -l length ] [ -p peaks ]"
+usageHelp="Usage: KAS-Analyzer targetgenes [ -h/--help ] [ -o prefix ] [ -s assembly id ] [ -f features ] [ -l length ] [ -p peaks ]"
 exampleHelp="Example: 
 Gene features:
-nohup KAS-pipe2 targetgenes -o KAS-seq_peaks_target_genes -s mm10 -f promoter -p KAS-seq_peaks.bed &
+nohup KAS-Analyzer targetgenes -o KAS-seq_peaks_target_genes -s mm10 -f promoter -p KAS-seq_peaks.bed &
 Associated genes of enhancers:
-nohup KAS-pipe2 targetgenes -o KAS-seq_ss_enhancers_asso_genes -s mm10 -f enhancer -l 50000 -p KAS-seq_ss_enhancers.bed &"
-prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 targetgenes' output files. DEFAULT: basename of peaks file."
+nohup KAS-Analyzer targetgenes -o KAS-seq_ss_enhancers_asso_genes -s mm10 -f enhancer -l 50000 -p KAS-seq_ss_enhancers.bed &"
+prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer targetgenes' output files. DEFAULT: basename of peaks file."
 assemblyidHelp="-s [assembly id]: please specify the genome assembly id of KAS-seq peaks. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 featuresHelp="-f [features]: please specify the gene feagures used to define target genes. e.g. promoter, genebody, terminator, gene or enhancer. REQUIRED."
 lengthHelp="-l [length]: please specify the length cutoff (length to TSS) to define enhancer's associated genes. DEFAULT: 50000."
 peaksHelp="-p [peaks]: please specify the KAS-seq peaks, R-loops or enhancer to define their target genes. REQUIRED."
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 targetgenes' shell script is applied to define target or associated genes (promoter, genebody, terminator or gene) of KAS-seq peaks, R-loops or enhancers loci."
+Note: The 'KAS-Analyzer targetgenes' shell script is applied to define target or associated genes (promoter, genebody, terminator or gene) of KAS-seq peaks, R-loops or enhancers loci."
 
 # print help function.
 printHelpAndExit() {
@@ -41,7 +41,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 targetgenes' will print the help.
+# if no parameters was provided, 'KAS-Analyzer targetgenes' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
@@ -132,4 +132,4 @@ elif [[ $features == "enhancer" ]] ;then
    echo ""
 fi
 
-echo "'KAS-pipe2 targetgenes' run successfully!"
+echo "'KAS-Analyzer targetgenes' run successfully!"

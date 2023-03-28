@@ -1,28 +1,28 @@
 #!/bin/bash
-# 'KAS-pipe2 KAS-seq' was developped by Ruitu Lyu on 12-08-2021.
+# 'KAS-Analyzer KAS-seq' was developped by Ruitu Lyu on 12-08-2021.
 
 # Stop on error
 set -e
 
 ## Read arguments                                                     
-usageHelp="Usage: KAS-pipe2 KAS-seq [ -h ] [ -a aligner ] [ -t threads ] [ -i index path ] [ -u ] [ -e extend length ] [ -o prefix ] [ -s assembly id ] [ -1 read1 ] [ -2 read2 ]"
+usageHelp="Usage: KAS-Analyzer KAS-seq [ -h ] [ -a aligner ] [ -t threads ] [ -i index path ] [ -u ] [ -e extend length ] [ -o prefix ] [ -s assembly id ] [ -1 read1 ] [ -2 read2 ]"
 exampleHelp="Example:
        Single-end:
-       nohup KAS-pipe2 KAS-seq -a bowtie2 -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -e 150 -o KAS-seq -s hg19 -1 KAS-seq.trim.fastq.gz &
+       nohup KAS-Analyzer KAS-seq -a bowtie2 -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -e 150 -o KAS-seq -s hg19 -1 KAS-seq.trim.fastq.gz &
        Paired-end:
-       nohup KAS-pipe2 KAS-seq -a bowtie2 -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o KAS-seq -s hg19 -1 KAS-seq.trim.R1.fastq.gz -2 KAS-seq.trim.R2.fastq.gz &
+       nohup KAS-Analyzer KAS-seq -a bowtie2 -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o KAS-seq -s hg19 -1 KAS-seq.trim.R1.fastq.gz -2 KAS-seq.trim.R2.fastq.gz &
        Note: Bowtie2 Index example: /absolute path/Bowtie2Index/hg19; bwa Index example: /absolute path/BWAIndex/hg19.fa"
 alignerHelp="-a [aligner]: please specify the aligner (bowtie2 or bwa) you want to use to map KAS-seq data. DEFAULT: bowtie2."
 threadsHelp="-t [threads]: please input the number of threads used for KAS-seq data mapping. DEFAULT: 1."
 indexpathHelp="-i [index path]: please input the absolute path of reference genome index for aligner. Note: the path to a folder followed by a prefix of genome index. REQUIRED."
 uniqueHelp="-u: please specify to filter the unique mapped reads. DEFAULT: off."
 extendlengthHelp="-e [extendlengthHelp]: please input the extend length for single-end KAS-seq data. DEFAULT: 150."
-prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 KAS-seq' output files. REQUIRED."
+prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer KAS-seq' output files. REQUIRED."
 assemblyidHelp="-s [assembly id]: please specify the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. REQUIRED."
 read1Help="-1 [read1]: please input trimmed single-end KAS-seq fastq file or read 1 of paired-end KAS-seq raw fastq files; Compressed .fastq.gz is accepted. REQUIRED."
 read2Help="-2 [read2]: please input trimmed read2 of paired-end KAS-seq raw fastq files. Compressed .fastq.gz is accepted."
 helpHelp="-h: print this help and exit.
-Note: The 'KAS-pipe2 KAS-seq' shell script mainly invoke the specific aligner (bowtie, bowtie2 or bwa) for KAS-seq data mapping, please refer to their official websites for more information."
+Note: The 'KAS-Analyzer KAS-seq' shell script mainly invoke the specific aligner (bowtie, bowtie2 or bwa) for KAS-seq data mapping, please refer to their official websites for more information."
 
 # print help.
 printHelpAndExit() {
@@ -53,7 +53,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 KAS-seq' will print the help.
+# if no parameters was provided, 'KAS-Analyzer KAS-seq' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
@@ -85,7 +85,7 @@ fi
 
 if test -z $prefix ;then
    echo ""
-   echo "Please provide the prefix (basename) of 'KAS-pipe2 KAS-seq' output files. -o [prefix]"
+   echo "Please provide the prefix (basename) of 'KAS-Analyzer KAS-seq' output files. -o [prefix]"
    echo ""
    exit 1
 fi
@@ -160,12 +160,12 @@ else
    paired_or_single_end="paired"
 fi
 
-# get the path of 'KAS-pipe2 KAS-seq' shell script.
+# get the path of 'KAS-Analyzer KAS-seq' shell script.
 SH_SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 
 
 echo ""
-echo "Welcome to analyze KAS-seq data with 'KAS-pipe2'..."
+echo "Welcome to analyze KAS-seq data with 'KAS-Analyzer'..."
 echo ""
 
 # Map single-end KAS-seq data.
@@ -755,4 +755,4 @@ elif [[ $paired_or_single_end == "paired" ]] ;then
    fi
 fi
 
-echo "'KAS-pipe2 KAS-seq' run successfully!"
+echo "'KAS-Analyzer KAS-seq' run successfully!"

@@ -1,19 +1,19 @@
 #!/bin/bash
-# 'KAS-pipe2 motif' was developed by Ruitu Lyu on 12-22-2021.
+# 'KAS-Analyzer motif' was developed by Ruitu Lyu on 12-22-2021.
 
 # Stop on error
 set -e
 
 # help arguments
-usageHelp="Usage: KAS-pipe2 motif [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -e enhancer position file ] [ -c control position file ] "
-exampleHelp="Example: nohup KAS-pipe2 motif -o KAS-seq_enhancers_motifs -t 10 -s mm10 -e enhancers.bed -c control_background_peaks.bed &"
+usageHelp="Usage: KAS-Analyzer motif [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -e enhancer position file ] [ -c control position file ] "
+exampleHelp="Example: nohup KAS-Analyzer motif -o KAS-seq_enhancers_motifs -t 10 -s mm10 -e enhancers.bed -c control_background_peaks.bed &"
 threadsHelp="-t [threads]: please specify the number of threads used for enriched TF motifs on transcribing enhancers. DEFAULT: 1."
-prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 motif' output files. Default: basename of enhancers file."
+prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer motif' output files. Default: basename of enhancers file."
 assemblyidHelp="-s [assembly id]: please specify the genome assembly id of enhancers regulatory elements. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 enhancersHelp="-e [enhaner]: please specify the enhancers position file in bed format. REQUIRED."
 controlHelp="-c [control]: please specify the control position file in bed format, which was used as background for enriched TF motifs idenfication on enhancers. OPTIONAL"
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 motif' shell script is applied to identify enriched TF motifs on transcribing enhancers identified by KAS-seq data. For more detials, please refer to http://homer.ucsd.edu/homer/ngs/peakMotifs.html"
+Note: The 'KAS-Analyzer motif' shell script is applied to identify enriched TF motifs on transcribing enhancers identified by KAS-seq data. For more detials, please refer to http://homer.ucsd.edu/homer/ngs/peakMotifs.html"
 
 # print help function.
 printHelpAndExit() {
@@ -37,7 +37,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 motif' will print the help.
+# if no parameters was provided, 'KAS-Analyzer motif' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
@@ -92,7 +92,7 @@ fi
 if ! type findMotifs.pl > /dev/null 2>&1 ;then
    echo "homer was not installed or not export to the \$PATH'"
    echo ""
-   echo "Install homer findMotifs.pl with 'conda install -c bioconda homer' or 'KAS-pipe2 install -t homer'."
+   echo "Install homer findMotifs.pl with 'conda install -c bioconda homer' or 'KAS-Analyzer install -t homer'."
    echo ""
    exit 1
 fi
@@ -100,12 +100,12 @@ fi
 if ! type bedtools > /dev/null 2>&1 ;then
    echo "bedtools was not installed or not export to the \$PATH'"
    echo ""
-   echo "Install bedtools with 'conda install -c bioconda bedtools' or 'KAS-pipe2 install -t bedtools'."
+   echo "Install bedtools with 'conda install -c bioconda bedtools' or 'KAS-Analyzer install -t bedtools'."
    echo ""
    exit 1
 fi
 
-# the path of KAS-pipe2 KAS-seq shell script.
+# the path of KAS-Analyzer KAS-seq shell script.
 SH_SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 
 if test -z $control ;then
@@ -161,4 +161,4 @@ else
 
 fi
 
-echo "'KAS-pipe2 motif' run successfully!"
+echo "'KAS-Analyzer motif' run successfully!"

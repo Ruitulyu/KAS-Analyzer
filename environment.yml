@@ -1,0 +1,28 @@
+name: KAS-Analyzer
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+  - r
+dependencies:
+  - python
+  - samtools
+  - bedtools
+  - picard
+  - fastqc
+  - homer
+  - ucsc-bedgraphtobigwig
+  - ucsc-bedsort
+  - r-base
+  - r-essentials
+  - r-devtools
+  - r-corrplot
+  - r-ggpubr
+  - r-RColorBrewer
+  - bowtie2
+  - bwa
+  - deeptools
+  - cutadapt
+  - trim-galore
+  - macs2
+  - epic2=0.0.52

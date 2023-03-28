@@ -1,14 +1,14 @@
 #!/bin/bash
-# 'KAS-pipe2 RNaseH' was developed by Ruitu Lyu on 12-15-2022.
+# 'KAS-Analyzer RNaseH' was developed by Ruitu Lyu on 12-15-2022.
 
 # Stop on error
 set -e
 
 # help arguments
-usageHelp="Usage: KAS-pipe2 RNaseH [ -h/--help ] [ -p threads ] [ -o prefix ] [ -r WT_R-loop.bed ] [ -f fold change ] [ -c WT_R-loop_density.txt ] [ -t RNaseH_R-loop_density.txt ]"
-exampleHelp="Example: nohup KAS-pipe2 RNaseH -p 10 -o RNaseH_sensitive_R-loops -r WT_R-loop.bed -f 2 -c WT_R-loop_density.txt -t RNaseH_R-loop_density.txt &"
+usageHelp="Usage: KAS-Analyzer RNaseH [ -h/--help ] [ -p threads ] [ -o prefix ] [ -r WT_R-loop.bed ] [ -f fold change ] [ -c WT_R-loop_density.txt ] [ -t RNaseH_R-loop_density.txt ]"
+exampleHelp="Example: nohup KAS-Analyzer RNaseH -p 10 -o RNaseH_sensitive_R-loops -r WT_R-loop.bed -f 2 -c WT_R-loop_density.txt -t RNaseH_R-loop_density.txt &"
 threadsHelp="-p [threads]: please specify the number of threads used for R-loops identification. DEFAULT: 1."
-prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 RNaseH' output files. REQUIRED."
+prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer RNaseH' output files. REQUIRED."
 RloopsHelp="-r [WT_R-loops.bed]: please specify the R-loop list defined using spKAS-seq data in cells without RNase H treatment. REQUIRED."
 foldchangeHelp="-f [fold change]: please specify the fold change threshold of R-loop density difference between WT and RNase H samples used for the identification of R-loops sensitive to RNase H treatment. DEFAULT: 2."
 WTRloopHelp="-c [WT_R-loop_density.txt]: please input the text file containing WT R-loop density files. REQUIRED.
@@ -20,7 +20,7 @@ Example:
 RNaseH_R-loop.rep1.bigWig
 RNaseH_R-loop.rep2.bigWig       ---RNaseH_R-loop_density.txt"
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 RNaseH' shell script is applied to identify R-loops sensitive to RNase H treatment."
+Note: The 'KAS-Analyzer RNaseH' shell script is applied to identify R-loops sensitive to RNase H treatment."
 
 printHelpAndExit() {
     echo -e ""
@@ -45,7 +45,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 RNaseH' will print the help.
+# if no parameters was provided, 'KAS-Analyzer RNaseH' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
@@ -76,7 +76,7 @@ fi
 # Required options.
 if test -z $prefix ;then
    echo ""      
-   echo "Please input the prefix (basename) of 'KAS-pipe2 RNaseH' output files. REQUIRED: -o prefix"
+   echo "Please input the prefix (basename) of 'KAS-Analyzer RNaseH' output files. REQUIRED: -o prefix"
    echo ""
    exit 1
 fi
@@ -111,7 +111,7 @@ if test -z $foldchange ;then
    foldchange=2
 fi
 
-# get the absolute path of 'KAS-pipe2 R-loop' shell script.
+# get the absolute path of 'KAS-Analyzer R-loop' shell script.
 SH_SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 
 # get the list of KASseq bigWig files and labels.
@@ -170,4 +170,4 @@ rm -f ${prefix}_RNaseH_vs_WT_on_${Rloops_basename}.bed
 echo "done."
 echo ""
 
-echo "'KAS-pipe2 RNaseH' run successfully!"
+echo "'KAS-Analyzer RNaseH' run successfully!"

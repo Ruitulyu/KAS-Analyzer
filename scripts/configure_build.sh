@@ -4,8 +4,8 @@
 set -e
 
 # Help information
-usageHelp="Usage: KAS-pipe2 build [ -h ] [ -a aligner ] [ -g genome fasta ] [ -p index prefix ] [ -t threads ] [ -d index dir ]"
-exampleHelp="Example: KAS-pipe2 build -a bowtie2 -g ./genome.fa -p hg19 -t 10 -d /Software/hg19_Bowtie2Index/ "
+usageHelp="Usage: KAS-Analyzer build [ -h ] [ -a aligner ] [ -g genome fasta ] [ -p index prefix ] [ -t threads ] [ -d index dir ]"
+exampleHelp="Example: KAS-Analyzer build -a bowtie2 -g ./genome.fa -p hg19 -t 10 -d /Software/hg19_Bowtie2Index/ "
 alignerHelp="-a [aligner]: please specify aligner name you want to use, e.g. bowtie, bowtie2 or bwa. REQUIRED."
 fastaHelp="-g [genome fasta]: please input the path of reference genome fasta file. REQUIRED."
 threadsHelp="-t [threads]: please specify the number of threads. Default: 1."
@@ -35,7 +35,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 build' will print the help.
+# if no parameters was provided, 'KAS-Analyzer build' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
@@ -90,7 +90,7 @@ if [[ "$aligner" == "bowtie2" ]]; then
    if ! type bowtie2 > /dev/null 2>&1 ;then
       echo "bowtie2 was not installed or not export to the \$PATH'"
       echo ""
-      echo "Install bowtie2 with 'conda install -c bioconda bowtie2' or 'KAS-pipe2 install -t bowtie2'."
+      echo "Install bowtie2 with 'conda install -c bioconda bowtie2' or 'KAS-Analyzer install -t bowtie2'."
       echo ""
       exit 1
    fi            	
@@ -107,7 +107,7 @@ elif [[ "$aligner" == "bwa" ]]; then
    if ! type bwa > /dev/null 2>&1 ;then
    echo "bwa was not installed or not export to the \$PATH'"
    echo ""
-   echo "Install bwa with 'conda install -c bioconda bwa' or 'KAS-pipe2 install -t bwa'."
+   echo "Install bwa with 'conda install -c bioconda bwa' or 'KAS-Analyzer install -t bwa'."
    echo ""
    exit 1
    fi
@@ -129,4 +129,4 @@ fi
 
 echo "$aligner $fasta_name index built successfully."
 
-echo "'KAS-pipe2 build' run successfully!"
+echo "'KAS-Analyzer build' run successfully!"

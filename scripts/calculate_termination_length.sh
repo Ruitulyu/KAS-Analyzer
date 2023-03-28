@@ -1,13 +1,13 @@
 #!/bin/bash
-# 'KAS-pipe2 termilength' was developed by Ruitu Lyu on 1-25-2022.
+# 'KAS-Analyzer termilength' was developed by Ruitu Lyu on 1-25-2022.
 
 # Stop on error
 set -e
 
 # help arguments
-usageHelp="Usage: KAS-pipe2 termilength [ -h/--help ] [ -o prefix ] [ -t threads ] [ -b bin size ] [ -g assembly id ] [ -p peaks ] [ -l labels ] [ -k KAS-seq ]"
-exampleHelp="Example: nohup KAS-pipe2 termilength -o KAS-seq_termination_length -t 10 -g mm10 -p peaks.txt -l labels.txt -k KAS-seq.txt &"
-prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 termilength' output files. REQUIET."
+usageHelp="Usage: KAS-Analyzer termilength [ -h/--help ] [ -o prefix ] [ -t threads ] [ -b bin size ] [ -g assembly id ] [ -p peaks ] [ -l labels ] [ -k KAS-seq ]"
+exampleHelp="Example: nohup KAS-Analyzer termilength -o KAS-seq_termination_length -t 10 -g mm10 -p peaks.txt -l labels.txt -k KAS-seq.txt &"
+prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer termilength' output files. REQUIET."
 threadsHelp="-t [threads]: please specify the number of threads. DEFAULT: 1."
 binsizeHelp="-b [bin size]: please specify the size of sliding bins used for transcription termination length calculation. DEFAULT:100."
 peaksHelp="-p [peaks]: please input the text file containing the peaks file of (sp)KAS-seq data. REQUIET.
@@ -15,7 +15,7 @@ Example:
 WT.peaks.rep1.bed
 WT.peaks.rep2.bed              ---peaks.txt"
 assemblyidHelp="-s [assembly id]: please specify the genome assembly id of (sp)KAS-seq data. -g [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
-labelsHelp="-l [labels]: please input the text file containing the labels of (sp)KAS-seq data that show in 'KAS-pipe2 termilength' output files. DEFAULT: basename of KAS-seq file.
+labelsHelp="-l [labels]: please input the text file containing the labels of (sp)KAS-seq data that show in 'KAS-Analyzer termilength' output files. DEFAULT: basename of KAS-seq file.
 Example:
 WT.rep1
 WT.rep2                        ---labels.txt"
@@ -24,7 +24,7 @@ Example:
 KAS-seq.rep1.bam
 KAS-seq.rep2.bam               ---KAS-seq.txt"
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 termilength' shell script is applied to calculate the transcription termination length of protein coding genes."
+Note: The 'KAS-Analyzer termilength' shell script is applied to calculate the transcription termination length of protein coding genes."
 
 # print help.
 printHelpAndExit() {
@@ -51,7 +51,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 KAS-seq' will print the help.
+# if no parameters was provided, 'KAS-Analyzer KAS-seq' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
@@ -73,7 +73,7 @@ done
 # Required options.
 if test -z $prefix ;then
    echo ""
-   echo "Please provide the prefix (basename) of 'KAS-pipe2 termilength' output files. -o [prefix]"
+   echo "Please provide the prefix (basename) of 'KAS-Analyzer termilength' output files. -o [prefix]"
    echo ""
    exit 1
 fi
@@ -134,7 +134,7 @@ fi
 
 if test -z $labels ;then
    echo ""
-   echo "Please input the text file containing the labels of (sp)KAS-seq in 'KAS-pipe2 termination_length' output files. -l [labels]."
+   echo "Please input the text file containing the labels of (sp)KAS-seq in 'KAS-Analyzer termination_length' output files. -l [labels]."
    echo ""
    exit 1
 fi
@@ -265,4 +265,4 @@ elif test -z $KASseq ;then
 
 fi 
 
-echo "'KAS-pipe2 termilength' run successfully!"
+echo "'KAS-Analyzer termilength' run successfully!"

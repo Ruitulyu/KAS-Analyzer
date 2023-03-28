@@ -1,23 +1,23 @@
 #!/bin/bash
-# 'KAS-pipe2 correlation' was developed by Ruitu Lyu on 12-10-2021.
+# 'KAS-Analyzer correlation' was developed by Ruitu Lyu on 12-10-2021.
 
 # Stop on error
 set -e
 
 ## Read arguments                                                     
-usageHelp="Usage: KAS-pipe2 correlation [ -h/--help ] [ -m correlation method ] [ -t threads ] [ -s assembly id ] [ -r regions ] [ -f peaks file ] [ -p plot types ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ]"
+usageHelp="Usage: KAS-Analyzer correlation [ -h/--help ] [ -m correlation method ] [ -t threads ] [ -s assembly id ] [ -r regions ] [ -f peaks file ] [ -p plot types ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ]"
 exampleHelp="Example:
 On peaks:             
-nohup KAS-pipe2 correlation -m pearson -t 10 -s hg19 -r peaks -f KAS-seq_peaks.bed -p heatmap -o KAS-seq -l labels.txt -k KAS-seq.txt &
+nohup KAS-Analyzer correlation -m pearson -t 10 -s hg19 -r peaks -f KAS-seq_peaks.bed -p heatmap -o KAS-seq -l labels.txt -k KAS-seq.txt &
 On bins:
-nohup KAS-pipe2 correlation -m pearson -t 10 -s hg19 -r bin -p heatmap -o KAS-seq -l labels.txt -k KAS-seq.txt &"
+nohup KAS-Analyzer correlation -m pearson -t 10 -s hg19 -r bin -p heatmap -o KAS-seq -l labels.txt -k KAS-seq.txt &"
 methodsHelp="-m [correlation method]: please specify the methods to calculate correlation coefficients. e.g. pearson, kendall or spearman. DEFAULT: pearson."
 threadsHelp="-t [threads]: please specify the number of threads. DEFAULT: 1."
 assemblyidHelp="-s [assembly id]: please specify the genome assembly id of your (sp)KAS-seq data. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 regionsHelp="-r [regions]: please specify the region types to calculate the (sp)KAS-seq density matrix. e.g. bin or peak. DEFAULT: bin."
 peakfileHelp="-f [peaks file]: please input the merged peaks list file. Note: only valid when '-r peaks' is specified. REQUIRED." 
 plotsHelp="-p [plot types]: please specify the plot types to generate correlation plot. DEFAULT: scatterplot."
-prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 correlation' output files. REQUIRED."
+prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer correlation' output files. REQUIRED."
 labelsHelp="-l [labels]: please input the text file containing the labels of (sp)KAS-seq data that show in heatmap or scatterplot. REQUIRED.
 Example:
 WT_rep1
@@ -35,7 +35,7 @@ KAS-seq_KO.rep1.bam
 KAS-seq_KO.rep2.bam
 KAS-seq_KO.rep3.bam           ---KAS-seq_data.txt"
 helpHelp="-h: print this help and exit.
-Note: The 'KAS-pipe2 correlation' shell script is applied to calculate correlation coefficients and generate correlation plots between replicates or (sp)KAS-seq data of different conditions."
+Note: The 'KAS-Analyzer correlation' shell script is applied to calculate correlation coefficients and generate correlation plots between replicates or (sp)KAS-seq data of different conditions."
 
 printHelpAndExit() {
     echo -e "$usageHelp"
@@ -65,7 +65,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 correlation' will print the help.
+# if no parameters was provided, 'KAS-Analyzer correlation' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
@@ -161,7 +161,7 @@ fi
 
 if test -z $prefix ;then
    echo ""
-   echo "Please specify the prefix (basename) of 'KAS-pipe2 correlation' output files. -o [prefix]"
+   echo "Please specify the prefix (basename) of 'KAS-Analyzer correlation' output files. -o [prefix]"
    echo ""
    exit 1
 fi
@@ -398,4 +398,4 @@ fi
 rm -f $KASseq_list
 rm -f ${prefix}.KAS-seq.RPKM.bigWig.txt
 
-echo "'KAS-pipe2 correlation' run successfully!"
+echo "'KAS-Analyzer correlation' run successfully!"

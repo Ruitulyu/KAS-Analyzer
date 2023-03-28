@@ -1,18 +1,18 @@
 #!/bin/bash
-# 'KAS-pipe2 saturation' was developed by Ruitu Lyu on 12-16-2021.
+# 'KAS-Analyzer saturation' was developed by Ruitu Lyu on 12-16-2021.
 
 # Stop on error
 set -e
 
 # help arguments
-usageHelp="Usage: KAS-pipe2 saturation [ -h/--help ] [ -o prefix ] [ -s assembly id ] [ -c control ] [ -k KAS-seq ]"
-exampleHelp="Example: nohup KAS-pipe2 saturation -o KAS-seq_saturation -s hg19 -c KAS-seq_Input.bed -k KAS-seq.bed &"
-prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 saturation' output files. Default: basename of KAS-seq data."
+usageHelp="Usage: KAS-Analyzer saturation [ -h/--help ] [ -o prefix ] [ -s assembly id ] [ -c control ] [ -k KAS-seq ]"
+exampleHelp="Example: nohup KAS-Analyzer saturation -o KAS-seq_saturation -s hg19 -c KAS-seq_Input.bed -k KAS-seq.bed &"
+prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer saturation' output files. Default: basename of KAS-seq data."
 assemblyidHelp="-s [assembly id]: please specify the genome assembly id of (sp)KAS-seq data. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 controlHelp="-c [control]: please input the control data (input of (sp)KAS-seq data) containing uniquely mapped reads. e.g. -c KAS-seq_Input.bed. REQUIRED. Note: reads number of KAS-seq and Input should be similar."
 KASseqHelp="-k [KAS-seq]: please input the KAS-seq data containing uniquely mapped reads. e.g. -k KAS-seq.bed. REQUIRED."
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 saturation' shell script is applied to evaluate the saturation of (sp)KAS-seq data."
+Note: The 'KAS-Analyzer saturation' shell script is applied to evaluate the saturation of (sp)KAS-seq data."
 
 printHelpAndExit() {
     echo -e ""
@@ -41,7 +41,7 @@ if ! type macs2 > /dev/null 2>&1 ;then
    exit 1
 fi
 
-# if no parameters was provided, 'KAS-pipe2 saturation' will print the help.
+# if no parameters was provided, 'KAS-Analyzer saturation' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
@@ -270,4 +270,4 @@ mv KAS-seq_saturation_plot.png ${prefix}_KAS-seq_saturation_plot.png
 mv KAS-seq_saturation_plot.svg ${prefix}_KAS-seq_saturation_plot.svg
 # rm -f ${prefix}_saturation.txt
 
-echo "'KAS-pipe2 saturation' run successfully!"
+echo "'KAS-Analyzer saturation' run successfully!"

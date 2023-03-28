@@ -1,16 +1,16 @@
 #!/bin/bash
-# 'KAS-pipe2 readsnum' was developped by Ruitu Lyu on 1-18-2022.
+# 'KAS-Analyzer readsnum' was developped by Ruitu Lyu on 1-18-2022.
 
 # Stop on error
 set -e
 
 ## Read arguments                                                     
-usageHelp="Usage: KAS-pipe2 readsnum [ -h/--help ] [ -o prefix ] [ -f format ] "
-exampleHelp="Example: nohup KAS-pipe2 readsnum -o KAS-seq_reads_num -f fastq.gz &"
-prefixHelp="-o [prefix]: please specify the prefix (basename) of 'KAS-pipe2 readsnum' output files. REQUIRED."
+usageHelp="Usage: KAS-Analyzer readsnum [ -h/--help ] [ -o prefix ] [ -f format ] "
+exampleHelp="Example: nohup KAS-Analyzer readsnum -o KAS-seq_reads_num -f fastq.gz &"
+prefixHelp="-o [prefix]: please specify the prefix (basename) of 'KAS-Analyzer readsnum' output files. REQUIRED."
 formatHelp="-f [format]: please specify the format of raw reads data. e.g. fastq, fq, fastq.gz, fasta, fa or fa.gz. REQUIRED."
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 readsnum' shell script is applied to calculate the reads number of raw sequencing files."
+Note: The 'KAS-Analyzer readsnum' shell script is applied to calculate the reads number of raw sequencing files."
 
 printHelpAndExit() {
     echo -e ""
@@ -27,7 +27,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 readsnum' will print the help.
+# if no parameters was provided, 'KAS-Analyzer readsnum' will print the help.
 if [[ $# == 1 ]] || [[ "$1" == "--help" ]] || [[ $1 == "-help" ]];then
     printHelpAndExit
 fi
@@ -44,7 +44,7 @@ done
 # Required options.
 if test -z $prefix ;then
    echo ""
-   echo "Please input the prefix (basename) of 'KAS-pipe2 readsnum' output files. -o [prefix]"
+   echo "Please input the prefix (basename) of 'KAS-Analyzer readsnum' output files. -o [prefix]"
    echo ""
    exit 1
 fi
@@ -136,4 +136,4 @@ elif [ "${rawdata_format}" == "fasta" ]; then
 
 fi
 
-echo "'KAS-pipe2 readsnum' run successfully!"
+echo "'KAS-Analyzer readsnum' run successfully!"

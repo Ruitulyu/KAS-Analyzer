@@ -1,14 +1,14 @@
 #!/bin/bash
-# 'KAS-pipe2 KASindex' was developed by Ruitu Lyu on 1-19-2022.
+# 'KAS-Analyzer KASindex' was developed by Ruitu Lyu on 1-19-2022.
 
 # Stop on error
 set -e
 
 # help arguments
-usageHelp="Usage: KAS-pipe2 KASindex [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -r regions ] [ -p peaks ] [ -l labels ] [ -k KAS-seq ] "
-exampleHelp="Example: nohup KAS-pipe2 KASindex -o KAS-seq_expression -t 10 -s mm10 -r TSS -l labels.txt -k KAS-seq_data.txt &"
+usageHelp="Usage: KAS-Analyzer KASindex [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -r regions ] [ -p peaks ] [ -l labels ] [ -k KAS-seq ] "
+exampleHelp="Example: nohup KAS-Analyzer KASindex -o KAS-seq_expression -t 10 -s mm10 -r TSS -l labels.txt -k KAS-seq_data.txt &"
 threadsHelp="-t [threads]: please specify the number of threads used for calculating elongation index. DEFAULT: 1."
-prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 KASindex' output files. DEFAULT: basename of KAS-seq data."
+prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer KASindex' output files. DEFAULT: basename of KAS-seq data."
 assemblyidHelp="-s [assembly id]: please specify the genome assembly id of KAS-seq data. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 regionsHelp="-r [regions]: please specify the types of genomic regions. e.g. promoter, genebody, gene or peak. REQUIRED."
 peaksHelp="-p [peaks]: please specify the custom regions file used for KAS index calculation. OPTIONAL."
@@ -25,7 +25,7 @@ KAS-seq_WT.rep2.bigWig
 KAS-seq_KO.rep1.bigWig
 KAS-seq_KO.rep2.bigWig        ---KAS-seq_data.txt"
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 KASindex' shell script is applied to calculate elongation index on promoter, genebody, genes or custom regions."
+Note: The 'KAS-Analyzer KASindex' shell script is applied to calculate elongation index on promoter, genebody, genes or custom regions."
 
 printHelpAndExit() {
     echo -e "$usageHelp"
@@ -51,12 +51,12 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 KASindex' will print the help.
+# if no parameters was provided, 'KAS-Analyzer KASindex' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
 
-# get the options of 'KAS-pipe2 KASindex' shell script.
+# get the options of 'KAS-Analyzer KASindex' shell script.
 while getopts 'ht:o:s:r:p:l:k:' opt; do
     case $opt in
         h) printHelpAndExit 0;;
@@ -349,4 +349,4 @@ fi
 
 rm -f ${prefix}.labels_basename.txt
 
-echo "'KAS-pipe2 KASexpre' run successfully!"
+echo "'KAS-Analyzer KASexpre' run successfully!"

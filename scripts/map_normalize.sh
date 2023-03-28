@@ -1,14 +1,14 @@
 #!/bin/bash
-# 'KAS-pipe2 normalize' was developed by Ruitu Lyu on 12-10-2021.
+# 'KAS-Analyzer normalize' was developed by Ruitu Lyu on 12-10-2021.
 
 # Stop on error
 set -e
 
 ## Read arguments                                                     
-usageHelp="Usage: KAS-pipe2 normalize [ -h/--help ] [-m methods ] [ -k KAS-seq ] [ -r ratios ] [ -b ] [ -s assembly id ]"
-exampleHelp="Example: nohup KAS-pipe2 normalize -m ratios -k KAS-seq_data.txt -r ratios.txt -b -s mm10 &"
+usageHelp="Usage: KAS-Analyzer normalize [ -h/--help ] [-m methods ] [ -k KAS-seq ] [ -r ratios ] [ -b ] [ -s assembly id ]"
+exampleHelp="Example: nohup KAS-Analyzer normalize -m ratios -k KAS-seq_data.txt -r ratios.txt -b -s mm10 &"
 methodsHelp="-m [methods]: please input the methods used for KAS-seq data normalization. e.g. ratios or RPKM. DEFAULT: ratios."
-KASseqHelp="-k [KAS-seq_data.txt]: please input the text file containing the bedGraph files generated from 'KAS-pipe2 (sp)KAS-seq'. REQUIRED.
+KASseqHelp="-k [KAS-seq_data.txt]: please input the text file containing the bedGraph files generated from 'KAS-Analyzer (sp)KAS-seq'. REQUIRED.
 Example:
 -m ratios:                            -m FPKM:
 KAS-seq_WT.rep1.bg                    KAS-seq_WT.rep1.bam         
@@ -24,7 +24,7 @@ Example:
 bigWigHelp="-b: please specify if you want to convert the normalized bedGraph files into bigWig files. DEFAULT: off."
 assemblyidHelp="-s [assembly id]: please input the reference genome assembly id of bedGraph files. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the normalized KAS-seq bedGraph files. REQUIRED only if -b was specified."
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 normalize' shell script is applied to normalize spKAS-seq or KAS-seq data."
+Note: The 'KAS-Analyzer normalize' shell script is applied to normalize spKAS-seq or KAS-seq data."
 
 # print help function.
 printHelpAndExit() {
@@ -48,7 +48,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 normalize' will print the help.
+# if no parameters was provided, 'KAS-Analyzer normalize' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
@@ -69,7 +69,7 @@ done
 # Required options.
 if test -z $KASseq ;then
    echo ""
-   echo "Please input the text file containing the bedGraph or bam files generated from 'KAS-pipe2 KAS-seq'. -k [KAS-seq.txt]"
+   echo "Please input the text file containing the bedGraph or bam files generated from 'KAS-Analyzer KAS-seq'. -k [KAS-seq.txt]"
    echo ""
    exit -1
 fi
@@ -129,7 +129,7 @@ if [[ $methods == "ratios" ]] && test -z $ratios ;then
    exit -1
 fi
 
-# get the path of 'KAS-pipe2 KAS-seq' shell script.
+# get the path of 'KAS-Analyzer KAS-seq' shell script.
 SH_SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 
 # Test if the number of ratios is consistent with the number of samples.
@@ -208,4 +208,4 @@ exit
 
 fi     
 
-echo "'KAS-pipe2 normalize' run successfully!"
+echo "'KAS-Analyzer normalize' run successfully!"

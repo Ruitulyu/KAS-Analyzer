@@ -1,15 +1,15 @@
 #!/bin/bash
-# 'KAS-pipe2 fingerprint' was developed by Ruitu Lyu on 12-11-2021.
+# 'KAS-Analyzer fingerprint' was developed by Ruitu Lyu on 12-11-2021.
 
 # Stop on error
 set -e
 
 # arguments                                                     
-usageHelp="Usage: KAS-pipe2 fingerprint [ -h/--help ] [ -t threads ] [ -s assembly id ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ] "
-exampleHelp="Example: nohup KAS-pipe2 fingerprint -t 10 -s hg19 -o KAS-seq_fingerprint -l labels.txt -k KAS-seq_data.txt &"
+usageHelp="Usage: KAS-Analyzer fingerprint [ -h/--help ] [ -t threads ] [ -s assembly id ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ] "
+exampleHelp="Example: nohup KAS-Analyzer fingerprint -t 10 -s hg19 -o KAS-seq_fingerprint -l labels.txt -k KAS-seq_data.txt &"
 threadsHelp="-t [threads]: please input the number of threads used for generating KAS-seq fingerprint plot. Default: 1."
 assemblyidHelp="-s [assembly id]: please specify the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. REQUIRED."
-prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 fingerprint' output files. REQUIRED"
+prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer fingerprint' output files. REQUIRED"
 labelsHelp="-l [labels] please input the text file containing the labels of KAS-seq or spKAS-seq data that show in fingerprint plot. REQUIRED.
 Example:
 KAS-seq.rep1
@@ -23,7 +23,7 @@ KAS-seq.rep2.bam
 KAS-seq_Input.rep1.bam
 KAS-seq_Input.rep2.bam           ---KAS-seq.txt"
 helpHelp="-h/--help: print this help and exit.
-Note: the 'KAS-pipe2 fingerprint' shell script is applied to generate the fingerprint plot of (sp)KAS-seq data. For the more details about fingerprint plot, please refer to https://deeptools.readthedocs.io/en/develop/content/tools/plotFingerprint.html."
+Note: the 'KAS-Analyzer fingerprint' shell script is applied to generate the fingerprint plot of (sp)KAS-seq data. For the more details about fingerprint plot, please refer to https://deeptools.readthedocs.io/en/develop/content/tools/plotFingerprint.html."
 
 printHelpAndExit() {
     echo -e ""
@@ -46,7 +46,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 fingerprint' will print the help.
+# if no parameters was provided, 'KAS-Analyzer fingerprint' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
@@ -91,7 +91,7 @@ fi
 
 if test -z $prefix ;then
    echo ""
-   echo "Please input the prefix (basename) of 'KAS-pipe2 fingerprint' output files. -o [prefix]"
+   echo "Please input the prefix (basename) of 'KAS-Analyzer fingerprint' output files. -o [prefix]"
    echo ""
    printHelpAndExit 0
 fi
@@ -152,4 +152,4 @@ plotFingerprint -b $KASseq_list --labels $labels_list --minMappingQuality 10 --s
 echo "done."
 echo ""
 
-echo "'KAS-pipe2 fingerprint' run successfully!"
+echo "'KAS-Analyzer fingerprint' run successfully!"

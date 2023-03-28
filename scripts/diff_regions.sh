@@ -1,14 +1,14 @@
 #!/bin/bash
-# 'KAS-pipe2 diff' was developed by Ruitu Lyu on 1-20-2022.
+# 'KAS-Analyzer diff' was developed by Ruitu Lyu on 1-20-2022.
 
 # Stop on error
 set -e
 
 # help arguments
-usageHelp="Usage: KAS-pipe2 diff [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -r regions ] [ -p peaks ] [ -f fold change ] [ -c comparison file ] [ -l labels ] [ -k KAS-seq ] "
-exampleHelp="Example: nohup KAS-pipe2 diff -o KAS-seq_diff -t 10 -s mm10 -r gene -c comparision.txt -l labels.txt -k KAS-seq_data.txt &"
+usageHelp="Usage: KAS-Analyzer diff [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -r regions ] [ -p peaks ] [ -f fold change ] [ -c comparison file ] [ -l labels ] [ -k KAS-seq ] "
+exampleHelp="Example: nohup KAS-Analyzer diff -o KAS-seq_diff -t 10 -s mm10 -r gene -c comparision.txt -l labels.txt -k KAS-seq_data.txt &"
 threadsHelp="-t [threads]: please specify the number of threads used for calculating KAS index. DEFAULT: 1."
-prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 diff' output files. DEFAULT: basename of KAS-seq txt file."
+prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer diff' output files. DEFAULT: basename of KAS-seq txt file."
 assemblyidHelp="-s [assembly id]: please specify the genome assembly id of KAS-seq data. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce
 11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 regionsHelp="-r [regions]: please specify the types of genomic regions used for differential KAS-seq analysis. e.g. promoter, genebody, gene, bin or peak. REQUIRED."
@@ -33,7 +33,7 @@ KAS-seq_WT.rep2.bam
 KAS-seq_KO.rep1.bam
 KAS-seq_KO.rep2.bam         ---KAS-seq_data.txt"
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 diff' shell script is applied to perform differential KAS-seq analysis on promoter, genebody, gene, bin or custom regions."
+Note: The 'KAS-Analyzer diff' shell script is applied to perform differential KAS-seq analysis on promoter, genebody, gene, bin or custom regions."
 
 printHelpAndExit() {
     echo -e "$usageHelp"
@@ -63,12 +63,12 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 diff' will print the help.
+# if no parameters was provided, 'KAS-Analyzer diff' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
 
-# get the options of 'KAS-pipe2 diff' shell script.
+# get the options of 'KAS-Analyzer diff' shell script.
 while getopts 'ht:o:s:r:p:f:c:l:k:' opt; do
     case $opt in
         h) printHelpAndExit 0;;
@@ -635,4 +635,4 @@ fi
 rm -f $KASseq_list
 rm -f ${prefix}.KAS-seq.RPKM.bigWig.txt
 
-echo "'KAS-pipe2 diff' run successfully!"
+echo "'KAS-Analyzer diff' run successfully!"

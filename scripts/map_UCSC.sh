@@ -1,13 +1,13 @@
 #!/bin/bash
-# 'KAS-pipe2 UCSC' was developed by Ruitu Lyu on 12-10-2021.
+# 'KAS-Analyzer UCSC' was developed by Ruitu Lyu on 12-10-2021.
 
 # Stop on error
 set -e
 
 ## Read arguments                                                     
-usageHelp="Usage: KAS-pipe2 UCSC [ -h/--help ] [ -k KAS-seq ] [ -l UCSC track ] [ -c track colors ]"
-exampleHelp="Example: nohup KAS-pipe2 UCSC -k KAS-seq_data.txt -l UCSC_track_names.txt &"
-KASseqHelp="-k [KAS-seq]: please input the text file containing the bedGraph files generated from 'KAS-pipe2 KAS-seq'. REQUIRED.
+usageHelp="Usage: KAS-Analyzer UCSC [ -h/--help ] [ -k KAS-seq ] [ -l UCSC track ] [ -c track colors ]"
+exampleHelp="Example: nohup KAS-Analyzer UCSC -k KAS-seq_data.txt -l UCSC_track_names.txt &"
+KASseqHelp="-k [KAS-seq]: please input the text file containing the bedGraph files generated from 'KAS-Analyzer KAS-seq'. REQUIRED.
 Example:
 KAS-seq_WT.rep1.nor.bg
 KAS-seq_WT.rep2.nor.bg
@@ -29,7 +29,7 @@ Example:
 For more colors options, please refer to https://www.w3schools.com/colors/colors_rgb.asp or https://www.rapidtables.com/web/color/RGB_Color.html.
 "
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 UCSC' shell script is used to generate files for uploading into UCSC genome browser."
+Note: The 'KAS-Analyzer UCSC' shell script is used to generate files for uploading into UCSC genome browser."
 
 # print help function.
 printHelpAndExit() {
@@ -49,7 +49,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters or option '--help' was provided, 'KAS-pipe2 UCSC' will print the help.
+# if no parameters or option '--help' was provided, 'KAS-Analyzer UCSC' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then	
    printHelpAndExit
 fi
@@ -139,4 +139,4 @@ done
 
 rm -f .track_colors.txt
 
-echo "'KAS-pipe2 UCSC' run successfully!"
+echo "'KAS-Analyzer UCSC' run successfully!"

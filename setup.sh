@@ -5,7 +5,7 @@
 # Stop on error
 set -e
 ###
-### setup.sh - This script is used to setup the 'KAS-pipe2' pipeline.
+### setup.sh - This script is used to setup the 'KAS-Analyzer' pipeline.
 ###
 ### Usage: ./setup.sh	
 ###
@@ -28,16 +28,16 @@ elif [[ "$#" -gt 1 ]]; then
     echo "please refer the usage: ./setup.sh"
     exit 1
 elif [[ "$#" -eq 0 ]]; then 
-    echo "setup 'KAS-pipe2' pipeline"
+    echo "setup KAS-Analyzer!"
 fi    
 
 # make these scripts executable and add their directory to your PATH
 # get the path of shell script.
 SH_SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 
-chmod u+x ${SH_SCRIPT_DIR}/KAS-pipe2
+chmod u+x ${SH_SCRIPT_DIR}/KAS-Analyzer
 chmod 755 ${SH_SCRIPT_DIR}/scripts/*sh
 echo export PATH=\"${SH_SCRIPT_DIR}:"$"PATH\" >> $HOME/.bashrc
 . $HOME/.bashrc
 
-echo "All the shell scripts have been made to be executable and added to the \$path variable, please enjoy the 'KAS-pipe2' pipeline!"
+echo "All the shell scripts have been made to be executable and added to the \$path variable, please enjoy the KAS-Analyzer!"

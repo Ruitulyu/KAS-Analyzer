@@ -1,14 +1,14 @@
 #!/bin/bash
-# 'KAS-pipe2 R-loop' was developed by Ruitu Lyu on 12-22-2021.
+# 'KAS-Analyzer R-loop' was developed by Ruitu Lyu on 12-22-2021.
 
 # Stop on error
 set -e
 
 # help arguments
-usageHelp="Usage: KAS-pipe2 R-loop [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -p peaks ] [ -b bin size ] [ -f fold change ] [ -l labels ] [ -n Input ] [ -k spKAS-seq ]"
-exampleHelp="Example: nohup KAS-pipe2 R-loop -o KAS-seq_R-loops -t 10 -s mm10 -l labels.txt -k KAS-seq.txt &"
+usageHelp="Usage: KAS-Analyzer R-loop [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -p peaks ] [ -b bin size ] [ -f fold change ] [ -l labels ] [ -n Input ] [ -k spKAS-seq ]"
+exampleHelp="Example: nohup KAS-Analyzer R-loop -o KAS-seq_R-loops -t 10 -s mm10 -l labels.txt -k KAS-seq.txt &"
 threadsHelp="-t [threads]: please specify the number of threads used for R-loops identification. DEFAULT: 1."
-prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-pipe2 R-loop' output files. DEFAULT: basename of txt files containing spKAS-seq data."
+prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer R-loop' output files. DEFAULT: basename of txt files containing spKAS-seq data."
 assemblyidHelp="-s [assembly id]: please specify the genome assembly id of spKAS-seq data. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11."
 peaksHelp="-p [peaks]: please specify the spKAS-seq peaks file. if not specified, spKAS-seq peaks will be called by using macs2 without spKAS-seq Input. OPTIONAL."
 binsizeHelp="-b [bin size]: please specify the size of bins used to identify R-loops. Default: 500."
@@ -29,7 +29,7 @@ spKAS-seq_rep1.bed
 spKAS-seq_rep2.bed
 spKAS-seq_rep3.bed          ---KAS-seq.txt"
 helpHelp="-h/--help: print this help and exit.
-Note: The 'KAS-pipe2 R-loops' shell script is applied to identify R-loops from multiples pKAS-seq data."
+Note: The 'KAS-Analyzer R-loops' shell script is applied to identify R-loops from multiples pKAS-seq data."
 
 printHelpAndExit() {
     echo -e ""
@@ -60,7 +60,7 @@ printHelpAndExit() {
     exit -1
 }
 
-# if no parameters was provided, 'KAS-pipe2 R-loops' will print the help.
+# if no parameters was provided, 'KAS-Analyzer R-loops' will print the help.
 if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
@@ -183,14 +183,14 @@ else
    fi
 fi
 
-# get the absolute path of 'KAS-pipe2 R-loop' shell script.
+# get the absolute path of 'KAS-Analyzer R-loop' shell script.
 SH_SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 
 if [ $number_of_samples -eq 1 ]; then
 
    sample_selected=$(sed -n '1p' $spKASseq)
    
-   echo "Only one spKAS-seq data: $sample_selected is provided, 'KAS-pipe2 R-loop' will not perform statistical analysis for R-loops identification."
+   echo "Only one spKAS-seq data: $sample_selected is provided, 'KAS-Analyzer R-loop' will not perform statistical analysis for R-loops identification."
    echo ""
    echo "Separate $sample_selected spKAS-seq mapped reads into minus and plus strands."
    echo ""
@@ -341,7 +341,7 @@ if [ $number_of_samples -eq 1 ]; then
 
 elif [ $number_of_samples -gt 1 ]; then
 
-   echo "$number_of_samples spKAS-seq data was provided, 'KAS-pipe2 R-loop' will perform statistical analysis for R-loops identification."
+   echo "$number_of_samples spKAS-seq data was provided, 'KAS-Analyzer R-loop' will perform statistical analysis for R-loops identification."
    echo ""
    
    # generate the annotation file with header.
@@ -543,4 +543,4 @@ elif [ $number_of_samples -gt 1 ]; then
 
 fi
 
-echo "'KAS-pipe2 R-loop' run successfully!"
+echo "'KAS-Analyzer R-loop' run successfully!"
