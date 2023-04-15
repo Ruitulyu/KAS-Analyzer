@@ -52,7 +52,7 @@ source ~/.bashrc
 # If anaconda or miniconda was not installed on your system. #OPTIONAL.
 KAS-Analyzer install -conda
 
-# Make sure you have Mamba installed. If not, you can install it in your base Conda environment with the following command.
+# Make sure you have Mamba installed. If not, you can install it in your base Conda environment with the following command:
 conda install mamba -c conda-forge
 
 # Install 'KAS-Analyzer' environment using mamba. 
@@ -63,6 +63,9 @@ KAS-Analyzer install -KAS-Analyzer
 
 # Activate conda 'KAS-Analyzer' environment.
 conda activate KAS-Analyzer
+
+# Deactivate conda 'KAS-Analyzer' environment.
+conda deactivate
 ```	
 
 ------------------------------------	
