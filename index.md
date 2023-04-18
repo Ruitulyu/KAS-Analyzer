@@ -136,9 +136,9 @@ KAS-Analyzer sub-command [options]
 ### download 
 Downlaod the index of reference genome for aligners (bowtie2 or bwa).
 ```
-usage: KAS-pipe2 download [ -l ] [ -h ] [ -a aligner ] [ -g assembly id ] [ -d directory to save index of aligner ]
+usage: KAS-Analyzer download [ -l ] [ -h ] [ -a aligner ] [ -g assembly id ] [ -d directory to save index of aligner ]
 
-Example: KAS-pipe2 download -a bowtie2 -g hg19 -d /Software/reference_genome/ 
+Example: KAS-Analyzer download -a bowtie2 -g hg19 -d /Software/reference_genome/ 
 
 -l list all of the available aligner index for reference genomes.
 
@@ -154,9 +154,9 @@ Example: KAS-pipe2 download -a bowtie2 -g hg19 -d /Software/reference_genome/
 ### build 
 Build the index of reference genome for aligners (bowtie2 or bwa).
 ```
-usage: KAS-pipe2 build [ -h ] [ -a aligner ] [ -g genome fasta ] [ -p index prefix ] [ -t threads ] [ -d index dir ]
+usage: KAS-Analyzer build [ -h ] [ -a aligner ] [ -g genome fasta ] [ -p index prefix ] [ -t threads ] [ -d index dir ]
 
-Example: KAS-pipe2 build -a bowtie2 -g ./genome.fa -p hg19 -t 10 -d /Software/hg19_Bowtie2Index/ 
+Example: KAS-Analyzer build -a bowtie2 -g ./genome.fa -p hg19 -t 10 -d /Software/hg19_Bowtie2Index/ 
 
 -a [aligner]: please specify aligner name you want to use, e.g. bowtie, bowtie2 or bwa. REQUIRED.
 
@@ -172,38 +172,38 @@ Example: KAS-pipe2 build -a bowtie2 -g ./genome.fa -p hg19 -t 10 -d /Software/hg
 ```  
 
 ### install 
-Install and check the 'KAS-pipe2' conda environment; check the installation of tools. 
+Install and check the 'KAS-Analyzer' conda environment; check the installation of tools. 
 ```
-usage: KAS-pipe2 install [ -h\--help ] [ -conda ] [ -check ] [ -t tools ] [ -KAS-pipe2 ]
+usage: KAS-Analyzer install [ -h\--help ] [ -conda ] [ -check ] [ -t tools ] [ -KAS-pipe2 ]
 
-Example: KAS-pipe2 install or KAS-pipe2 install -check
+Example: KAS-Analyzer install or KAS-Analyzer install -check
 
 -conda: check the installation or install anaconda in your computer.
 
 -check: list the installed and uninstalled tools.
 
--KAS-pipe2: install and configure the KAS-pipe2 conda environment.
+-KAS-Analyzer: install and configure the KAS-Analyzer conda environment.
 
 -t [tools]: check the installation of specific tool, if not, will install automaticially.
 
 -h\-help: print this help and exit.
-Note: this subcommand is used to install conda environment and specific tool that needed in KAS-pipe2.
+Note: this subcommand is used to install conda environment and specific tool that needed in KAS-Analyzer.
 ``` 
 
 ### uninstall 
-Uninstall 'KAS-pipe2' conda environment.
+Uninstall 'KAS-Analyzer' conda environment.
 ``` 
-usage: KAS-pipe2 uninstall 
+usage: KAS-Analyzer uninstall 
 ``` 
 
 ### activate 
-Activate 'KAS-pipe2' conda environment.
+Activate 'KAS-Analyzer' conda environment.
 ``` 
-usage: conda activate KAS-pipe2
+usage: conda activate KAS-Analyzer
 ``` 
 
 ### deactivate 
-Deactivate 'KAS-pipe2' conda environment.
+Deactivate 'KAS-Analyzer' conda environment.
 ``` 
 usage: conda deactivate
 ``` 
@@ -214,9 +214,9 @@ usage: conda deactivate
 ### fastqc
 Generate basic quality control metrics for KAS-seq data.
 ``` 
-usage: KAS-pipe2 fastqc [ -h/--help ] [ -t threads ] [ -c contaminants ] [ -o output dir ] [ -k KAS-seq ] 
+usage: KAS-Analyzer fastqc [ -h/--help ] [ -t threads ] [ -c contaminants ] [ -o output dir ] [ -k KAS-seq ] 
 
-Example: nohup KAS-pipe2 fastqc -t 10 -k KAS-seq.rep1.fastq.gz,KAS-seq.rep2.fastq.gz,KAS-seq.rep3.fastq.gz &
+Example: nohup KAS-Analyzer fastqc -t 10 -k KAS-seq.rep1.fastq.gz,KAS-seq.rep2.fastq.gz,KAS-seq.rep3.fastq.gz &
 
 -t [threads]: please input number of threads to be used for quality control check. DEFAULT: 1.
 
@@ -227,34 +227,34 @@ Example: nohup KAS-pipe2 fastqc -t 10 -k KAS-seq.rep1.fastq.gz,KAS-seq.rep2.fast
 -k [KAS-seq]: please input the KAS-seq data that you want to know the quality control, like sequencing quality, duplicates, contaminants (adapter sequence).
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 fastqc' shell script is applied to check quality control and identify a potential type of problem in your KAS-seq data in non-interactive mode. It mainly invoke FASTQC, please refer to the FASTQC official website for more information.
+Note: The 'KAS-Analyzer fastqc' shell script is applied to check quality control and identify a potential type of problem in your KAS-seq data in non-interactive mode. It mainly invoke FASTQC, please refer to the FASTQC official website for more information.
 ``` 
 
 ### readsnum
 Calculate the reads number of raw sequencing files.
 ``` 
-usage: KAS-pipe2 readsnum [ -h/--help ] [ -o prefix ] [ -f format ] 
+usage: KAS-Analyzer readsnum [ -h/--help ] [ -o prefix ] [ -f format ] 
 
-Example: nohup KAS-pipe2 readsnum -o KAS-seq_reads_num -f fastq.gz &
+Example: nohup KAS-Analyzer readsnum -o KAS-seq_reads_num -f fastq.gz &
 
--o [prefix]: please specify the prefix (basename) of 'KAS-pipe2 readsnum' output files. REQUIRED.
+-o [prefix]: please specify the prefix (basename) of 'KAS-Analyzer readsnum' output files. REQUIRED.
 
 -f [format]: please specify the format of raw reads data. e.g. fastq, fq, fastq.gz, fasta, fa or fa.gz. REQUIRED.
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 readsnum' shell script is applied to calculate the reads number of raw sequencing files.
+Note: The 'KAS-Analyzer readsnum' shell script is applied to calculate the reads number of raw sequencing files.
 ``` 
 
 ### statistics
 Generate the table containing (sp)KAS-seq mapping statistics.
 ```
-usage: KAS-pipe2 statistics [ -h/--help ] [ -o prefix ] [ -l labels ] [ -s summary folder ]
+usage: KAS-Analyzer statistics [ -h/--help ] [ -o prefix ] [ -l labels ] [ -s summary folder ]
 
-Example: nohup KAS-pipe2 statistics -o KAS-seq_statistics -l labels.txt -s /absolute path/Summary/ &
+Example: nohup KAS-Analyzer statistics -o KAS-seq_statistics -l labels.txt -s /absolute path/Summary/ &
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 statistics' output files. REQUIRED.
+-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer statistics' output files. REQUIRED.
 
--l [labels]: please input the txt file containing labels of (sp)KAS-seq summary file generated by 'KAS-pipe2 (sp)KAS-seq'. DEFAULT: basename of summary file.
+-l [labels]: please input the txt file containing labels of (sp)KAS-seq summary file generated by 'KAS-Analyzer (sp)KAS-seq'. DEFAULT: basename of summary file.
 KAS-seq.rep1
 KAS-seq.rep2
 KAS-seq.rep3
@@ -267,17 +267,17 @@ KO.rep1.KAS-seq_mapping_summary.txt
 KO.rep2.KAS-seq_mapping_summary.txt     ---summary.txt
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 statistics' shell script is applied to generate the table containing (sp)KAS-seq mapping statistics.
+Note: The 'KAS-Analyzer statistics' shell script is applied to generate the table containing (sp)KAS-seq mapping statistics.
 ```
 
 ### FRiP
 Calculate and plot fraction of reads in peaks (FRiP) scores.
 ```
-Usage: KAS-pipe2 FRiP [ -h/--help ] [ -o prefix ] [ -p peaks ] [ -l labels ] [ -k KAS-seq ]
+Usage: KAS-Analyzer FRiP [ -h/--help ] [ -o prefix ] [ -p peaks ] [ -l labels ] [ -k KAS-seq ]
 
-Example: nohup KAS-pipe2 FRiP -o KAS-seq_FRiP -p peaks_files.txt -l labels.txt -k KAS-seq.txt &
+Example: nohup KAS-Analyzer FRiP -o KAS-seq_FRiP -p peaks_files.txt -l labels.txt -k KAS-seq.txt &
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 FRiP' output files. REQUIRED.
+-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer FRiP' output files. REQUIRED.
 
 -p [peaks]: please input the text file containing the peaks files. REQUIRED.
 Example:
@@ -293,7 +293,7 @@ WT.rep2
 KO.rep1
 KO.rep2                        ---labels.txt
 
--k [KAS-seq]: please input the text file containing bed files (uniquely mapped reads used for 'KAS-pipe2 peakcalling'), which are used to calcuate fraction of reads in peaks (FRiP) score. The order and number of (sp)KAS-seq data should be the consistent with the labels file. REQUIRED.
+-k [KAS-seq]: please input the text file containing bed files (uniquely mapped reads used for 'KAS-Analyzer peakcalling'), which are used to calcuate fraction of reads in peaks (FRiP) score. The order and number of (sp)KAS-seq data should be the consistent with the labels file. REQUIRED.
 Example:
 KAS-seq_WT_rep1.bed
 KAS-seq_WT_rep2.bed
@@ -301,17 +301,17 @@ KAS-seq_KO_rep1.bed
 KAS-seq_KO_rep2.bed            ---KAS-seq.txt
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 FRiP' shell script is applied to calculate and plot fraction of reads in peaks (FRiP) scores.
+Note: The 'KAS-Analyzer FRiP' shell script is applied to calculate and plot fraction of reads in peaks (FRiP) scores.
 ```
 
 ### fragmentsize
 Measure the fragment size of paired-end KAS-seq data..
 ```
-Usage: KAS-pipe2 fragmentsize [ -h/--help ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ]
+Usage: KAS-Analyzer fragmentsize [ -h/--help ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ]
 
-Example: nohup KAS-pipe2 fragmentsize -o KAS-seq_fragmentsize -l labels.txt -k KAS-seq.txt &
+Example: nohup KAS-Analyzer fragmentsize -o KAS-seq_fragmentsize -l labels.txt -k KAS-seq.txt &
 
--o [prefix]: please specify the prefix (basename) of 'KAS-pipe2 fragmentsize' output files. REQUIRED.
+-o [prefix]: please specify the prefix (basename) of 'KAS-Analyzer fragmentsize' output files. REQUIRED.
 
 -l [labels.txt]: please input the text file containing the labels of paired-end KAS-seq or spKAS-seq data that show in fragment size plot. DEFAULT: basename of (sp)KAS-seq bed files.
 Example:
@@ -320,7 +320,7 @@ WT.rep2
 WT.rep3
 WT.rep4                        ---labels.txt
 
--k [KAS-seq.txt]: please input the text file containing bed files (uniquely mapped reads from 'KAS-pipe2 (sp)KAS-seq'), which are used to calcuate fragment size of DNA fragments. The order and number of (sp)KAS-seq bed files should be the consistent with the labels in labels.txt file. REQUIRED.
+-k [KAS-seq.txt]: please input the text file containing bed files (uniquely mapped reads from 'KAS-Analyzer (sp)KAS-seq'), which are used to calcuate fragment size of DNA fragments. The order and number of (sp)KAS-seq bed files should be the consistent with the labels in labels.txt file. REQUIRED.
 Example:
 KAS-seq_WT_PE.rep1.bed
 KAS-seq_WT_PE.rep2.bed
@@ -328,19 +328,19 @@ KAS-seq_WT_PE.rep3.bed
 KAS-seq_WT_PE.rep4.bed         ---KAS-seq.txt
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 fragmentsize' shell script is applied to calculate and plot fragment size of (sp)KAS-seq data. Note: it only works for paired-end (sp)KAS-seq data.
+Note: The 'KAS-Analyzer fragmentsize' shell script is applied to calculate and plot fragment size of (sp)KAS-seq data. Note: it only works for paired-end (sp)KAS-seq data.
 ```
 
 ### correlation
 Calculate the correlation coefficient and pvalue, generate correlation plot for replicates of KAS-seq data.
 ```
-Usage: KAS-pipe2 correlation [ -h/--help ] [ -m correlation method ] [ -t threads ] [ -s assembly id ] [ -r regions ] [ -f peaks file ] [ -p plot types ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ]
+Usage: KAS-Analyzer correlation [ -h/--help ] [ -m correlation method ] [ -t threads ] [ -s assembly id ] [ -r regions ] [ -f peaks file ] [ -p plot types ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ]
 
 Example:
 On peaks:             
-nohup KAS-pipe2 correlation -m pearson -t 10 -s hg19 -r peaks -f KAS-seq_peaks.bed -p heatmap -o KAS-seq -l labels.txt -k KAS-seq.txt &
+nohup KAS-Analyzer correlation -m pearson -t 10 -s hg19 -r peaks -f KAS-seq_peaks.bed -p heatmap -o KAS-seq -l labels.txt -k KAS-seq.txt &
 On bins:
-nohup KAS-pipe2 correlation -m pearson -t 10 -s hg19 -r bins -p heatmap -o KAS-seq -l labels.txt -k KAS-seq.txt &
+nohup KAS-Analyzer correlation -m pearson -t 10 -s hg19 -r bins -p heatmap -o KAS-seq -l labels.txt -k KAS-seq.txt &
 
 -m [correlation method]: please specify the methods to calculate correlation coefficients. e.g. pearson, kendall or spearman. DEFAULT: pearson.
 
@@ -354,7 +354,7 @@ nohup KAS-pipe2 correlation -m pearson -t 10 -s hg19 -r bins -p heatmap -o KAS-s
 
 -p [plot types]: please specify the plot types to generate correlation plot. DEFAULT: scatterplot.
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 correlation' output files. REQUIRED.
+-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer correlation' output files. REQUIRED.
 
 -l [labels]: please input the text file containing the labels of (sp)KAS-seq data that show in heatmap or scatterplot. REQUIRED.
 Example:
@@ -375,17 +375,17 @@ KAS-seq_KO.rep2.bam
 KAS-seq_KO.rep3.bam           ---KAS-seq_data.txt
 
 -h: print this help and exit.
-Note: The 'KAS-pipe2 correlation' shell script is applied to calculate correlation coefficients and generate correlation plots between replicates or (sp)KAS-seq data of different conditions.
+Note: The 'KAS-Analyzer correlation' shell script is applied to calculate correlation coefficients and generate correlation plots between replicates or (sp)KAS-seq data of different conditions.
 ```
 
 ### saturation
 Perform saturation analysis for KAS-seq data.
 ```
-Usage: KAS-pipe2 saturation [ -h/--help ] [ -o prefix ] [ -s assembly id ] [ -c control ] [ -k KAS-seq ]
+Usage: KAS-Analyzer saturation [ -h/--help ] [ -o prefix ] [ -s assembly id ] [ -c control ] [ -k KAS-seq ]
 
-Example: nohup KAS-pipe2 saturation -o KAS-seq_saturation -c KAS-seq_Input.bed -k KAS-seq.bed &
+Example: nohup KAS-Analyzer saturation -o KAS-seq_saturation -c KAS-seq_Input.bed -k KAS-seq.bed &
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 saturation' output files. DEFAULT: basename of KAS-seq data.
+-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer saturation' output files. DEFAULT: basename of KAS-seq data.
 
 -s [assembly id]: please specify the genome assembly id of (sp)KAS-seq data. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED.
 
@@ -394,17 +394,17 @@ Example: nohup KAS-pipe2 saturation -o KAS-seq_saturation -c KAS-seq_Input.bed -
 -k [KAS-seq]: please input the KAS-seq data containing uniquely mapped reads. e.g. -k KAS-seq.bed. REQUIRED.
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 saturation' shell script is applied to evaluate the saturation of (sp)KAS-seq data.
+Note: The 'KAS-Analyzer saturation' shell script is applied to evaluate the saturation of (sp)KAS-seq data.
 ```
 
 ### complexity
 Calculate the complexity metric for (sp)KAS-seq data, including the PCR Bottlenecking Coefficient and Non-Redundant Fraction (NRF).
 ```
-Usage: KAS-pipe2 complexity [ -h/--help ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ]
+Usage: KAS-Analyzer complexity [ -h/--help ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ]
 
-Example: nohup KAS-pipe2 complexity -o KAS-seq_complexity -l labels.txt -k KAS-seq.txt &
+Example: nohup KAS-Analyzer complexity -o KAS-seq_complexity -l labels.txt -k KAS-seq.txt &
 
--o [KAS-seq_complexity]: please input the prefix (basename) of 'KAS-pipe2 complexity' output files. REQUIRED.
+-o [KAS-seq_complexity]: please input the prefix (basename) of 'KAS-Analyzer complexity' output files. REQUIRED.
 
 -l [labels.txt]: please input the text file containing the labels of KAS-seq or spKAS-seq data complexity metric. DEFAULT: basename of KAS-seq files.
 Example:
@@ -421,17 +421,17 @@ KAS-seq.rep3.bam
 KAS-seq.rep4.bam     ---KAS-seq.txt
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 complexity' shell script is applied to calculate the library complexity metric of (sp)KAS-seq data including, the PCR Bottlenecking Coefficient and Non-Redundant Fraction (NRF) for KAS-seq. Please refer to https://www.encodeproject.org/data-standards/terms/ for more details about the library complexity metric.
+Note: The 'KAS-Analyzer complexity' shell script is applied to calculate the library complexity metric of (sp)KAS-seq data including, the PCR Bottlenecking Coefficient and Non-Redundant Fraction (NRF) for KAS-seq. Please refer to https://www.encodeproject.org/data-standards/terms/ for more details about the library complexity metric.
 ```
 
 ### genomicdist
 Visualize the genomic distribution for KAS-seq peaks (table and plot).
 ```
-Usage: KAS-pipe2 genomicdist [ -h/--help ] [ -o prefix ] [ -c ] [ -p peaks ] [ -s assembly id ]
+Usage: KAS-Analyzer genomicdist [ -h/--help ] [ -o prefix ] [ -c ] [ -p peaks ] [ -s assembly id ]
 
-Example: nohup KAS-pipe2 genomicdist -o KAS-seq_genomic_distribution -p KAS-seq_peaks.bed -s hg19 &
+Example: nohup KAS-Analyzer genomicdist -o KAS-seq_genomic_distribution -p KAS-seq_peaks.bed -s hg19 &
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 genomicdist' output files. DEFAULT: basename of KAS-seq peak file.
+-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer genomicdist' output files. DEFAULT: basename of KAS-seq peak file.
 
 -c: please specify if the percentages of normal genomic feature distribution is generated, which is regard as a control. DEFAULT: off.
 
@@ -440,21 +440,21 @@ Example: nohup KAS-pipe2 genomicdist -o KAS-seq_genomic_distribution -p KAS-seq_
 -s [assembly id]: please specify the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. REQUIRED.
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 genomicdist' shell script is applied to calculate and plot the percentages of (sp)KAS-seq peaks distribution on genomic features (Promoter(TSS +/-1kb), Exon, Intron, Terminal(TES+3kb) and Intergenic regions).
+Note: The 'KAS-Analyzer genomicdist' shell script is applied to calculate and plot the percentages of (sp)KAS-seq peaks distribution on genomic features (Promoter(TSS +/-1kb), Exon, Intron, Terminal(TES+3kb) and Intergenic regions).
 ```
 
 ### fingerprint
 Plot fingerprint for KAS-seq data.
 ```
-Usage: KAS-pipe2 fingerprint [ -h/--help ] [ -t threads ] [ -s assembly id ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ] 
+Usage: KAS-Analyzer fingerprint [ -h/--help ] [ -t threads ] [ -s assembly id ] [ -o prefix ] [ -l labels ] [ -k KAS-seq ] 
 
-Example: nohup KAS-pipe2 fingerprint -t 10 -s hg19 -o KAS-seq_fingerprint -l labels.txt -k KAS-seq_data.txt &
+Example: nohup KAS-Analyzer fingerprint -t 10 -s hg19 -o KAS-seq_fingerprint -l labels.txt -k KAS-seq_data.txt &
 
 -t [threads]: please input the number of threads used for generating KAS-seq fingerprint plot. DEFAULT: 1.
 
 -s [assembly id]: please specify the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. REQUIRED.
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 fingerprint' output files. REQUIRED
+-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer fingerprint' output files. REQUIRED
 
 -l [labels] please input the text file containing the labels of KAS-seq or spKAS-seq data that show in fingerprint plot. REQUIRED.
 Example:
@@ -509,13 +509,13 @@ Note: The 'KAS-pipe2 trim' shell script mainly invoke the trim-galore, please re
 ### KAS-seq
 Align KAS-seq data to the reference genome, deduplicate mapped reads, and generate several files with maped reads (bam, bed and bedGraph).
 ```
-Usage: KAS-pipe2 KAS-seq [ -h ] [ -a aligner ] [ -t threads ] [ -i index path ] [ -u ] [ -e extend length ] [ -o prefix ] [ -s assembly id ] [ -1 read1 ] [ -2 read2 ]
+Usage: KAS-Analyzer KAS-seq [ -h ] [ -a aligner ] [ -t threads ] [ -i index path ] [ -u ] [ -e extend length ] [ -o prefix ] [ -s assembly id ] [ -1 read1 ] [ -2 read2 ]
 
 Example:
        Single-end:
-       nohup KAS-pipe2 KAS-seq -a bowtie2 -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -e 150 -o KAS-seq -s hg19 -1 KAS-seq.trim.fastq.gz &
+       nohup KAS-Analyzer KAS-seq -a bowtie2 -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -e 150 -o KAS-seq -s hg19 -1 KAS-seq.trim.fastq.gz &
        Paired-end:
-       nohup KAS-pipe2 KAS-seq -a bowtie2 -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o KAS-seq -s hg19 -1 KAS-seq.trim.R1.fastq.gz -2 KAS-seq.trim.R2.fastq.gz &
+       nohup KAS-Analyzer KAS-seq -a bowtie2 -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o KAS-seq -s hg19 -1 KAS-seq.trim.R1.fastq.gz -2 KAS-seq.trim.R2.fastq.gz &
        Note: Bowtie2 Index example: /absolute path/Bowtie2Index/hg19; bwa Index example: /absolute path/BWAIndex/hg19.fa
 
 -a [aligner]: please specify the aligner (bowtie2 or bwa) you want to use to map KAS-seq data. DEFAULT: bowtie2.
@@ -528,7 +528,7 @@ Example:
 
 -e [extendlengthHelp]: please input the extend length for single-end KAS-seq data. DEFAULT: 150.
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 KAS-seq' output files. REQUIRED.
+-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer KAS-seq' output files. REQUIRED.
 
 -s [assembly id]: please specify the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. REQUIRED.
 
@@ -537,21 +537,21 @@ Example:
 -2 [read2]: please input trimmed read2 of paired-end KAS-seq raw fastq files. Compressed .fastq.gz is accepted.
 
 -h: print this help and exit.
-Note: The 'KAS-pipe2 KAS-seq' shell script mainly invoke the specific aligner (bowtie, bowtie2 or bwa) for KAS-seq data mapping, please refer to their official websites for more information.
+Note: The 'KAS-Analyzer KAS-seq' shell script mainly invoke the specific aligner (bowtie, bowtie2 or bwa) for KAS-seq data mapping, please refer to their official websites for more information.
 ```
 
 ### spKAS-seq
 Align strand specific KAS-seq (spKAS-seq) data. 
 ```
-Usage: KAS-pipe2 spKAS-seq [ -h ] [ -t threads ] [ -i index path ] [ -u ] [ -r ] [ -f fold change ] [ -b bin size ] [ -e extend length ] [ -o prefix ] [ -s assembly id ] [ -1 read1 ] [ -2 read2 ]
+Usage: KAS-Analyzer spKAS-seq [ -h ] [ -t threads ] [ -i index path ] [ -u ] [ -r ] [ -f fold change ] [ -b bin size ] [ -e extend length ] [ -o prefix ] [ -s assembly id ] [ -1 read1 ] [ -2 read2 ]
 
 Note: we strongly recommend paired-end sequencing for strand specific KAS-seq (spKAS-seq) data to accurately measure the fragments size.
 
 Example:
        Single-end:
-       nohup KAS-pipe2 spKAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o spKAS-seq -r -s hg19 -1 spKAS-seq.trim.R1.fastq.gz &
+       nohup KAS-Analyzer spKAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o spKAS-seq -r -s hg19 -1 spKAS-seq.trim.R1.fastq.gz &
        Paired-end:
-       nohup KAS-pipe2 spKAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o spKAS-seq -r -s hg19 -1 spKAS-seq.trim.R1.fastq.gz -2 spKAS-seq.trim.R2.fastq.gz &
+       nohup KAS-Analyzer spKAS-seq -t 10 -i /absolute path/hg19_Bowtie2Index/hg19 -o spKAS-seq -r -s hg19 -1 spKAS-seq.trim.R1.fastq.gz -2 spKAS-seq.trim.R2.fastq.gz &
        Note: Bowtie2 Index example: /absolute path/Bowtie2Index/hg19.
 
 -t [threads]: please specify the number of threads used for spKAS-seq data mapping. DEFAULT: 1.
@@ -566,7 +566,7 @@ Example:
 
 -b [bin size]: please specify the size of bins used to identify R-loops. DEFAULT: 500.
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 spKAS-seq' output files. REQUIRED.
+-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer spKAS-seq' output files. REQUIRED.
 
 -s [assembly id]: please input the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. REQUIRED.
 
@@ -575,15 +575,15 @@ Example:
 -2 [read2]: please input trimmed read2 of paired-end spKAS-seq raw fastq files. compressed fastq.gz is accepted.
 
 -h: print this help and exit.
-Note: The 'KAS-pipe2 spKAS-seq' shell script mainly invoke bowtie2 for spKAS-seq data mapping and R-loops identification, please refer to their official websites for more information.
+Note: The 'KAS-Analyzer spKAS-seq' shell script mainly invoke bowtie2 for spKAS-seq data mapping and R-loops identification, please refer to their official websites for more information.
 ```
 
 ### peakscalling
 Call broad or sharp peaks for KAS-seq data.
 ```
-Usage: KAS-pipe2 peakscalling [ -h ] [ -m peaks caller ] [ -k KAS-seq ] [ -c Control ] [ -b mode ] [ -o prefix ] [ -p pvalue or qvalue ] [ -g assembly id ]
+Usage: KAS-Analyzer peakscalling [ -h ] [ -m peaks caller ] [ -k KAS-seq ] [ -c Control ] [ -b mode ] [ -o prefix ] [ -p pvalue or qvalue ] [ -g assembly id ]
 
-Example: nohup KAS-pipe2 peakscalling -t KAS-seq.rep1.bed,KAS-seq.rep2.bed -c Control_Input.rep1.bed,Control_Input.rep2.bed -o KAS-seq -g hg19 &
+Example: nohup KAS-Analyzer peakscalling -t KAS-seq.rep1.bed,KAS-seq.rep2.bed -c Control_Input.rep1.bed,Control_Input.rep2.bed -o KAS-seq -g hg19 &
 
 -m [peaks caller]: please input the peaks caller (macs14, macs2) that you want to use for KAS-seq peaks calling. DEFAULT: macs2.
 
@@ -593,7 +593,7 @@ Example: nohup KAS-pipe2 peakscalling -t KAS-seq.rep1.bed,KAS-seq.rep2.bed -c Co
 
 -b [mode]: specify macs2 to perferm KAS-seq peaks calling with 'broad' or 'sharp' mode. -b option only works for macs2. DEFAULT: broad.
 
--o [prefix]: please input the prefix (basename), which will be used to generate the name of 'KAS-pipe2 peakscalling' output files. REQUIRED.
+-o [prefix]: please input the prefix (basename), which will be used to generate the name of 'KAS-Analyzer peakscalling' output files. REQUIRED.
 
 -p [pvalue or qvalue]: please input the pvalue or qvalue for KAS-seq peaks calling with macs14 or macs2. DEFAULT: macs14: 1e-7; macs2: 0.01
 
@@ -606,13 +606,13 @@ Note: This shell script mainly invoke macs14 or macs2 for calling (sp)KAS-seq da
 ### normalize 
 Normalize KAS-seq data with bedGraph density files.
 ```
-Usage: KAS-pipe2 normalize [ -h/--help ] [-m methods ] [ -k KAS-seq ] [ -r ratios ] [ -b ] [ -s assembly id ]
+Usage: KAS-Analyzer normalize [ -h/--help ] [-m methods ] [ -k KAS-seq ] [ -r ratios ] [ -b ] [ -s assembly id ]
 
-Example: nohup KAS-pipe2 normalize -m ratios -k KAS-seq_data.txt -r ratios.txt -b -s mm10 &
+Example: nohup KAS-Analyzer normalize -m ratios -k KAS-seq_data.txt -r ratios.txt -b -s mm10 &
 
 -m [methods]: please input the methods used for KAS-seq data normalization. e.g. ratios or RPKM. DEFAULT: ratios.
 
--k [KAS-seq_data.txt]: please input the text file containing the bedGraph files generated from 'KAS-pipe2 (sp)KAS-seq'. REQUIRED.
+-k [KAS-seq_data.txt]: please input the text file containing the bedGraph files generated from 'KAS-Analyzer (sp)KAS-seq'. REQUIRED.
 Example:
 -m ratios:                                       -m FPKM:
 KAS-seq_WT.rep1.bg                               KAS-seq_WT.rep1.bam
@@ -632,17 +632,17 @@ Example:
 -s [assembly id]: please input the reference genome assembly id of bedGraph files. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the normalized KAS-seq bedGraph files. REQUIRED only if -b was specified.
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 normalize' shell script is applied to normalize spKAS-seq or KAS-seq data.
+Note: The 'KAS-Analyzer normalize' shell script is applied to normalize spKAS-seq or KAS-seq data.
 ```
 
 ### ToBigWig
 Convert normalized bedGraph file to bigWig file.
 ```
-Usage: KAS-pipe2 ToBigWig [ -h/--help ] [ -k KAS-seq ] [ -s assembly id ]
+Usage: KAS-Analyzer ToBigWig [ -h/--help ] [ -k KAS-seq ] [ -s assembly id ]
 
-Example: nohup KAS-pipe2 ToBigWig -k KAS-seq_data.txt -s hg19 &
+Example: nohup KAS-Analyzer ToBigWig -k KAS-seq_data.txt -s hg19 &
 
--k [KAS-seq]: please input the text file containing the bedGraph files generated from 'KAS-pipe2 KAS-seq'. REQUIRED.
+-k [KAS-seq]: please input the text file containing the bedGraph files generated from 'KAS-Analyzer KAS-seq'. REQUIRED.
 Example:
 KAS-seq_WT.rep1.nor.bg
 KAS-seq_WT.rep2.nor.bg
@@ -652,21 +652,21 @@ KAS-seq_KO.rep2.nor.bg    ---KAS-seq_data.txt
 -s [assembly id]: please input the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the normalized KAS-seq bedGraph files. REQUIRED.
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 ToBigWig' shell script is applied to transfer (sp)KAS-seq bedGraph to bigWig files.
+Note: The 'KAS-Analyzer ToBigWig' shell script is applied to transfer (sp)KAS-seq bedGraph to bigWig files.
 ```
 
 ### targetgenes
 Define target or associated genes (promoter, genebody, terminator or gene) of KAS-seq peaks, R-loops or enhancers loci.
 ```
-Usage: KAS-pipe2 targetgenes [ -h/--help ] [ -o prefix ] [ -s assembly id ] [ -f features ] [ -l length ] [ -p peaks ]
+Usage: KAS-Analyzer targetgenes [ -h/--help ] [ -o prefix ] [ -s assembly id ] [ -f features ] [ -l length ] [ -p peaks ]
 
 Example: 
 Gene features:
-nohup KAS-pipe2 targetgenes -o KAS-seq_peaks_target_genes -s mm10 -f promoter -p KAS-seq_peaks.bed &
+nohup KAS-Analyzer targetgenes -o KAS-seq_peaks_target_genes -s mm10 -f promoter -p KAS-seq_peaks.bed &
 Associated genes of enhancers:
-nohup KAS-pipe2 targetgenes -o KAS-seq_ss_enhancers_asso_genes -s mm10 -f enhancer -l 50000 -p KAS-seq_ss_enhancers.bed &
+nohup KAS-Analyzer targetgenes -o KAS-seq_ss_enhancers_asso_genes -s mm10 -f enhancer -l 50000 -p KAS-seq_ss_enhancers.bed &
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 targetgenes' output files. DEFAULT: basename of peaks file.
+-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer targetgenes' output files. DEFAULT: basename of peaks file.
 
 -s [assembly id]: please specify the genome assembly id of KAS-seq peaks. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED.
 
@@ -677,17 +677,17 @@ nohup KAS-pipe2 targetgenes -o KAS-seq_ss_enhancers_asso_genes -s mm10 -f enhanc
 -p [peaks]: please specify the KAS-seq peaks, R-loops or enhancer to define their target genes. REQUIRED.
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 targetgenes' shell script is applied to define target or associated genes (promoter, genebody, terminator or gene) of KAS-seq peaks, R-loops or enhancers loci.
+Note: The 'KAS-Analyzer targetgenes' shell script is applied to define target or associated genes (promoter, genebody, terminator or gene) of KAS-seq peaks, R-loops or enhancers loci.
 ```
 
 ### UCSC
 Generate bedGraph files ready for submitting to UCSC genome browser.
 ```
-Usage: KAS-pipe2 UCSC [ -h/--help ] [ -k KAS-seq ] [ -l UCSC track ] [ -c track colors ] 
+Usage: KAS-Analyzer UCSC [ -h/--help ] [ -k KAS-seq ] [ -l UCSC track ] [ -c track colors ] 
 
-Example: nohup KAS-pipe2 UCSC -k KAS-seq_data.txt -n UCSC_track_names.txt &
+Example: nohup KAS-Analyzer UCSC -k KAS-seq_data.txt -n UCSC_track_names.txt &
 
--k [KAS-seq]: please input the text file containing the bedGraph files generated from 'KAS-pipe2 KAS-seq'. REQUIRED.
+-k [KAS-seq]: please input the text file containing the bedGraph files generated from 'KAS-Analyzer KAS-seq'. REQUIRED.
 Example:
 KAS-seq_WT.rep1.nor.bg
 KAS-seq_WT.rep2.nor.bg
@@ -712,7 +712,7 @@ For more colors options, please refer to https://www.w3schools.com/colors/colors
 
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 UCSC' shell script is used to generate files for uploading into UCSC genome browser.
+Note: The 'KAS-Analyzer UCSC' shell script is used to generate files for uploading into UCSC genome browser.
 ```
 
 ### Summary Plot sub-commands:
@@ -721,23 +721,23 @@ Note: The 'KAS-pipe2 UCSC' shell script is used to generate files for uploading 
 ### profile
 Generate metagene profile for KAS-seq data.
 ```
-Usage: KAS-pipe2 profile [ -h/--help ] [ -t threads ] [ -s assembly id ] [ -e length ] [ -o prefix ] [ -r regions ] [ -p peaks file ] [ -f peaks files list ] [ -l labels ] [ -c colors ] [ -k KAS-seq ]
+Usage: KAS-Analyzer profile [ -h/--help ] [ -t threads ] [ -s assembly id ] [ -e length ] [ -o prefix ] [ -r regions ] [ -p peaks file ] [ -f peaks files list ] [ -l labels ] [ -c colors ] [ -k KAS-seq ]
 
 Example: 
 Genomic features(genebody, TSS or TES):
-nohup KAS-pipe2 profile -t 10 -s hg19 -o KAS-seq_genebody -r genebody -c red,blue,green,purple -l labels.txt -k KAS-seq.txt &
+nohup KAS-Analyzer profile -t 10 -s hg19 -o KAS-seq_genebody -r genebody -c red,blue,green,purple -l labels.txt -k KAS-seq.txt &
 
 Custom regions(peaks. e.g. enhancers.bed):
-nohup KAS-pipe2 profile -t 10 -o KAS-seq_peaks -r peaks -p KAS-seq_peaks.bed -c red,blue,green,purple -l labels.txt -k KAS-seq.txt &
+nohup KAS-Analyzer profile -t 10 -o KAS-seq_peaks -r peaks -p KAS-seq_peaks.bed -c red,blue,green,purple -l labels.txt -k KAS-seq.txt &
 
 KAS-seq signal on different regions (-f [peaks list] must be specified):
-nohup KAS-pipe2 profile -t 10 -o KAS-seq_different_clusters -r peakslist -f peaks_cluster1.bed,peaks_cluster2.bed,peaks_cluster3.bed -c red,green,purple -l labels.txt -k KAS-seq.txt &
+nohup KAS-Analyzer profile -t 10 -o KAS-seq_different_clusters -r peakslist -f peaks_cluster1.bed,peaks_cluster2.bed,peaks_cluster3.bed -c red,green,purple -l labels.txt -k KAS-seq.txt &
 
 -t [threads]: please input the number of threads used for generating (sp)KAS-seq metagene profile plot. DEFAULT: 1.
 
 -s [assemblyid]: please specify the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. REQUIRED only for 'genomic features' mode.
 
--o [KAS-seq_profile]: please input the prefix (basename), which will be used to generate the name of 'KAS-pipe2 metageneprofile' output files. REQUIRED.
+-o [KAS-seq_profile]: please input the prefix (basename), which will be used to generate the name of 'KAS-Analyzer metageneprofile' output files. REQUIRED.
 
 -e [length]: please specify the distance upstream of the start site of the regions defined in the region file. If the regions are genebody, this would be the distance upstream of the transcription start site. DEFAULT: 3000.
 
@@ -756,7 +756,7 @@ WT.rep2          Cluster2
 KO.rep1          Cluster3
 KO.rep2   or                        ---labels.txt
 
--k [KAS-seq.txt]: please input the text file containing normalized (sp)KAS-seq bigWig files, which can be generated with 'KAS-pipe2 normalize' and 'KAS-pipe2 bedGraphToBigWig' shell scripts. The order and number of (sp)KAS-seq bigWig files should be the consistent with the labels file when provided. REQUIRED.
+-k [KAS-seq.txt]: please input the text file containing normalized (sp)KAS-seq bigWig files, which can be generated with 'KAS-Analyzer normalize' and 'KAS-Analyzer bedGraphToBigWig' shell scripts. The order and number of (sp)KAS-seq bigWig files should be the consistent with the labels file when provided. REQUIRED.
 Example:
 KAS-seq_WT_rep1.nor.bigWig
 KAS-seq_WT_rep2.nor.bigWig
@@ -764,19 +764,19 @@ KAS-seq_KO_rep1.nor.bigWig
 KAS-seq_KO_rep2.nor.bigWig          ---KAS-seq.txt
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 profile' shell script is applied to generate metagene profile for (sp)KAS-seq data on genomic features( genebody, TSS or TES) or provided custom regions. 'KAS-pipe2 metageneprofile' shell script mainly invoke deeptools 'computeMatrix' and 'plotProfile', please refer to https://deeptools.readthedocs.io/en/develop/content/list_of_tools.html for more information.
+Note: The 'KAS-Analyzer profile' shell script is applied to generate metagene profile for (sp)KAS-seq data on genomic features( genebody, TSS or TES) or provided custom regions. 'KAS-Analyzer metageneprofile' shell script mainly invoke deeptools 'computeMatrix' and 'plotProfile', please refer to https://deeptools.readthedocs.io/en/develop/content/list_of_tools.html for more information.
 ```
 
 ### heatmap
 Generate heatmap for (sp)KAS-seq data.
 ```
-Usage: KAS-pipe2 heatmap [ -h/--help ] [ -t threads ] [ -e length ] [ -s assembly id ] [ -q ] [ -u samples using ] [ -m maximum value ] [ -o prefix ] [ -r regions ] [ -p peaks ] [ -l labels ] [ -c colors ] [ -k KAS-seq ]
+Usage: KAS-Analyzer heatmap [ -h/--help ] [ -t threads ] [ -e length ] [ -s assembly id ] [ -q ] [ -u samples using ] [ -m maximum value ] [ -o prefix ] [ -r regions ] [ -p peaks ] [ -l labels ] [ -c colors ] [ -k KAS-seq ]
 
 Example: 
 Genomic features(genebody, TSS or TES):
-nohup KAS-pipe2 heatmap -t 10 -s hg19 -o KAS-seq_heatmap -r genebody -q -c Reds -l labels.txt -k KAS-seq.txt &
+nohup KAS-Analyzer heatmap -t 10 -s hg19 -o KAS-seq_heatmap -r genebody -q -c Reds -l labels.txt -k KAS-seq.txt &
 Custom regions(peaks. e.g. enhancers.bed):
-nohup KAS-pipe2 heatmap -t 10 -o KAS-seq_heatmap -r peaks -q -p KAS-seq_peaks.bed -c Reds,Reds,Blues,Blues -l labels.txt -k KAS-seq.txt &
+nohup KAS-Analyzer heatmap -t 10 -o KAS-seq_heatmap -r peaks -q -p KAS-seq_peaks.bed -c Reds,Reds,Blues,Blues -l labels.txt -k KAS-seq.txt &
 
 -t [threads]: please specify the number of threads used for generating (sp)KAS-seq heatmap plot. DEFAULT: 1.
 
@@ -790,7 +790,7 @@ nohup KAS-pipe2 heatmap -t 10 -o KAS-seq_heatmap -r peaks -q -p KAS-seq_peaks.be
 
 -m [maximum value]: please specify the maximum value of the heatmap intensities. e.g. -m 15,20,60. Note: the number of values need to be consistent with KAS-seq samples.
 
--o [KAS-seq_heatmap]: please specify the prefix (basename) of 'KAS-pipe2 heatmap' output files. REQUIRED.
+-o [KAS-seq_heatmap]: please specify the prefix (basename) of 'KAS-Analyzer heatmap' output files. REQUIRED.
 
 -r [regions]: please specify the regions types to generate heatmap plot. e.g. Genomic features: genebody, TSS or TES; Custom regions: peaks. REQUIRED.
 
@@ -805,7 +805,7 @@ WT.rep2
 KO.rep1
 KO.rep2                        ---labels.txt
 
--k [KAS-seq.txt]: please input the text file containing normalized (sp)KAS-seq bigWig files, which can be generated with 'KAS-pipe2 normalize' and 'KAS-pipe2 bedGraphToBigWig' shell scripts. The order and number of (sp)KAS-seq bigWig files should be the consistent with the labels file when specified. REQUIRED.
+-k [KAS-seq.txt]: please input the text file containing normalized (sp)KAS-seq bigWig files, which can be generated with 'KAS-Analyzer normalize' and 'KAS-Analyzer bedGraphToBigWig' shell scripts. The order and number of (sp)KAS-seq bigWig files should be the consistent with the labels file when specified. REQUIRED.
 Example:
 KAS-seq_WT_rep1.nor.bigWig
 KAS-seq_WT_rep2.nor.bigWig
@@ -813,7 +813,7 @@ KAS-seq_KO_rep1.nor.bigWig
 KAS-seq_KO_rep2.nor.bigWig     ---KAS-seq.txt
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 heatmap' shell script is applied to generate heatmap plots for (sp)KAS-seq data on genomic features( genebody, TSS or TES) or provided custom regions. 'KAS-pipe2 heatmap' shell script mainly invoke deeptools 'computeMatrix' and 'plotHeatmap', please refer to https://deeptools.readthedocs.io/en/develop/content/list_of_tools.html for more information.
+Note: The 'KAS-Analyzer heatmap' shell script is applied to generate heatmap plots for (sp)KAS-seq data on genomic features( genebody, TSS or TES) or provided custom regions. 'KAS-Analyzer heatmap' shell script mainly invoke deeptools 'computeMatrix' and 'plotHeatmap', please refer to https://deeptools.readthedocs.io/en/develop/content/list_of_tools.html for more information.
 ```
 
 ### Differential analysis sub-commands:
@@ -822,13 +822,13 @@ Note: The 'KAS-pipe2 heatmap' shell script is applied to generate heatmap plots 
 ### diff
 Perform differential KAS-seq analysis on promoter, genebody, gene, bin or custom regions.
 ```
-Usage: KAS-pipe2 diff [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -r regions ] [ -p peaks ] [ -f fold change ] [ -c comparison file ] [ -l labels ] [ -k KAS-seq ] 
+Usage: KAS-Analyzer diff [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -r regions ] [ -p peaks ] [ -f fold change ] [ -c comparison file ] [ -l labels ] [ -k KAS-seq ] 
 
-Example: nohup KAS-pipe2 diff -o KAS-seq_diff -t 10 -s mm10 -r gene -c comparision.txt -l labels.txt -k KAS-seq_data.txt &
+Example: nohup KAS-Analyzer diff -o KAS-seq_diff -t 10 -s mm10 -r gene -c comparision.txt -l labels.txt -k KAS-seq_data.txt &
 
 -t [threads]: please specify the number of threads used for calculating KAS index. DEFAULT: 1.
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 diff' output files. DEFAULT: basename of KAS-seq txt file.
+-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer diff' output files. DEFAULT: basename of KAS-seq txt file.
 
 -s [assembly id]: please specify the genome assembly id of KAS-seq data. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce
 11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED.
@@ -861,24 +861,24 @@ KAS-seq_KO.rep1.bigWig
 KAS-seq_KO.rep2.bigWig      ---KAS-seq_data.txt
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 diff' shell script is applied to perform differential KAS-seq analysis on promoter, genebody, gene, bin or custom regions.
+Note: The 'KAS-Analyzer diff' shell script is applied to perform differential KAS-seq analysis on promoter, genebody, gene, bin or custom regions.
 ```
 
 ### TC
 Perform 'case-only' or 'case-control' differential time course(TC) analysis for (sp)KAS-seq data.
 ```
-Usage: KAS-pipe2 TC [ -h/--help ] [ -t threads ] [ -o prefix ] [ -g assembly id ] [ -r regions ] [ -s bin size ] [ -b ] [ -p peaks ] [ -d differential analysis ] [ -a annotation ] [ -l labels ] [ -k KAS-seq ] 
+Usage: KAS-Analyzer TC [ -h/--help ] [ -t threads ] [ -o prefix ] [ -g assembly id ] [ -r regions ] [ -s bin size ] [ -b ] [ -p peaks ] [ -d differential analysis ] [ -a annotation ] [ -l labels ] [ -k KAS-seq ] 
 
 Example: 
 Case-only:
-nohup KAS-pipe2 TC -o KAS-seq_timecourse -t 10 -g mm10 -r bin -d case_only -a Case_only.annotation.txt -l labels.txt -k KAS-seq_data.txt &
+nohup KAS-Analyzer TC -o KAS-seq_timecourse -t 10 -g mm10 -r bin -d case_only -a Case_only.annotation.txt -l labels.txt -k KAS-seq_data.txt &
 
 Case-control:
-nohup KAS-pipe2 TC -o KAS-seq_timecourse -t 10 -g mm10 -r bin -d case_control -a Case_control.annotation.txt -l labels.txt -k KAS-seq_data.txt &
+nohup KAS-Analyzer TC -o KAS-seq_timecourse -t 10 -g mm10 -r bin -d case_control -a Case_control.annotation.txt -l labels.txt -k KAS-seq_data.txt &
 
 -t [threads]: please specify the number of threads used for calculating KAS index. DEFAULT: 1.
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 KASindex' output files. REQUIRED.
+-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer KASindex' output files. REQUIRED.
 
 -g [assembly id]: please specify the genome assembly id of KAS-seq data. -g [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED.
 
@@ -957,17 +957,17 @@ treat.rep3.60min.bam               KO.treat.rep3.0min.bam
                                    KO.treat.rep3.30min.bam                      ---KAS-seq_data.txt
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 TC' shell script is applied to performed differential analysis for 'case only' or 'case-control' time course(TC) KAS-seq on promoter, genebody, bin, genes or custom regions.
+Note: The 'KAS-Analyzer TC' shell script is applied to performed differential analysis for 'case only' or 'case-control' time course(TC) KAS-seq on promoter, genebody, bin, genes or custom regions.
 ```
 
 ### PCA
 Perform and plot PCA analysis for (sp)KAS-seq data.
 ```
-Usage: KAS-pipe2 PCA [ -h/--help ] [ -o prefix ] [ -t threads ] [ -r regions ] [ -s assembly id ] [ -b bin size ] [ -p peaks] [ -l labels ] [ -k KAS-seq ]
+Usage: KAS-Analyzer PCA [ -h/--help ] [ -o prefix ] [ -t threads ] [ -r regions ] [ -s assembly id ] [ -b bin size ] [ -p peaks] [ -l labels ] [ -k KAS-seq ]
 
-Example: nohup KAS-pipe2 PCA -o KAS-seq_PCA -r bin -s mm10 -l labels.txt -k KAS-seq.txt &
+Example: nohup KAS-Analyzer PCA -o KAS-seq_PCA -r bin -s mm10 -l labels.txt -k KAS-seq.txt &
 
--o [KAS-seq_PCA]: please input the prefix (basename) of 'KAS-pipe2 PCA' output files. REQUIRED.
+-o [KAS-seq_PCA]: please input the prefix (basename) of 'KAS-Analyzer PCA' output files. REQUIRED.
 
 -t [threads]: please specify the number of threads used for perform PCA analysis. DEFAULT: 1.
 
@@ -998,7 +998,7 @@ KAS-seq.12h.bam
 KAS-seq.24h.bam                --KAS-seq.txt
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 PCA' shell script is applied to perform Principal Component Analysis (PCA) for (sp)KAS-seq data.
+Note: The 'KAS-Analyzer PCA' shell script is applied to perform Principal Component Analysis (PCA) for (sp)KAS-seq data.
 ```
 
 ### R-loops sub-commands:
@@ -1007,13 +1007,13 @@ Note: The 'KAS-pipe2 PCA' shell script is applied to perform Principal Component
 ### R-loop
 Identify R-loops regions with spKAS-seq data.
 ```
-Usage: KAS-pipe2 R-loop [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -p peaks ] [ -b bin size ] [ -f fold change ] [ -l labels ] [ -n Input ] [ -k spKAS-seq ]
+Usage: KAS-Analyzer R-loop [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -p peaks ] [ -b bin size ] [ -f fold change ] [ -l labels ] [ -n Input ] [ -k spKAS-seq ]
 
-Example: nohup KAS-pipe2 R-loop -o KAS-seq_R-loops -t 10 -s mm10 -l labels.txt -k KAS-seq.txt &
+Example: nohup KAS-Analyzer R-loop -o KAS-seq_R-loops -t 10 -s mm10 -l labels.txt -k KAS-seq.txt &
 
 -t [threads]: please specify the number of threads used for R-loops identification. DEFAULT: 1.
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 R-loop' output files. Default: basename of txt files containing spKAS-seq data.
+-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer R-loop' output files. Default: basename of txt files containing spKAS-seq data.
 
 -s [assembly id]: please specify the genome assembly id of spKAS-seq data. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11.
 
@@ -1042,19 +1042,19 @@ spKAS-seq_rep2.bed
 spKAS-seq_rep3.bed          ---KAS-seq.txt
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 R-loops' shell script is applied to identify R-loops from multiples pKAS-seq data.
+Note: The 'KAS-Analyzer R-loops' shell script is applied to identify R-loops from multiples pKAS-seq data.
 ```
 
 ### RNaseH
 Identify R-loops regions sensitive to RNase H treatment.
 ```
-Usage: KAS-pipe2 RNaseH [ -h/--help ] [ -p threads ] [ -o prefix ] [ -r WT_R-loop.bed ] [ -f fold change ] [ -c WT_R-loop_density ] [ -t RNaseH_R-loop_density ]
+Usage: KAS-Analyzer RNaseH [ -h/--help ] [ -p threads ] [ -o prefix ] [ -r WT_R-loop.bed ] [ -f fold change ] [ -c WT_R-loop_density ] [ -t RNaseH_R-loop_density ]
 
-Example: nohup KAS-pipe2 RNaseH -p 10 -o RNaseH_sensitive_R-loops -r WT_R-loop.bed -f 2 -c WT_R-loop_density.txt -t RNaseH_R-loop_density.txt &
+Example: nohup KAS-Analyzer RNaseH -p 10 -o RNaseH_sensitive_R-loops -r WT_R-loop.bed -f 2 -c WT_R-loop_density.txt -t RNaseH_R-loop_density.txt &
 
 -p [threads]: please specify the number of threads used for R-loops identification. DEFAULT: 1.
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 RNaseH' output files. REQUIRED.
+-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer RNaseH' output files. REQUIRED.
 
 -r [WT_R-loops.bed]: please specify the R-loop list defined using spKAS-seq data in cells without RNase H treatment. REQUIRED.
 
@@ -1071,7 +1071,7 @@ RNaseH_R-loop.rep1.bigWig
 RNaseH_R-loop.rep2.bigWig       ---RNaseH_R-loop_density.txt
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 RNaseH' shell script is applied to identify R-loops sensitive to RNase H treatment.
+Note: The 'KAS-Analyzer RNaseH' shell script is applied to identify R-loops sensitive to RNase H treatment.
 ```
 
 ### Single-stranded transcribing enhancers (SST enhancers) identification sub-commands:
@@ -1080,11 +1080,11 @@ Note: The 'KAS-pipe2 RNaseH' shell script is applied to identify R-loops sensiti
 ### SST_enhancer
 Identify the single-stranded transcribing enhancers (SST enhancers).
 ```
-Usage: KAS-pipe2 SST_enhancer [ -h/--help ] [ -o prefix ] [ -t threads ] [ -s assembly id ] [ -e enhancer ] [ -p peaks ] [ -k KAS-seq ] 
+Usage: KAS-Analyzer SST_enhancer [ -h/--help ] [ -o prefix ] [ -t threads ] [ -s assembly id ] [ -e enhancer ] [ -p peaks ] [ -k KAS-seq ] 
 
-Example: nohup KAS-pipe2 SST_enhancer -o KAS-seq_SST_enhancers -s mm10 -e H3K27ac_enhancers.bed -p KAS-seq_peaks.bed -k KAS-seq.rep1.bam,KAS-seq.rep2.bam &
+Example: nohup KAS-Analyzer SST_enhancer -o KAS-seq_SST_enhancers -s mm10 -e H3K27ac_enhancers.bed -p KAS-seq_peaks.bed -k KAS-seq.rep1.bam,KAS-seq.rep2.bam &
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 SST_enhancer' output files. DEFAULT: basename of enhancer file.
+-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer SST_enhancer' output files. DEFAULT: basename of enhancer file.
 
 -t [threads]: please specify the number of threads used for single-stranded transcribing enhancers (SST enhancers) identification. DEFAULT: 1.
 
@@ -1097,28 +1097,28 @@ Example: nohup KAS-pipe2 SST_enhancer -o KAS-seq_SST_enhancers -s mm10 -e H3K27a
 -k [KAS-seq]: please specify the indexed bam file of KAS-seq data used for single-stranded transcribing enhancers (SST enhancers) identification. e.g. KAS-seq.rep1.bam,KAS-seq.rep2.bam. REQUIRED.
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 ss_enhancer' shell script is applied to identify single-stranded transcribing enhancers (SST enhancers).
+Note: The 'KAS-Analyzer ss_enhancer' shell script is applied to identify single-stranded transcribing enhancers (SST enhancers).
 ```
 
 ### motif
 Identify enriched TF binding motifs on ss_enhancers.
 ```
-Usage: KAS-pipe2 motif [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -e enhancer position file ] [ -c control position file ] 
+Usage: KAS-Analyzer motif [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -e enhancer position file ] [ -c control position file ] 
 
-Example: nohup KAS-pipe2 motif -o KAS-seq_enhancers_motifs -t 10 -s mm10 -e enhancers.bed -c control_background_peaks.bed &
+Example: nohup KAS-Analyzer motif -o KAS-seq_enhancers_motifs -t 10 -s mm10 -e enhancers.bed -c control_background_peaks.bed &
 
 -t [threads]: please specify the number of threads used for enriched TF motifs on transcribing enhancers. DEFAULT: 1.
 
 -s [assembly id]: please specify the genome assembly id of enhancers regulatory elements. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED.
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 motif' output files. Default: basename of enhancers file.
+-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer motif' output files. Default: basename of enhancers file.
 
 -e [enhaner]: please specify the enhancers position file in bed format. REQUIRED.
 
 -c [control]: please specify the control position file in bed format, which was used as background for enriched TF motifs idenfication on enhancers. OPTIONAL
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 motif' shell script is applied to identify enriched TF motifs on transcribing enhancers identified by KAS-seq data. For more detials, please refer to http://homer.ucsd.edu/homer/ngs/peakMotifs.html
+Note: The 'KAS-Analyzer motif' shell script is applied to identify enriched TF motifs on transcribing enhancers identified by KAS-seq data. For more detials, please refer to http://homer.ucsd.edu/homer/ngs/peakMotifs.html
 ```
 
 ### Termination length sub-commands:
@@ -1127,11 +1127,11 @@ Note: The 'KAS-pipe2 motif' shell script is applied to identify enriched TF moti
 ### termilength
 Calculate the transcription termination length of protein coding genes.
 ```
-Usage: KAS-pipe2 termilength [ -h/--help ] [ -o prefix ] [ -t threads ] [ -b bin size ] [ -g assembly id ] [ -p peaks ] [ -l labels ] [ -k KAS-seq ]
+Usage: KAS-Analyzer termilength [ -h/--help ] [ -o prefix ] [ -t threads ] [ -b bin size ] [ -g assembly id ] [ -p peaks ] [ -l labels ] [ -k KAS-seq ]
 
-Example: nohup KAS-pipe2 termilength -o KAS-seq_termination_length -t 10 -g mm10 -p peaks.txt -l labels.txt -k KAS-seq.txt &
+Example: nohup KAS-Analyzer termilength -o KAS-seq_termination_length -t 10 -g mm10 -p peaks.txt -l labels.txt -k KAS-seq.txt &
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 termilength' output files. REQUIET.
+-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer termilength' output files. REQUIET.
 
 -t [threads]: please specify the number of threads. DEFAULT: 1.
 
@@ -1144,7 +1144,7 @@ WT.peaks.rep2.bed              ---peaks.txt
 
 -s [assembly id]: please specify the genome assembly id of (sp)KAS-seq data. -g [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED.
 
--l [labels]: please input the text file containing the labels of (sp)KAS-seq data that show in 'KAS-pipe2 termination_length' output files. DEFAULT: basename of KAS-seq file.
+-l [labels]: please input the text file containing the labels of (sp)KAS-seq data that show in 'KAS-Analyzer termination_length' output files. DEFAULT: basename of KAS-seq file.
 Example:
 WT.rep1
 WT.rep2                        ---labels.txt
@@ -1155,7 +1155,7 @@ KAS-seq.rep1.bam
 KAS-seq.rep2.bam               ---KAS-seq.txt
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 termilength' shell script is applied to calculate the transcription termination length of protein coding genes.
+Note: The 'KAS-Analyzer termilength' shell script is applied to calculate the transcription termination length of protein coding genes.
 ```
 
 ### KAS-seq index sub-commands:
@@ -1164,11 +1164,11 @@ Note: The 'KAS-pipe2 termilength' shell script is applied to calculate the trans
 ### index
 Calculate the pausing or termination index. 
 ```
-Usage: KAS-pipe2 index [ -h/--help ] [ -o prefix ] [ -t threads ] [ -s assembly id ] [ -i index types ] [ -l labels ] [ -k KAS-seq ]
+Usage: KAS-Analyzer index [ -h/--help ] [ -o prefix ] [ -t threads ] [ -s assembly id ] [ -i index types ] [ -l labels ] [ -k KAS-seq ]
 
-Example: nohup KAS-pipe2 index -o KAS-seq_pausing_index -t 10 -s hg19 -i pausing -l labels.txt -k KAS-seq.txt &
+Example: nohup KAS-Analyzer index -o KAS-seq_pausing_index -t 10 -s hg19 -i pausing -l labels.txt -k KAS-seq.txt &
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 index' output files. REQUIRED.
+-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer index' output files. REQUIRED.
 
 -t [threads]: please specify the number of threads used for the pausing or termination index calculation. DEFAULT: 1.
 
@@ -1176,7 +1176,7 @@ Example: nohup KAS-pipe2 index -o KAS-seq_pausing_index -t 10 -s hg19 -i pausing
 
 -i [index]: please specify the index type you want to calculate. e.g. pausing or termination. REQUIRED.
 
--l [labels]: please input the text file containing the labels of (sp)KAS-seq that show in 'KAS-pipe2 index' output files. DEFAULT: basename of KAS-seq files.
+-l [labels]: please input the text file containing the labels of (sp)KAS-seq that show in 'KAS-Analyzer index' output files. DEFAULT: basename of KAS-seq files.
 Example:
 WT_rep1
 WT.rep2                        ---labels.txt
@@ -1187,19 +1187,19 @@ KAS-seq_WT_rep1.bam
 KAS-seq_WT_rep2.bam            ---KAS-seq.txt
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 index' shell script is applied to calculate the pausing or termination index.
+Note: The 'KAS-Analyzer index' shell script is applied to calculate the pausing or termination index.
 ```
 
 ### KASindex
 Calculate KAS-seq index on promoter, genebody, genes or custom regions.
 ```
-Usage: KAS-pipe2 KASindex [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -r regions ] [ -p peaks ] [ -l labels ] [ -k KAS-seq ] 
+Usage: KAS-Analyzer KASindex [ -h/--help ] [ -t threads ] [ -o prefix ] [ -s assembly id ] [ -r regions ] [ -p peaks ] [ -l labels ] [ -k KAS-seq ] 
  
-Example: nohup KAS-pipe2 KASindex -o KAS-seq_index -t 10 -s mm10 -r TSS -l labels.txt -k KAS-seq_data.txt &
+Example: nohup KAS-Analyzer KASindex -o KAS-seq_index -t 10 -s mm10 -r TSS -l labels.txt -k KAS-seq_data.txt &
 
 -t [threads]: please specify the number of threads used for calculating KAS expression. DEFAULT: 1.
 
--o [prefix]: please input the prefix (basename) of 'KAS-pipe2 KASexpre' output files. Default: basename of KAS-seq data.
+-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer KASexpre' output files. Default: basename of KAS-seq data.
 
 -s [assembly id]: please specify the genome assembly id of KAS-seq data. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED.
 
@@ -1222,7 +1222,7 @@ KAS-seq_KO.rep1.bam
 KAS-seq_KO.rep2.bam           ---KAS-seq_data.txt
 
 -h/--help: print this help and exit.
-Note: The 'KAS-pipe2 KASexpre' shell script is applied to calculate KAS-seq index on promoter, genebody, genes or custom regions.
+Note: The 'KAS-Analyzer KASexpre' shell script is applied to calculate KAS-seq index on promoter, genebody, genes or custom regions.
 ```
 ### General help sub-commands:
 ---------------------------------------------------------------------------
@@ -1234,7 +1234,7 @@ Print this help menu.
 
 ### --version
 ```
-Print the version of KAS-pipe2 you are using.
+Print the version of KAS-Analyzer you are using.
 ```
 
 ### --contact
