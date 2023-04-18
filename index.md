@@ -7,9 +7,9 @@
 
 ## Introduction
 
-KAS-Analyzer is a collection of command line tools specifically developped for exploring KAS-seq or strand-specific (sp)KAS-seq data, including the basic processing tools for quality control, reference genome index, raw reads mapping, and heatmaps and summary plots. KAS-pipe2 also includes many novel features and completely new frame design compared to KAS-pipe. e.g. time-courese(TC) KAS-seq differential analysis, R-loop identification (only for spKAS-seq), ss-enhancers, motif, index calculation, termination length and so on.
+KAS-Analyzer is a collection of command line tools specifically developped for exploring KAS-seq or strand-specific (sp)KAS-seq data, including the basic processing tools for quality control, reference genome index, raw reads mapping, and heatmaps and summary plots. KAS-Analyzer also includes many novel features and completely new frame design compared to KAS-pipe. e.g. time-courese(TC) KAS-seq differential analysis, R-loop identification (only for spKAS-seq), ss-enhancers, motif, index calculation, termination length and so on.
 
-KAS-pipe2 is still on active development and the source code is hosted on [GitHub](https://github.com/Ruitulyu/KAS-Analyzer).
+KAS-Analyzer is still on active development and the source code is hosted on [GitHub](https://github.com/Ruitulyu/KAS-Analyzer).
 
 ## Installation
 
@@ -56,10 +56,10 @@ KAS-Analyzer sub-command [options]
 ```	
    download        Downlaod the index of reference genome for aligners (bowtie2, bwa).
    build           Build the index of reference genome for aligners (bowtie2, bwa).
-   install         Install and check the 'KAS-pipe2' conda environment; check the installation of tools.
-   uninstall       Uninstall the 'KAS-pipe2' conda environment.
-   activate        Activate the 'KAS-pipe2' conda environment.
-   deactivate      Deactivate the 'KAS-pipe2' conda environment.
+   install         Install and check the 'KAS-Analyzer' conda environment; check the installation of tools.
+   uninstall       Uninstall the 'KAS-Analyzer' conda environment.
+   activate        Activate the 'KAS-Analyzer' conda environment.
+   deactivate      Deactivate the 'KAS-Analyzer' conda environment.
 ```	
 ### Fastqc
 ```
@@ -174,7 +174,7 @@ Example: KAS-Analyzer build -a bowtie2 -g ./genome.fa -p hg19 -t 10 -d /Software
 ### install 
 Install and check the 'KAS-Analyzer' conda environment; check the installation of tools. 
 ```
-usage: KAS-Analyzer install [ -h\--help ] [ -conda ] [ -check ] [ -t tools ] [ -KAS-pipe2 ]
+usage: KAS-Analyzer install [ -h\--help ] [ -conda ] [ -check ] [ -t tools ] [ -KAS-Analyzer]
 
 Example: KAS-Analyzer install or KAS-Analyzer install -check
 
@@ -471,7 +471,7 @@ KAS-seq_Input.rep1.bam
 KAS-seq_Input.rep2.bam           ---KAS-seq.txt
 
 -h/--help: print this help and exit.
-Note: the 'KAS-pipe2 fingerprint' shell script is applied to generate the fingerprint plot of (sp)KAS-seq data. For the more details about fingerprint plot, please refer to https://deeptools.readthedocs.io/en/develop/content/tools/plotFingerprint.html.
+Note: the 'KAS-Analyzer fingerprint' shell script is applied to generate the fingerprint plot of (sp)KAS-seq data. For the more details about fingerprint plot, please refer to https://deeptools.readthedocs.io/en/develop/content/tools/plotFingerprint.html.
 ```
 
 ### Map sub-commands:
@@ -480,19 +480,19 @@ Note: the 'KAS-pipe2 fingerprint' shell script is applied to generate the finger
 ### trim
 Trim adapter and low quality sequence, perform quality control for raw KAS-seq data.
 ```
-Usage: KAS-pipe2 trim [ -h ] [ -a adapter ] [ -t threads ] [ -f ] [ -q quality ] [ -l length ] [ -1 read1 ] [ -2 read2 ]
+Usage: KAS-Analyzer trim [ -h ] [ -a adapter ] [ -t threads ] [ -f ] [ -q quality ] [ -l length ] [ -1 read1 ] [ -2 read2 ]
 
 Example:
        Single-end:
-       nohup KAS-pipe2 trim -a illumina -t 10 -1 KAS-seq.fastq.gz &
+       nohup KAS-Analyzer trim -a illumina -t 10 -1 KAS-seq.fastq.gz &
        Paired-end:
-       nohup KAS-pipe2 trim -a illumina -t 10 -1 KAS-seq.R1.fastq.gz -2 KAS-seq.R2.fastq.gz &
+       nohup KAS-Analyzer trim -a illumina -t 10 -1 KAS-seq.R1.fastq.gz -2 KAS-seq.R2.fastq.gz &
 
--a [adapter types]: adapter sequence to be trimmed. e.g. illumina, nextera or small_rna. Hint: most of the NGS data used Illumina adapter. If not specified explicitly. KAS-pipe2 trim will auto-detect.
+-a [adapter types]: adapter sequence to be trimmed. e.g. illumina, nextera or small_rna. Hint: most of the NGS data used Illumina adapter. If not specified explicitly. KAS-Analyzer trim will auto-detect.
 
 -t [threads]: number of threads to be used for trimming. DEFAULT: 1.
 
--f: instruct 'KAS-pipe2 trim' to check quality control before trimming. DEFAULT: off.
+-f: instruct 'KAS-Analyzer trim' to check quality control before trimming. DEFAULT: off.
 
 -q [quality]: trim low-quality ends from reads in addition to adapter removal. DEFAULT Phred score(ASCII+33): 20.
 
@@ -503,7 +503,7 @@ Example:
 -2 [read2]: please input read2 of paired-end KAS-seq raw fastq files.
 
 -h: print this help and exit.
-Note: The 'KAS-pipe2 trim' shell script mainly invoke the trim-galore, please refer to http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/ for more information.
+Note: The 'KAS-Analyzer trim' shell script mainly invoke the trim-galore, please refer to http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/ for more information.
 ```
 
 ### KAS-seq
