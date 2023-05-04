@@ -1,4 +1,4 @@
-# KAS-Analyzer: an integrated toolkit for exploring KAS-seq data
+# KAS-Analyzer: a comprehensive framework for exploring KAS-seq data
 
 ## Author: Ruitu Lyu, Chemistry department, the University of Chicago 
 ---------------------------------------------------------------------------
@@ -7,7 +7,7 @@
 
 ## Introduction
 
-KAS-Analyzer is a collection of command line tools specifically developped for exploring KAS-seq or strand-specific (sp)KAS-seq data, including the basic processing tools for quality control, reference genome index, raw reads mapping, and heatmaps and summary plots. KAS-Analyzer also includes many novel features and completely new frame design compared to KAS-pipe. e.g. time-courese(TC) KAS-seq differential analysis, R-loop identification (only for spKAS-seq), ss-enhancers, motif, index calculation, termination length and so on.
+Here we introduce KAS-Analyzer, a newly designed, comprehensive methodological framework aimed at simplifying the analysis and interpretation of KAS-seq data. In addition to standard analyses, KAS-Analyzer offers many novel features specifically tailored for KAS-seq data, including, but not limited to: calculation of termination length and index, identification of single-stranded transcribing (SST) enhancers, high-resolution mapping of R-loops, and time-course differential RNA polymerase activity analysis.
 
 KAS-Analyzer is still on active development and the source code is hosted on [GitHub](https://github.com/Ruitulyu/KAS-Analyzer).
 
