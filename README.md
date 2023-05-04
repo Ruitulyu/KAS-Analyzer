@@ -1,9 +1,9 @@
 # KAS-Analyzer
-## An integrated and flexible toolkit for exploring (sp)KAS-seq data ##
+## An comprehensive methodological framework for exploring (sp)KAS-seq data ##
 <img src="https://github.com/Ruitulyu/KAS-Analyzer/blob/main/image/KAS-Analyzer.png"  height="180" align="right" />
 
 ----------------------------------------
-KAS-Analyzer is a collection of command line tools specifically developped for exploring KAS-seq or strand-specific (sp)KAS-seq data, including the basic processing tools for quality control, reference genome index, raw reads mapping, and heatmaps and summary plots. KAS-Analyzer also includes many novel command line tools and completely new frame design compared to the first version of KAS-pipe. e.g. time-courese(TC) KAS-seq differential analysis, R-loop identification (only for spKAS-seq), single-stranded enhancers identification, motif calling,  pausing and termination index calculation, termination length and so on. 
+Here we introduce KAS-Analyzer, a newly designed, comprehensive methodological framework aimed at simplifying the analysis and interpretation of KAS-seq data. In addition to standard analyses, KAS-Analyzer offers many novel features specifically tailored for KAS-seq data, including, but not limited to: calculation of termination length and index, identification of single-stranded transcribing (SST) enhancers, high-resolution mapping of R-loops, and time-course differential RNA polymerase activity analysis.
 
 KAS-seq is a kethoxal-assisted single-stranded DNA sequencing (KAS-seq) approach, based on the fast and specific reaction between N3-kethoxal and guanines in ssDNA. KAS-seq allows rapid (within 5 min), sensitive and genome-wide capture and mapping of ssDNA produced by transcriptionally active RNA polymerases or other processes in situ using as few as 1,000 cells. KAS-seq can also enable definition of a group of enhancers that are single-stranded. Overall, KAS-seq facilitates fast and accurate analysis of transcription dynamics and enhancer activities in both low-input and high-throughput manner. Strand-specific KAS-seq (spKAS-seq) was further developped to identify in vivo genome-wide R-loops with strand specificity using as few as 50,000 cells by mapping the exposed single-stranded DNA (ssDNA) caused by RNA-DNA duplex R-loop formation.
 

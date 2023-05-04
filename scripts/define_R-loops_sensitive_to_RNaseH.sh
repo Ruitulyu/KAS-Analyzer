@@ -108,7 +108,7 @@ if test -z $threads ;then
 fi
 
 if test -z $foldchange ;then
-   foldchange=2
+   foldchange=1.5
 fi
 
 # get the absolute path of 'KAS-Analyzer R-loop' shell script.
