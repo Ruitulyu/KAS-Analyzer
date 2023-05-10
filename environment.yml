@@ -6,6 +6,7 @@ channels:
   - r
 dependencies:
   - python
+  - gawk
   - samtools
   - bedtools
   - picard
@@ -26,3 +27,4 @@ dependencies:
   - trim-galore
   - macs2
   - epic2=0.0.52
+  - idr
