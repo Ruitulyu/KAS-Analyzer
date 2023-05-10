@@ -1,5 +1,5 @@
 # KAS-Analyzer
-## An comprehensive methodological framework for exploring (sp)KAS-seq data ##
+## A new computational framework for exploring KAS-seq data ##
 <img src="https://github.com/Ruitulyu/KAS-Analyzer/blob/main/image/KAS-Analyzer.png"  height="180" align="right" />
 
 ----------------------------------------
