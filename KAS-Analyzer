@@ -206,7 +206,7 @@ elif [[ "$1" == "spKAS-seq" ]]; then
 elif [[ "$1" == "peakscalling" ]]; then
    ${SH_SCRIPT_DIR}/scripts/map_peakscalling.sh $( echo $* | cut -d " " -f 2- )
 
-elif [[ "$1" == "peakscalling" ]]; then
+elif [[ "$1" == "idr" ]]; then
    ${SH_SCRIPT_DIR}/scripts/map_idr.sh $( echo $* | cut -d " " -f 2- )
 
 elif [[ "$1" == "normalize" ]]; then
