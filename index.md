@@ -583,7 +583,7 @@ Call broad or sharp peaks for KAS-seq data.
 ```
 Usage: KAS-Analyzer peakscalling [ -h ] [ -m peaks caller ] [ -k KAS-seq ] [ -c Control ] [ -b mode ] [ -o prefix ] [ -p pvalue or qvalue ] [ -g assembly id ]
 
-Example: nohup KAS-Analyzer peakscalling -t KAS-seq.rep1.bed,KAS-seq.rep2.bed -c Control_Input.rep1.bed,Control_Input.rep2.bed -o KAS-seq -g hg19 &
+Example: nohup KAS-Analyzer peakscalling -k KAS-seq.rep1.bed,KAS-seq.rep2.bed -c Control_Input.rep1.bed,Control_Input.rep2.bed -o KAS-seq -g hg19 &
 
 -m [peaks caller]: please input the peaks caller (macs14, macs2) that you want to use for KAS-seq peaks calling. DEFAULT: macs2.
 
