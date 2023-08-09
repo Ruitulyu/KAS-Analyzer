@@ -5,7 +5,7 @@
 set -e
 
 # help arguments
-usageHelp="Usage: KAS-Analyzer TC [ -h/--help ] [ -t threads ] [ -o prefix ] [ -g assembly id ] [ -r regions ] [ -s bin size ] [ -b ] [ -p peaks ] [ -d differential analysis ] [ -a annotation ] [ -l labels ] [ -k KAS-seq ] "
+usageHelp="Usage: KAS-Analyzer TC [ -h/--help ] [ -t threads ] [ -n ratios ] [ -o prefix ] [ -g assembly id ] [ -r regions ] [ -s bin size ] [ -b ] [ -p peaks ] [ -d differential analysis ] [ -a annotation ] [ -l labels ] [ -k KAS-seq ] "
 exampleHelp="Example: 
 Case-only:
 nohup KAS-Analyzer TC -o KAS-seq_timecourse -t 10 -g mm10 -r bin -d case_only -a Case_only.annotation.txt -l labels.txt -k KAS-seq_data.txt &
@@ -13,6 +13,12 @@ nohup KAS-Analyzer TC -o KAS-seq_timecourse -t 10 -g mm10 -r bin -d case_only -a
 Case-control:
 nohup KAS-Analyzer TC -o KAS-seq_timecourse -t 10 -g mm10 -r bin -d case_control -a Case_control.annotation.txt -l labels.txt -k KAS-seq_data.txt &"
 threadsHelp="-t [threads]: please specify the number of threads used for performing differential time-course KAS-seq analysis. DEFAULT: 1."
+normalizaitonHelp="-n [ratios.txt]: please input the text file containing ratios that used to normalize KAS-seq data undergo global significant changes, which can be calculated based on SpikeIn reads. The order and number of ratios should be the consistent with KAS-seq bam files. OPTIONAL.
+Example:
+1.10
+1.20
+1.30
+1.23                 ---ratios.txt"
 prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer KASindex' output files. REQUIRED."
 assemblyidHelp="-g [assembly id]: please specify the genome assembly id of KAS-seq data. -g [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 regionsHelp="-r [regions]: please specify the types of genomic regions. e.g. promoter, genebody, bin, gene or peak. REQUIRED."
@@ -92,6 +98,8 @@ printHelpAndExit() {
     echo -e ""
     echo -e "$threadsHelp"
     echo -e ""
+    echo -e "$normalizaitonHelp"
+    echo -e ""
     echo -e "$prefixHelp"
     echo -e ""
     echo -e "$assemblyidHelp"
@@ -122,10 +130,11 @@ if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
     printHelpAndExit
 fi
 
-while getopts 'ht:o:g:r:s:bp:d:a:l:k:' opt; do
+while getopts 'ht:n:o:g:r:s:bp:d:a:l:k:' opt; do
     case $opt in
         h) printHelpAndExit 0;;
         t) threads=$OPTARG ;;
+	n) spikein=$OPTARG ;;
         o) prefix=$OPTARG ;;
         g) assemblyid=$OPTARG ;;
         r) regions=$OPTARG ;;
@@ -318,11 +327,20 @@ sample_selected=$(sed -n ''$i'p' $KASseq)
 samtools index $sample_selected
 echo "Normalize $sample_selected using RPKM and output bigWig file ..."
 echo ""
-bamCoverage -b $sample_selected --outFileFormat bigwig -p $threads -bl ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed --effectiveGenomeSize $genomesize --normalizeUsing RPKM -o ${sample_selected}.bigWig > /dev/null 2>&1
+bamCoverage -b $sample_selected --outFileFormat bigWig -p $threads -bl ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed --effectiveGenomeSize $genomesize --normalizeUsing RPKM -o ${sample_selected}.bigWig > /dev/null 2>&1
 echo ${sample_selected}.bigWig >> ${prefix}.KAS-seq.RPKM.bigWig.txt
 echo "done."
 echo ""
 done
+
+if test -n $spikein ;then
+   echo "Normalize $sample_selected using spikein and output bigWig file ..."
+   echo ""
+   bamCoverage -b $sample_selected --outFileFormat bigWig -p $threads -bl ${SH_SCRIPT_DIR}/../blacklist/${assemblyid}-blacklist.bed --effectiveGenomeSize $genomesize --scaleFactor $spikein -o ${sample_selected}.bigWig > /dev/null 2>&1
+   echo ${sample_selected}.bigWig >> ${prefix}.KAS-seq.RPKM.bigWig.txt
+   echo "done."
+   echo ""
+fi
 
 KASseq_list=$(awk '{for(i=1;i<=NF;i++) a[i,NR]=$i}END{for(i=1;i<=NF;i++) {for(j=1;j<=NR;j++) printf a[i,j] " ";print ""}}' ${prefix}.KAS-seq.RPKM.bigWig.txt)
 labels_list=$(awk '{for(i=1;i<=NF;i++) a[i,NR]=$i}END{for(i=1;i<=NF;i++) {for(j=1;j<=NR;j++) printf a[i,j] " ";print ""}}' $labels)

@@ -6,12 +6,12 @@ channels:
   - r
 dependencies:
   - python
-  - gawk
-  - samtools
-  - bedtools
-  - picard
-  - fastqc
-  - homer
+  - gawk=5.0.1
+  - samtools=1.16.1
+  - bedtools=2.30.0
+  - picard=3.0.0
+  - fastqc=0.12.1
+  - homer=4.11
   - ucsc-bedgraphtobigwig
   - ucsc-bedsort
   - r-base
@@ -20,11 +20,11 @@ dependencies:
   - r-corrplot
   - r-ggpubr
   - r-RColorBrewer
-  - bowtie2
-  - bwa
-  - deeptools
-  - cutadapt
-  - trim-galore
-  - macs2
+  - bowtie2=2.5.1
+  - bwa=0.7.17
+  - deeptools=3.5.1
+  - cutadapt=4.3
+  - trim-galore=0.6.10
+  - macs2=2.2.7.1
   - epic2=0.0.52
-  - idr
+  - idr=2.0.4.2
