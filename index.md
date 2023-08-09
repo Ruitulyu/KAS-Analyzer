@@ -867,7 +867,7 @@ Note: The 'KAS-Analyzer diff' shell script is applied to perform differential KA
 ### TC
 Perform 'case-only' or 'case-control' differential time course(TC) analysis for (sp)KAS-seq data.
 ```
-Usage: KAS-Analyzer TC [ -h/--help ] [ -t threads ] [ -o prefix ] [ -g assembly id ] [ -r regions ] [ -s bin size ] [ -b ] [ -p peaks ] [ -d differential analysis ] [ -a annotation ] [ -l labels ] [ -k KAS-seq ] 
+Usage: KAS-Analyzer TC [ -h/--help ] [ -t threads ] [ -n ratios ] [ -o prefix ] [ -g assembly id ] [ -r regions ] [ -s bin size ] [ -b ] [ -p peaks ] [ -d differential analysis ] [ -a annotation ] [ -l labels ] [ -k KAS-seq ] 
 
 Example: 
 Case-only:
@@ -877,6 +877,13 @@ Case-control:
 nohup KAS-Analyzer TC -o KAS-seq_timecourse -t 10 -g mm10 -r bin -d case_control -a Case_control.annotation.txt -l labels.txt -k KAS-seq_data.txt &
 
 -t [threads]: please specify the number of threads used for calculating KAS index. DEFAULT: 1.
+
+-n [ratios.txt]: please input the text file containing ratios that used to normalize KAS-seq data undergo global significant changes, which can be calculated based on SpikeIn reads. The order and number of ratios should be the consistent with KAS-seq bam files. OPTIONAL.
+Example:
+1.10
+1.20
+1.30
+1.23                 ---ratios.txt
 
 -o [prefix]: please input the prefix (basename) of 'KAS-Analyzer KASindex' output files. REQUIRED.
 
