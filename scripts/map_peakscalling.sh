@@ -131,7 +131,7 @@ if test -z $peakscaller ;then
 fi
 
 if test -z $mode ;then
-   peakscaller="both"
+   mode="both"
 fi
 
 if [[ $peakscaller == "epic2" ]] ;then 
