@@ -14,7 +14,7 @@ peaksHelp="-p [peaks]: please input the text file containing the peaks file of (
 Example:
 WT.peaks.rep1.bed
 WT.peaks.rep2.bed              ---peaks.txt"
-assemblyidHelp="-s [assembly id]: please specify the genome assembly id of (sp)KAS-seq data. -g [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
+assemblyidHelp="-s [assembly id]: please specify the genome assembly id of (sp)KAS-seq data. -g [assembly id]. e.g. Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 labelsHelp="-l [labels]: please input the text file containing the labels of (sp)KAS-seq data that show in 'KAS-Analyzer termilength' output files. DEFAULT: basename of KAS-seq file.
 Example:
 WT.rep1
@@ -80,16 +80,16 @@ fi
 
 if test -z $assemblyid ;then
    echo ""
-   echo "Please input the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra 
+   echo "Please input the reference genome assembly id, e.g. Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra 
 fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. -g [assembly id]"
    echo ""
    exit 1
 fi
 
 # supported assembly id.
-if [[ $assemblyid != "hg18" ]] && [[ $assemblyid != "hg19" ]] && [[ $assemblyid != "hg38" ]] && [[ $assemblyid != "mm9" ]] && [[ $assemblyid != "mm10" ]] && [[ $assemblyid != "mm39" ]] && [[ $assemblyid != "dm3" ]] && [[ $assemblyid != "dm6" ]] && [[ $assemblyid != "rn6" ]] && [[ $assemblyid != "rn7" ]] && [[ $assemblyid != "ce10" ]] && [[ $assemblyid != "ce11" ]] && [[ $assemblyid != "danRer10" ]] && [[ $assemblyid != "danRer11" ]] ;then
+if [[ $assemblyid != "hg18" ]] && [[ $assemblyid != "hg19" ]] && [[ $assemblyid != "hg38" ]] && [[ $assemblyid != "hs1" ]] && [[ $assemblyid != "mm9" ]] && [[ $assemblyid != "mm10" ]] && [[ $assemblyid != "mm39" ]] && [[ $assemblyid != "dm3" ]] && [[ $assemblyid != "dm6" ]] && [[ $assemblyid != "rn6" ]] && [[ $assemblyid != "rn7" ]] && [[ $assemblyid != "ce10" ]] && [[ $assemblyid != "ce11" ]] && [[ $assemblyid != "danRer10" ]] && [[ $assemblyid != "danRer11" ]] ;then
    echo ""
-   echo "Error: unsupported assembly id: $assemblyid ; Please specify the reference genome assembly id of KAS-seq data. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11."
+   echo "Error: unsupported assembly id: $assemblyid ; Please specify the reference genome assembly id of KAS-seq data. e.g. Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11."
    echo ""
    exit 1
 fi
@@ -100,6 +100,8 @@ if [[ $assemblyid == "hg18" ]] ;then
 elif [[ $assemblyid == "hg19" ]] ;then
     genomesize=2960053816
 elif [[ $assemblyid == "hg38" ]] ;then
+    genomesize=3113504866
+elif [[ $assemblyid == "hs1" ]] ;then
     genomesize=3113504866
 elif [[ $assemblyid == "mm9" ]] ;then
     genomesize=2674874829

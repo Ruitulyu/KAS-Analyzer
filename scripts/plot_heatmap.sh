@@ -12,7 +12,7 @@ nohup KAS-Analyzer heatmap -t 10 -s hg19 -o KAS-seq_heatmap -r genebody -q -c Re
 Custom regions(peaks. e.g. enhancers.bed):
 nohup KAS-Analyzer heatmap -t 10 -o KAS-seq_heatmap -r peaks -q -p KAS-seq_peaks.bed -c Reds,Reds,Blues,Blues -l labels.txt -k KAS-seq.txt &"
 threadsHelp="-t [threads]: please specify the number of threads used for generating (sp)KAS-seq heatmap plot. DEFAULT: 1."
-assemblyidHelp="-s [assemblyid]: please specify the genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED only for 'genomic features' mode."
+assemblyidHelp="-s [assemblyid]: please specify the genome assembly id, e.g. Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED only for 'genomic features' mode."
 sortHelp="-q: please specify to sort the regions. DEFAULT: off."
 sortsampleusingHelp="-u [sample using]: please specify the samples list to sort the regions. e.g. -u 1,2,3"
 lengthHelp="-e [length]: please specify the distance upstream of the start site of the regions defined in the region file. If the regions are genebody, this would be the distance upstream of the transcription start site. DEFAULT: 3000."
@@ -124,12 +124,11 @@ elif [[ $regions == "genebody" ]] || [[ $regions == "TSS" ]] || [[ $regions == "
    
    if test -z $assemblyid ;then 
    echo ""
-   echo "please specify the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebr
-a fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. -s [assembly id]; REQUIRED only for 'genomic features' mode."
+   echo "please specify the reference genome assembly id, e.g. Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. -s [assembly id]; REQUIRED only for 'genomic features' mode."
    echo ""
    exit -1
    
-   elif [[ $assemblyid != "hg18" ]] && [[ $assemblyid != "hg19" ]] && [[ $assemblyid != "hg38" ]] && [[ $assemblyid != "mm9" ]] && [[ $assemblyid != "mm10" ]] && [[ $assemblyid != "mm39" ]] && [[ $assemblyid != "dm3" ]] && [[ $assemblyid != "dm6" ]] && [[ $assemblyid != "rn6" ]] && [[ $assemblyid != "rn7" ]] && [[ $assemblyid != "ce10" ]] && [[ $assemblyid != "ce11" ]] && [[ $assemblyid != "danRer10" ]] && [[ $assemblyid != "danRer11" ]]; then
+   elif [[ $assemblyid != "hg18" ]] && [[ $assemblyid != "hg19" ]] && [[ $assemblyid != "hg38" ]] && [[ $assemblyid != "hs1" ]] && [[ $assemblyid != "mm9" ]] && [[ $assemblyid != "mm10" ]] && [[ $assemblyid != "mm39" ]] && [[ $assemblyid != "dm3" ]] && [[ $assemblyid != "dm6" ]] && [[ $assemblyid != "rn6" ]] && [[ $assemblyid != "rn7" ]] && [[ $assemblyid != "ce10" ]] && [[ $assemblyid != "ce11" ]] && [[ $assemblyid != "danRer10" ]] && [[ $assemblyid != "danRer11" ]]; then
    echo ""
    echo "Error: unsupported assembly id: $assemblyid." 
    echo ""

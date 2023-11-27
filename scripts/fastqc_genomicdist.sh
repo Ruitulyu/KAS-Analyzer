@@ -10,7 +10,7 @@ exampleHelp="Example: nohup KAS-Analyzer genomicdist -o KAS-seq_genomic_distribu
 prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer genomicdist' output files. DEFAULT: basename of KAS-seq peak file."
 controlHelp="-c: please specify if the percentages of normal genomic feature distribution is generated, which is regard as a control. DEFAULT: off."
 peaksHelp="-p [peaks]: please input the KAS-seq peak or differential KAS-seq peak file. REQUIRED."
-assemblyid="-s [assembly id]: please specify the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. REQUIRED."
+assemblyid="-s [assembly id]: please specify the reference genome assembly id, e.g. Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. REQUIRED."
 helpHelp="-h/--help: print this help and exit.
 Note: The 'KAS-Analyzer genomicdist' shell script is applied to calculate and plot the percentages of (sp)KAS-seq peaks distribution on genomic features (Promoter(TSS +/-1kb), Exon, Intron, Terminal(TES+3kb) and Intergenic regions)."
 
@@ -53,7 +53,7 @@ done
 # Required options.
 if test -z $assemblyid ;then
    echo ""
-   echo "Please specify the reference genome assembly id of your KAS-seq data. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. -s [assembly id]"
+   echo "Please specify the reference genome assembly id of your KAS-seq data. e.g. Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. -s [assembly id]"
    echo ""
    exit -1
 fi
@@ -78,9 +78,9 @@ fi
 SH_SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 
 # test if $assemblyid is supported.
-if [[ $assemblyid != "hg18" ]] && [[ $assemblyid != "hg19" ]] && [[ $assemblyid != "hg38" ]] && [[ $assemblyid != "mm9" ]] && [[ $assemblyid != "mm10" ]] && [[ $assemblyid != "mm39" ]] && [[ $assemblyid != "ce10" ]] && [[ $assemblyid != "ce11" ]] && [[ $assemblyid != "dm3" ]] && [[ $assemblyid != "dm6" ]] && [[ $assemblyid != "rn6" ]] && [[ $assemblyid != "rn7" ]] && [[ $assemblyid != "danRer10" ]] && [[ $assemblyid != "danRer11" ]] ;then
+if [[ $assemblyid != "hg18" ]] && [[ $assemblyid != "hg19" ]] && [[ $assemblyid != "hg38" ]] && [[ $assemblyid != "hs1" ]] && [[ $assemblyid != "mm9" ]] && [[ $assemblyid != "mm10" ]] && [[ $assemblyid != "mm39" ]] && [[ $assemblyid != "ce10" ]] && [[ $assemblyid != "ce11" ]] && [[ $assemblyid != "dm3" ]] && [[ $assemblyid != "dm6" ]] && [[ $assemblyid != "rn6" ]] && [[ $assemblyid != "rn7" ]] && [[ $assemblyid != "danRer10" ]] && [[ $assemblyid != "danRer11" ]] ;then
    echo ""
-   echo "Error: unsupported assembly id : ${assemblyid} in 'KAS-Analyzer genomicdist'. Supported assembly id: Human: hg18, hg19, hg38; Mouse: mm9,mm10,mm39; Fruitfly: dm3, dm6; Rat: rn6, rn7; C.elegans: ce10, ce11; Zebra fish: danRer10, danRer11. -s [assembly id]"
+   echo "Error: unsupported assembly id : ${assemblyid} in 'KAS-Analyzer genomicdist'. Supported assembly id: Human: hg18, hg19, hg38, hs1; Mouse: mm9,mm10,mm39; Fruitfly: dm3, dm6; Rat: rn6, rn7; C.elegans: ce10, ce11; Zebra fish: danRer10, danRer11. -s [assembly id]"
    echo ""
    exit -1
 fi

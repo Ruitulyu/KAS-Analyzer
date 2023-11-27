@@ -22,7 +22,7 @@ foldchangeHelp="-f [fold change cutoff]: please specify the fold change cutoff o
 binsizeHelp="-b [bin size]: please specify the size of bins used to identify R-loops. DEFAULT: 500."
 extendlengthHelp="-e [extendlengthHelp]: please input the extend length for single-end spKAS-seq data. DEFAULT: 150."
 prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer spKAS-seq' output files. REQUIRED."
-assemblyidHelp="-s [assembly id]: please input the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. REQUIRED."
+assemblyidHelp="-s [assembly id]: please input the reference genome assembly id, e.g. Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. REQUIRED."
 read1Help="-1 [read1]: please input trimmed single-end spKAS-seq fastq file or read1 of paired-end spKAS-seq fastq files; compressed .fastq.gz is accepted. REQUIRED."
 read2Help="-2 [read2]: please input trimmed read2 of paired-end spKAS-seq raw fastq files. compressed fastq.gz is accepted."
 helpHelp="-h: print this help and exit.
@@ -102,7 +102,7 @@ fi
 
 if test -z $assemblyid ;then
    echo ""	
-   echo "Please input the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the bowtie2 reference genome index. -s [assembly id]."
+   echo "Please input the reference genome assembly id, e.g. Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the bowtie2 reference genome index. -s [assembly id]."
    echo ""
    exit -1
 fi
@@ -144,9 +144,9 @@ fi
 SH_SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 
 # supported assembly id.
-if [[ $assemblyid != "hg18" ]] && [[ $assemblyid != "hg19" ]] && [[ $assemblyid != "hg38" ]] && [[ $assemblyid != "mm9" ]] && [[ $assemblyid != "mm10" ]] && [[ $assemblyid != "mm39" ]] && [[ $assemblyid != "dm3" ]] && [[ $assemblyid != "dm6" ]] && [[ $assemblyid != "rn6" ]] && [[ $assemblyid != "rn7" ]] && [[ $assemblyid != "ce10" ]] && [[ $assemblyid != "ce11" ]] && [[ $assemblyid != "danRer10" ]] && [[ $assemblyid != "danRer11" ]] ;then
+if [[ $assemblyid != "hg18" ]] && [[ $assemblyid != "hg19" ]] && [[ $assemblyid != "hg38" ]] && [[ $assemblyid != "hs1" ]] && [[ $assemblyid != "mm9" ]] && [[ $assemblyid != "mm10" ]] && [[ $assemblyid != "mm39" ]] && [[ $assemblyid != "dm3" ]] && [[ $assemblyid != "dm6" ]] && [[ $assemblyid != "rn6" ]] && [[ $assemblyid != "rn7" ]] && [[ $assemblyid != "ce10" ]] && [[ $assemblyid != "ce11" ]] && [[ $assemblyid != "danRer10" ]] && [[ $assemblyid != "danRer11" ]] ;then
    echo ""
-   echo "Error: unsupported assembly id: $assemblyid. Supported assembly id: Human: hg18, hg19, hg38; Mouse: mm9,mm10,mm39; Fruitfly: dm3, dm6; Rat: rn6, rn7; C.elegans: ce10, ce11; Zebra fish: danRer10, danRer11."
+   echo "Error: unsupported assembly id: $assemblyid. Supported assembly id: Human: hg18, hg19, hg38, hs1; Mouse: mm9,mm10,mm39; Fruitfly: dm3, dm6; Rat: rn6, rn7; C.elegans: ce10, ce11; Zebra fish: danRer10, danRer11."
    echo ""
    exit 1
 fi
@@ -336,7 +336,7 @@ if [[ $paired_or_single_end == "single" ]] ;then
       echo ""
       sed -i '/^chrM/d' ${prefix}.ext${extendlength}.bed
  
-      if [[ $assemblyid == "hg18" ]] || [[ $assemblyid == "hg19" ]] || [[ $assemblyid == "hg38" ]] ;then
+      if [[ $assemblyid == "hg18" ]] || [[ $assemblyid == "hg19" ]] || [[ $assemblyid == "hg38" ]] || [[ $assemblyid == "hs1" ]] ;then
              assemblysize="2.7e9"
       elif [[ $assemblyid == "mm9" ]] || [[ $assemblyid == "mm10" ]] || [[ $assemblyid == "mm39" ]] ;then
              assemblysize="1.87e9"
@@ -623,7 +623,7 @@ elif [[ $paired_or_single_end == "paired" ]]; then
       # peak calling for spKAS-seq data.
       echo "spKAS-seq peaking with macs2 to filter ${binsize}bp bins."
       echo ""
-      if [[ $assemblyid == "hg18" ]] || [[ $assemblyid == "hg19" ]] || [[ $assemblyid == "hg38" ]] ;then
+      if [[ $assemblyid == "hg18" ]] || [[ $assemblyid == "hg19" ]] || [[ $assemblyid == "hg38" ]] || [[ $assemblyid == "hs1" ]]  ;then
 	     assemblysize="2.7e9"
       elif [[ $assemblyid == "mm9" ]] || [[ $assemblyid == "mm10" ]] || [[ $assemblyid == "mm39" ]] ;then
 	     assemblysize="1.87e9"

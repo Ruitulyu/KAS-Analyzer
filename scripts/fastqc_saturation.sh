@@ -8,7 +8,7 @@ set -e
 usageHelp="Usage: KAS-Analyzer saturation [ -h/--help ] [ -o prefix ] [ -s assembly id ] [ -c control ] [ -k KAS-seq ]"
 exampleHelp="Example: nohup KAS-Analyzer saturation -o KAS-seq_saturation -s hg19 -c KAS-seq_Input.bed -k KAS-seq.bed &"
 prefixHelp="-o [prefix]: please input the prefix (basename) of 'KAS-Analyzer saturation' output files. Default: basename of KAS-seq data."
-assemblyidHelp="-s [assembly id]: please specify the genome assembly id of (sp)KAS-seq data. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
+assemblyidHelp="-s [assembly id]: please specify the genome assembly id of (sp)KAS-seq data. e.g. Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 controlHelp="-c [control]: please input the control data (input of (sp)KAS-seq data) containing uniquely mapped reads. e.g. -c KAS-seq_Input.bed. REQUIRED. Note: reads number of KAS-seq and Input should be similar."
 KASseqHelp="-k [KAS-seq]: please input the KAS-seq data containing uniquely mapped reads. e.g. -k KAS-seq.bed. REQUIRED."
 helpHelp="-h/--help: print this help and exit.
@@ -61,7 +61,7 @@ done
 # Required options.
 if test -z $assemblyid ;then
    echo ""      
-   echo "Please specify the reference genome assembly id of (sp)KAS-seq data. -s [assembly id]. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11."
+   echo "Please specify the reference genome assembly id of (sp)KAS-seq data. -s [assembly id]. e.g. Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11."
    echo ""
    exit -1
 fi
@@ -81,7 +81,7 @@ if test -z $KASseq ;then
 fi
 
 # genome size. e.g. human(hs): 2.7e9; mouse(mm): 1.87e9; C.elegans(ce): 9e7; fruitfly(dm): 1.2e8; rat(rn): 2.5e9; zebrafish(danRer): 1e9.
-if [[ $assemblyid == "hg18" ]] || [[ $assemblyid == "hg19" ]] || [[ $assemblyid == "hg38" ]] ;then
+if [[ $assemblyid == "hg18" ]] || [[ $assemblyid == "hg19" ]] || [[ $assemblyid == "hg38" ]] || [[ $assemblyid == "hs1" ]] ;then
    genomesize="2.7e9"
 elif [[ $assemblyid == "mm9" ]] || [[ $assemblyid == "mm10" ]] || [[ $assemblyid == "mm39" ]] ;then     
    genomesize="1.87e9"
@@ -95,7 +95,7 @@ elif [[ $assemblyid == "danRer10" ]] || [[ $assemblyid == "danRer11" ]] ;then
    genomesize="1e9"
 else 
    echo ""
-   echo "Error: unsupported assembly id: $assemblyid. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11."
+   echo "Error: unsupported assembly id: $assemblyid. e.g. Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11."
    echo ""
    exit -1
 fi

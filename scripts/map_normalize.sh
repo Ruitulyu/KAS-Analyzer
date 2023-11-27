@@ -22,7 +22,7 @@ Example:
 1.30
 1.23                 ---ratios.txt"
 bigWigHelp="-b: please specify if you want to convert the normalized bedGraph files into bigWig files. DEFAULT: off."
-assemblyidHelp="-s [assembly id]: please input the reference genome assembly id of bedGraph files. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the normalized KAS-seq bedGraph files. REQUIRED only if -b was specified."
+assemblyidHelp="-s [assembly id]: please input the reference genome assembly id of bedGraph files. e.g. Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the normalized KAS-seq bedGraph files. REQUIRED only if -b was specified."
 helpHelp="-h/--help: print this help and exit.
 Note: The 'KAS-Analyzer normalize' shell script is applied to normalize spKAS-seq or KAS-seq data."
 
@@ -74,8 +74,13 @@ if test -z $KASseq ;then
    exit -1
 fi
 
+# Required options.
+if test -z $assemblyid ;then
+   assemblyid = "no"
+fi
+
 # supported assembly id.
-if [[ $assemblyid != "hg18" ]] && [[ $assemblyid != "hg19" ]] && [[ $assemblyid != "hg38" ]] && [[ $assemblyid != "mm9" ]] && [[ $assemblyid != "mm10" ]] && [[ $assemblyid != "mm39" ]] && [[ $assemblyid != "dm3" ]] && [[ $assemblyid != "dm6" ]] && [[ $assemblyid != "rn6" ]] && [[ $assemblyid != "rn7" ]] && [[ $assemblyid != "ce10" ]] && [[ $assemblyid != "ce11" ]] && [[ $assemblyid != "danRer10" ]] && [[ $assemblyid != "danRer11" ]] ;then
+if [[ $assemblyid != "hg18" ]] && [[ $assemblyid != "hg19" ]] && [[ $assemblyid != "hg38" ]] && [[ $assemblyid != "hs1" ]] && [[ $assemblyid != "mm9" ]] && [[ $assemblyid != "mm10" ]] && [[ $assemblyid != "mm39" ]] && [[ $assemblyid != "dm3" ]] && [[ $assemblyid != "dm6" ]] && [[ $assemblyid != "rn6" ]] && [[ $assemblyid != "rn7" ]] && [[ $assemblyid != "ce10" ]] && [[ $assemblyid != "ce11" ]] && [[ $assemblyid != "danRer10" ]] && [[ $assemblyid != "danRer11" ]] && [[ $assemblyid != "no" ]] ;then
         echo ""
         echo "Error: unsupported assembly id: $assemblyid "
         echo ""
@@ -88,6 +93,8 @@ if [[ $assemblyid == "hg18" ]] ;then
 elif [[ $assemblyid == "hg19" ]] ;then
     genomesize=2960053816
 elif [[ $assemblyid == "hg38" ]] ;then    
+    genomesize=3113504866
+elif [[ $assemblyid == "hs1" ]] ;then
     genomesize=3113504866
 elif [[ $assemblyid == "mm9" ]] ;then
     genomesize=2674874829

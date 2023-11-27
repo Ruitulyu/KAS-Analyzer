@@ -13,7 +13,7 @@ On bins:
 nohup KAS-Analyzer correlation -m pearson -t 10 -s hg19 -r bin -p heatmap -o KAS-seq -l labels.txt -k KAS-seq.txt &"
 methodsHelp="-m [correlation method]: please specify the methods to calculate correlation coefficients. e.g. pearson, kendall or spearman. DEFAULT: pearson."
 threadsHelp="-t [threads]: please specify the number of threads. DEFAULT: 1."
-assemblyidHelp="-s [assembly id]: please specify the genome assembly id of your (sp)KAS-seq data. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
+assemblyidHelp="-s [assembly id]: please specify the genome assembly id of your (sp)KAS-seq data. e.g. Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 regionsHelp="-r [regions]: please specify the region types to calculate the (sp)KAS-seq density matrix. e.g. bin or peak. DEFAULT: bin."
 peakfileHelp="-f [peaks file]: please input the merged peaks list file. Note: only valid when '-r peaks' is specified. REQUIRED." 
 plotsHelp="-p [plot types]: please specify the plot types to generate correlation plot. DEFAULT: scatterplot."
@@ -115,13 +115,13 @@ fi
 # Required options.
 if test -z $assemblyid ;then
    echo ""	
-   echo "Please specify the reference genome assembly id of (sp)KAS-seq data. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. -s [assembly id]"
+   echo "Please specify the reference genome assembly id of (sp)KAS-seq data. e.g. Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. -s [assembly id]"
    echo ""
    exit 1
 fi
 
 # supported assembly id.
-if [[ $assemblyid != "hg18" ]] && [[ $assemblyid != "hg19" ]] && [[ $assemblyid != "hg38" ]] && [[ $assemblyid != "mm9" ]] && [[ $assemblyid != "mm10" ]] && [[ $assemblyid != "mm39" ]] && [[ $assemblyid != "dm3" ]] && [[ $assemblyid != "dm6" ]] && [[ $assemblyid != "rn6" ]] && [[ $assemblyid != "rn7" ]] && [[ $assemblyid != "ce10" ]] && [[ $assemblyid != "ce11" ]] && [[ $assemblyid != "danRer10" ]] && [[ $assemblyid != "danRer11" ]] ;then
+if [[ $assemblyid != "hg18" ]] && [[ $assemblyid != "hg19" ]] && [[ $assemblyid != "hg38" ]] && [[ $assemblyid != "hs1" ]] && [[ $assemblyid != "mm9" ]] && [[ $assemblyid != "mm10" ]] && [[ $assemblyid != "mm39" ]] && [[ $assemblyid != "dm3" ]] && [[ $assemblyid != "dm6" ]] && [[ $assemblyid != "rn6" ]] && [[ $assemblyid != "rn7" ]] && [[ $assemblyid != "ce10" ]] && [[ $assemblyid != "ce11" ]] && [[ $assemblyid != "danRer10" ]] && [[ $assemblyid != "danRer11" ]] ;then
     echo ""
     echo "Error: unsupported assembly id: $assemblyid "
     echo ""
@@ -134,6 +134,8 @@ if [[ $assemblyid == "hg18" ]] ;then
 elif [[ $assemblyid == "hg19" ]] ;then
     genomesize=2960053816
 elif [[ $assemblyid == "hg38" ]] ;then
+    genomesize=3113504866
+elif [[ $assemblyid == "hs1" ]] ;then
     genomesize=3113504866
 elif [[ $assemblyid == "mm9" ]] ;then
     genomesize=2674874829

@@ -16,7 +16,7 @@ nohup KAS-Analyzer profile -t 10 -o KAS-seq_peaks -r peaks -p KAS-seq_peaks.bed 
 KAS-seq signal on different regions (-f [peaks list] must be specified):
 nohup KAS-Analyzer profile -t 10 -o KAS-seq_different_clusters -r peakslist -f peaks_cluster1.bed,peaks_cluster2.bed,peaks_cluster3.bed -c red,green,purple -l labels.txt -k KAS-seq.txt &"
 threadsHelp="-t [threads]: please input the number of threads used for generating (sp)KAS-seq metagene profile plot. DEFAULT: 1."
-assemblyidHelp="-s [assemblyid]: please specify the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. REQUIRED only for 'genomic features' mode."
+assemblyidHelp="-s [assemblyid]: please specify the reference genome assembly id, e.g. Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. REQUIRED only for 'genomic features' mode."
 lengthHelp="-e [length]: please specify the distance upstream of the start site of the regions defined in the region file. If the regions are genebody, this would be the distance upstream of the transcription start site. DEFAULT: 3000."
 prefixHelp="-o [KAS-seq_profile]: please input the prefix (basename), which will be used to generate the name of 'KAS-Analyzer metageneprofile' output files. REQUIRED."
 regionsHelp="-r [regions]: please specify the regions types for generating metagene profile plot. e.g. Genomic features: genebody, TSS or TES; Custom regions: peaks or peakslist. REQUIRED."
@@ -120,13 +120,13 @@ elif [[ $regions == "genebody" ]] || [[ $regions == "TSS" ]] || [[ $regions == "
    
    if test -z $assemblyid ;then 
       echo ""
-      echo "please specify the reference genome assembly id, e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. -s [assembly id]; REQUIRED only for 'genomic features' mode."
+      echo "please specify the reference genome assembly id, e.g. Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. Note: the assembly id need to be consistent with the reference genome index. -s [assembly id]; REQUIRED only for 'genomic features' mode."
       echo ""
       exit -1
 
-   elif [[ $assemblyid != "hg18" ]] && [[ $assemblyid != "hg19" ]] && [[ $assemblyid != "hg38" ]] && [[ $assemblyid != "mm9" ]] && [[ $assemblyid != "mm10" ]] && [[ $assemblyid != "mm39" ]] && [[ $assemblyid != "dm3" ]] && [[ $assemblyid != "dm6" ]] && [[ $assemblyid != "rn6" ]] && [[ $assemblyid != "rn7" ]] && [[ $assemblyid != "ce10" ]] && [[ $assemblyid != "ce11" ]] && [[ $assemblyid != "danRer10" ]] && [[ $assemblyid != "danRer11" ]]; then
+   elif [[ $assemblyid != "hg18" ]] && [[ $assemblyid != "hg19" ]] && [[ $assemblyid != "hg38" ]] && [[ $assemblyid != "hs1" ]] && [[ $assemblyid != "mm9" ]] && [[ $assemblyid != "mm10" ]] && [[ $assemblyid != "mm39" ]] && [[ $assemblyid != "dm3" ]] && [[ $assemblyid != "dm6" ]] && [[ $assemblyid != "rn6" ]] && [[ $assemblyid != "rn7" ]] && [[ $assemblyid != "ce10" ]] && [[ $assemblyid != "ce11" ]] && [[ $assemblyid != "danRer10" ]] && [[ $assemblyid != "danRer11" ]]; then
       echo ""
-      echo "Error: unsupported assembly id: $assemblyid. supported assembly id: Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11." 
+      echo "Error: unsupported assembly id: $assemblyid. supported assembly id: Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11." 
       echo ""
       exit -1
    fi 

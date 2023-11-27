@@ -13,7 +13,7 @@ controlHelp="-c [Control]: please input the KAS-seq control bed or bam files. e.
 modeHelp="-b [mode]: specify macs2 to perferm KAS-seq peaks calling with 'broad', 'sharp' or 'both' mode. epic2 for broad peaks; macs2 for sharp peaks; combined epic2&macs2 for broad and sharp peaks . DEFAULT: both."
 prefixHelp="-o [prefix]: please input the prefix (basename), which will be used to generate the name of 'KAS-Analyzer peakscalling' output files. REQUIRED."
 cutoffHelp="-p [FDR or qvalue]: please input the pvalue or qvalue for KAS-seq peaks calling with macs14 or macs2. DEFAULT: epic2 FDR: 0.05; macs2 qvalue: 0.01"
-assemblyidHelp="-g [assembly id]: please specify the reference genome assembly id of KAS-seq data. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
+assemblyidHelp="-g [assembly id]: please specify the reference genome assembly id of KAS-seq data. e.g. Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. REQUIRED."
 # genome size. e.g. human(hs): 2.7e9; mouse(mm): 1.87e9; C.elegans(ce): 9e7; fruitfly(dm): 1.2e8; rat(rn): 2.5e9; zebrafish(danRer): 1e9.
 helpHelp="-h: print this help and exit.
 Note: This shell script mainly invoke macs2 and epic2 for calling (sp)KAS-seq data peaks, please google their github pages for more information."
@@ -98,14 +98,14 @@ fi
 
 if test -z $assemblyid ;then
    echo ""	
-   echo "Please specify the reference genome assembly id of KAS-seq data. e.g. Human: hg18, hg19, hg38; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. -g [assembly id]"
+   echo "Please specify the reference genome assembly id of KAS-seq data. e.g. Human: hg18, hg19, hg38, hs1; Mouse: mm9, mm10, mm39; C.elegans: ce10, ce11; D.melanogaster: dm3, dm6; Rat: rn6, rn7; Zebra fish: danRer10, danRer11. -g [assembly id]"
    echo ""
    exit -1
 fi
 
 # genome size. e.g. human(hs): 2.7e9; mouse(mm): 1.87e9; C.elegans(ce): 9e7; fruitfly(dm): 1.2e8; rat(rn): 2.5e9; zebrafish(danRer): 1e9.
 
-if [[ $assemblyid == "hg18" ]] || [[ $assemblyid == "hg19" ]] || [[ $assemblyid == "hg38" ]] ;then
+if [[ $assemblyid == "hg18" ]] || [[ $assemblyid == "hg19" ]] || [[ $assemblyid == "hg38" ]] || [[ $assemblyid == "hs1" ]] ;then
 	genomesize="2.7e9"
 elif [[ $assemblyid == "mm9" ]] || [[ $assemblyid == "mm10" ]] || [[ $assemblyid == "mm39" ]] ;then	
         genomesize="1.87e9"
