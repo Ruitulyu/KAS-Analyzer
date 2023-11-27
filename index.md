@@ -581,13 +581,13 @@ Note: The 'KAS-Analyzer spKAS-seq' shell script mainly invoke bowtie2 for spKAS-
 ### peakscalling
 Call broad or sharp peaks for KAS-seq data.
 ```
-Usage: KAS-Analyzer peakscalling [ -h ] [ -m peaks caller ] [ -k KAS-seq ] [ -c Control ] [ -b mode ] [ -o prefix ] [ -p pvalue or qvalue ] [ -g assembly id ]
+Usage: KAS-Analyzer peakscalling [ -h ] [ -m peaks caller ] [ -t KAS-seq ] [ -c Control ] [ -b mode ] [ -o prefix ] [ -p pvalue or qvalue ] [ -g assembly id ]
 
-Example: nohup KAS-Analyzer peakscalling -k KAS-seq.rep1.bed,KAS-seq.rep2.bed -c Control_Input.rep1.bed,Control_Input.rep2.bed -o KAS-seq -g hg19 &
+Example: nohup KAS-Analyzer peakscalling -t KAS-seq.rep1.bed,KAS-seq.rep2.bed -c Control_Input.rep1.bed,Control_Input.rep2.bed -o KAS-seq -g hg19 &
 
 -m [peaks caller]: please input the peaks caller (macs2, epic2 or macs2_and_epic2) that you want to use for KAS-seq peaks calling. DEFAULT: macs2_and_epic2.
 
--k [KAS-seq]: please input the KAS-seq bed or bam files. e.g. KAS-seq.rep1.bed,KAS-seq.rep2.bed or KAS-seq.rep1.bam,KAS-seq.rep2.bam. REQUIRED.
+-t [KAS-seq]: please input the KAS-seq bed or bam files. e.g. KAS-seq.rep1.bed,KAS-seq.rep2.bed or KAS-seq.rep1.bam,KAS-seq.rep2.bam. REQUIRED.
 
 -c [Control]: please input the KAS-seq control bed or bam files. e.g. KAS-seq_Input.rep1.bed,KAS-seq_Input.rep2.bed or KAS-seq_Input.rep1.bam,KAS-seq_Input.rep2.bam. OPTIONAL.
 
