@@ -178,7 +178,7 @@ if [[ $paired_or_single_end == "single" ]]; then
       # create $prefix folder and move read1 KAS-seq data into $prefix folder
       mkdir -p $prefix
       cd $prefix
-      mv ../$read1 ./
+      ln -s ../$read1 ./
 
       # ouput the numebr of raw reads into mapping_summary txt file.
       # test if $read1 is .gz compressed file.
@@ -306,7 +306,7 @@ if [[ $paired_or_single_end == "single" ]]; then
       # create $prefix folder and move read1 KAS-seq data into $prefix folder
       mkdir -p $prefix
       cd $prefix
-      mv ../$read1 ./
+      ln -s ../$read1 ./
 	      
       # ouput the number of raw reads into mapping_summary txt file.
       # test if $read1 is .gz compressed file.
@@ -435,8 +435,8 @@ elif [[ $paired_or_single_end == "paired" ]] ;then
       # create $prefix folder and move read1 and read2 KAS-seq data into $prefix folder
       mkdir -p $prefix
       cd $prefix
-      mv ../${read1} ./
-      mv ../${read2} ./
+      ln -s ../${read1} ./
+      ln -s ../${read2} ./
 
       # ouput the numebr of raw reads into mapping_summary txt file.
       # test if $read1 is .gz compressed file.
@@ -598,8 +598,8 @@ elif [[ $paired_or_single_end == "paired" ]] ;then
       # create $prefix folder and move read1 and read2 KAS-seq data into $prefix folder.
       mkdir -p $prefix
       cd $prefix
-      mv ../$read1 ./
-      mv ../$read2 ./
+      ln -s ../$read1 ./
+      ln -s ../$read2 ./
 
       # ouput the numebr of raw reads into mapping_summary txt file.
       # test if $read1 is .gz compressed file.
