@@ -5,10 +5,10 @@
 set -e
 
 ## Read arguments                                                     
-usageHelp="Usage: KAS-Analyzer peakscalling [ -h ] [ -m peaks caller ] [ -k KAS-seq ] [ -c Control ] [ -b mode ] [ -o prefix ] [ -p pvalue or qvalue ] [ -g assembly id ]."
-exampleHelp="Example: nohup KAS-Analyzer peakscalling -k KAS-seq.rep1.bed,KAS-seq.rep2.bed -c Control_Input.rep1.bed,Control_Input.rep2.bed -o KAS-seq -g hg19 &"
+usageHelp="Usage: KAS-Analyzer peakscalling [ -h ] [ -m peaks caller ] [ -t KAS-seq ] [ -c Control ] [ -b mode ] [ -o prefix ] [ -p pvalue or qvalue ] [ -g assembly id ]."
+exampleHelp="Example: nohup KAS-Analyzer peakscalling -t KAS-seq.rep1.bed,KAS-seq.rep2.bed -c Control_Input.rep1.bed,Control_Input.rep2.bed -o KAS-seq -g hg19 &"
 peakscallerHelp="-m [peaks caller]: please input the peaks caller (macs2, epic2 or macs2_and_epic2) that you want to use for KAS-seq peaks calling. DEFAULT: macs2_and_epic2."
-KASseqHelp="-k [KAS-seq]: please input the KAS-seq bed or bam files. e.g. KAS-seq.rep1.bed,KAS-seq.rep2.bed or KAS-seq.rep1.bam,KAS-seq.rep2.bam. REQUIRED."
+KASseqHelp="-t [KAS-seq]: please input the KAS-seq bed or bam files. e.g. KAS-seq.rep1.bed,KAS-seq.rep2.bed or KAS-seq.rep1.bam,KAS-seq.rep2.bam. REQUIRED."
 controlHelp="-c [Control]: please input the KAS-seq control bed or bam files. e.g. KAS-seq_Input.rep1.bed,KAS-seq_Input.rep2.bed or KAS-seq_Input.rep1.bam,KAS-seq_Input.rep2.bam. OPTIONAL."
 modeHelp="-b [mode]: specify macs2 to perferm KAS-seq peaks calling with 'broad', 'sharp' or 'both' mode. epic2 for broad peaks; macs2 for sharp peaks; combined epic2&macs2 for broad and sharp peaks . DEFAULT: both."
 prefixHelp="-o [prefix]: please input the prefix (basename), which will be used to generate the name of 'KAS-Analyzer peakscalling' output files. REQUIRED."
@@ -50,11 +50,11 @@ if [[ $# == 1 ]] || [[ $1 == "--help" ]] || [[ $1 == "-help" ]] ;then
 fi
 
 # get the value of options.
-while getopts 'hm:k:c:b:o:p:g:' opt; do
+while getopts 'hm:t:c:b:o:p:g:' opt; do
     case $opt in
         h) printHelpAndExit 0;;
         m) peakscaller=$OPTARG ;;
-        k) KASseq=$OPTARG ;;
+        t) KASseq=$OPTARG ;;
         c) control=$OPTARG ;;
 	b) mode=$OPTARG ;;
         o) prefix=$OPTARG ;;
