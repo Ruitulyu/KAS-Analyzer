@@ -24,6 +24,8 @@ KAS-seq is a kethoxal-assisted single-stranded DNA sequencing (KAS-seq) approach
 
 3. Wu, Tong, Ruitu Lyu, and Chuan He. [spKAS-seq reveals R-loop dynamics using low-input materials by detecting single-stranded DNA with strand specificity.](https://www.science.org/doi/full/10.1126/sciadv.abq2166) Science Advances 8.48 (2022): eabq2166.
 
+4. Lyu, Ruitu, Tong Wu, Gayoung Park, Yu-Ying He, Mengjie Chen, and Chuan He. [KAS-Analyzer: a novel computational framework for exploring KAS-seq data.](https://academic.oup.com/bioinformaticsadvances/article/3/1/vbad121/7264217) Bioinformatics Advances 3, no. 1 (2023): vbad121.
+
 ----------------------------------------
 
 ### Documentation:
