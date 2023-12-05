@@ -60,6 +60,9 @@ conda install mamba -c conda-forge
 # Install 'KAS-Analyzer' environment using mamba. 
 mamba env create -f ./environment.yml
 
+# Decompress the genomic annotation files.
+find ./ -type f -name '*.xz' -exec xz -d {} +
+
 # or
 KAS-Analyzer install -KAS-Analyzer
 
@@ -68,6 +71,7 @@ conda activate KAS-Analyzer
 
 # Deactivate conda 'KAS-Analyzer' environment.
 conda deactivate
+
 ```	
 
 ------------------------------------	
