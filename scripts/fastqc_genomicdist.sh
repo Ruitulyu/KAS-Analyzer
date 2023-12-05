@@ -142,31 +142,31 @@ fi
 # get the number of peaks 50bp bins on different genomic features.
 echo "Calculate $peaks 'Promoter' percentage ..."
 echo ""
-peaks_promoter=$( intersectBed -a ${SH_SCRIPT_DIR}/../genomic_bins/${assemblyid}/${assemblyid}.50bp.promoter.bed -b $peaks -wa | sort -u |wc -l )
+peaks_promoter=$( intersectBed -a ${SH_SCRIPT_DIR}/../genomic_bins/${assemblyid}/${assemblyid}.50bp.promoter.bed -b $peaks -wa -f 0.5 | sort -u | wc -l )
 echo "done."
 echo ""
 
 echo "Calculate $peaks 'Exon' percentage ..."
 echo ""
-peaks_exon=$( intersectBed -a ${SH_SCRIPT_DIR}/../genomic_bins/${assemblyid}/${assemblyid}.50bp.exon.bed -b $peaks -wa | sort -u |wc -l )
+peaks_exon=$( intersectBed -a ${SH_SCRIPT_DIR}/../genomic_bins/${assemblyid}/${assemblyid}.50bp.exon.bed -b $peaks -wa -f 0.5 | sort -u | wc -l )
 echo "done."
 echo ""
 
 echo "Calculate $peaks 'Intron' percentage ..."
 echo ""
-peaks_intron=$( intersectBed -a ${SH_SCRIPT_DIR}/../genomic_bins/${assemblyid}/${assemblyid}.50bp.intron.bed -b $peaks -wa | sort -u |wc -l )
+peaks_intron=$( intersectBed -a ${SH_SCRIPT_DIR}/../genomic_bins/${assemblyid}/${assemblyid}.50bp.intron.bed -b $peaks -wa -f 0.5 | sort -u | wc -l )
 echo "done."
 echo ""
 
 echo "Calculate $peaks 'Intergenic' percentage ..."
 echo ""
-peaks_intergenic=$( intersectBed -a ${SH_SCRIPT_DIR}/../genomic_bins/${assemblyid}/${assemblyid}.50bp.intergenic.bed -b $peaks -wa | sort -u |wc -l )
+peaks_intergenic=$( intersectBed -a ${SH_SCRIPT_DIR}/../genomic_bins/${assemblyid}/${assemblyid}.50bp.intergenic.bed -b $peaks -wa -f 0.5 | sort -u | wc -l )
 echo "done."
 echo ""
 
 echo "Calculate $peaks 'Terminal3kb' percentage ..."
 echo ""
-peaks_terminal3kb=$( intersectBed -a ${SH_SCRIPT_DIR}/../genomic_bins/${assemblyid}/${assemblyid}.50bp.terminal3kb.bed -b $peaks -wa | sort -u |wc -l )
+peaks_terminal3kb=$( intersectBed -a ${SH_SCRIPT_DIR}/../genomic_bins/${assemblyid}/${assemblyid}.50bp.terminal3kb.bed -b $peaks -wa -f 0.5 | sort -u | wc -l )
 peaks_sum=$((peaks_exon + peaks_intergenic + peaks_intron + peaks_promoter + peaks_terminal3kb))
 echo "done."
 echo ""
